@@ -1,6 +1,6 @@
 use_frameworks!
 
-platform :ios, '8.0'
+platform :ios, '9.3'
 
 target 'XYHelper_Example' do
   pod 'XYHelper', :path => '../'

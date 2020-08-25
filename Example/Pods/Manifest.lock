@@ -1,0 +1,16 @@
+PODS:
+  - XYHelper (0.1.0)
+
+DEPENDENCIES:
+  - XYHelper (from `../`)
+
+EXTERNAL SOURCES:
+  XYHelper:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  XYHelper: 00adfd4cb5f6c70d215957dbc33ad3633623aae5
+
+PODFILE CHECKSUM: 0a0f531c83bd6c6d0d61aa39e52e12f85e8d4c99
+
+COCOAPODS: 1.10.0.beta.2
