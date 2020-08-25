@@ -7,7 +7,7 @@
 //
 
 #import "PPNetworkCache.h"
-#import "YYCache.h"
+#import <YYCache/YYCache.h>
 
 static NSString *const kPPNetworkResponseCache = @"kPPNetworkResponseCache";
 

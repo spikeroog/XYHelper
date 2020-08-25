@@ -480,7 +480,7 @@ navBgImageStr = _navBgImageStr;
     }
     // 防止视图上移
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.hbd_extendedLayoutDidSet = !hidden;
+//    self.hbd_extendedLayoutDidSet = !hidden;
 }
 
 

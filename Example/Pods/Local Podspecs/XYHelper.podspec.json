@@ -1,6 +1,6 @@
 {
   "name": "XYHelper",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "summary": "挤虚体验几番钟，雷，揍会干我一样，爱象节款XYHelper.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
@@ -13,10 +13,27 @@
   },
   "source": {
     "git": "https://github.com/spikeroog/XYHelper.git",
-    "tag": "0.1.0"
+    "tag": "1.0.1"
   },
   "platforms": {
-    "ios": "9.3"
+    "ios": "9.0"
   },
-  "source_files": "XYHelper/Classes/**/*.{h,m}"
+  "source_files": "XYHelper/Classes/**/*.{h,m}",
+  "dependencies": {
+    "AFNetworking": [
+      "~> 4.0"
+    ],
+    "HBDNavigationBar": [
+      "~> 1.5.2"
+    ],
+    "SDWebImage": [
+      "~> 5.8.4"
+    ],
+    "MBProgressHUD": [
+      "~> 1.2.0"
+    ],
+    "YYCache": [
+      "~> 1.0.4"
+    ]
+  }
 }

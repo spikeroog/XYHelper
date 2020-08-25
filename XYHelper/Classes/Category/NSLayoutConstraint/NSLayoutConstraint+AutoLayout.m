@@ -7,7 +7,7 @@
 //
 
 #import "NSLayoutConstraint+AutoLayout.h"
-#import "XYKit.h"
+#import "XYHelper.h"
 
 @implementation NSLayoutConstraint (AutoLayout)
 

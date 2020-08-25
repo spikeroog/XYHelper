@@ -6,8 +6,8 @@
 //  Copyright © 2019年 Xiao Yuen. All rights reserved.
 //
 
-#import "MBProgressHUD.h"
-#import "XYKit.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+#import "XYHelper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

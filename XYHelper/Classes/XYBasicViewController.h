@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XYKit.h"
+#import "XYHelper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

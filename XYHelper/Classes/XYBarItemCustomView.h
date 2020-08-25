@@ -7,7 +7,7 @@
 //  设置自定义barItemView的间距，ios11及以上，ios10及以下两种情况的适配
 
 #import <UIKit/UIKit.h>
-#import "XYKit.h"
+#import "XYHelper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
