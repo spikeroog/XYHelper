@@ -58,11 +58,51 @@
 
 - (NSDictionary *)hbd_titleTextAttributes {
     id obj = objc_getAssociatedObject(self, _cmd);
-    return obj ?: [UINavigationBar appearance].titleTextAttributes;
+    if (obj) {
+        return obj;
+    }
+    
+    UIBarStyle barStyle = self.hbd_barStyle;
+    NSDictionary *attributes = [UINavigationBar appearance].titleTextAttributes;
+    if (attributes) {
+        if (![attributes objectForKey:NSForegroundColorAttributeName]) {
+            NSMutableDictionary *mutableAttributes = [attributes mutableCopy];
+            if (barStyle == UIBarStyleBlack) {
+                [mutableAttributes addEntriesFromDictionary:@{ NSForegroundColorAttributeName: UIColor.whiteColor }];
+            } else {
+                [mutableAttributes addEntriesFromDictionary:@{ NSForegroundColorAttributeName: UIColor.blackColor }];
+            }
+            return mutableAttributes;
+        }
+        return attributes;
+    }
+    
+    if (barStyle == UIBarStyleBlack) {
+        return @{ NSForegroundColorAttributeName: UIColor.whiteColor };
+    } else {
+        return @{ NSForegroundColorAttributeName: UIColor.blackColor };
+    }
 }
 
 - (void)setHbd_titleTextAttributes:(NSDictionary *)attributes {
     objc_setAssociatedObject(self, @selector(hbd_titleTextAttributes), attributes, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (UIBarButtonItem *)hbd_backBarButtonItem {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setHbd_backBarButtonItem:(UIBarButtonItem *)backBarButtonItem {
+    objc_setAssociatedObject(self, @selector(hbd_backBarButtonItem), backBarButtonItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)hbd_extendedLayoutDidSet {
+    id obj = objc_getAssociatedObject(self, _cmd);
+    return obj ? [obj boolValue] : NO;
+}
+
+- (void)setHbd_extendedLayoutDidSet:(BOOL)didSet {
+    objc_setAssociatedObject(self, @selector(hbd_extendedLayoutDidSet), @(didSet), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (float)hbd_barAlpha {
@@ -166,27 +206,6 @@
     if (self.navigationController && [self.navigationController isKindOfClass:[HBDNavigationController class]]) {
         HBDNavigationController *nav = (HBDNavigationController *)self.navigationController;
         [nav updateNavigationBarForViewController:self];
-    }
-}
-
--(void)hbd_setNeedsUpdateNavigationBarAlpha {
-    if (self.navigationController && [self.navigationController isKindOfClass:[HBDNavigationController class]]) {
-        HBDNavigationController *nav = (HBDNavigationController *)self.navigationController;
-        [nav updateNavigationBarAlphaForViewController:self];
-    }
-}
-
-- (void)hbd_setNeedsUpdateNavigationBarColorOrImage {
-    if (self.navigationController && [self.navigationController isKindOfClass:[HBDNavigationController class]]) {
-        HBDNavigationController *nav = (HBDNavigationController *)self.navigationController;
-        [nav updateNavigationBarColorOrImageForViewController:self];
-    }
-}
-
-- (void)hbd_setNeedsUpdateNavigationBarShadowAlpha {
-    if (self.navigationController && [self.navigationController isKindOfClass:[HBDNavigationController class]]) {
-        HBDNavigationController *nav = (HBDNavigationController *)self.navigationController;
-        [nav updateNavigationBarShadowImageIAlphaForViewController:self];
     }
 }
 

@@ -1,9 +1,9 @@
 //
 //  NSObject+KVO.m
-//  XYKit
+//  XYHelper
 //
-//  Created by Xiao Yuen on 2018/12/18.
-//  Copyright © 2018 Xiao Yuen. All rights reserved.
+//  Created by spikeroog on 2018/12/18.
+//  Copyright © 2018 spikeroog. All rights reserved.
 //
 
 #import "NSObject+KVO.h"

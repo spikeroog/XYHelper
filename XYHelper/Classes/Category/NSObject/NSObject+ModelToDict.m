@@ -1,9 +1,9 @@
 //
 //  NSObject+ModelToDict.m
-//  XYKit
+//  XYHelper
 //
-//  Created by Xiao Yuen on 2020/1/6.
-//  Copyright © 2020 Xiao Yuen. All rights reserved.
+//  Created by spikeroog on 2020/1/6.
+//  Copyright © 2020 spikeroog. All rights reserved.
 //
 
 #import "NSObject+ModelToDict.h"

@@ -140,43 +140,32 @@ self.window.rootViewController = [[HBDNavigationController alloc] initWithRootVi
 
 #### Aways translucent
 
-NavigationBar 的 `translucent` 属性的值总是 YES，这意味着，controller 的 view 总是位于导航栏底下，这可能会给某些同学带来困扰。我们目前解决这个问题的办法是定义一个基类：
+本库重写了 UINavigationBar 的 `translucent` 属性，使得它的值总是 YES。
+
+本库根据导航栏的背景是否含有透明度，自动调整  `UIViewController#edgesForExtendedLayout`  这个属性。
+
+如果导航栏一开始是不透明的，由于后续操作而变透明，需要设置 `UIViewController#extendedLayoutIncludesOpaqueBars`  的值为 `YES`。
 
 ```objc
-@interface HBDViewController : UIViewController
-
-@property (nonatomic, assign) BOOL hbd_extendedLayoutIncludesTopBar;
-
-@end
-
-BOOL hasAlpha(UIColor *color) {
-    if (!color) {
-        return YES;
-    }
-    CGFloat red = 0;
-    CGFloat green= 0;
-    CGFloat blue = 0;
-    CGFloat alpha = 0;
-    [color getRed:&red green:&green blue:&blue alpha:&alpha];
-    return alpha < 1.0;
-}
-
-@implementation HBDViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    if (!(self.hbd_extendedLayoutIncludesTopBar || hasAlpha(self.hbd_barTintColor))) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
+    // 一开始导航栏为不透明
+    self.hbd_barTintColor = UIColor.whiteColor;
+    self.extendedLayoutIncludesOpaqueBars = YES;
 }
 
-@end
+- (void)handleScroll {
+    // 由于用户操作而变透明
+    self.hbd_barAlpha = 0.5;
+    [self hbd_setNeedsUpdateNavigationBar];
+}
+
 ```
 
 基本原则就是如果我们设置的背景是含有透明度的，那么页面就应该位于 NavigationBar 底下(under)，否则位于 NavigationBar 下面(below).
 
-如果我们的 NavigationBar 一开始是不透明的，但有可能因为用户操作而变透明，那么设置 `hbd_extendedLayoutIncludesTopBar` 的值为 YES，记得在 `[super viewDidLoad]` 之前设置好。
+如果我们的 NavigationBar 一开始是不透明的，但有可能因为用户操作而变透明，那么设置 `extendedLayoutIncludesOpaqueBars` 的值为 `YES`。
+
 
 #### 拦截返回事件
 
@@ -197,31 +186,30 @@ BOOL hasAlpha(UIColor *color) {
 
 #### 全屏返回
 
-建议和 [FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture) 一起使用，像下面那为 `fd_fullscreenPopGestureRecognizer` 添加 target 和 action：
+创建一个继承于 `HBDNavigationController` 的子类，具体参考 FSPNavigationController
 
 ```objc
-#import "BaseNavigationController.h"
-#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
+// FSPNavigationController.m
+@implementation FSPNavigationController
 
-@interface BaseNavigationController ()
-
-@end
-
-@implementation BaseNavigationController
-
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    [super pushViewController:viewController animated:animated];
-    NSArray *internalTargets = [self.fd_fullscreenPopGestureRecognizer valueForKey:@"targets"];
-    if (![internalTargets containsObject:self]) {
-        [self.fd_fullscreenPopGestureRecognizer addTarget:self action:NSSelectorFromString(@"handlePopGesture:")];
-    }
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // 获取系统自带滑动手势的target对象
+    id target = self.interactivePopGestureRecognizer.delegate;
+    // 创建全屏滑动手势，调用系统自带滑动手势的 target 的 action 方法
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+    // 设置手势代理，拦截手势触发
+    pan.delegate = self.interactivePopGestureRecognizer.delegate;
+    // 给导航控制器的view添加全屏滑动手势
+    [self.view addGestureRecognizer:pan];
+    // 禁止使用系统自带的滑动手势
+    self.interactivePopGestureRecognizer.enabled = NO;
 }
 
 @end
-
 ```
 
-一旦使用了 FDFullscreenPopGesture，`hbd_backInteractive`  和  `hbd_swipeBackEnabled` 将失效，此时使用 `fd_interactivePopDisabled` 代替。
 
 ## 感谢
 
@@ -229,7 +217,7 @@ BOOL hasAlpha(UIColor *color) {
 
 ## Requirements
 
-iOS 8+
+iOS 9+
 
 ## Installation
 
@@ -237,7 +225,7 @@ HBDNavigationBar is available through [CocoaPods](http://cocoapods.org). To inst
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'HBDNavigationBar', '~> 1.5.2'
+pod 'HBDNavigationBar', '~> 1.7.7'
 ```
 
 ## License

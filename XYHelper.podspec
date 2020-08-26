@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = '挤虚体验几番钟，雷，揍会干我一样，爱象节款XYHelper.'
 
 # This description is used to generate tags and improve search results.
@@ -39,9 +39,15 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
    s.dependency 'AFNetworking', '~> 4.0'
-   s.dependency 'HBDNavigationBar', '~> 1.5.2'
+   s.dependency 'HBDNavigationBar', '~> 1.7.7'
    s.dependency 'SDWebImage', '~> 5.8.4'
    s.dependency 'MBProgressHUD', '~> 1.2.0'
    s.dependency 'YYCache', '~> 1.0.4'
+   s.dependency 'YYCategories', '~> 1.0.4'
+   s.dependency 'TZImagePickerController', '~> 3.4.2'
+   s.dependency 'FLAnimatedImage', '~> 1.0.2'
+   s.dependency 'Aspects'
+   s.dependency 'ReactiveObjC'
+   s.dependency 'Masonry'
 
 end

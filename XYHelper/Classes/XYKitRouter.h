@@ -1,13 +1,12 @@
 //
 //  XYKitRouter.h
-//  XYKit
+//  XYHelper
 //
-//  Created by Xiao Yuen on 2019/8/21.
-//  Copyright © 2019年 Xiao Yuen All rights reserved.
+//  Created by spikeroog on 2019/8/21.
+//  Copyright © 2019年 spikeroog All rights reserved.
 //  系统导航栏相关
 
 #import <Foundation/Foundation.h>
-#import "XYHelper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -25,7 +25,7 @@
     UIView *view = [super hitTest:point withEvent:event];
     NSString *viewName = [[[view classForCoder] description] stringByReplacingOccurrencesOfString:@"_" withString:@""];
     
-    if (view && [viewName isEqualToString:@"HBDNavigationBar"]) {
+    if ([view isKindOfClass:[self class]]) {
         for (UIView *subview in self.subviews) {
             NSString *viewName = [[[subview classForCoder] description] stringByReplacingOccurrencesOfString:@"_" withString:@""];
             NSArray *array = @[ @"UINavigationItemButtonView" ];
@@ -42,7 +42,7 @@
         }
     }
     
-    NSArray *array = @[ @"UINavigationBarContentView", @"HBDNavigationBar" ];
+    NSArray *array = @[ @"UINavigationBarContentView", @"UIButtonBarStackView", NSStringFromClass([self class]) ];
     if ([array containsObject:viewName]) {
         if (self.backgroundImageView.image) {
             if (self.backgroundImageView.alpha < 0.01) {
@@ -93,6 +93,20 @@
         [[self.subviews firstObject] insertSubview:_backgroundImageView aboveSubview:self.fakeView];
     }
     return _backgroundImageView;
+}
+
+- (UILabel *)backButtonLabel {
+    if (@available(iOS 11, *)) ; else return nil;
+    UIView *navigationBarContentView = [self valueForKeyPath:@"visualProvider.contentView"];
+    __block UILabel *backButtonLabel = nil;
+    [navigationBarContentView.subviews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(__kindof UIView * _Nonnull subview, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([subview isKindOfClass:NSClassFromString(@"_UIButtonBarButton")]) {
+            UIButton *titleButton = [subview valueForKeyPath:@"visualProvider.titleButton"];
+            backButtonLabel = titleButton.titleLabel;
+            *stop = YES;
+        }
+    }];
+    return backButtonLabel;
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics {

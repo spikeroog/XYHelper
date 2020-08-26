@@ -1,9 +1,9 @@
 //
 //  UIButton+EnlargeEdge.h
-//  XYKit
+//  XYHelper
 //
-//  Created by Xiao Yuen on 2018/11/27.
-//  Copyright © 2018 Xiao Yuen. All rights reserved.
+//  Created by spikeroog on 2018/11/27.
+//  Copyright © 2018 spikeroog. All rights reserved.
 //  扩大button的点击范围
 
 #import <UIKit/UIKit.h>

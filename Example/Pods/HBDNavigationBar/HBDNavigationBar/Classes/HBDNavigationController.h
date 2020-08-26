@@ -10,12 +10,15 @@
 @interface HBDNavigationController : UINavigationController
 
 - (void)updateNavigationBarForViewController:(UIViewController *)vc;
-- (void)updateNavigationBarAlphaForViewController:(UIViewController *)vc;
-- (void)updateNavigationBarColorOrImageForViewController:(UIViewController *)vc;
-- (void)updateNavigationBarShadowImageIAlphaForViewController:(UIViewController *)vc;
 
 @end
 
 @interface UINavigationController(UINavigationBar) <UINavigationBarDelegate>
+
+@end
+
+@protocol HBDNavigationTransitionProtocol <NSObject>
+
+- (void)handleNavigationTransition:(UIScreenEdgePanGestureRecognizer *)pan;
 
 @end

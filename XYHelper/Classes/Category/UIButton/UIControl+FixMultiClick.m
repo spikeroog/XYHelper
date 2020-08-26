@@ -2,8 +2,8 @@
 //  UIControl+FixMultiClick.m
 //  UIButtonSwizzling
 //
-//  Created by Xiao Yuen on 2018/8/9.
-//  Copyright © 2018年 Xiao Yuen. All rights reserved.
+//  Created by spikeroog on 2018/8/9.
+//  Copyright © 2018年 spikeroog. All rights reserved.
 //
 
 #import "UIControl+FixMultiClick.h"
