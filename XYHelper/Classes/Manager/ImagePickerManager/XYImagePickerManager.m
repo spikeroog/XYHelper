@@ -7,8 +7,6 @@
 //
 
 #import "XYImagePickerManager.h"
-#import "TZLocationManager.h"
-#import "FLAnimatedImage.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <Photos/Photos.h>
 #import <PhotosUI/PhotosUI.h>
@@ -348,7 +346,7 @@ UINavigationControllerDelegate> {
     }
     
     // 选择视频后，有个导出的过程，视频越大越费时
-    [MBProgressHUD showLoadingHUD:@"导出视频中.."];
+    [MBProgressHUD showLoadingHUD:@"导出视频中.." canTouch:false];
     
     // open this code to send video / 打开这段代码发送视频
     @weakify(self);
@@ -356,7 +354,7 @@ UINavigationControllerDelegate> {
         
         @strongify(self);
         
-        [MBProgressHUD removeLoadingHud:YES];
+        [MBProgressHUD removeLoadingHud];
         
         !self.videoCallBackBlock ? : self.videoCallBackBlock(outputPath, coverImage);
         

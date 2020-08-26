@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
   s.version          = '1.0.2'
-  s.summary          = '挤虚体验几番钟，雷，揍会干我一样，爱象节款XYHelper.'
+  s.summary          = '挤虚体验几番钟, 雷, 揍会干我一样, 爱象节款XYHelper.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/spikeroog/XYHelper.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '9.3'
 
   s.source_files = 'XYHelper/Classes/**/*.{h,m}'
   

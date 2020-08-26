@@ -7,6 +7,7 @@
 //
 
 #import "XYViewController.h"
+#import <XYHelper/XYHelper.h>
 
 @interface XYViewController ()
 
@@ -17,7 +18,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    [MBProgressHUD showLoadingHUD:@"苹果支付中..." canTouch:false];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [MBProgressHUD removeLoadingHud];
+    });
 }
 
 - (void)didReceiveMemoryWarning

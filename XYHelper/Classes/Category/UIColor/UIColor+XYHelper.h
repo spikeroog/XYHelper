@@ -14,9 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**项目使用频率高的颜色*/
 
 // 主题色 导航栏颜色
-#define kMainColor kColorWithRGB(233, 123, 155)
+#define kMainColor kColorWithRGB16Radix(0xE97B9B)
 // 字体颜色
-
 #define kColor333333 kColorWithRGB16Radix(0x333333)
 #define kColor666666 kColorWithRGB16Radix(0x666666)
 #define kColor999999 kColorWithRGB16Radix(0x999999)

@@ -19,16 +19,11 @@ typedef NS_ENUM(NSInteger, MBProgressHudGifType) {
 @interface MBProgressHUD (XYHelper)
 <MBProgressHUDDelegate>
 
-/**
- 移除loading hud
 
- @param isKeyWindow 是否是在keyWindow上，YES为keywindow，NO为当前显示的VC
- */
-+ (void)removeLoadingHud:(BOOL)isKeyWindow;
-/**
- 无提示，简单hud
- */
-+ (void)showSimpleHUD;
+/// 移除gif hud
++ (void)removeGifHud;
+/// 移除loading hud
++ (void)removeLoadingHud;
 
 /**
  文本hud
@@ -38,42 +33,43 @@ typedef NS_ENUM(NSInteger, MBProgressHudGifType) {
 + (void)showTextHUD:(NSString *)text;
 
 /**
- 文本hud显示在可以window上
+ 文本hud显示在window上
  
  @param text 文本
  */
 + (void)showTextHUDInKeyWindow:(NSString *)text;
 
 /**
+ 无提示，简单hud
+ */
++ (void)showSimpleHUD:(BOOL)canTouch;
+
+/**
  带指示器的hud
  
  @param loadText 文本
  */
-+ (void)showLoadingHUD:(NSString *)loadText;
++ (void)showLoadingHUD:(NSString *)loadText
+              canTouch:(BOOL)canTouch;
 
 /**
- 显示成功hud，带图标
+ 显示图片提示hud，带图标
  
  @param text 文本
  */
-+ (void)showSuccessHUD:(NSString *)text;
-
-/**
- 显示失败hud，带图标
- 
- @param text 文本
- */
-+ (void)showErrorHUD:(NSString *)text;
++ (void)showHintHUD:(NSString *)text
+      hintImageName:(NSString *)hintImageName
+           canTouch:(BOOL)canTouch;
 
 /**
  显示gif hud
 
  @param type 显示类型
- @param message 目标字符串，url链接或者本地gif名称
+ @param gifImageName 目标字符串，url链接或者本地gif名称
  @param text 提示文本
  */
 + (void)showGifHUD:(MBProgressHudGifType)type
-           message:(NSString *)message
+           gifImageName:(NSString *)gifImageName
               text:(nullable NSString *)text;
 
 /// 显示环形下载hud

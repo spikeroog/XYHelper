@@ -37,7 +37,6 @@
     if (isKeyWindow) {
         view = [self fetchKeyWindow];
     } else {
-//        view = [[UIApplication sharedApplication].windows lastObject];
         view = [self currentVC].view;
     }
     
@@ -53,12 +52,12 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     // 背景颜色
     hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
-    hud.bezelView.color = kColorWithRGB16RadixA(0x000000, 1);
+    hud.bezelView.color = kColorWithRGB16RadixA(0x333333, 1);
     // 字体颜色
     hud.contentColor = kColorWithRGB16Radix(0xffffff);
-    
+        
     // hud在屏幕上的位置
-    hud.offset = HUD_IN_BOTTOM;
+    hud.offset = HUD_IN_CENTER;
     
     if (couldTouch) { // 可以点击背景，右滑返回等
         hud.userInteractionEnabled = NO;
@@ -66,11 +65,11 @@
         hud.userInteractionEnabled = YES;
     }
     
-    hud.bezelView.layer.cornerRadius = 15;
+    hud.bezelView.layer.cornerRadius = kAutoCs(15);
     hud.bezelView.layer.masksToBounds = YES;
     
     // 设置菊花颜色  只能设置菊花的颜色
-    //    hud.activityIndicatorColor = kColorWithRGB16Radix(0xffffff);
+//    hud.activityIndicatorColor = kColorWithRGB16Radix(0xffffff);
     
     hud.label.font = kFontWithAutoSize(HUD_FONT);
     hud.label.textColor = kColorWithRGB16Radix(0xffffff);
@@ -85,30 +84,20 @@
 #pragma mark - Main
 
 /**
- 移除loading hud
- 
- @param isKeyWindow 是否是在keyWindow上，YES为keywindow，NO为当前显示的VC
+ 移除Gif hud
  */
-+ (void)removeLoadingHud:(BOOL)isKeyWindow {
-    if (isKeyWindow) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self hideHUDForView:[self fetchKeyWindow] animated:YES];
-        });
-    } else {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self hideHUDForView:[self currentVC].view animated:YES];
-        });
-    }
++ (void)removeGifHud {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self hideHUDForView:[self currentVC].view animated:YES];
+    });
 }
 
 /**
- 无提示，简单hud
+ 移除loading hud
  */
-+ (void)showSimpleHUD {
++ (void)removeLoadingHud {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        MBProgressHUD *hud = [self reuseHudWithCouldTouch:YES isKeyWindow:YES];
-        hud.offset = HUD_IN_CENTER;
-        hud.mode = MBProgressHUDModeIndeterminate;
+        [self hideHUDForView:[self fetchKeyWindow] animated:YES];
     });
 }
 
@@ -119,7 +108,7 @@
  */
 + (void)showTextHUD:(NSString *)text {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        MBProgressHUD *hud = [self reuseHudWithCouldTouch:YES isKeyWindow:YES];
+        MBProgressHUD *hud = [self reuseHudWithCouldTouch:YES isKeyWindow:NO];
         hud.mode = MBProgressHUDModeText;
         hud.label.text = text;
         [hud hideAnimated:YES afterDelay:HUD_DELAY];
@@ -141,44 +130,45 @@
 }
 
 /**
+ 无提示，简单hud
+ */
++ (void)showSimpleHUD:(BOOL)canTouch {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        MBProgressHUD *hud = [self reuseHudWithCouldTouch:canTouch isKeyWindow:YES];
+        hud.offset = HUD_IN_CENTER;
+        hud.mode = MBProgressHUDModeIndeterminate;
+    });
+}
+
+/**
  带指示器的hud
  
  @param loadText 文本
  */
-+ (void)showLoadingHUD:(NSString *)loadText {
++ (void)showLoadingHUD:(NSString *)loadText canTouch:(BOOL)canTouch {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        MBProgressHUD *hud = [self reuseHudWithCouldTouch:YES isKeyWindow:YES];
+        MBProgressHUD *hud = [self reuseHudWithCouldTouch:canTouch isKeyWindow:YES];
+        hud.offset = HUD_IN_CENTER;
+        hud.bezelView.layer.cornerRadius = kAutoCs(3);
         hud.mode = MBProgressHUDModeIndeterminate;
-        hud.label.text = loadText;
+        if (loadText.length > 0) {
+            hud.label.text = loadText;
+        }
     });
 }
 
 /**
- 显示成功hud，带图标
+ 显示图片提示hud，带图标
  
  @param text 文本
  */
-+ (void)showSuccessHUD:(NSString *)text {
++ (void)showHintHUD:(NSString *)text hintImageName:(NSString *)hintImageName canTouch:(BOOL)canTouch {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        MBProgressHUD *hud = [self reuseHudWithCouldTouch:YES isKeyWindow:YES];
+        MBProgressHUD *hud = [self reuseHudWithCouldTouch:canTouch isKeyWindow:YES];
         hud.label.text = text;
         hud.mode = MBProgressHUDModeCustomView;
-        hud.customView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"jg_hud_success"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-        [hud hideAnimated:YES afterDelay:HUD_DELAY];
-    });
-}
-
-/**
- 显示失败hud，带图标
- 
- @param text 文本
- */
-+ (void)showErrorHUD:(NSString *)text {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        MBProgressHUD *hud = [self reuseHudWithCouldTouch:YES isKeyWindow:YES];
-        hud.label.text = text;
-        hud.mode = MBProgressHUDModeCustomView;
-        hud.customView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"jg_hud_error"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        hud.bezelView.layer.cornerRadius = kAutoCs(3);
+        hud.customView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:hintImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         [hud hideAnimated:YES afterDelay:HUD_DELAY];
     });
 }
@@ -188,11 +178,11 @@
  显示gif hud
  
  @param type 显示类型
- @param message 目标字符串，url链接或者本地gif名称
+ @param gifImageName 目标字符串，url链接或者本地gif名称
  @param text 提示文本
  */
 + (void)showGifHUD:(MBProgressHudGifType)type
-           message:(NSString *)message
+           gifImageName:(NSString *)gifImageName
               text:(nullable NSString *)text {
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -213,7 +203,7 @@
         if (type == MBProgressHUDGIfTypeUrl) { // 网络gif
             
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:message]];
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:gifImageName]];
                 UIImage *image = [UIImage sd_imageWithGIFData:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     gifImageView.image = image;
@@ -223,7 +213,7 @@
             
         } else if (type == MBProgressHUDGIfTypeFile) { // 本地gif
             
-            NSString *path = [[NSBundle mainBundle] pathForResource:message ofType:@"gif"];
+            NSString *path = [[NSBundle mainBundle] pathForResource:gifImageName ofType:@"gif"];
             NSData *data = [NSData dataWithContentsOfFile:path];
             UIImage *image = [UIImage sd_imageWithGIFData:data];
             gifImageView.image = image;

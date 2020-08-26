@@ -8,7 +8,9 @@
 //  视频一次只能选一个，且选了视频就无法再选图片，多选的时候无法裁剪图片，只有单选的时候才能裁剪
 
 #import <Foundation/Foundation.h>
-#import "TZImagePickerController.h"
+#import <UIKit/UIKit.h>
+#import <TZImagePickerController/TZImagePickerController.h>
+#import <FLAnimatedImage/FLAnimatedImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

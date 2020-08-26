@@ -1,7 +1,7 @@
 {
   "name": "XYHelper",
   "version": "1.0.2",
-  "summary": "挤虚体验几番钟，雷，揍会干我一样，爱象节款XYHelper.",
+  "summary": "挤虚体验几番钟, 雷, 揍会干我一样, 爱象节款XYHelper.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
   "license": {
@@ -16,7 +16,7 @@
     "tag": "1.0.2"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "9.3"
   },
   "source_files": "XYHelper/Classes/**/*.{h,m}",
   "dependencies": {

@@ -22,8 +22,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIImage+GIF.h>
 
-#import <TZImagePickerController/TZImagePickerController.h>
-
 #import <Masonry/Masonry.h> // 视图约束配置
 #define MAS_SHORTHAND // equalTo不需要使用"mas_"前缀
 #define MAS_SHORTHAND_GLOBALS // @1直接写1即可 自动将数据类型转为NSNumber类型
