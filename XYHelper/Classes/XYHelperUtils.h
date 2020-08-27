@@ -1,5 +1,5 @@
 //
-//  XYUtilityTools.h
+//  XYHelperUtils.h
 //  XYHelper
 //
 //  Created by spikeroog on 2018/11/20.
@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "XYKitMarco.h"
+#import "XYHelperMarco.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XYUtilityTools : NSObject
+@interface XYHelperUtils : NSObject
 
 #pragma mark - 判断字符串是否为空
 + (BOOL)isNull:(NSString *)string;
@@ -104,9 +104,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (long long)folderSizeAtPath:(NSString *)folderPath;
 
 #pragma mark - 跳转appStore
-+ (void)gotoAppStore;
++ (void)gotoAppStoreWithAppleId:(NSString *)appleId;
 #pragma mark - 跳转appStore评分
-+ (void)gotoAppStoreGrade;
++ (void)gotoAppStoreGradeWithAppleId:(NSString *)appleId;
 
 #pragma mark - 判断越狱机器,因为越狱的设备都会安装有cydia
 + (BOOL)isJailBreak;

@@ -9,7 +9,7 @@
 #import "XYCommentView.h"
 #import <Masonry/Masonry.h>
 #import <YYCategories/YYCategories.h>
-#import "UITextView+Placeholder.h"
+#import "UITextView+XYHelper.h"
 #import "UIColor+XYHelper.h"
 
 @interface XYCommentView () <UITextViewDelegate>

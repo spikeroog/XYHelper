@@ -1,23 +1,23 @@
 //
-//  NetWorkStatusManager.m
+//  XYNetworkStatusManager.m
 //  XYHelper
 //
 //  Created by spikeroog on 2019/2/13.
 //  Copyright © 2019 spikeroog. All rights reserved.
 //
 
-#import "NetWorkStatusManager.h"
+#import "XYNetworkStatusManager.h"
 // 判断手机网络状态
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
-@implementation NetWorkStatusManager
+@implementation XYNetworkStatusManager
 
 + (instancetype) shareInstanced {
-    static NetWorkStatusManager *manager = nil;
+    static XYNetworkStatusManager *manager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[NetWorkStatusManager alloc] init];
+        manager = [[XYNetworkStatusManager alloc] init];
     });
     return manager;
 }
@@ -38,7 +38,7 @@
                 handle(@"NotReachable", PPNetworkStatusNotReachable);
                 break;
             case PPNetworkStatusReachableViaWWAN: // 手机网络
-                handle([NetWorkStatusManager fetchViaWWANType], PPNetworkStatusReachableViaWWAN);
+                handle([XYNetworkStatusManager fetchViaWWANType], PPNetworkStatusReachableViaWWAN);
                 break;
             case PPNetworkStatusReachableViaWiFi: // WIFI
                 handle(@"ViaWiFi", PPNetworkStatusReachableViaWiFi);

@@ -1,8 +1,8 @@
 //  UIView+XYHelper.m
-//  MJRefreshExample
+//  XYHelper
 //
-//  Created by MJ Lee on 14-5-28.
-//  Copyright (c) 2014年 小码哥. All rights reserved.
+//  Created by spikeroog on 14-5-28.
+//  Copyright (c) 2018年 spikeroog. All rights reserved.
 //
 
 #import "UIView+XYHelper.h"
@@ -80,19 +80,23 @@
     return self.frame.origin;
 }
 
-- (CGFloat)xy_centerX {
+- (CGFloat)xy_centerX
+{
     return self.center.x;
 }
 
-- (void)setXy_centerX:(CGFloat)xy_centerX {
+- (void)setXy_centerX:(CGFloat)xy_centerX
+{
     self.center = CGPointMake(xy_centerX, self.center.y);
 }
 
-- (CGFloat)xy_centerY {
+- (CGFloat)xy_centerY
+{
     return self.center.y;
 }
 
-- (void)setXy_centerY:(CGFloat)xy_centerY {
+- (void)setXy_centerY:(CGFloat)xy_centerY
+{
     self.center = CGPointMake(self.center.x, xy_centerY);
 }
 

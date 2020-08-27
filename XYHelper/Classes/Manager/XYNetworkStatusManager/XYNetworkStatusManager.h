@@ -1,5 +1,5 @@
 //
-//  NetWorkStatusManager.h
+//  XYNetworkStatusManager.h
 //  XYHelper
 //
 //  Created by spikeroog on 2019/2/13.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NetWorkStatusManager : NSObject
+@interface XYNetworkStatusManager : NSObject
 
 
 + (instancetype) shareInstanced;

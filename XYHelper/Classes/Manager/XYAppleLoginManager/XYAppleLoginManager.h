@@ -1,5 +1,5 @@
 //
-//  AppleLoginManager.h
+//  XYAppleLoginManager.h
 //  XYHelper
 //
 //  Created by spikeroog on 2019/12/18.
@@ -15,7 +15,7 @@ typedef void(^AppleLoginCompleteHandler)(BOOL successed,NSString * _Nullable use
 
 typedef void(^AppleLoginObserverHandler)(void);
 
-@interface AppleLoginManager : NSObject
+@interface XYAppleLoginManager : NSObject
 
 + (instancetype)shared;
 

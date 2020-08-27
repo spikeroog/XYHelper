@@ -9,7 +9,7 @@
 #import "XYObserverView.h"
 #import "UIView+XYPop.h"
 #import "UIView+XYHelper.h"
-#import "XYKitMarco.h"
+#import "XYHelperMarco.h"
 
 @implementation XYObserverView
 

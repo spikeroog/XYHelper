@@ -1,30 +1,30 @@
 //
-//  AppleLoginManager.m
+//  XYAppleLoginManager.m
 //  XYHelper
 //
 //  Created by spikeroog on 2019/12/18.
 //  Copyright © 2019 spikeroog. All rights reserved.
 //
 
-#import "AppleLoginManager.h"
+#import "XYAppleLoginManager.h"
 #import <AuthenticationServices/AuthenticationServices.h>
 
-@interface AppleLoginManager ()<ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding>
+@interface XYAppleLoginManager ()<ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding>
 @property (nonatomic, copy) AppleLoginCompleteHandler completeHander;
 @property (nonatomic, copy) AppleLoginObserverHandler observerHander;
 + (instancetype)shared;
 
 @end
 
-@implementation AppleLoginManager
+@implementation XYAppleLoginManager
 
 + (instancetype)shared {
     
-    static AppleLoginManager *instance = nil;
+    static XYAppleLoginManager *instance = nil;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        instance = [[AppleLoginManager alloc] init];
+        instance = [[XYAppleLoginManager alloc] init];
     });
     
     return instance;

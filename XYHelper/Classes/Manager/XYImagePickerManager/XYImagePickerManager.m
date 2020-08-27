@@ -11,11 +11,11 @@
 #import <Photos/Photos.h>
 #import <PhotosUI/PhotosUI.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "XYKitRouter.h"
-#import "XYKitMarco.h"
+#import "XYHelperRouter.h"
+#import "XYHelperMarco.h"
 #import "UIView+XYHelper.h"
 #import "MBProgressHUD+XYHelper.h"
-#import "XYUtilityTools.h"
+#import "XYHelperUtils.h"
 
 // 视频最大拍摄时间(s)
 #define kVideoMaxTime 10
@@ -69,7 +69,7 @@ UINavigationControllerDelegate> {
         _imagePickerVc.videoMaximumDuration = kVideoMaxTime;
         // set appearance / 改变相册选择页的导航栏外观
         _imagePickerVc.navigationBar.translucent = NO;
-        _imagePickerVc.navigationBar.barTintColor = [XYKitRouter navBgColor];
+        _imagePickerVc.navigationBar.barTintColor = [XYHelperRouter navBgColor];
         _imagePickerVc.navigationBar.tintColor = [UIColor whiteColor];
         _imagePickerVc.allowsEditing = NO; // 不允许裁剪
         _imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -160,7 +160,7 @@ UINavigationControllerDelegate> {
     self.tz_ImagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
 
     self.tz_ImagePickerVc.navigationBar.translucent = NO;
-    self.tz_ImagePickerVc.navigationBar.barTintColor = [XYKitRouter navBgColor];
+    self.tz_ImagePickerVc.navigationBar.barTintColor = [XYHelperRouter navBgColor];
     self.tz_ImagePickerVc.navigationBar.tintColor = [UIColor whiteColor];
     
     
@@ -187,7 +187,7 @@ UINavigationControllerDelegate> {
         [alertVc addAction:cancelAction];
         
         
-        [[XYKitRouter currentVC] presentViewController:alertVc animated:YES completion:nil];
+        [[XYHelperRouter currentVC] presentViewController:alertVc animated:YES completion:nil];
         
     } else {
         [self pushTZImagePickerController:self.tz_ImagePickerVc];
@@ -213,7 +213,7 @@ UINavigationControllerDelegate> {
     
     // 自定义imagePickerVc导航栏背景颜色 标题颜色等
     imagePickerVc.navigationBar.translucent = NO;
-    imagePickerVc.navigationBar.barTintColor = [XYKitRouter navBgColor];
+    imagePickerVc.navigationBar.barTintColor = [XYHelperRouter navBgColor];
     imagePickerVc.navigationBar.tintColor = [UIColor whiteColor];
     
     imagePickerVc.iconThemeColor = [UIColor colorWithRed:31 / 255.0 green:185 / 255.0 blue:34 / 255.0 alpha:1.0];
@@ -230,8 +230,8 @@ UINavigationControllerDelegate> {
     // 设置竖屏下的裁剪尺寸
     CGFloat width = kScreenWidth;
     CGFloat height = width;
-    CGFloat left = [XYKitRouter fetchKeyWindow].xy_centerX-width/2;
-    CGFloat top = [XYKitRouter fetchKeyWindow].xy_centerY-height/2;
+    CGFloat left = [XYHelperRouter fetchKeyWindow].xy_centerX-width/2;
+    CGFloat top = [XYHelperRouter fetchKeyWindow].xy_centerY-height/2;
     imagePickerVc.cropRect = CGRectMake(left, top, width, height);
     // 设置横屏下的裁剪尺寸
     // imagePickerVc.cropRectLandscape = CGRectMake(left, top, kScreenWidth, kScreenWidth);
@@ -278,7 +278,7 @@ UINavigationControllerDelegate> {
         
     imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
     
-    [[XYKitRouter currentVC] presentViewController:imagePickerVc animated:YES completion:nil];
+    [[XYHelperRouter currentVC] presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
 /// 用户点击了取消
@@ -319,7 +319,7 @@ UINavigationControllerDelegate> {
         [muPhotosAsset addObject:asset];
         
         if (self.maxImageSize > 0) {
-            if ([XYUtilityTools fetchImageSize:obj] > self.maxImageSize) {
+            if ([XYHelperUtils fetchImageSize:obj] > self.maxImageSize) {
                 [muPhotos removeObjectAtIndex:idx];
                 [MBProgressHUD showTextHUD:[NSString stringWithFormat:@"请选择小于等于%ldM的图片文件", (long)self.maxImageSize]];
             }
@@ -476,7 +476,7 @@ UINavigationControllerDelegate> {
             self.imagePickerVc.mediaTypes = mediaTypes;
         }
         kLog(@"%d", self.imagePickerVc.allowsEditing);
-        [[XYKitRouter currentVC] presentViewController:self.imagePickerVc animated:YES completion:nil];
+        [[XYHelperRouter currentVC] presentViewController:self.imagePickerVc animated:YES completion:nil];
     } else {
         kLog(@"模拟器中无法打开照相机,请在真机中使用");
     }
@@ -524,15 +524,15 @@ UINavigationControllerDelegate> {
                     // 设置竖屏下的裁剪尺寸
                     CGFloat width = kScreenWidth;
                     CGFloat height = width;
-                    CGFloat left = [XYKitRouter fetchKeyWindow].xy_centerX-width/2;
-                    CGFloat top = [XYKitRouter fetchKeyWindow].xy_centerY-height/2;
+                    CGFloat left = [XYHelperRouter fetchKeyWindow].xy_centerX-width/2;
+                    CGFloat top = [XYHelperRouter fetchKeyWindow].xy_centerY-height/2;
                     imagePicker.cropRect = CGRectMake(left, top, width, height);
                     
                     imagePicker.modalPresentationStyle = UIModalPresentationFullScreen;
                     [self.targetVC presentViewController:imagePicker animated:YES completion:nil];
                     
                 } else {
-                    if ([XYUtilityTools fetchImageSize:image] > self.maxImageSize) {
+                    if ([XYHelperUtils fetchImageSize:image] > self.maxImageSize) {
                         [MBProgressHUD showTextHUD:[NSString stringWithFormat:@"请选择小于等于%ldM的图片文件", (long)self.maxImageSize]];
                     } else {
                         // 返回图片回调

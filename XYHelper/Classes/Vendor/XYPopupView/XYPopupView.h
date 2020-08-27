@@ -38,7 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)disMissView;
 
-
 + (BOOL)iPhoneNotchScreen;
 
 @end

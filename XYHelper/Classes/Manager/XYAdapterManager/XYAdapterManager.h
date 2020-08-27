@@ -1,5 +1,5 @@
 //
-//  AdapterManager.h
+//  XYAdapterManager.h
 //  XYHelper
 //
 //  Created by spikeroog on 2018/11/30.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AdapterManager : NSObject
+@interface XYAdapterManager : NSObject
 @end
 
 NS_ASSUME_NONNULL_END

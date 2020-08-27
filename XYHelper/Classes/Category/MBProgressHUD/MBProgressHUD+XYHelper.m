@@ -8,7 +8,7 @@
 
 #import "MBProgressHUD+XYHelper.h"
 #import "UIImage+GIF.h"
-#import "XYKitMarco.h"
+#import "XYHelperMarco.h"
 #import "PPNetworkHelper.h"
 
 #define HUD_DELAY 1.25f

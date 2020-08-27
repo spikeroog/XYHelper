@@ -8,7 +8,7 @@
 #import "XYBasicWebViewController.h"
 #import <WebKit/WebKit.h> // 引入头文件
 #import "WeakWebViewScriptMessageDelegate.h" // wkwebView注入js方法，内存不会释放（dealloc方法不走的解决方案）
-#import "XYKitMarco.h"
+#import "XYHelperMarco.h"
 #import "UIColor+XYHelper.h"
 
 typedef NS_ENUM(NSInteger, WkWebViewShowType) {

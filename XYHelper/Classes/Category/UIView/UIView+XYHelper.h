@@ -1,8 +1,8 @@
 //  UIView+XYHelper.h
-//  MJRefreshExample
+//  XYHelper
 //
-//  Created by MJ Lee on 14-5-28.
-//  Copyright (c) 2014年 小码哥. All rights reserved.
+//  Created by spikeroog on 14-5-28.
+//  Copyright (c) 2018年 spikeroog. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -1,13 +1,13 @@
 //
-//  XYUtilityTools.m
+//  XYHelperUtils.m
 //  XYHelper
 //
 //  Created by spikeroog on 2018/11/20.
 //  Copyright © 2018 spikeroog. All rights reserved.
 //
 
-#import "XYUtilityTools.h"
-#import "XYKitRouter.h"
+#import "XYHelperUtils.h"
+#import "XYHelperRouter.h"
 #import <objc/runtime.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Foundation/Foundation.h>
@@ -16,7 +16,7 @@
 #import <Masonry/Masonry.h>
 #import <ReactiveObjC/ReactiveObjC.h>
 
-@implementation XYUtilityTools
+@implementation XYHelperUtils
 
 #pragma mark - 判断字符串是否为空
 + (BOOL)isNull:(NSString *)string {
@@ -128,7 +128,7 @@
  @param cancelMessage 取消文案
  @param thirdMessage 第三个文案
  @param style UIAlertControllerStyle风格 Alert和Sheet
- @param target 目标self 如：[XYKitRouter currentVC].self
+ @param target 目标self 如：[XYHelperRouter currentVC].self
  @param sureHandler 确认回调
  @param cancelHandler 取消回调
  @param thirdHandler 第三个按钮回调
@@ -175,7 +175,7 @@
  @param cancelMessage 取消文案
  @param thridMessage 第三个按钮文案
  @param style UIAlertControllerStyle风格 Alert和Sheet
- @param target 目标self 如：[XYKitRouter currentVC].self
+ @param target 目标self 如：[XYHelperRouter currentVC].self
  @param sureHandler 确认回调
  @param cancelHandler 取消回调
  @param thirdHandler 第三个按钮回调
@@ -306,7 +306,7 @@
  - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
  WEAKSELF
  if ([textField isEqual:self.TF]) { // 输入金额限制小数后两位
- BOOL resultType = [XYUtilityTools judgeTextMoneyTypeWithTextField:textField shouldChangeCharactersInRange:range replacementString:string isFirst:self.isFirstChar complete:^(BOOL isFirstChar) {
+ BOOL resultType = [XYHelperUtils judgeTextMoneyTypeWithTextField:textField shouldChangeCharactersInRange:range replacementString:string isFirst:self.isFirstChar complete:^(BOOL isFirstChar) {
  weakSelf.isFirstChar = isFirstChar;
  } ];
  return resultType;
@@ -394,8 +394,6 @@
 }
 
 #pragma mark - 绘制部分圆角
-
-
 /**
  使用CAShapeLayer和UIBezierPath，绘制部分圆角
  
@@ -456,8 +454,7 @@
         }
     }
     @catch (NSException * e) {
-        //        [MAUIToolkit showMessage:[NSString stringWithFormat:@"颜色取值错误:%@,%@", [e name], [e reason]]];
-        //        return [UIColor blackColor];
+ 
     }
     return [UIColor colorWithRed:(float)(red/255.0f) green:(float)(green/255.0f) blue:(float)(blue/255.0f) alpha:(float)(1.0f)];
 }
@@ -680,13 +677,13 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #pragma mark - 跳转appStore
-+ (void)gotoAppStore {
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreUrl]];
++ (void)gotoAppStoreWithAppleId:(NSString *)appleId {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appleId]]];
 }
 
 #pragma mark - 跳转appStore评分
-+ (void)gotoAppStoreGrade {
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreGradeUrl]];
++ (void)gotoAppStoreGradeWithAppleId:(NSString *)appleId {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/itunes-u/id%@?action=write-review&mt=8", appleId]]];
 }
 
 #pragma clang diagnostic pop
@@ -785,8 +782,8 @@
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
     NSInteger interval = [zone secondsFromGMTForDate: netDate];
     NSDate *localeDate = [netDate  dateByAddingTimeInterval: interval];
-    NSString *timeStr = [XYUtilityTools dateConversionTimeStamp:localeDate];
-    return [XYUtilityTools timeToStrFrom:timeStr dateformat:dateFormat];
+    NSString *timeStr = [XYHelperUtils dateConversionTimeStamp:localeDate];
+    return [XYHelperUtils timeToStrFrom:timeStr dateformat:dateFormat];
 }
 
 
@@ -1053,7 +1050,7 @@
 + (void)showAlertWithTitle:(NSString *)title {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [[XYKitRouter currentVC] presentViewController:alertController animated:YES completion:nil];
+    [[XYHelperRouter currentVC] presentViewController:alertController animated:YES completion:nil];
 }
 
 // NSDate转时间戳

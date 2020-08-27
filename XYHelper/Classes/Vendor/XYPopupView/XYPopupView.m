@@ -7,9 +7,9 @@
 //  eg：如果是变大变小的动画CGAffineTransformMakeScale要写在CGAffineTransformMakeTranslation的前面
 
 #import "XYPopupView.h"
-#import "XYKitMarco.h"
+#import "XYHelperMarco.h"
 #import "UIView+XYHelper.h"
-#import "XYKitRouter.h"
+#import "XYHelperRouter.h"
 #import <UIKit/UIKit.h>
 
 // 刘海屏底部栏的高度
@@ -70,9 +70,9 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
     self.clickDismiss = clickDismiss;
     
     self.targetView.frame = CGRectMake(0, 0, targetView.xy_size.width, targetView.xy_size.height);
-    self.targetView.xy_centerX = [XYKitRouter fetchKeyWindow].xy_centerX;
+    self.targetView.xy_centerX = [XYHelperRouter fetchKeyWindow].xy_centerX;
 
-    CGFloat centY = [XYKitRouter fetchKeyWindow].xy_centerY-targetView.xy_size.height/2.0f;
+    CGFloat centY = [XYHelperRouter fetchKeyWindow].xy_centerY-targetView.xy_size.height/2.0f;
     
     if (animationType == PopUpViewAnimationTypeCenter) {
         

@@ -1,23 +1,23 @@
 //
-//  XYKitRouter.m
+//  XYHelperRouter.m
 //  XYHelper
 //
 //  Created by spikeroog on 2019/8/21.
 //  Copyright © 2019年 spikeroog All rights reserved.
 //
 
-#import "XYKitRouter.h"
-#import "XYKitMarco.h"
+#import "XYHelperRouter.h"
+#import "XYHelperMarco.h"
 #import <HBDNavigationBar/HBDNavigationBar.h>
 #import <HBDNavigationBar/HBDNavigationController.h>
 #import <HBDNavigationBar/UIViewController+HBD.h>
 #import "UINavigationController+XYHelper.h"
 
-@implementation XYKitRouter
+@implementation XYHelperRouter
 
 #pragma mark - 导航栏颜色获取
 + (UIColor *)navBgColor {
-    return [XYKitRouter currentVC].hbd_barTintColor;
+    return [XYHelperRouter currentVC].hbd_barTintColor;
 }
 
 #pragma mark - 获取当前Window试图
@@ -113,19 +113,19 @@
  */
 + (void)pushViewController:(__kindof UIViewController *)viewController {
     // 防止因为点击多次而重复跳转同一个视图
-    if ([[XYKitRouter currentVC] isMemberOfClass:[viewController class]]) {
+    if ([[XYHelperRouter currentVC] isMemberOfClass:[viewController class]]) {
         return;
     }
-    [[XYKitRouter currentNavC] pushViewController:viewController animated:YES];
+    [[XYHelperRouter currentNavC] pushViewController:viewController animated:YES];
 }
 
 + (void)pushViewController:(__kindof UIViewController *)viewController completion:(void(^)())completion {
     // 防止因为点击多次而重复跳转同一个视图
-    if ([[XYKitRouter currentVC] isMemberOfClass:[viewController class]]) {
+    if ([[XYHelperRouter currentVC] isMemberOfClass:[viewController class]]) {
         return;
     }
     
-    [[XYKitRouter currentNavC] pushViewController:viewController animated:YES completion:^{
+    [[XYHelperRouter currentNavC] pushViewController:viewController animated:YES completion:^{
         completion();
     }];
 }
@@ -133,19 +133,19 @@
 #pragma mark - 跳转到某个类(跳转的时候，如果这个类存在，就返回到这个类的位置)
 + (void)pushViewControllerNoRepeat:(__kindof UIViewController *)viewController {
     // 防止因为点击多次而重复跳转同一个视图
-    if ([[XYKitRouter currentVC] isMemberOfClass:[viewController class]]) {
+    if ([[XYHelperRouter currentVC] isMemberOfClass:[viewController class]]) {
         return;
     }
     /// 防止跳转界面时重复跳转，即界面a,b,c,d，我们希望界面d再跳转界面c的时候不会重复跳转，
     /// 而是返回到界面c
-    NSArray *viewControllers = [XYKitRouter currentNavC].viewControllers;
+    NSArray *viewControllers = [XYHelperRouter currentNavC].viewControllers;
     for (UIViewController *controller in viewControllers) {
         if ([controller isKindOfClass:[viewController class]]) {
-            [[XYKitRouter currentNavC] popToViewController:controller animated:YES];
+            [[XYHelperRouter currentNavC] popToViewController:controller animated:YES];
             return;
         }
     }
-    [[XYKitRouter currentNavC] pushViewController:viewController animated:YES];
+    [[XYHelperRouter currentNavC] pushViewController:viewController animated:YES];
 }
 
 #pragma mark - 删除层级中的某个控制器
@@ -156,12 +156,11 @@
  @param viewControllerName 控制器名称
  */
 + (void)deleteViewControllerWithName:(NSString *)viewControllerName {
-    // 取得RTNavigationController下的RTContainerController数组
-    NSMutableArray <__kindof UIViewController *> *navArray = [[NSMutableArray alloc] initWithArray:[XYKitRouter currentNavC].viewControllers];
+    // 取得NavigationController下的viewController数组
+    NSMutableArray <__kindof UIViewController *> *navArray = [[NSMutableArray alloc] initWithArray:[XYHelperRouter currentNavC].viewControllers];
     NSMutableArray <__kindof UIViewController *> *tmpArray = [NSMutableArray new];
     tmpArray = navArray.mutableCopy;
     // ios字典和数组forin遍历时不能执行removeobject操作，不然会crash掉，但是for循环可以。
-    
     [navArray enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([NSStringFromClass([obj class]) isEqualToString:viewControllerName]) {
             [tmpArray removeObjectAtIndex:idx];
@@ -171,17 +170,17 @@
     
     navArray = tmpArray.mutableCopy;
 
-    [[XYKitRouter currentNavC] setViewControllers:navArray animated:YES];
+    [[XYHelperRouter currentNavC] setViewControllers:navArray animated:YES];
 }
 
 #pragma mark - 返回上一级控制器
 + (void)popController {
-    [[XYKitRouter currentNavC] popViewControllerAnimated:YES];
+    [[XYHelperRouter currentNavC] popViewControllerAnimated:YES];
 }
 
 #pragma mark - 返回根目录控制器
 + (void)popToRootController {
-    [[XYKitRouter currentNavC] popToRootViewControllerAnimated:YES];
+    [[XYHelperRouter currentNavC] popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - 返回到某个可能存在的控制器，带回调和不带回调，无法回滚到根目录控制器
@@ -193,10 +192,10 @@
  @param viewControllerName 控制器名称
  */
 + (void)popToMaybeExistControllerWithName:(NSString *)viewControllerName {
-    for (UIViewController *controller in [XYKitRouter currentNavC].viewControllers) {
+    for (UIViewController *controller in [XYHelperRouter currentNavC].viewControllers) {
         if ([NSStringFromClass([controller class]) isEqualToString:viewControllerName]) {
             // 包含该要查找的视图
-            [[XYKitRouter currentNavC] popToViewController:controller animated:YES];
+            [[XYHelperRouter currentNavC] popToViewController:controller animated:YES];
             return;
         }
     }

@@ -1,21 +1,21 @@
 //
-//  AdapterManager.m
+//  XYAdapterManager.m
 //  XYHelper
 //
 //  Created by spikeroog on 2018/11/30.
 //  Copyright © 2018 spikeroog. All rights reserved.
 //  控制器打印dealloc信息
 
-#import "AdapterManager.h"
+#import "XYAdapterManager.h"
 #import <Aspects/Aspects.h>
-#import "XYKitMarco.h"
+#import "XYHelperMarco.h"
 
-@implementation AdapterManager
+@implementation XYAdapterManager
 
 + (void)load {
     /* + (void)load 会在应用启动的时候自动被runtime调用，通过重载这个方法来实现最小的对业务方的“代码入侵” */
     [super load];
-    [AdapterManager sharedInstance];
+    [XYAdapterManager sharedInstance];
 }
 
 /*
@@ -24,9 +24,9 @@
  */
 + (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
-    static AdapterManager *sharedInstance = nil;
+    static XYAdapterManager *sharedInstance = nil;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[AdapterManager alloc] init];
+        sharedInstance = [[XYAdapterManager alloc] init];
     });
     return sharedInstance;
 }
@@ -47,14 +47,6 @@
 }
 
 - (void)dealloc:(UIViewController *)viewController {
-    /*
-     你可以使用这个方法进行打日志，初始化基础业务相关的内容
-     去掉RTNavigationController包含的多余的打印信息
-     在这里去除你不想打印的控制器
-     */
-//    if ([viewController isKindOfClass:[RTContainerController class]] || [viewController isKindOfClass:[RTContainerNavigationController class]]) {
-//        return ;
-//    }
     kLog(@"[(控制器)%@ dealloc(释放)]", [viewController class]);
 }
 

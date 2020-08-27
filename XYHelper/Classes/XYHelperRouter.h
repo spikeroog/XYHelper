@@ -1,5 +1,5 @@
 //
-//  XYKitRouter.h
+//  XYHelperRouter.h
 //  XYHelper
 //
 //  Created by spikeroog on 2019/8/21.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XYKitRouter : NSObject
+@interface XYHelperRouter : NSObject
 
 #pragma mark - 导航栏颜色获取
 + (UIColor *)navBgColor;

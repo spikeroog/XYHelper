@@ -1,13 +1,13 @@
 //
-//  XYKitMarco.h
+//  XYHelperMarco.h
 //  XYHelper
 //
 //  Created by spikeroog on 2020/8/13.
 //  Copyright © 2020 spikeroog. All rights reserved.
 //
 
-#ifndef XYKitMarco_h
-#define XYKitMarco_h
+#ifndef XYHelperMarco_h
+#define XYHelperMarco_h
 
 // ----  导航栏高度
 #define kNavBarHeight (isIPhoneNotchScreen?88:64)
@@ -255,4 +255,4 @@ static inline bool isIPhoneNotchScreen(void) {
     return iPhoneNotchDirectionSafeAreaInsets > 20;
 }
 
-#endif /* XYKitMarco_h */
+#endif /* XYHelperMarco_h */

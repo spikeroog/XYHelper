@@ -8,8 +8,8 @@
 
 #import "XYBasicViewController.h"
 #import "XYBarItemCustomView.h"
-#import "XYKitRouter.h"
-#import "XYKitMarco.h"
+#import "XYHelperRouter.h"
+#import "XYHelperMarco.h"
 #import <HBDNavigationBar/HBDNavigationBar.h>
 #import <HBDNavigationBar/HBDNavigationController.h>
 #import <HBDNavigationBar/UIViewController+HBD.h>
@@ -53,7 +53,7 @@ navBgImageStr = _navBgImageStr;
     [self hiddenNavigation:self.isHiddenNav];
     
     // 左侧默认显示图片
-    NSInteger count = [XYKitRouter currentNavC].childViewControllers.count;
+    NSInteger count = [XYHelperRouter currentNavC].childViewControllers.count;
     if (count > 1) {
         // 设置默认左侧按钮图片
 //        self.leftBarItemImage = kImageWithName(@"");
@@ -92,7 +92,7 @@ navBgImageStr = _navBgImageStr;
  左侧按钮点击事件
  */
 - (void)leftActionInController {
-    [XYKitRouter popController];
+    [XYHelperRouter popController];
 }
 
 /**
