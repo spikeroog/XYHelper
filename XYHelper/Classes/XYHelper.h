@@ -47,6 +47,7 @@
 #import "XYImagePickerManager.h"
 #import "XYAdapterManager.h"
 #import "XYAppDelegateManager.h"
+#import "XYUserInfoManager.h"
 
 #pragma mark ---- 自定义基类
 

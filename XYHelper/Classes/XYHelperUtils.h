@@ -27,28 +27,29 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isApplicationFirstInstallLoad;
 
 #pragma mark - 系统alert或sheet
-+ (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
-               sureMessage:(NSString *)sureMessage
-             cancelMessage:(NSString *)cancelMessage
++ (void)showAlertWithTitle:(nullable NSString *)title
+                   message:(nullable NSString *)message
+               sureMessage:(nullable NSString *)sureMessage
+             cancelMessage:(nullable NSString *)cancelMessage
               thirdMessage:(nullable NSString *)thirdMessage
                  style:(UIAlertControllerStyle)style
-                    target:(id)target
                sureHandler:(void (^)())sureHandler
              cancelHandler:(void (^)())cancelHandler
               thirdHandler:(void(^)())thirdHandler;
 
 #pragma mark - 自定义alert或sheet
-+ (void)showCustomAlertViewWithTitle:(NSString *)title
-                             message:(NSString *)message
-                         sureMessage:(NSString *)sureMessage
-                       cancelMessage:(NSString *)cancelMessage
-                        thridMessage:(nullable NSString *)thridMessage
-                           style:(UIAlertControllerStyle)style
-                              target:(id)target
++ (void)showCustomAlertViewWithTitle:(nullable NSString *)title
+                             message:(nullable NSString *)message
+                         sureMessage:(nullable NSString *)sureMessage
+                       cancelMessage:(nullable NSString *)cancelMessage
+                        thirdMessage:(nullable NSString *)thirdMessage
+                               style:(UIAlertControllerStyle)style
                          sureHandler:(void (^)())sureHandler
                        cancelHandler:(void (^)())cancelHandler
                         thirdHandler:(void(^)())thirdHandler;
+
+#pragma mark - 显示单行单按钮alert
++ (void)showAlertWithTitle:(NSString *)title;
 
 #pragma mark - 是否插入了耳机
 + (BOOL)isHeadsetPluggedIn;
@@ -203,9 +204,6 @@ NS_ASSUME_NONNULL_BEGIN
  @return 大小
  */
 + (CGFloat)fetchVideoSize:(NSString *)videoPath;
-
-#pragma mark - 显示单行单按钮alert
-+ (void)showAlertWithTitle:(NSString *)title;
 
 /// NSDate转时间戳
 + (NSString *)dateConversionTimeStamp:(NSDate *)date;

@@ -53,22 +53,25 @@
 + (UIViewController *)currentVC {
     UIViewController *currVC = nil;
     UIViewController *rootVC = kKeyWindow.rootViewController;
-    do {
-        if ([rootVC isKindOfClass:[UINavigationController class]]) {
-            UINavigationController *nav = (UINavigationController *)rootVC;
-            UIViewController *vc = [nav.viewControllers lastObject];
-            currVC = vc;
-            rootVC = vc.presentedViewController;
-            continue;
-        } else if ([rootVC isKindOfClass:[UITabBarController class]]) {
-            UITabBarController *tabVC = (UITabBarController *)rootVC;
-            currVC = tabVC;
-            rootVC = [tabVC.viewControllers objectAtIndex:tabVC.selectedIndex];
-            continue;
-        }
-    } while (rootVC != nil);
-    
-    return currVC;
+    if ([rootVC isKindOfClass:[UINavigationController class]] || [rootVC isKindOfClass:[UITabBarController class]]) {
+        do {
+            if ([rootVC isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *nav = (UINavigationController *)rootVC;
+                UIViewController *vc = [nav.viewControllers lastObject];
+                currVC = vc;
+                rootVC = vc.presentedViewController;
+                continue;
+            } else if ([rootVC isKindOfClass:[UITabBarController class]]) {
+                UITabBarController *tabVC = (UITabBarController *)rootVC;
+                currVC = tabVC;
+                rootVC = [tabVC.viewControllers objectAtIndex:tabVC.selectedIndex];
+                continue;
+            }
+        } while (rootVC != nil);
+        return currVC;
+    } else {
+        return rootVC;
+    }
 }
 
 /** 获取最上层的window */

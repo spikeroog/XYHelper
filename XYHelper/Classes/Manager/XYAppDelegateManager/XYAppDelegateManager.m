@@ -7,7 +7,6 @@
 
 #import "XYAppDelegateManager.h"
 #import "XYNetworkStatusManager.h"
-#import "PPNetworkHelper.h"
 #import "XYHelperMarco.h"
 
 @implementation XYAppDelegateManager
@@ -26,7 +25,6 @@
     [[UIButton appearance] setExclusiveTouch:YES];
     
 #pragma mark - scrollView适配iOS11
-    
     if (@available(iOS 11.0, *)) {
         // 防止iOS11后所有的ScrollView，TableView，CollectionView下移64
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
@@ -41,9 +39,10 @@
 }
 
 /// 实时监听网络状态
-+ (void)netWorkStatusObserver {
++ (void)netWorkStatusObserver:(void(^)(NSString *netWorkStatusStr, PPNetworkStatusType statusType))complete {
     [[XYNetworkStatusManager shareInstanced] addNetWorkStatusObserver:^(NSString * _Nonnull netWorkStatusStr, PPNetworkStatusType status) {
-        
+        kLog(@"\n====检测到网络环境变化，当前网络环境为：%@", netWorkStatusStr);
+        complete(netWorkStatusStr, status);
     }];
 }
 

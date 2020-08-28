@@ -6,6 +6,7 @@
 //  以下方法请在AppDelete中的DidFinishLaunch中调用
 
 #import <Foundation/Foundation.h>
+#import "PPNetworkHelper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)appGlobalSet;
 
 /// 实时监听网络状态
-+ (void)netWorkStatusObserver;
++ (void)netWorkStatusObserver:(void(^)(NSString *netWorkStatusStr, PPNetworkStatusType statusType))complete;
+
 @end
 
 NS_ASSUME_NONNULL_END

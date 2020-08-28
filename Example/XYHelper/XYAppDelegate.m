@@ -7,11 +7,19 @@
 //
 
 #import "XYAppDelegate.h"
+#import <XYHelper.h>
 
 @implementation XYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [XYAppDelegateManager appGlobalSet];
+    
+    [XYAppDelegateManager netWorkStatusObserver:^(NSString * _Nonnull netWorkStatusStr, PPNetworkStatusType statusType) {
+        
+    }];
+    
     // Override point for customization after application launch.
     return YES;
 }

@@ -128,18 +128,16 @@
  @param cancelMessage 取消文案
  @param thirdMessage 第三个文案
  @param style UIAlertControllerStyle风格 Alert和Sheet
- @param target 目标self 如：[XYHelperRouter currentVC].self
  @param sureHandler 确认回调
  @param cancelHandler 取消回调
  @param thirdHandler 第三个按钮回调
  */
-+ (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
-               sureMessage:(NSString *)sureMessage
-             cancelMessage:(NSString *)cancelMessage
++ (void)showAlertWithTitle:(nullable NSString *)title
+                   message:(nullable NSString *)message
+               sureMessage:(nullable NSString *)sureMessage
+             cancelMessage:(nullable NSString *)cancelMessage
               thirdMessage:(nullable NSString *)thirdMessage
                      style:(UIAlertControllerStyle)style
-                    target:(id)target
                sureHandler:(void (^)())sureHandler
              cancelHandler:(void (^)())cancelHandler
               thirdHandler:(void(^)())thirdHandler {
@@ -161,7 +159,7 @@
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [target presentViewController:alertController animated:YES completion:nil];
+        [[XYHelperRouter currentVC].self presentViewController:alertController animated:YES completion:nil];
     });
 }
 
@@ -175,18 +173,16 @@
  @param cancelMessage 取消文案
  @param thridMessage 第三个按钮文案
  @param style UIAlertControllerStyle风格 Alert和Sheet
- @param target 目标self 如：[XYHelperRouter currentVC].self
  @param sureHandler 确认回调
  @param cancelHandler 取消回调
  @param thirdHandler 第三个按钮回调
  */
-+ (void)showCustomAlertViewWithTitle:(NSString *)title
-                             message:(NSString *)message
-                         sureMessage:(NSString *)sureMessage
-                       cancelMessage:(NSString *)cancelMessage
-                        thridMessage:(nullable NSString *)thridMessage
++ (void)showCustomAlertViewWithTitle:(nullable NSString *)title
+                             message:(nullable NSString *)message
+                         sureMessage:(nullable NSString *)sureMessage
+                       cancelMessage:(nullable NSString *)cancelMessage
+                        thirdMessage:(nullable NSString *)thirdMessage
                                style:(UIAlertControllerStyle)style
-                              target:(id)target
                          sureHandler:(void (^)())sureHandler
                        cancelHandler:(void (^)())cancelHandler
                         thirdHandler:(void(^)())thirdHandler {
@@ -217,18 +213,27 @@
     
     if (sureMessage) {
         UIAlertAction *sureBtn = [UIAlertAction actionWithTitle:sureMessage style:UIAlertActionStyleDefault handler:sureHandler];
-        [sureBtn setValue:kColorWithRGB16Radix(0xFFA801) forKey:@"_titleTextColor"];
+        [sureBtn setValue:kColorWithRGB16Radix(0xE97B9B) forKey:@"_titleTextColor"];
         [alertController addAction:sureBtn];
     }
     
-    if (thridMessage) {
-        UIAlertAction *thridMessageBtn = [UIAlertAction actionWithTitle:thridMessage style:UIAlertActionStyleDestructive handler:thirdHandler];
-        [thridMessageBtn setValue:kColorWithRGB16Radix(0xF2A801) forKey:@"_titleTextColor"];
-        [alertController addAction:thridMessageBtn];
+    if (thirdMessage) {
+        UIAlertAction *thirdMessageBtn = [UIAlertAction actionWithTitle:thirdMessage style:UIAlertActionStyleDestructive handler:thirdHandler];
+        [thirdMessageBtn setValue:kColorWithRGB16Radix(0x9A9A9A) forKey:@"_titleTextColor"];
+        [alertController addAction:thirdMessageBtn];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [target presentViewController:alertController animated:YES completion:nil];
+        [[XYHelperRouter currentVC].self presentViewController:alertController animated:YES completion:nil];
+    });
+}
+
+#pragma mark - 显示单行单按钮alert
++ (void)showAlertWithTitle:(NSString *)title {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[XYHelperRouter currentVC].self presentViewController:alertController animated:YES completion:nil];
     });
 }
 
@@ -832,6 +837,20 @@
     return dateStr;
 }
 
+// NSDate转时间戳
++ (NSString *)dateConversionTimeStamp:(NSDate *)date {
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[date timeIntervalSince1970]*1000];
+    return timeSp;
+}
+
+// 2019-12-31 23:59:59 转 NSDate
++ (NSDate *)nsstringConversionNSDate:(NSString *)dateStr {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *datestr = [dateFormatter dateFromString:dateStr];
+    return datestr;
+}
+
 #pragma mark - 顺时针视图旋转N度
 /**
  视图旋转N度
@@ -1044,27 +1063,6 @@
 + (UILabel *)labelWithTextfield:(UITextField *)tf {
     Ivar ivar = class_getInstanceVariable([UITextField class], "_placeholderLabel");
     return object_getIvar(tf, ivar);
-}
-
-#pragma mark - 显示单行单按钮alert
-+ (void)showAlertWithTitle:(NSString *)title {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [[XYHelperRouter currentVC] presentViewController:alertController animated:YES completion:nil];
-}
-
-// NSDate转时间戳
-+ (NSString *)dateConversionTimeStamp:(NSDate *)date {
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[date timeIntervalSince1970]*1000];
-    return timeSp;
-}
-
-// 2019-12-31 23:59:59 转 NSDate
-+ (NSDate *)nsstringConversionNSDate:(NSString *)dateStr {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *datestr = [dateFormatter dateFromString:dateStr];
-    return datestr;
 }
 
 /// 获取今年是哪一年
