@@ -21,6 +21,13 @@
     
     self.view.backgroundColor = kMainColor;
     
+//    [XYHelperUtils showCustomAlertViewWithTitle:@"前端程序员" message:@"前端程序员" sureMessage:@"朕知道了" cancelMessage:@"嗯嗯，这就滚" thirdMessage:nil style:UIAlertControllerStyleAlert sureHandler:^{
+//        
+//    } cancelHandler:^{
+//        
+//    } thirdHandler:^{
+//        
+//    } sureColor:UIColor.redColor cancelColor:UIColor.cyanColor];
     
 //    [MBProgressHUD showTextHUD:@"0-20人"];
 //

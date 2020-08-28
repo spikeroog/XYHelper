@@ -46,7 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
                                style:(UIAlertControllerStyle)style
                          sureHandler:(void (^)())sureHandler
                        cancelHandler:(void (^)())cancelHandler
-                        thirdHandler:(void(^)())thirdHandler;
+                        thirdHandler:(void(^)())thirdHandler
+                           sureColor:(nullable UIColor *)sureColor
+                         cancelColor:(nullable UIColor *)cancelColor;
 
 #pragma mark - 显示单行单按钮alert
 + (void)showAlertWithTitle:(NSString *)title;

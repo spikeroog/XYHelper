@@ -176,6 +176,8 @@
  @param sureHandler 确认回调
  @param cancelHandler 取消回调
  @param thirdHandler 第三个按钮回调
+ @param sureColor 确认按钮颜色
+ @param cancelColor 取消按钮颜色
  */
 + (void)showCustomAlertViewWithTitle:(nullable NSString *)title
                              message:(nullable NSString *)message
@@ -185,7 +187,9 @@
                                style:(UIAlertControllerStyle)style
                          sureHandler:(void (^)())sureHandler
                        cancelHandler:(void (^)())cancelHandler
-                        thirdHandler:(void(^)())thirdHandler {
+                        thirdHandler:(void(^)())thirdHandler
+                           sureColor:(nullable UIColor *)sureColor
+                         cancelColor:(nullable UIColor *)cancelColor {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
     
     // 修改title
@@ -207,19 +211,31 @@
     if (cancelMessage) {
         UIAlertAction *cancleBtn = [UIAlertAction actionWithTitle:cancelMessage style:UIAlertActionStyleCancel handler:
                                     cancelHandler];
-        [cancleBtn setValue:kColorWithRGB16Radix(0x9A9A9A) forKey:@"_titleTextColor"];
+        if (cancelColor) {
+            [cancleBtn setValue:cancelColor forKey:@"_titleTextColor"];
+        } else {
+            [cancleBtn setValue:kColorWithRGB16Radix(0x9A9A9A) forKey:@"_titleTextColor"];
+        }
         [alertController addAction:cancleBtn];
     }
     
     if (sureMessage) {
         UIAlertAction *sureBtn = [UIAlertAction actionWithTitle:sureMessage style:UIAlertActionStyleDefault handler:sureHandler];
-        [sureBtn setValue:kColorWithRGB16Radix(0xE97B9B) forKey:@"_titleTextColor"];
+        if (sureColor) {
+            [sureBtn setValue:sureColor forKey:@"_titleTextColor"];
+        } else {
+            [sureBtn setValue:kColorWithRGB16Radix(0xE97B9B) forKey:@"_titleTextColor"];
+        }
         [alertController addAction:sureBtn];
     }
     
     if (thirdMessage) {
         UIAlertAction *thirdMessageBtn = [UIAlertAction actionWithTitle:thirdMessage style:UIAlertActionStyleDestructive handler:thirdHandler];
-        [thirdMessageBtn setValue:kColorWithRGB16Radix(0x9A9A9A) forKey:@"_titleTextColor"];
+        if (cancelColor) {
+            [thirdMessageBtn setValue:cancelColor forKey:@"_titleTextColor"];
+        } else {
+            [thirdMessageBtn setValue:kColorWithRGB16Radix(0x9A9A9A) forKey:@"_titleTextColor"];
+        }
         [alertController addAction:thirdMessageBtn];
     }
     
