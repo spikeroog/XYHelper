@@ -1,6 +1,6 @@
 {
   "name": "XYHelper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "summary": "挤虚体验几番钟, 雷, 揍会干我一样, 爱象节款XYHelper.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/spikeroog/XYHelper.git",
-    "tag": "1.0.2"
+    "tag": "1.0.3"
   },
   "platforms": {
     "ios": "9.0"
@@ -43,6 +43,12 @@
     ],
     "FLAnimatedImage": [
       "~> 1.0.2"
+    ],
+    "YBImageBrowser": [
+      "~> 3.0.9"
+    ],
+    "YBImageBrowser/Video": [
+      "~> 3.0.9"
     ],
     "Aspects": [
 

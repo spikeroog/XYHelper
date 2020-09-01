@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = '挤虚体验几番钟, 雷, 揍会干我一样, 爱象节款XYHelper.'
 
 # This description is used to generate tags and improve search results.
@@ -46,8 +46,12 @@ TODO: Add long description of the pod here.
    s.dependency 'YYCategories', '~> 1.0.4'
    s.dependency 'TZImagePickerController', '~> 3.4.2'
    s.dependency 'FLAnimatedImage', '~> 1.0.2'
+   s.dependency 'YBImageBrowser', '~> 3.0.9'
+   s.dependency 'YBImageBrowser/Video', '~> 3.0.9'
    s.dependency 'Aspects'
    s.dependency 'ReactiveObjC'
    s.dependency 'Masonry'
+   
+   
 
 end

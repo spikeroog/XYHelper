@@ -23,8 +23,7 @@
 #import <Masonry/Masonry.h> // 视图约束配置
 #define MAS_SHORTHAND // equalTo不需要使用"mas_"前缀
 #define MAS_SHORTHAND_GLOBALS // @1直接写1即可 自动将数据类型转为NSNumber类型
-#import <ReactiveObjC/ReactiveObjC.h>
-
+#import <ReactiveObjC/ReactiveObjC.h> // rac
 
 #pragma mark ---- 非Pods引用三方库
 
@@ -48,6 +47,7 @@
 #import "XYAdapterManager.h"
 #import "XYAppDelegateManager.h"
 #import "XYUserInfoManager.h"
+#import "XYMediaPreviewManager.h"
 
 #pragma mark ---- 自定义基类
 

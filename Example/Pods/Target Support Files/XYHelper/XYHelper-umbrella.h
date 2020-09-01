@@ -45,6 +45,7 @@
 #import "XYAppDelegateManager.h"
 #import "XYAppleLoginManager.h"
 #import "XYImagePickerManager.h"
+#import "XYMediaPreviewManager.h"
 #import "XYNetworkUtils.h"
 #import "XYNetworkStatusManager.h"
 #import "XYUserBasicModel.h"
