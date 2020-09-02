@@ -135,6 +135,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)timeToStrFrom:(NSString *)timeStamp;
 + (NSString *)timeToStrFrom:(NSString *)timeStamp
                  dateformat:(NSString *)dateformat;
+/// NSDate转时间戳
++ (NSString *)dateConversionTimeStamp:(NSDate *)date;
+/// 2019-12-31 23:59:59 转 NSDate
++ (NSDate *)nsstringConversionNSDate:(NSString *)dateStr;
+
 #pragma mark - 顺时针视图旋转N度
 + (void)rotationTransformWithView:(__kindof UIView *)targetView
                     rotationAngle:(CGFloat)rotationAngle;
@@ -207,20 +212,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (CGFloat)fetchVideoSize:(NSString *)videoPath;
 
-/// NSDate转时间戳
-+ (NSString *)dateConversionTimeStamp:(NSDate *)date;
-
-/// 2019-12-31 23:59:59 转 NSDate
-+ (NSDate *)nsstringConversionNSDate:(NSString *)dateStr;
-
 /// 获取今年是哪一年
 + (NSString *)fetchCurrentYear;
 
 /// 比较两个数组元素是否相等
-/// @param array1 数组1
-/// @param array2 数组2
-+ (BOOL)compareArray:(NSArray *)array1
-           isEqualTo:(NSArray *)array2;
+/// @param arrayA 数组1
+/// @param arrayB 数组2
++ (BOOL)compareArray:(NSArray *)arrayA
+           isEqualTo:(NSArray *)arrayB;
 
 /// iOS13 给textfield添加leftView，rightView
 /// @param textfield textfield
@@ -237,7 +236,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 添加和中文有间距的下划线
 /// @param fatherLabel 父label
 + (void)addUnderLineWithLabel:(__kindof UILabel *)fatherLabel;
-
 
 @end
 

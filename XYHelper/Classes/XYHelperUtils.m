@@ -196,7 +196,7 @@
     if (title) {
         NSMutableAttributedString *alertControllerTitleStr = [[NSMutableAttributedString alloc] initWithString:title];
         [alertControllerTitleStr addAttribute:NSForegroundColorAttributeName value:kColorWithRGB16Radix(0x222222) range:NSMakeRange(0, title.length)];
-        [alertControllerTitleStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, title.length)];
+        [alertControllerTitleStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17] range:NSMakeRange(0, title.length)];
         [alertController setValue:alertControllerTitleStr forKey:@"attributedTitle"];
     }
     
@@ -214,7 +214,7 @@
         if (cancelColor) {
             [cancleBtn setValue:cancelColor forKey:@"_titleTextColor"];
         } else {
-            [cancleBtn setValue:kColorWithRGB16Radix(0x9A9A9A) forKey:@"_titleTextColor"];
+            [cancleBtn setValue:UIColor.grayColor forKey:@"_titleTextColor"];
         }
         [alertController addAction:cancleBtn];
     }
@@ -224,7 +224,7 @@
         if (sureColor) {
             [sureBtn setValue:sureColor forKey:@"_titleTextColor"];
         } else {
-            [sureBtn setValue:kColorWithRGB16Radix(0xE97B9B) forKey:@"_titleTextColor"];
+            [sureBtn setValue:UIColor.systemRedColor forKey:@"_titleTextColor"];
         }
         [alertController addAction:sureBtn];
     }
@@ -1037,178 +1037,6 @@
     return formattedNumberString;
 }
 
-#pragma mark - 计算视频大小和图片大小
-/**
- 计算图片的大小 单位：M
- 图片是除以1000，视频时除以1024
- 
- @param image 图片
- @return 大小
- */
-+ (CGFloat)fetchImageSize:(UIImage *)image {
-    NSData *imageData = UIImageJPEGRepresentation(image,1);
-    CGFloat length = [imageData length]/1000/1000;
-    return length;
-}
-
-/**
- 计算视频的大小 单位：M
- 图片是除以1000，视频时除以1024
- 
- @param videoPath 视频路径
- @return 大小
- */
-+ (CGFloat)fetchVideoSize:(NSString *)videoPath {
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    float filesize = -1.0;
-    if ([fileManager fileExistsAtPath:videoPath]) {
-        NSDictionary *fileDic = [fileManager attributesOfItemAtPath:videoPath error:nil];//获取文件的属性
-        unsigned long long size = [[fileDic objectForKey:NSFileSize] longLongValue];
-        filesize = 1.0*size/1024/1024;
-    }
-    return filesize;
-}
-
-
-/**
- ios13获取textfield label的方法
-
- @param tf 目标textfield
- @return label
- */
-+ (UILabel *)labelWithTextfield:(UITextField *)tf {
-    Ivar ivar = class_getInstanceVariable([UITextField class], "_placeholderLabel");
-    return object_getIvar(tf, ivar);
-}
-
-/// 获取今年是哪一年
-+ (NSString *)fetchCurrentYear {
-    
-    NSDate *date = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    // 获取当前时间日期展示字符串 如：2019-05-23-13:58:59
-//    NSString *currentTime = [formatter stringFromDate:date];
-    
-    //下面是单独获取每项的值
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSInteger unitFlags = NSCalendarUnitYear |NSCalendarUnitMonth |NSCalendarUnitDay |NSCalendarUnitWeekday |NSCalendarUnitHour |NSCalendarUnitMinute |NSCalendarUnitSecond;
-    comps = [calendar components:unitFlags fromDate:date];
-    
-    //星期 注意星期是从周日开始计算
-//    long week = [comps weekday];
-    //年
-    long year = [comps year];
-    //月
-//    long month = [comps month];
-//    //日
-//    long day = [comps day];
-//    //时
-//    long hour = [comps hour];
-//    //分
-//    long minute = [comps minute];
-//    //秒
-//    long second = [comps second];
-    
-    return  [NSString stringWithFormat:@"%ld", year];
-}
-
-/// 比较两个数组元素是否相等
-/// @param array1 数组1
-/// @param array2 数组2
-+ (BOOL)compareArray:(NSArray *)array1
-           isEqualTo:(NSArray *)array2 {
-    if (array1.count != array2.count) {
-        return NO;
-    }
-    for (NSString *str in array1) {
-        if (![array2 containsObject:str]) {
-            return NO;
-        }
-    }
-    return YES;
-}
-
-/// iOS13 给textfield添加leftView，rightView
-/// @param textfield textfield
-/// @param viewSize viewSize
-/// @param leftViewImageStr leftViewImageStr
-/// @param rightViewImageStr rightViewImageStr
-/// @param leftViewClick leftView点击回调
-/// @param rightViewClick righView点击回调
-+ (void)addViewWithTextfield:(__kindof UITextField *)textfield
-                    viewSize:(CGSize)viewSize
-            leftViewImageStr:(nullable NSString *)leftViewImageStr
-           rightViewImageStr:(nullable NSString *)rightViewImageStr leftViewClick:(void(^)())leftViewClick rightViewClick:(void(^)())rightViewClick {
-    
-    /// masonry布局的对象，想要立即获得其布局的属性值，需要调用layoutIfNeeded方法
-    [textfield layoutIfNeeded];
-    
-    if (leftViewImageStr.length > 0) {
-        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, textfield.height)];
-        UIImageView *leftImgV = [[UIImageView alloc] initWithImage:kImageWithName(leftViewImageStr)];
-        leftImgV.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
-        leftImgV.centerY = textfield.height/2;
-        [leftView addSubview:leftImgV];
-        
-        UITapGestureRecognizer *leftTap = [[UITapGestureRecognizer alloc] init];
-        [[leftTap rac_gestureSignal] subscribeNext:^(id x) {
-            leftViewClick();
-        }];
-        [leftView addGestureRecognizer:leftTap];
-        
-        textfield.leftView = leftView;
-        textfield.leftViewMode = UITextFieldViewModeAlways;
-    }
-    
-    if (rightViewImageStr.length > 0) {
-        UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, textfield.height)];
-        
-        UIImageView *rightImgV = [[UIImageView alloc] initWithImage:kImageWithName(rightViewImageStr)];
-        rightImgV.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
-        rightImgV.centerY = textfield.height/2;
-        [rightView addSubview:rightImgV];
-        
-        UITapGestureRecognizer *rightTap = [[UITapGestureRecognizer alloc] init];
-        [[rightTap rac_gestureSignal] subscribeNext:^(id x) {
-            rightViewClick();
-        }];
-        [rightView addGestureRecognizer:rightTap];
-        
-        textfield.rightView = rightView;
-        textfield.rightViewMode = UITextFieldViewModeAlways;
-    }
-}
-
-/// 添加和中文有间距的下划线
-/// @param fatherLabel 父label
-+ (void)addUnderLineWithLabel:(__kindof UILabel *)fatherLabel {
-    /// 添加和中文有间距的下划线
-    UILabel *underLabel = [[UILabel alloc] init];
-    underLabel.userInteractionEnabled = false;
-    underLabel.numberOfLines = fatherLabel.numberOfLines;
-    underLabel.textAlignment = fatherLabel.textAlignment;
-    underLabel.backgroundColor = kColorWithNull;
-    underLabel.textColor = kColorWithNull;
-    NSDictionary *underAttribtDic = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle],NSFontAttributeName:fatherLabel.font};
-    NSMutableAttributedString *underAttr = [[NSMutableAttributedString alloc] initWithString:fatherLabel.text attributes:underAttribtDic];
-    
-    [underAttr addAttribute:NSForegroundColorAttributeName value:kColorWithNull range:NSMakeRange(0, fatherLabel.text.length)];
-    [underAttr addAttribute:NSUnderlineColorAttributeName value:fatherLabel.textColor range:NSMakeRange(0, fatherLabel.text.length)];
-    underLabel.attributedText = underAttr;
-    [fatherLabel addSubview:underLabel];
-    
-    /// 4为中文和下划线的间距
-    [underLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(fatherLabel);
-    }];
-    [underLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(fatherLabel.mas_top).offset(kAutoCs(4));
-    }];
-}
-
 #pragma mark - model转Json字符串，如果后台需要
 
 // ---- start ----
@@ -1332,7 +1160,179 @@
     return [NSNull null];
 }
 
-// ---- end ----
+
+#pragma mark - 计算视频大小和图片大小
+/**
+ 计算图片的大小 单位：M
+ 图片是除以1000，视频时除以1024
+ 
+ @param image 图片
+ @return 大小
+ */
++ (CGFloat)fetchImageSize:(UIImage *)image {
+    NSData *imageData = UIImageJPEGRepresentation(image,1);
+    CGFloat length = [imageData length]/1000/1000;
+    return length;
+}
+
+/**
+ 计算视频的大小 单位：M
+ 图片是除以1000，视频时除以1024
+ 
+ @param videoPath 视频路径
+ @return 大小
+ */
++ (CGFloat)fetchVideoSize:(NSString *)videoPath {
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    float filesize = -1.0;
+    if ([fileManager fileExistsAtPath:videoPath]) {
+        NSDictionary *fileDic = [fileManager attributesOfItemAtPath:videoPath error:nil];//获取文件的属性
+        unsigned long long size = [[fileDic objectForKey:NSFileSize] longLongValue];
+        filesize = 1.0*size/1024/1024;
+    }
+    return filesize;
+}
+
+
+/**
+ ios13获取textfield label的方法
+
+ @param tf 目标textfield
+ @return label
+ */
++ (UILabel *)labelWithTextfield:(UITextField *)tf {
+    Ivar ivar = class_getInstanceVariable([UITextField class], "_placeholderLabel");
+    return object_getIvar(tf, ivar);
+}
+
+/// 获取今年是哪一年
++ (NSString *)fetchCurrentYear {
+    
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    // 获取当前时间日期展示字符串 如：2019-05-23-13:58:59
+//    NSString *currentTime = [formatter stringFromDate:date];
+    
+    //下面是单独获取每项的值
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSCalendarUnitYear |NSCalendarUnitMonth |NSCalendarUnitDay |NSCalendarUnitWeekday |NSCalendarUnitHour |NSCalendarUnitMinute |NSCalendarUnitSecond;
+    comps = [calendar components:unitFlags fromDate:date];
+    
+    //星期 注意星期是从周日开始计算
+//    long week = [comps weekday];
+    //年
+    long year = [comps year];
+    //月
+//    long month = [comps month];
+//    //日
+//    long day = [comps day];
+//    //时
+//    long hour = [comps hour];
+//    //分
+//    long minute = [comps minute];
+//    //秒
+//    long second = [comps second];
+    
+    return  [NSString stringWithFormat:@"%ld", year];
+}
+
+/// 比较两个数组元素是否相等
+/// @param arrayA 数组1
+/// @param arrayB 数组2
++ (BOOL)compareArray:(NSArray *)arrayA
+           isEqualTo:(NSArray *)arrayB {
+    if (arrayA.count != arrayB.count) {
+        return NO;
+    }
+    for (NSString *str in arrayA) {
+        if (![arrayB containsObject:str]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+/// iOS13 给textfield添加leftView，rightView
+/// @param textfield textfield
+/// @param viewSize viewSize
+/// @param leftViewImageStr leftViewImageStr
+/// @param rightViewImageStr rightViewImageStr
+/// @param leftViewClick leftView点击回调
+/// @param rightViewClick righView点击回调
++ (void)addViewWithTextfield:(__kindof UITextField *)textfield
+                    viewSize:(CGSize)viewSize
+            leftViewImageStr:(nullable NSString *)leftViewImageStr
+           rightViewImageStr:(nullable NSString *)rightViewImageStr leftViewClick:(void(^)())leftViewClick rightViewClick:(void(^)())rightViewClick {
+    
+    /// masonry布局的对象，想要立即获得其布局的属性值，需要调用layoutIfNeeded方法
+    [textfield layoutIfNeeded];
+    
+    if (leftViewImageStr.length > 0) {
+        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, textfield.height)];
+        UIImageView *leftImgV = [[UIImageView alloc] initWithImage:kImageWithName(leftViewImageStr)];
+        leftImgV.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
+        leftImgV.centerY = textfield.height/2;
+        [leftView addSubview:leftImgV];
+        
+        UITapGestureRecognizer *leftTap = [[UITapGestureRecognizer alloc] init];
+        [[leftTap rac_gestureSignal] subscribeNext:^(id x) {
+            leftViewClick();
+        }];
+        [leftView addGestureRecognizer:leftTap];
+        
+        textfield.leftView = leftView;
+        textfield.leftViewMode = UITextFieldViewModeAlways;
+    }
+    
+    if (rightViewImageStr.length > 0) {
+        UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, textfield.height)];
+        
+        UIImageView *rightImgV = [[UIImageView alloc] initWithImage:kImageWithName(rightViewImageStr)];
+        rightImgV.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
+        rightImgV.centerY = textfield.height/2;
+        [rightView addSubview:rightImgV];
+        
+        UITapGestureRecognizer *rightTap = [[UITapGestureRecognizer alloc] init];
+        [[rightTap rac_gestureSignal] subscribeNext:^(id x) {
+            rightViewClick();
+        }];
+        [rightView addGestureRecognizer:rightTap];
+        
+        textfield.rightView = rightView;
+        textfield.rightViewMode = UITextFieldViewModeAlways;
+    }
+}
+
+/// 添加和中文有间距的下划线
+/// @param fatherLabel 父label
++ (void)addUnderLineWithLabel:(__kindof UILabel *)fatherLabel {
+    /// 添加和中文有间距的下划线
+    UILabel *underLabel = [[UILabel alloc] init];
+    underLabel.userInteractionEnabled = false;
+    underLabel.numberOfLines = fatherLabel.numberOfLines;
+    underLabel.textAlignment = fatherLabel.textAlignment;
+    underLabel.backgroundColor = kColorWithNull;
+    underLabel.textColor = kColorWithNull;
+    NSDictionary *underAttribtDic = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle],NSFontAttributeName:fatherLabel.font};
+    NSMutableAttributedString *underAttr = [[NSMutableAttributedString alloc] initWithString:fatherLabel.text attributes:underAttribtDic];
+    
+    [underAttr addAttribute:NSForegroundColorAttributeName value:kColorWithNull range:NSMakeRange(0, fatherLabel.text.length)];
+    [underAttr addAttribute:NSUnderlineColorAttributeName value:fatherLabel.textColor range:NSMakeRange(0, fatherLabel.text.length)];
+    underLabel.attributedText = underAttr;
+    [fatherLabel addSubview:underLabel];
+    
+    /// 4为中文和下划线的间距
+    [underLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(fatherLabel);
+    }];
+    [underLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(fatherLabel.mas_top).offset(kAutoCs(4));
+    }];
+}
+
 
 @end
 

@@ -50,7 +50,7 @@ navBgImageStr = _navBgImageStr;
         self.automaticallyAdjustsScrollViewInsets = false;
     }
     
-    [self hiddenNavigation:self.isHiddenNav];
+    [self navigationHidden:self.barHidden];
     
     // 左侧默认显示图片
     NSInteger count = [XYHelperRouter currentNavC].childViewControllers.count;
@@ -77,14 +77,14 @@ navBgImageStr = _navBgImageStr;
     // 修改导航栏标题样式
     self.hbd_barStyle = UIBarStyleDefault;
     // 修改导航栏按钮颜色
-    self.hbd_tintColor = kMainColor;
+    self.hbd_tintColor = UIColor.blackColor;
     // 设置导航栏字体颜色
     self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [self.navTitleColor colorWithAlphaComponent:1],NSFontAttributeName:kFontWithAutoSize(18)};;
 }
 
-- (void)setIsHiddenNav:(BOOL)isHiddenNav {
-    _isHiddenNav = isHiddenNav;
-    [self hiddenNavigation:isHiddenNav];
+- (void)setBarHidden:(BOOL)barHidden {
+    _barHidden = barHidden;
+    [self navigationHidden:barHidden];
 }
 
 #pragma mark - 导航栏左右侧按钮点击事件，子类重写的话就不会再调用了
@@ -199,7 +199,7 @@ navBgImageStr = _navBgImageStr;
  @param leftBarItemTitle 文字
  */
 - (void)setLeftBarItemTitle:(NSString *)leftBarItemTitle {
-    if (self.isHiddenNav) {
+    if (self.barHidden) {
         return ;
     }
     
@@ -216,7 +216,7 @@ navBgImageStr = _navBgImageStr;
  @param leftBarItemDistanceImage 图片
  */
 - (void)setLeftBarItemDistanceImage:(UIImage *)leftBarItemDistanceImage {
-    if (self.isHiddenNav) {
+    if (self.barHidden) {
         return ;
     }
     
@@ -262,7 +262,6 @@ navBgImageStr = _navBgImageStr;
     }
     
     self.navigationItem.leftBarButtonItems = arrayMut;
-    
 }
 
 /**
@@ -271,7 +270,7 @@ navBgImageStr = _navBgImageStr;
  @param leftBarItemImage 图片
  */
 - (void)setLeftBarItemImage:(UIImage *)leftBarItemImage {
-    if (self.isHiddenNav) {
+    if (self.barHidden) {
         return ;
     }
     
@@ -304,7 +303,7 @@ navBgImageStr = _navBgImageStr;
  @param rightBarItemTitle 文字
  */
 - (void)setRightBarItemTitle:(NSString *)rightBarItemTitle {
-    if (self.isHiddenNav) {
+    if (self.barHidden) {
         return ;
     }
     
@@ -321,7 +320,7 @@ navBgImageStr = _navBgImageStr;
  @param rightBarItemImage 图片url
  */
 - (void)setRightBarItemImage:(UIImage *)rightBarItemImage {
-    if (self.isHiddenNav) {
+    if (self.barHidden) {
         return ;
     }
     
@@ -344,7 +343,7 @@ navBgImageStr = _navBgImageStr;
 - (void)rigBarItemsWithTitleArr:(nullable NSArray *)titleArr
                        imageArr:(nullable NSArray *)imageArr {
     
-    if (self.isHiddenNav) {
+    if (self.barHidden) {
         return ;
     }
     
@@ -377,7 +376,6 @@ navBgImageStr = _navBgImageStr;
                 spacer.width = -kAutoCs(8);
                 [muarr addObject:spacer];
             }
-            
             
             if ([imageArr objectAtIndex:i] != nil) {
                 if ([titleArr objectAtIndex:i] != nil) {
@@ -477,10 +475,10 @@ navBgImageStr = _navBgImageStr;
 #pragma mark - 隐藏/显示导航栏
 /// 隐藏导航栏
 /// @param hidden 是否隐藏
-- (void)hiddenNavigation:(BOOL)hidden {
+- (void)navigationHidden:(BOOL)hidden {
     // 是否隐藏导航栏
     self.hbd_barHidden = hidden;
-    if (self.isHiddenNav) {
+    if (self.barHidden) {
         [self leftBarItemHidden];
         [self rightBarItemHidden];
     } else {

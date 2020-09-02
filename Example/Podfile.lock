@@ -20,9 +20,9 @@ PODS:
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - ReactiveObjC (3.1.1)
-  - SDWebImage (5.8.4):
-    - SDWebImage/Core (= 5.8.4)
-  - SDWebImage/Core (5.8.4)
+  - SDWebImage (5.9.0):
+    - SDWebImage/Core (= 5.9.0)
+  - SDWebImage/Core (5.9.0)
   - TZImagePickerController (3.4.2)
   - XYHelper (1.0.3):
     - AFNetworking (~> 4.0)
@@ -32,7 +32,7 @@ PODS:
     - Masonry
     - MBProgressHUD (~> 1.2.0)
     - ReactiveObjC
-    - SDWebImage (~> 5.8.4)
+    - SDWebImage (~> 5.9.0)
     - TZImagePickerController (~> 3.4.2)
     - YBImageBrowser (~> 3.0.9)
     - YBImageBrowser/Video (~> 3.0.9)
@@ -84,9 +84,9 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
-  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
+  SDWebImage: 62ae4a18473520c67b79e9724c31a63599cc9423
   TZImagePickerController: cc0b74d5f01ab4cddcc24dcdfc3c7d68e6261056
-  XYHelper: acd370517c861457976278db146441b74978a686
+  XYHelper: e9c19205388c7038d3840911566ba1b627f53e84
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd

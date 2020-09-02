@@ -40,7 +40,7 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit', 'MapKit'
    s.dependency 'AFNetworking', '~> 4.0'
    s.dependency 'HBDNavigationBar', '~> 1.7.7'
-   s.dependency 'SDWebImage', '~> 5.8.4'
+   s.dependency 'SDWebImage', '~> 5.9.0'
    s.dependency 'MBProgressHUD', '~> 1.2.0'
    s.dependency 'YYCache', '~> 1.0.4'
    s.dependency 'YYCategories', '~> 1.0.4'

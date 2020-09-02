@@ -15,7 +15,7 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 @interface XYBasicViewController : UIViewController
 
 /// 隐藏导航栏，默认NO
-@property (nonatomic, assign) BOOL isHiddenNav;
+@property (nonatomic, assign) BOOL barHidden;
 
 /// 导航栏背景颜色
 @property (nonatomic, strong) UIColor *navBgColor;

@@ -34,7 +34,6 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
 @property (nonatomic, assign) PopUpViewAnimationType popUpViewAnimationType;
 @property (nonatomic, assign) BOOL clickDismiss;
 @property (nonatomic, strong) UIView *bkVview;
-@property (nonatomic, strong) UIButton *hehe;
 @end
 
 @implementation XYPopupView
