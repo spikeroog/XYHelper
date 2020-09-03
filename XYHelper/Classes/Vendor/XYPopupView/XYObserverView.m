@@ -10,6 +10,7 @@
 #import "UIView+XYPop.h"
 #import "UIView+XYHelper.h"
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 
 @implementation XYObserverView
 

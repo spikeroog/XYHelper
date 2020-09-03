@@ -8,6 +8,7 @@
 
 #import "XYPopupView.h"
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 #import "UIView+XYHelper.h"
 #import "XYHelperRouter.h"
 #import <UIKit/UIKit.h>

@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
   s.version          = '1.0.3'
-  s.summary          = '挤虚体验几番钟, 雷, 揍会干我一样, 爱象节款XYHelper.'
+  s.summary          = '基础类库, 用于快速构建你的新项目.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -48,10 +48,11 @@ TODO: Add long description of the pod here.
    s.dependency 'FLAnimatedImage', '~> 1.0.2'
    s.dependency 'YBImageBrowser', '~> 3.0.9'
    s.dependency 'YBImageBrowser/Video', '~> 3.0.9'
-   s.dependency 'Aspects'
-   s.dependency 'ReactiveObjC'
+   s.dependency 'SGPagingView', '~> 1.6.8'
    s.dependency 'Masonry'
-   
+   s.dependency 'ReactiveObjC'
+   s.dependency 'Aspects'
+   s.dependency 'IQKeyboardManager'   
    
 
 end

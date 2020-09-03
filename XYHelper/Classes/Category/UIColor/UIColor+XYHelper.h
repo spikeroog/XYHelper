@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

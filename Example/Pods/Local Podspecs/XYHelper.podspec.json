@@ -1,7 +1,7 @@
 {
   "name": "XYHelper",
   "version": "1.0.3",
-  "summary": "挤虚体验几番钟, 雷, 揍会干我一样, 爱象节款XYHelper.",
+  "summary": "基础类库, 用于快速构建你的新项目.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
   "license": {
@@ -50,13 +50,19 @@
     "YBImageBrowser/Video": [
       "~> 3.0.9"
     ],
-    "Aspects": [
+    "SGPagingView": [
+      "~> 1.6.8"
+    ],
+    "Masonry": [
 
     ],
     "ReactiveObjC": [
 
     ],
-    "Masonry": [
+    "Aspects": [
+
+    ],
+    "IQKeyboardManager": [
 
     ]
   }

@@ -24,17 +24,20 @@
 #define MAS_SHORTHAND // equalTo不需要使用"mas_"前缀
 #define MAS_SHORTHAND_GLOBALS // @1直接写1即可 自动将数据类型转为NSNumber类型
 #import <ReactiveObjC/ReactiveObjC.h> // rac
+#import <SGPagingView/SGPagingView.h> // 多段控制器
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 #pragma mark ---- 非Pods引用三方库
 
 #import "PPNetworkHelper.h"
-#import "ZXPUnicode.h"
+#import "XYUnicodeUtil.h"
 
 
 #pragma mark ---- 自定义路由
 
 #import "XYHelperRouter.h"
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h" // 屏幕适配
 #import "XYUserBasicModel.h"
 #import "XYHelperUtils.h"
 #import "XYNetworkUtils.h"
@@ -52,6 +55,7 @@
 #pragma mark ---- 自定义基类
 
 #import "XYBasicViewController.h"
+#import "XYPagingViewController.h"
 #import "XYNavigationController.h"
 #import "XYBasicWebViewController.h"
 #import "XYObserverView.h"

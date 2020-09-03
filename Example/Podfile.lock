@@ -17,22 +17,26 @@ PODS:
   - Aspects (1.4.1)
   - FLAnimatedImage (1.0.12)
   - HBDNavigationBar (1.7.7)
+  - IQKeyboardManager (6.5.6)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - ReactiveObjC (3.1.1)
   - SDWebImage (5.9.0):
     - SDWebImage/Core (= 5.9.0)
   - SDWebImage/Core (5.9.0)
+  - SGPagingView (1.6.8)
   - TZImagePickerController (3.4.2)
   - XYHelper (1.0.3):
     - AFNetworking (~> 4.0)
     - Aspects
     - FLAnimatedImage (~> 1.0.2)
     - HBDNavigationBar (~> 1.7.7)
+    - IQKeyboardManager
     - Masonry
     - MBProgressHUD (~> 1.2.0)
     - ReactiveObjC
     - SDWebImage (~> 5.9.0)
+    - SGPagingView (~> 1.6.8)
     - TZImagePickerController (~> 3.4.2)
     - YBImageBrowser (~> 3.0.9)
     - YBImageBrowser/Video (~> 3.0.9)
@@ -62,10 +66,12 @@ SPEC REPOS:
     - Aspects
     - FLAnimatedImage
     - HBDNavigationBar
+    - IQKeyboardManager
     - Masonry
     - MBProgressHUD
     - ReactiveObjC
     - SDWebImage
+    - SGPagingView
     - TZImagePickerController
     - YBImageBrowser
     - YYCache
@@ -81,12 +87,14 @@ SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   HBDNavigationBar: 6ba38b99637039c831ce460364d5398f29fa0685
+  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDWebImage: 62ae4a18473520c67b79e9724c31a63599cc9423
+  SGPagingView: 8b8c0960e062e7d704896d0a639afb564e4ae86c
   TZImagePickerController: cc0b74d5f01ab4cddcc24dcdfc3c7d68e6261056
-  XYHelper: e9c19205388c7038d3840911566ba1b627f53e84
+  XYHelper: 4ea08f11e81a856225b362fd2d855ae94bd9336f
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd

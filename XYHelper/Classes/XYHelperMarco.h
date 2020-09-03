@@ -71,23 +71,6 @@
 // ----  自定义透明度颜色,不会作用在子视图
 #define kColorWithOpacity(color, alpha) [color colorWithAlphaComponent:alpha]
 
-// ----  根据名字设置字体
-#define kFontWithNameAndSize(fontName,fontSize) ([UIFont fontWithName:fontName size:fontSize])
-// ----  正常的字体
-#define kFontWithSize(size) ([UIFont systemFontOfSize:size])
-// ----  屏幕适配的字体
-#define kFontWithAutoSize(size) ([UIFont systemFontOfSize:kAutoCs(size)])
-// ----  加粗字体
-#define kBoldFontWithSize(size) ([UIFont boldSystemFontOfSize:size])
-// ----  加粗屏幕适配的字体
-#define kBoldFontWithAutoSize(size) ([UIFont boldSystemFontOfSize:kAutoCs(size)])
-// ----  斜体
-#define kItalicFontWithSize(size) ([UIFont italicSystemFontOfSize:size])
-
-// ----  约束
-#define kAutoCs(number) (number) * ([UIScreen mainScreen].bounds.size.width) / 375.0f
-
-
 // ----  本地图片
 #define kImageWithName(name) [UIImage imageNamed:(name)]
 // ----  网络图片
@@ -118,11 +101,11 @@
 // ----  判断9.7 ipad
 #define kIpad97 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1536, 2048), [[UIScreen mainScreen] currentMode].size) && kiPad : NO)
 
-// ----  GCD - 一次性执行
+// ----  GCD - 一次性执行  使用方法:kDISPATCH_ONCE_BLOCK(^{  });
 #define kDISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&onceToken, onceBlock);
-// ----  GCD - 在Main线程上运行
+// ----  GCD - 在Main线程上运行  使用方法:kDISPATCH_MAIN_THREAD(^{  });
 #define kDISPATCH_MAIN_THREAD(mainQueueBlock) dispatch_async(dispatch_get_main_queue(), mainQueueBlock);
-// ----  GCD - 开启异步线程
+// ----  GCD - 开启异步线程  使用:kDISPATCH_GLOBAL_QUEUE_DEFAULT(^{  });
 #define kDISPATCH_GLOBAL_QUEUE_DEFAULT(globalQueueBlock) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), globalQueueBlocl);
 
 // ----  获取沙盒 Home目录

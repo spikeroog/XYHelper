@@ -8,6 +8,7 @@
 
 #import "NSLayoutConstraint+XYHelper.h"
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 
 @implementation NSLayoutConstraint (XYHelper)
 

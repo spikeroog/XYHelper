@@ -7,6 +7,7 @@
 
 #import "XYNetworkUtils.h"
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 
 @implementation XYNetworkUtils
 

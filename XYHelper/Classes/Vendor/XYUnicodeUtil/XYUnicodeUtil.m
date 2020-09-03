@@ -1,14 +1,11 @@
 //
-//  ZXPUnicode.m
+//  XYUnicodeUtil.m
 //
-//  blog : http://blog.csdn.net/biggercoffee
-//  github : https://github.com/biggercoffee/ZXPUnicode
-//
-//  Created by Mango on 2017/3/31.
-//  Copyright © 2017年 coffee. All rights reserved.
+//  Created by spikeroog on 2019/3/31.
+//  Copyright © 2017年 spikeroog. All rights reserved.
 //
 
-#import "ZXPUnicode.h"
+#import "XYUnicodeUtil.h"
 #import <objc/runtime.h>
 
 static inline void zxp_swizzleSelector(Class class, SEL originalSelector, SEL swizzledSelector) {
@@ -21,7 +18,7 @@ static inline void zxp_swizzleSelector(Class class, SEL originalSelector, SEL sw
     }
 }
 
-@implementation NSString (ZXPUnicode)
+@implementation NSString (XYUnicodeUtil)
 
 - (NSString *)stringByReplaceUnicode {
     NSMutableString *convertedString = [self mutableCopy];
@@ -37,7 +34,7 @@ static inline void zxp_swizzleSelector(Class class, SEL originalSelector, SEL sw
 
 @end
 
-@implementation NSArray (ZXPUnicode)
+@implementation NSArray (XYUnicodeUtil)
 
 + (void)load {
     static dispatch_once_t onceToken;
@@ -68,7 +65,7 @@ static inline void zxp_swizzleSelector(Class class, SEL originalSelector, SEL sw
 
 @end
 
-@implementation NSDictionary (ZXPUnicode)
+@implementation NSDictionary (XYUnicodeUtil)
 
 + (void)load {
     static dispatch_once_t onceToken;
@@ -94,7 +91,7 @@ static inline void zxp_swizzleSelector(Class class, SEL originalSelector, SEL sw
 
 @end
 
-@implementation NSSet (ZXPUnicode)
+@implementation NSSet (XYUnicodeUtil)
 
 + (void)load {
     static dispatch_once_t onceToken;

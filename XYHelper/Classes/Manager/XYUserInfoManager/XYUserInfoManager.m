@@ -8,6 +8,7 @@
 
 #import "XYUserInfoManager.h"
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 
 @implementation XYUserInfoManager
 

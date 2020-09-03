@@ -9,6 +9,7 @@
 #import "XYAdapterManager.h"
 #import <Aspects/Aspects.h>
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 
 @implementation XYAdapterManager
 

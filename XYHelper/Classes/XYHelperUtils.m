@@ -807,8 +807,6 @@
     return [XYHelperUtils timeToStrFrom:timeStr dateformat:dateFormat];
 }
 
-
-
 #pragma mark - 时间转换成时间戳
 /**
  时间转换成时间戳
@@ -1193,7 +1191,6 @@
     return filesize;
 }
 
-
 /**
  ios13获取textfield label的方法
 
@@ -1205,16 +1202,13 @@
     return object_getIvar(tf, ivar);
 }
 
-/// 获取今年是哪一年
-+ (NSString *)fetchCurrentYear {
+/// 获取现在时间，每个区块以字符串形式返回
++ (void)getPresentTime:(void(^)(NSString *year, NSString *month, NSString *day, NSString *hour, NSString *minute, NSString *second))completion {
     
     NSDate *date = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    // 获取当前时间日期展示字符串 如：2019-05-23-13:58:59
-//    NSString *currentTime = [formatter stringFromDate:date];
-    
+
     //下面是单独获取每项的值
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -1222,21 +1216,22 @@
     comps = [calendar components:unitFlags fromDate:date];
     
     //星期 注意星期是从周日开始计算
-//    long week = [comps weekday];
+    long week = [comps weekday];
     //年
     long year = [comps year];
     //月
-//    long month = [comps month];
-//    //日
-//    long day = [comps day];
-//    //时
-//    long hour = [comps hour];
-//    //分
-//    long minute = [comps minute];
-//    //秒
-//    long second = [comps second];
+    long month = [comps month];
+    //日
+    long day = [comps day];
+    //时
+    long hour = [comps hour];
+    //分
+    long minute = [comps minute];
+    //秒
+    long second = [comps second];
     
-    return  [NSString stringWithFormat:@"%ld", year];
+    completion([NSString stringWithFormat:@"%ld", year],[NSString stringWithFormat:@"%ld", month],[NSString stringWithFormat:@"%ld", day],[NSString stringWithFormat:@"%ld", hour],[NSString stringWithFormat:@"%ld", minute],[NSString stringWithFormat:@"%ld", second]);
+    
 }
 
 /// 比较两个数组元素是否相等

@@ -13,6 +13,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "XYHelperRouter.h"
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 #import "UIView+XYHelper.h"
 #import "MBProgressHUD+XYHelper.h"
 #import "XYHelperUtils.h"

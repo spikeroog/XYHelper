@@ -10,6 +10,7 @@
 #import "XYBarItemCustomView.h"
 #import "XYHelperRouter.h"
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 #import <HBDNavigationBar/HBDNavigationBar.h>
 #import <HBDNavigationBar/HBDNavigationController.h>
 #import <HBDNavigationBar/UIViewController+HBD.h>

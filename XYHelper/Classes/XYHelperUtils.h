@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "XYHelperMarco.h"
+#import "XYScreenAdapter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -212,8 +213,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (CGFloat)fetchVideoSize:(NSString *)videoPath;
 
-/// 获取今年是哪一年
-+ (NSString *)fetchCurrentYear;
+/// 获取现在时间，每个区块以字符串形式返回
++ (void)getPresentTime:(void(^)(NSString *year, NSString *month, NSString *day, NSString *hour, NSString *minute, NSString *second))completion;
 
 /// 比较两个数组元素是否相等
 /// @param arrayA 数组1
