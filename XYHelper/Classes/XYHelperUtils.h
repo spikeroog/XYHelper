@@ -148,7 +148,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 定时器
 + (void)createTimerWithTimeout:(NSInteger)time
                       interval:(CGFloat)interval
-                countingHandle:(void(^)())countingHandle
+                countingHandle:(void(^)(NSInteger count))countingHandle
                   finishHandle:(void(^)())finishHandle;
 
 #pragma mark - 给视图添加抖动动画
@@ -237,6 +237,34 @@ NS_ASSUME_NONNULL_BEGIN
 /// 添加和中文有间距的下划线
 /// @param fatherLabel 父label
 + (void)addUnderLineWithLabel:(__kindof UILabel *)fatherLabel;
+
+#pragma mark - 快速创建用户隐私协议按钮，可带勾选框☑️
+/// 使用方法:UIButton *btn = [XYHelperUtil createUserProButtonWithFullstring:xx];
+/// 快速创建用户隐私协议按钮，可带勾选框☑️
+/// @param fullstring 完整字符串
+/// @param normalSelectTitle 正常颜色的可点击文字，如：@"登录即代表同意"
+/// @param highlightSelectTitleArr 高亮颜色的可点击文字数组,如：@[@"用户协议",@"、",@"隐私声明"]
+/// @param normalColor 正常文字颜色
+/// @param highlightColor 高亮文字颜色
+/// @param normalFont 正常文字字体大小
+/// @param highlightFont 高亮文字字体大小
+/// @param isShowCheck 是否显示勾选框
+/// @param checkNormalImage 勾选框未选中颜色
+/// @param checkHighlightImage 勾选框选中颜色
+/// @param isDefaultCheck 是否默认勾选
+/// @param completion 回调点击下标
++ (UIButton *)createUserProButtonWithFullstring:(NSString *)fullstring
+                        normalSelectTitle:(NSString *)normalSelectTitle
+                  highlightSelectTitleArr:(NSArray *)highlightSelectTitleArr
+                              normalColor:(UIColor *)normalColor
+                           highlightColor:(UIColor *)highlightColor
+                               normalFont:(CGFloat)normalFont
+                            highlightFont:(CGFloat)highlightFont
+                              isShowCheck:(BOOL)isShowCheck
+                         checkNormalImage:(nullable UIImage *)checkNormalImage
+                      checkHighlightImage:(nullable UIImage *)checkHighlightImage
+                           isDefaultCheck:(BOOL)isDefaultCheck
+                               completion:(void(^)(NSInteger idx))completion;
 
 @end
 

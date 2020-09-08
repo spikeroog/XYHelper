@@ -39,6 +39,7 @@
 #import "UIImage+ImageEffects.h"
 #import "UIImage+XYHelper.h"
 #import "UILabel+XYHelper.h"
+#import "UILabel+YBAttributeTextTapAction.h"
 #import "UINavigationController+XYHelper.h"
 #import "UITextView+XYHelper.h"
 #import "UIView+XYHelper.h"

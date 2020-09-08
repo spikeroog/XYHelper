@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -86,58 +86,58 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>bcut</string>
-        <string>missevan</string>
-        <string>qing</string>
-        <string>bilibili</string>
-        <string>bilicomic</string>
-        <string>bili.hd</string>
-        <string>wechat</string>
-        <string>weixin</string>
-        <string>weixinULAPI</string>
-        <string>cmbmobilebank</string>
-        <string>uppaysdk</string>
-        <string>uppaywallet</string>
-        <string>sinaweibo</string>
-        <string>sinaweibohd</string>
-        <string>sinaweibosso</string>
-        <string>sinaweibohdsso</string>
-        <string>weibosdk</string>
-        <string>weibosdk2.5</string>
-        <string>mqzoneopensdk</string>
-        <string>mqzoneopensdkapi</string>
-        <string>mqzoneopensdkapi19</string>
-        <string>mqzoneopensdkapiV2</string>
-        <string>mqqOpensdkSSoLogin</string>
-        <string>mqqopensdkapiV2</string>
-        <string>mqqopensdkapiV3</string>
-        <string>wtloginmqq2</string>
-        <string>mqqapi</string>
-        <string>mqqwpa</string>
-        <string>mqzone</string>
-        <string>mqq</string>
-        <string>mqqopensdkapiV4</string>
-        <string>mqqopensdkminiapp</string>
-        <string>mqqbrowser</string>
-        <string>mttbrowser</string>
-        <string>alipay</string>
-        <string>mqqwallet</string>
-        <string>dianping</string>
-        <string>openapp.jdmobile</string>
-        <string>kaola</string>
-        <string>vipshop</string>
-        <string>ctrip</string>
-        <string>imeituan</string>
-        <string>tmall</string>
-        <string>taobao</string>
-        <string>tbopen</string>
-        <string>fleamarket</string>
-        <string>alipays</string>
-        <string>qunariphone</string>
-        <string>uclink</string>
-        <string>suning</string>
-    </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>bcut</string>
+		<string>missevan</string>
+		<string>qing</string>
+		<string>bilibili</string>
+		<string>bilicomic</string>
+		<string>bili.hd</string>
+		<string>wechat</string>
+		<string>weixin</string>
+		<string>weixinULAPI</string>
+		<string>cmbmobilebank</string>
+		<string>uppaysdk</string>
+		<string>uppaywallet</string>
+		<string>sinaweibo</string>
+		<string>sinaweibohd</string>
+		<string>sinaweibosso</string>
+		<string>sinaweibohdsso</string>
+		<string>weibosdk</string>
+		<string>weibosdk2.5</string>
+		<string>mqzoneopensdk</string>
+		<string>mqzoneopensdkapi</string>
+		<string>mqzoneopensdkapi19</string>
+		<string>mqzoneopensdkapiV2</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqopensdkapiV3</string>
+		<string>wtloginmqq2</string>
+		<string>mqqapi</string>
+		<string>mqqwpa</string>
+		<string>mqzone</string>
+		<string>mqq</string>
+		<string>mqqopensdkapiV4</string>
+		<string>mqqopensdkminiapp</string>
+		<string>mqqbrowser</string>
+		<string>mttbrowser</string>
+		<string>alipay</string>
+		<string>mqqwallet</string>
+		<string>dianping</string>
+		<string>openapp.jdmobile</string>
+		<string>kaola</string>
+		<string>vipshop</string>
+		<string>ctrip</string>
+		<string>imeituan</string>
+		<string>tmall</string>
+		<string>taobao</string>
+		<string>tbopen</string>
+		<string>fleamarket</string>
+		<string>alipays</string>
+		<string>qunariphone</string>
+		<string>uclink</string>
+		<string>suning</string>
+	</array>
 </dict>
 </plist>

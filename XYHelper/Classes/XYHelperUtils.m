@@ -15,6 +15,7 @@
 #import <YYCategories/YYCategories.h>
 #import <Masonry/Masonry.h>
 #import <ReactiveObjC/ReactiveObjC.h>
+#import "UILabel+YBAttributeTextTapAction.h"
 
 @implementation XYHelperUtils
 
@@ -889,7 +890,7 @@
  */
 + (void)createTimerWithTimeout:(NSInteger)time
                       interval:(CGFloat)interval
-                countingHandle:(void(^)())countingHandle
+                countingHandle:(void(^)(NSInteger count))countingHandle
                   finishHandle:(void(^)())finishHandle {
     
     __block NSInteger timeout = time;
@@ -909,7 +910,7 @@
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                countingHandle();
+                countingHandle(timeout);
             });
         }
     });
@@ -1328,6 +1329,120 @@
     }];
 }
 
+#pragma mark - 快速创建用户隐私协议按钮，可带勾选框☑️
+/// 使用方法:UIButton *btn = [XYHelperUtil createUserProButtonWithFullstring:xx];
+/// 快速创建用户隐私协议按钮，可带勾选框☑️
+/// @param fullstring 完整字符串
+/// @param normalSelectTitle 正常颜色的可点击文字，如：@"登录即代表同意"
+/// @param highlightSelectTitleArr 高亮颜色的可点击文字数组,如：@[@"用户协议",@"、",@"隐私声明"]
+/// @param normalColor 正常文字颜色
+/// @param highlightColor 高亮文字颜色
+/// @param normalFont 正常文字字体大小
+/// @param highlightFont 高亮文字字体大小
+/// @param isShowCheck 是否显示勾选框
+/// @param checkNormalImage 勾选框未选中颜色
+/// @param checkHighlightImage 勾选框选中颜色
+/// @param isDefaultCheck 是否默认勾选
+/// @param completion 回调点击下标
++ (UIButton *)createUserProButtonWithFullstring:(NSString *)fullstring
+                                normalSelectTitle:(NSString *)normalSelectTitle
+                            highlightSelectTitleArr:(NSArray *)highlightSelectTitleArr
+                             normalColor:(UIColor *)normalColor
+                          highlightColor:(UIColor *)highlightColor
+                              normalFont:(CGFloat)normalFont
+                           highlightFont:(CGFloat)highlightFont
+                             isShowCheck:(BOOL)isShowCheck
+                        checkNormalImage:(nullable UIImage *)checkNormalImage
+                     checkHighlightImage:(nullable UIImage *)checkHighlightImage
+                           isDefaultCheck:(BOOL)isDefaultCheck completion:(void(^)(NSInteger idx))completion {
+    
+    __block UIButton * button = [[UIButton alloc] init];
+    
+    NSString * showText;
+    
+    if (isShowCheck) {
+        [button setImage:checkNormalImage forState:UIControlStateNormal];
+        [button setImage:checkHighlightImage forState:UIControlStateSelected];
+        [button setImageEdgeInsets:UIEdgeInsetsMake(0, kAutoCs(18), 0, 0)];
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        showText = [NSString stringWithFormat:@"    %@",fullstring];
+        normalSelectTitle = [NSString stringWithFormat:@"    %@", normalSelectTitle];
+    } else {
+        showText = fullstring;
+    }
+ 
+    NSAttributedString * showAttString = [self getAttributeWith:highlightSelectTitleArr string:showText orginFont:normalFont orginColor:normalColor attributeFont:highlightFont attributeColor:highlightColor];
+    [button setAttributedTitle:showAttString forState:UIControlStateNormal];
+    button.titleLabel.numberOfLines = 0;
+    button.titleLabel.enabledTapEffect = false;
+    button.adjustsImageWhenHighlighted = false;
+    
+    if (isDefaultCheck) {
+        button.selected = true;
+    } else {
+        button.selected = false;
+    }
+    
+    NSMutableArray *arrayMut = [NSMutableArray new];
+    [arrayMut addObject:normalSelectTitle];
+    [arrayMut addObjectsFromArray:highlightSelectTitleArr];
+    [button.titleLabel yb_addAttributeTapActionWithStrings:arrayMut tapClicked:^(UILabel *label, NSString *string, NSRange range, NSInteger index) {
+        if ([string isEqualToString:normalSelectTitle]) {
+            button.selected = !button.selected;
+        } else {
+            completion(index);
+        }
+    }];
+
+    return button;
+}
+
++ (NSAttributedString *)getAttributeWith:(id)sender
+                                  string:(NSString *)string
+                               orginFont:(CGFloat)orginFont
+                              orginColor:(UIColor *)orginColor
+                           attributeFont:(CGFloat)attributeFont
+                          attributeColor:(UIColor *)attributeColor {
+    __block  NSMutableAttributedString *totalStr = [[NSMutableAttributedString alloc] initWithString:string];
+    [totalStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:orginFont] range:NSMakeRange(0, string.length)];
+    [totalStr addAttribute:NSForegroundColorAttributeName value:orginColor range:NSMakeRange(0, string.length)];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:5.0f]; //设置行间距
+    [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+    [paragraphStyle setAlignment:NSTextAlignmentLeft];
+    [paragraphStyle setLineBreakMode:NSLineBreakByCharWrapping];
+    [totalStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [totalStr length])];
+    
+    if ([sender isKindOfClass:[NSArray class]]) {
+        
+        __block NSString *oringinStr = string;
+        __weak typeof(self) weakSelf = self;
+        
+        [sender enumerateObjectsUsingBlock:^(NSString *  _Nonnull str, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            NSRange range = [oringinStr rangeOfString:str];
+            [totalStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:attributeFont] range:range];
+            [totalStr addAttribute:NSForegroundColorAttributeName value:attributeColor range:range];
+            oringinStr = [oringinStr stringByReplacingCharactersInRange:range withString:[weakSelf getStringWithRange:range]];
+        }];
+        
+    }else if ([sender isKindOfClass:[NSString class]]) {
+        
+        NSRange range = [string rangeOfString:sender];
+        
+        [totalStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:attributeFont] range:range];
+        [totalStr addAttribute:NSForegroundColorAttributeName value:attributeColor range:range];
+    }
+    return totalStr;
+}
+
++ (NSString *)getStringWithRange:(NSRange)range {
+    NSMutableString *string = [NSMutableString string];
+    for (int i = 0; i < range.length ; i++) {
+        [string appendString:@" "];
+    }
+    return string;
+}
 
 @end
 
