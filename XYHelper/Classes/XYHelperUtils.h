@@ -266,6 +266,14 @@ NS_ASSUME_NONNULL_BEGIN
                            isDefaultCheck:(BOOL)isDefaultCheck
                                completion:(void(^)(NSInteger idx))completion;
 
+#pragma mark - 获取gif中的图片数组
+/// 获取gif中的图片数组
+/// @param resource gif
+/// @param color 想要改成的颜色
++ (NSArray *)getImageFromGifResource:(NSString *)resource
+                               color:(UIColor *)color;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

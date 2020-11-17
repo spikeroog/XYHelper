@@ -3,7 +3,7 @@
 //
 //  Created by LYB on 16/7/1.
 //  Copyright © 2016年 LYB. All rights reserved.
-//
+//  设置不同颜色，可以点击的label
 
 #import <UIKit/UIKit.h>
 

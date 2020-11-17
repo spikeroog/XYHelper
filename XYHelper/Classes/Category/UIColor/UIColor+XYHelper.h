@@ -55,7 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)transitionVerColorWithColor:(UIColor *)beginColor
                              andEndColor:(UIColor *)endColor;
 
-+ (UIColor *)customMainNavColor;
 
 @end
 

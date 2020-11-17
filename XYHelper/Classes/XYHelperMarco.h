@@ -9,14 +9,23 @@
 #ifndef XYHelperMarco_h
 #define XYHelperMarco_h
 
+#define kIsBangsScreen ({\
+    BOOL isBangsScreen = NO; \
+    if (@available(iOS 11.0, *)) { \
+    UIWindow *window = [[UIApplication sharedApplication].windows firstObject]; \
+    isBangsScreen = window.safeAreaInsets.bottom > 0; \
+    } \
+    isBangsScreen; \
+})
+
 // ----  导航栏高度
-#define kNavBarHeight (isIPhoneNotchScreen?88:64)
+#define kNavBarHeight (kIsBangsScreen?88:64)
 // ----  电池栏高度
-#define kStatusBarHeight (isIPhoneNotchScreen?44:20)
+#define kStatusBarHeight (kIsBangsScreen?44:20)
 // ----  标签栏高度
-#define kTabBarHeight (isIPhoneNotchScreen?83:49)
+#define kTabBarHeight (kIsBangsScreen?83:49)
 // ----  刘海屏底部栏的高度
-#define kBottomBarHeight (isIPhoneNotchScreen?34:0)
+#define kBottomBarHeight (kIsBangsScreen?34:0)
 
 // ---- 循环引用
 #ifndef weakify
@@ -206,36 +215,5 @@ Stuff; \
 _Pragma("clang diagnostic pop") \
 } while (0)
 
-static inline bool isIPhoneNotchScreen(void) {
-    if (kSystemVersion < 11.0f)  return false;
-    CGFloat iPhoneNotchDirectionSafeAreaInsets = 0;
-    if (@available(iOS 11.0, *)) {
-        UIEdgeInsets safeAreaInsets = [UIApplication sharedApplication].windows[0].safeAreaInsets;
-        switch ([UIApplication sharedApplication].statusBarOrientation) {
-            case UIInterfaceOrientationPortrait:{
-                iPhoneNotchDirectionSafeAreaInsets = safeAreaInsets.top;
-            }
-                break;
-            case UIInterfaceOrientationLandscapeLeft:{
-                iPhoneNotchDirectionSafeAreaInsets = safeAreaInsets.left;
-            }
-                break;
-            case UIInterfaceOrientationLandscapeRight:{
-                iPhoneNotchDirectionSafeAreaInsets = safeAreaInsets.right;
-            }
-                break;
-            case UIInterfaceOrientationPortraitUpsideDown:{
-                iPhoneNotchDirectionSafeAreaInsets = safeAreaInsets.bottom;
-            }
-                break;
-            default:
-                iPhoneNotchDirectionSafeAreaInsets = safeAreaInsets.top;
-                break;
-        }
-    } else {
-        // Fallback on earlier versions
-    }
-    return iPhoneNotchDirectionSafeAreaInsets > 20;
-}
 
 #endif /* XYHelperMarco_h */

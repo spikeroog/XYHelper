@@ -1,7 +1,7 @@
 {
   "name": "XYHelper",
-  "version": "1.0.3",
-  "summary": "基础类库, 用于快速构建你的新项目.",
+  "version": "1.0.4",
+  "summary": "This is a basic class library for building your new project quickly.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
   "license": {
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/spikeroog/XYHelper.git",
-    "tag": "1.0.3"
+    "tag": "1.0.4"
   },
   "platforms": {
     "ios": "9.0"
@@ -26,9 +26,6 @@
     "HBDNavigationBar": [
       "~> 1.7.7"
     ],
-    "SDWebImage": [
-      "~> 5.9.0"
-    ],
     "MBProgressHUD": [
       "~> 1.2.0"
     ],
@@ -37,9 +34,6 @@
     ],
     "YYCategories": [
       "~> 1.0.4"
-    ],
-    "TZImagePickerController": [
-      "~> 3.4.2"
     ],
     "FLAnimatedImage": [
       "~> 1.0.2"
@@ -52,6 +46,15 @@
     ],
     "SGPagingView": [
       "~> 1.6.8"
+    ],
+    "BRPickerView": [
+
+    ],
+    "TZImagePickerController": [
+
+    ],
+    "SDWebImage": [
+
     ],
     "Masonry": [
 

@@ -77,13 +77,4 @@
     return kColorWithImage(img);
 }
 
-+ (UIColor *)customMainNavColor {
-    // 设置导航栏背景颜色，将图片设置为高度为1，可提高精确度
-    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
-    imageV.image = kImageWithName(@"");
-    imageV.contentMode = UIViewContentModeScaleAspectFill;
-    UIImage *img = [UIImage xy_convertViewToImage:imageV];
-    return kColorWithImage(img);
-}
-
 @end

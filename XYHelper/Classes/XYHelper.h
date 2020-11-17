@@ -25,12 +25,14 @@
 #define MAS_SHORTHAND_GLOBALS // @1直接写1即可 自动将数据类型转为NSNumber类型
 #import <ReactiveObjC/ReactiveObjC.h> // rac
 #import <SGPagingView/SGPagingView.h> // 多段控制器
-#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <IQKeyboardManager/IQKeyboardManager.h> // 键盘
+#import <BRPickerView.h> // 选择器
 
 #pragma mark ---- 非Pods引用三方库
 
 #import "PPNetworkHelper.h"
 #import "XYUnicodeUtil.h"
+#import "YCShadowView.h"
 
 
 #pragma mark ---- 自定义路由
@@ -66,6 +68,9 @@
 
 
 #pragma mark ---- 分类
+
+#import "UIView+JHDrawCategory.h"
+#import "UIButton+GradientBackgroundColor.h"
 
 #import "UIImage+ImageEffects.h"
 #import "UIControl+FixMultiClick.h"

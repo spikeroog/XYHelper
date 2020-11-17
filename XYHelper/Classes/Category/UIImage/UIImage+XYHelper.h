@@ -86,6 +86,10 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                           andEndColor:(UIColor *)endColor
                                bounds:(CGRect)bounds;
 
+
+/// 改变图片颜色,使用方法：[kImageWithName(@"xx") imageWithColor:UIColor.blackColor];
+- (UIImage *)imageWithColor:(UIColor *)color;
+
 @end
 
 NS_ASSUME_NONNULL_END

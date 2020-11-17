@@ -16,6 +16,7 @@
 #import <Masonry/Masonry.h>
 #import <ReactiveObjC/ReactiveObjC.h>
 #import "UILabel+YBAttributeTextTapAction.h"
+#import "UIImage+XYHelper.h"
 
 @implementation XYHelperUtils
 
@@ -1345,16 +1346,16 @@
 /// @param isDefaultCheck 是否默认勾选
 /// @param completion 回调点击下标
 + (UIButton *)createUserProButtonWithFullstring:(NSString *)fullstring
-                                normalSelectTitle:(NSString *)normalSelectTitle
-                            highlightSelectTitleArr:(NSArray *)highlightSelectTitleArr
-                             normalColor:(UIColor *)normalColor
-                          highlightColor:(UIColor *)highlightColor
-                              normalFont:(CGFloat)normalFont
-                           highlightFont:(CGFloat)highlightFont
-                             isShowCheck:(BOOL)isShowCheck
-                        checkNormalImage:(nullable UIImage *)checkNormalImage
-                     checkHighlightImage:(nullable UIImage *)checkHighlightImage
-                           isDefaultCheck:(BOOL)isDefaultCheck completion:(void(^)(NSInteger idx))completion {
+                              normalSelectTitle:(NSString *)normalSelectTitle
+                        highlightSelectTitleArr:(NSArray *)highlightSelectTitleArr
+                                    normalColor:(UIColor *)normalColor
+                                 highlightColor:(UIColor *)highlightColor
+                                     normalFont:(CGFloat)normalFont
+                                  highlightFont:(CGFloat)highlightFont
+                                    isShowCheck:(BOOL)isShowCheck
+                               checkNormalImage:(nullable UIImage *)checkNormalImage
+                            checkHighlightImage:(nullable UIImage *)checkHighlightImage
+                                 isDefaultCheck:(BOOL)isDefaultCheck completion:(void(^)(NSInteger idx))completion {
     
     __block UIButton * button = [[UIButton alloc] init];
     
@@ -1362,15 +1363,14 @@
     
     if (isShowCheck) {
         [button setImage:checkNormalImage forState:UIControlStateNormal];
-        [button setImage:checkHighlightImage forState:UIControlStateSelected];
-        [button setImageEdgeInsets:UIEdgeInsetsMake(0, kAutoCs(18), 0, 0)];
+        [button setImageEdgeInsets:UIEdgeInsetsMake(0, kAutoCs(22), 0, 0)];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-        showText = [NSString stringWithFormat:@"    %@",fullstring];
-        normalSelectTitle = [NSString stringWithFormat:@"    %@", normalSelectTitle];
+        showText = [NSString stringWithFormat:@"      %@",fullstring];
+        normalSelectTitle = [NSString stringWithFormat:@"      %@", normalSelectTitle];
     } else {
         showText = fullstring;
     }
- 
+    
     NSAttributedString * showAttString = [self getAttributeWith:highlightSelectTitleArr string:showText orginFont:normalFont orginColor:normalColor attributeFont:highlightFont attributeColor:highlightColor];
     [button setAttributedTitle:showAttString forState:UIControlStateNormal];
     button.titleLabel.numberOfLines = 0;
@@ -1389,11 +1389,20 @@
     [button.titleLabel yb_addAttributeTapActionWithStrings:arrayMut tapClicked:^(UILabel *label, NSString *string, NSRange range, NSInteger index) {
         if ([string isEqualToString:normalSelectTitle]) {
             button.selected = !button.selected;
+            
+            if (isShowCheck) {
+                if (button.selected) {
+                    [button setImage:checkHighlightImage forState:UIControlStateNormal];
+                } else {
+                    [button setImage:checkNormalImage forState:UIControlStateNormal];
+                }
+            }
+            
         } else {
             completion(index);
         }
     }];
-
+    
     return button;
 }
 
@@ -1443,6 +1452,34 @@
     }
     return string;
 }
+
+#pragma mark - 获取gif中的图片数组
+/// 获取gif中的图片数组
+/// @param resource gif
+/// @param color 想要改成的颜色
++ (NSArray *)getImageFromGifResource:(NSString *)resource
+                               color:(UIColor *)color {
+    NSMutableArray *imageArray = [NSMutableArray array];
+    
+    // 获取gif url
+    NSURL *url = [[NSBundle mainBundle] URLForResource:resource withExtension:@"gif"];
+    // 转换为图片源
+    CGImageSourceRef gifImageSourceRef = CGImageSourceCreateWithURL((CFURLRef)url, nil);
+    // 获取图片个数
+    size_t framesCount = CGImageSourceGetCount(gifImageSourceRef);
+    for (size_t i=0; i<framesCount; i++) {
+        CGImageRef imageRef = CGImageSourceCreateImageAtIndex(gifImageSourceRef, i, nil);
+        UIImage *image = [UIImage imageWithCGImage:imageRef];
+        
+        image = [image imageWithColor:color];
+        
+        [imageArray addObject:image];
+        
+        CFRelease(imageRef);
+    }
+    return imageArray;
+}
+
 
 @end
 
