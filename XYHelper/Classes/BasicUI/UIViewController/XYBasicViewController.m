@@ -19,10 +19,11 @@
 #import <SDWebImage/UIImage+GIF.h>
 #import "UIImage+XYHelper.h"
 #import "UIColor+XYHelper.h"
+#import <JXCategoryView/JXCategoryView.h>
 
 #define RotundityWH 35 // 导航栏左侧右侧，圆形或正方形显示barItem的默认宽高
 
-@interface XYBasicViewController ()
+@interface XYBasicViewController () <JXCategoryListContentViewDelegate>
 /**左侧按钮Item*/
 @property (nonatomic, strong) UIBarButtonItem *leftBarItem;
 /**右侧按钮Item*/
@@ -38,6 +39,14 @@ navTitleColor = _navTitleColor,
 navTitle = _navTitle,
 navBgImageStr = _navBgImageStr;
 
+#pragma mark - JXCategoryListContentViewDelegate
+
+/**
+ 实现 <JXCategoryListContentViewDelegate> 协议方法，返回该视图控制器所拥有的「视图」
+ */
+- (UIView *)listView {
+    return self.view;
+}
 
 #pragma mark - Controller lifecycle
 

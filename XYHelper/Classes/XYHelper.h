@@ -24,7 +24,6 @@
 #define MAS_SHORTHAND // equalTo不需要使用"mas_"前缀
 #define MAS_SHORTHAND_GLOBALS // @1直接写1即可 自动将数据类型转为NSNumber类型
 #import <ReactiveObjC/ReactiveObjC.h> // rac
-#import <SGPagingView/SGPagingView.h> // 多段控制器
 #import <IQKeyboardManager/IQKeyboardManager.h> // 键盘
 #import <BRPickerView.h> // 选择器
 
@@ -55,14 +54,16 @@
 #import "XYMediaPreviewManager.h"
 
 #pragma mark ---- 自定义基类
-
-#import "XYBasicViewController.h"
-#import "XYPagingViewController.h"
-#import "XYNavigationController.h"
 #import "XYBasicWebViewController.h"
+#import "XYBasicPagingViewController.h"
+#import "XYAnchorViewController.h"
+#import "XYNestSubViewController.h"
+#import "XYNestViewController.h"
+#import "XYNavigationController.h"
+#import "XYBasicViewController.h"
 #import "XYObserverView.h"
-#import "XYPopupView.h"
 #import "XYCommentView.h"
+#import "XYPopupView.h"
 #import "XYTextfield.h"
 #import "XYSlider.h"
 

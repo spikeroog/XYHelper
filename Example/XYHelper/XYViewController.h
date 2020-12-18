@@ -2,12 +2,16 @@
 //  XYViewController.h
 //  XYHelper
 //
-//  Created by spikeroog on 08/25/2020.
-//  Copyright (c) 2020 spikeroog. All rights reserved.
+//  Created by spikeroog on 2020/12/15.
+//  Copyright © 2020 spikeroog. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
-@interface XYViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
+
+@interface XYViewController : XYBasicViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

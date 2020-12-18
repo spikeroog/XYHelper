@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
-  s.version          = '1.0.4'
-  s.summary          = 'This is a basic class library for building your new project quickly.'
+  s.version          = '1.1.0'
+  s.summary          = 'The Objective-C utilities you always wish you had.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -38,22 +38,25 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-   s.dependency 'AFNetworking', '~> 4.0'
+
    s.dependency 'HBDNavigationBar', '~> 1.7.7'
-   s.dependency 'MBProgressHUD', '~> 1.2.0'
-   s.dependency 'YYCache', '~> 1.0.4'
-   s.dependency 'YYCategories', '~> 1.0.4'
    s.dependency 'FLAnimatedImage', '~> 1.0.2'
-   s.dependency 'YBImageBrowser', '~> 3.0.9'
+   s.dependency 'JXCategoryView', '~> 1.5.8'
+   s.dependency 'MBProgressHUD', '~> 1.2.0'
+   s.dependency 'YYCategories', '~> 1.0.4'
+   s.dependency 'AFNetworking', '~> 4.0'
+   s.dependency 'YYCache', '~> 1.0.4'
+
    s.dependency 'YBImageBrowser/Video', '~> 3.0.9'
-   s.dependency 'SGPagingView', '~> 1.6.8'
-   s.dependency 'BRPickerView'
+   s.dependency 'YBImageBrowser', '~> 3.0.9'
+   
    s.dependency 'TZImagePickerController'
+   s.dependency 'IQKeyboardManager'
+   s.dependency 'ReactiveObjC'
+   s.dependency 'BRPickerView'
    s.dependency 'SDWebImage'
    s.dependency 'Masonry'
-   s.dependency 'ReactiveObjC'
    s.dependency 'Aspects'
-   s.dependency 'IQKeyboardManager'   
    
 
 end

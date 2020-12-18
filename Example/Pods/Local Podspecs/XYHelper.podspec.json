@@ -1,7 +1,7 @@
 {
   "name": "XYHelper",
-  "version": "1.0.4",
-  "summary": "This is a basic class library for building your new project quickly.",
+  "version": "1.1.0",
+  "summary": "The Objective-C utilities you always wish you had.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
   "license": {
@@ -13,44 +13,50 @@
   },
   "source": {
     "git": "https://github.com/spikeroog/XYHelper.git",
-    "tag": "1.0.4"
+    "tag": "1.1.0"
   },
   "platforms": {
     "ios": "9.0"
   },
   "source_files": "XYHelper/Classes/**/*.{h,m}",
   "dependencies": {
-    "AFNetworking": [
-      "~> 4.0"
-    ],
     "HBDNavigationBar": [
       "~> 1.7.7"
-    ],
-    "MBProgressHUD": [
-      "~> 1.2.0"
-    ],
-    "YYCache": [
-      "~> 1.0.4"
-    ],
-    "YYCategories": [
-      "~> 1.0.4"
     ],
     "FLAnimatedImage": [
       "~> 1.0.2"
     ],
-    "YBImageBrowser": [
-      "~> 3.0.9"
+    "JXCategoryView": [
+      "~> 1.5.8"
+    ],
+    "MBProgressHUD": [
+      "~> 1.2.0"
+    ],
+    "YYCategories": [
+      "~> 1.0.4"
+    ],
+    "AFNetworking": [
+      "~> 4.0"
+    ],
+    "YYCache": [
+      "~> 1.0.4"
     ],
     "YBImageBrowser/Video": [
       "~> 3.0.9"
     ],
-    "SGPagingView": [
-      "~> 1.6.8"
-    ],
-    "BRPickerView": [
-
+    "YBImageBrowser": [
+      "~> 3.0.9"
     ],
     "TZImagePickerController": [
+
+    ],
+    "IQKeyboardManager": [
+
+    ],
+    "ReactiveObjC": [
+
+    ],
+    "BRPickerView": [
 
     ],
     "SDWebImage": [
@@ -59,13 +65,7 @@
     "Masonry": [
 
     ],
-    "ReactiveObjC": [
-
-    ],
     "Aspects": [
-
-    ],
-    "IQKeyboardManager": [
 
     ]
   }

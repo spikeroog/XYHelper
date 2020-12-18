@@ -30,26 +30,26 @@ PODS:
   - FLAnimatedImage (1.0.12)
   - HBDNavigationBar (1.7.7)
   - IQKeyboardManager (6.5.6)
+  - JXCategoryView (1.5.8)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - ReactiveObjC (3.1.1)
-  - SDWebImage (5.9.4):
-    - SDWebImage/Core (= 5.9.4)
-  - SDWebImage/Core (5.9.4)
-  - SGPagingView (1.6.9)
-  - TZImagePickerController (3.5.2)
-  - XYHelper (1.0.4):
+  - SDWebImage (5.10.0):
+    - SDWebImage/Core (= 5.10.0)
+  - SDWebImage/Core (5.10.0)
+  - TZImagePickerController (3.5.7)
+  - XYHelper (1.1.0):
     - AFNetworking (~> 4.0)
     - Aspects
     - BRPickerView
     - FLAnimatedImage (~> 1.0.2)
     - HBDNavigationBar (~> 1.7.7)
     - IQKeyboardManager
+    - JXCategoryView (~> 1.5.8)
     - Masonry
     - MBProgressHUD (~> 1.2.0)
     - ReactiveObjC
     - SDWebImage
-    - SGPagingView (~> 1.6.8)
     - TZImagePickerController
     - YBImageBrowser (~> 3.0.9)
     - YBImageBrowser/Video (~> 3.0.9)
@@ -81,11 +81,11 @@ SPEC REPOS:
     - FLAnimatedImage
     - HBDNavigationBar
     - IQKeyboardManager
+    - JXCategoryView
     - Masonry
     - MBProgressHUD
     - ReactiveObjC
     - SDWebImage
-    - SGPagingView
     - TZImagePickerController
     - YBImageBrowser
     - YYCache
@@ -103,13 +103,13 @@ SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   HBDNavigationBar: 6ba38b99637039c831ce460364d5398f29fa0685
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
+  JXCategoryView: 778a620f76070d6598fd8d7239991b8da8326170
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
-  SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
-  SGPagingView: 3420f9a9ccd2c93936b61bc5a23e58f58fe48809
-  TZImagePickerController: f1e4ed5ca1ddfc7e48d20867ff6a5c1e41a4b579
-  XYHelper: 34eefbd6572be73eed5a0def2977dfd8c96ca34e
+  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
+  TZImagePickerController: aff4b62eacce0194d2494ee4f42934bcff577cec
+  XYHelper: 3f688a968c80dbfdf9f071406f4ba39978a9e5ff
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd

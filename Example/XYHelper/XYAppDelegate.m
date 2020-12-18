@@ -7,7 +7,7 @@
 //
 
 #import "XYAppDelegate.h"
-#import <XYHelper.h>
+#import "XYViewController.h"
 
 @implementation XYAppDelegate
 
@@ -19,6 +19,10 @@
     [XYAppDelegateManager netWorkStatusObserver:^(NSString * _Nonnull netWorkStatusStr, PPNetworkStatusType statusType) {
         
     }];
+    
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = [[XYNavigationController alloc] initWithRootViewController:[XYViewController new]];
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
