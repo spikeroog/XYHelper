@@ -271,8 +271,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param resource gif
 /// @param color 想要改成的颜色
 + (NSArray *)getImageFromGifResource:(NSString *)resource
-                               color:(UIColor *)color;
-
+                               color:(nullable UIColor *)color;
+#pragma mark - 修改图片尺寸
++ (UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size;
 
 @end
 

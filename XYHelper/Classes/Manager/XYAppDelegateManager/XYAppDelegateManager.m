@@ -37,6 +37,7 @@
     [PPNetworkHelper setRequestTimeoutInterval:10.0f];
     
 #pragma mark - 设置状态栏颜色为白色
+    /// info.plist设置UIViewControllerBasedStatusBarAppearance为NO，才能生效
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
 #pragma mark - 配置IQKeyboardManager

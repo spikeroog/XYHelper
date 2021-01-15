@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  设置字间距
  */
-- (void)yx_setColumnSpace:(CGFloat)columnSpace;
+- (void)xy_setColumnSpace:(CGFloat)columnSpace;
 
 /**
  *  设置行距
  */
-- (void)yx_setRowSpace:(CGFloat)rowSpace;
+- (void)xy_setRowSpace:(CGFloat)rowSpace;
 
 @end
 

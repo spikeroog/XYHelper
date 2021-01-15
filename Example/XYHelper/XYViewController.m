@@ -13,17 +13,30 @@
 
 @implementation XYViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"首页";
     
+    /// 导航栏背景颜色
+    self.navBgColor = kBlackStyleNavBgColor;
+    /// 导航栏标题颜色
+    self.navTitleColor = kColorE8E8E8;
+    /// 导航栏按钮字体颜色
+    self.hbd_tintColor = kColorE8E8E8;
+    
     self.leftBarItemTitle = @"嵌套使用";
     self.rightBarItemTitle = @"底部锚点";
+   
+    self.view.backgroundColor = kBlackStyleViewControllerBgColor;
+    
+    self.isWhiteStatusBar = true;
 }
 
 - (void)leftActionInController {
     XYNestViewController *vc = [[XYNestViewController alloc] init];
+    vc.isWhiteStatusBar = false;
     vc.title = @"嵌套使用";
     vc.titles = @[@"主题一", @"主题二"];
     
@@ -72,7 +85,6 @@
     listVC_1.myCategoryView.cellWidthZoomScale = 1.3;
     
     
-    
     listVC_2.lineView.indicatorColor = UIColor.redColor;
     listVC_2.myCategoryView.titleColor = kColor333333;
     listVC_2.myCategoryView.titleSelectedColor = UIColor.redColor;
@@ -100,6 +112,7 @@
 
 - (void)rightActionInController {
     XYAnchorViewController *subViewC = [XYAnchorViewController new];
+    subViewC.isWhiteStatusBar = false;
     subViewC.title = @"底部锚点";
     subViewC.categoryViewHeight = 44;
     subViewC.lineView.indicatorColor = kColorWithNull;

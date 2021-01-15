@@ -13,16 +13,25 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**项目使用频率高的颜色*/
-// 主题色 导航栏颜色
-#define kMainColor kColorWithRGB16Radix(0xE97B9B)
 // 字体颜色
 #define kColor333333 kColorWithRGB16Radix(0x333333)
 #define kColor666666 kColorWithRGB16Radix(0x666666)
 #define kColor999999 kColorWithRGB16Radix(0x999999)
+#define kColorE8E8E8 kColorWithRGB16Radix(0xe8e8e8)
+
+
+// 导航栏颜色
+#define kWhiteStyleNavBgColor kColorWithRGB16Radix(0xffffff)
+#define kBlackStyleNavBgColor kColorWithRGB16Radix(0x2d2d30)
+
 // viewController tableView collectionView 背景颜色
-#define kColorTableViewBgColor kColorWithRGB16Radix(0xf5f5f5)
+#define kWhiteStyleViewControllerBgColor kColorWithRGB16Radix(0xf8f8f8)
+#define kBlackStyleViewControllerBgColor kColorWithRGB16Radix(0x222225)
+
 // cell分割线的颜色
-#define kColorCellSeparatorColor kColorWithRGB16Radix(0xE6E6E6)
+#define kWhiteStyleCellSeparatorColor kColorWithRGB16Radix(0xe6e6e6)
+#define kBlackStyleCellSeparatorColor kColorWithRGB16Radix(0x171719)
+
 
 @interface UIColor (XYHelper)
 

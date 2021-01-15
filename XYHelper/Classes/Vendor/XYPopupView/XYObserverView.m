@@ -43,7 +43,7 @@
     }
 }
 
-- (void)keyboardAction:(NSNotification*)sender {
+- (void)keyboardAction:(NSNotification *)sender {
     // 通过通知对象获取键盘frame: [value CGRectValue]
     NSDictionary *useInfo = [sender userInfo];
     CGRect beginUserRect = [[useInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];

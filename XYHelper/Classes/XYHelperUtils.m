@@ -1458,7 +1458,7 @@
 /// @param resource gif
 /// @param color 想要改成的颜色
 + (NSArray *)getImageFromGifResource:(NSString *)resource
-                               color:(UIColor *)color {
+                               color:(nullable UIColor *)color {
     NSMutableArray *imageArray = [NSMutableArray array];
     
     // 获取gif url
@@ -1471,13 +1471,28 @@
         CGImageRef imageRef = CGImageSourceCreateImageAtIndex(gifImageSourceRef, i, nil);
         UIImage *image = [UIImage imageWithCGImage:imageRef];
         
-        image = [image imageWithColor:color];
+        if (color != nil) {
+            image = [image imageWithColor:color];
+        }
         
         [imageArray addObject:image];
         
         CFRelease(imageRef);
     }
     return imageArray;
+}
+
+#pragma mark - 修改图片尺寸，防止图片因为自身尺寸过大在特殊场景无法按预期显示问题，如下滑刷新动态头部图片显示过大,一般为40x40
++ (UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size {
+    UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
+    // 绘制改变大小的图片
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage * scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 返回新的改变大小后的图片
+    return scaledImage;
 }
 
 

@@ -16,7 +16,7 @@
 
  @param columnSpace 间距
  */
-- (void)yx_setColumnSpace:(CGFloat)columnSpace {
+- (void)xy_setColumnSpace:(CGFloat)columnSpace {
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
     // 调整间距
     [attributedString addAttribute:(__bridge NSString *)kCTKernAttributeName value:@(columnSpace) range:NSMakeRange(0, [attributedString length])];
@@ -28,7 +28,7 @@
 
  @param rowSpace 间距
  */
-- (void)yx_setRowSpace:(CGFloat)rowSpace {
+- (void)xy_setRowSpace:(CGFloat)rowSpace {
     self.numberOfLines = 0;
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
     // 调整行距

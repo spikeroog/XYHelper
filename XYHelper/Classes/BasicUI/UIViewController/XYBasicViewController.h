@@ -17,6 +17,9 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 /// 隐藏导航栏，默认NO
 @property (nonatomic, assign) BOOL barHidden;
 
+/// 状态栏颜色，true为白色，false为黑色
+@property (nonatomic, assign) BOOL isWhiteStatusBar;
+
 /// 导航栏背景颜色
 @property (nonatomic, strong) UIColor *navBgColor;
 /// 导航栏背景图片

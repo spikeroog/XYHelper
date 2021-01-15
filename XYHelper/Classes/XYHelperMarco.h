@@ -9,6 +9,7 @@
 #ifndef XYHelperMarco_h
 #define XYHelperMarco_h
 
+// ----  异形屏
 #define kIsBangsScreen ({\
     BOOL isBangsScreen = NO; \
     if (@available(iOS 11.0, *)) { \
@@ -27,7 +28,7 @@
 // ----  刘海屏底部栏的高度
 #define kBottomBarHeight (kIsBangsScreen?34:0)
 
-// ---- 循环引用
+// ---- 弱强引用
 #ifndef weakify
 #if DEBUG
 #if __has_feature(objc_arc)
