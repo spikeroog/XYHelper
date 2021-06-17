@@ -7,9 +7,11 @@
 //
 
 #import "XYHelperUtils.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AdSupport/AdSupport.h>
+#import <SAMKeychain/SAMKeychain.h>
 #import "XYHelperRouter.h"
 #import <objc/runtime.h>
-#import <AVFoundation/AVFoundation.h>
 #import <Foundation/Foundation.h>
 #import <CoreText/CoreText.h>
 #import <YYCategories/YYCategories.h>
@@ -17,6 +19,7 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 #import "UILabel+YBAttributeTextTapAction.h"
 #import "UIImage+XYHelper.h"
+#import "NSString+XYHelper.h"
 
 @implementation XYHelperUtils
 
@@ -1495,6 +1498,75 @@
     return scaledImage;
 }
 
+#pragma mark - 获取视频封面
+/// @param videoURL 本地视频，网络视频都可以用
++ (UIImage *)thumbnailImageForVideo:(NSURL *)videoURL {
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
+    AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    gen.appliesPreferredTrackTransform = YES;
+    CMTime time = CMTimeMakeWithSeconds(2.0, 600);
+    NSError *error = nil;
+    CMTime actualTime;
+    CGImageRef image = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    UIImage *thumbImg = [[UIImage alloc] initWithCGImage:image];
+    return thumbImg;
+}
+
+
+#pragma mark - 获取设备号
++ (NSString *)deviceID {
+    NSString *device_id_key = @"device_id_key";
+    NSString *keychain_service = kAppBundleId;
+    // 从userDefaults取
+    NSString *result = [[NSUserDefaults standardUserDefaults] objectForKey:device_id_key];
+    if (!result) {
+        // 从keychain取
+        result = [SAMKeychain passwordForService:keychain_service account:device_id_key];
+        if (result) {
+            [[NSUserDefaults standardUserDefaults] setObject:result forKey:device_id_key];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } else {
+            // 从pasteboard取
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            id data = [pasteboard dataForPasteboardType:device_id_key];
+            if (data) {
+                result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            }
+            if (result) {
+                [[NSUserDefaults standardUserDefaults] setObject:result forKey:device_id_key];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [SAMKeychain setPassword:result forService:keychain_service account:device_id_key];
+            } else {
+                result = [[NSUUID UUID] UUIDString];
+                [[NSUserDefaults standardUserDefaults] setObject:result forKey:device_id_key];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [SAMKeychain setPassword:result forService:keychain_service account:device_id_key];
+                UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                NSData *data = [result dataUsingEncoding:NSUTF8StringEncoding];
+                [pasteboard setData:data forPasteboardType:device_id_key];
+            }
+        }
+    }
+    return [NSString stringWithFormat:@"ios_%@", result.MD5];
+}
+
+#pragma mark - 获取 IDFA
++ (NSString *)IDFA {
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+}
+
+#pragma mark - 播放提示音
+/// @param sourcesPath 提示音路径
++ (void)playAlertSound:(NSString *)sourcesPath {
+    if (sourcesPath) {
+        SystemSoundID soundID;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:sourcesPath], &soundID);
+        // 播放提示音 带震动
+        AudioServicesPlayAlertSound(soundID);
+    } else {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+    }
+}
 
 @end
 

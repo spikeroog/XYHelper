@@ -7,6 +7,7 @@
 //  两侧向中间的渐变颜色
 
 #import <UIKit/UIKit.h>
+#import "XYHelperMarco.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

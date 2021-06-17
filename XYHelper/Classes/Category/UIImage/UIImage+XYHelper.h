@@ -90,6 +90,9 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 /// 改变图片颜色,使用方法：[kImageWithName(@"xx") imageWithColor:UIColor.blackColor];
 - (UIImage *)imageWithColor:(UIColor *)color;
 
+// 根据 aSize 返回一个新的image
+- (UIImage *)drawImageBySize:(CGSize)aSize;
+
 @end
 
 NS_ASSUME_NONNULL_END

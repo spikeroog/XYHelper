@@ -263,7 +263,7 @@
     
     [PPNetworkHelper downloadWithURL:downloadUrl fileDir:@"Download" progress:^(NSProgress *progress) {
         
-        NSLog(@"=====%lld", progress.completedUnitCount);
+        kLog(@"=====%lld", progress.completedUnitCount);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             hud.progress = progress.completedUnitCount;
@@ -313,7 +313,7 @@
     
     [PPNetworkHelper downloadWithURL:downloadUrl fileDir:@"Download" progress:^(NSProgress *progress) {
         
-        NSLog(@"=====%lld", progress.completedUnitCount);
+        kLog(@"=====%lld", progress.completedUnitCount);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             hud.progress = progress.fractionCompleted;

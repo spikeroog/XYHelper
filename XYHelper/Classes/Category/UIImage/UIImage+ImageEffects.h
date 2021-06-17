@@ -92,7 +92,7 @@
  EA1002
  5/3/2013
  */
-
+#import "XYHelperMarco.h"
 @import UIKit;
 
 @interface UIImage (ImageEffects)

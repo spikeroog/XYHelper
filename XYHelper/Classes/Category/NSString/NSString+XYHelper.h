@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - MD5加密 32位 大写
 + (NSString *)MD5ForUpper32Bate:(NSString *)str;
 
+- (NSString *)MD5;
+
 @end
 
 NS_ASSUME_NONNULL_END

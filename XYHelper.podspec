@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
-  s.version          = '1.1.2'
+  s.version          = '1.2.0'
   s.summary          = 'The Objective-C utilities you always wish you had.'
 
 # This description is used to generate tags and improve search results.
@@ -39,7 +39,7 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
 
-   s.dependency 'HBDNavigationBar', '~> 1.7.7'
+   s.dependency 'HBDNavigationBar', '~> 1.8.0'
    s.dependency 'FLAnimatedImage', '~> 1.0.2'
    s.dependency 'JXCategoryView', '~> 1.5.8'
    s.dependency 'MBProgressHUD', '~> 1.2.0'
@@ -57,6 +57,7 @@ TODO: Add long description of the pod here.
    s.dependency 'SDWebImage'
    s.dependency 'Masonry'
    s.dependency 'Aspects'
+   s.dependency 'SAMKeychain'
    
 
 end

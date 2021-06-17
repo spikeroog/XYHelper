@@ -223,12 +223,6 @@ NS_ASSUME_NONNULL_BEGIN
            isEqualTo:(NSArray *)arrayB;
 
 /// iOS13 给textfield添加leftView，rightView
-/// @param textfield textfield
-/// @param viewSize viewSize
-/// @param leftViewImageStr leftViewImageStr
-/// @param rightViewImageStr rightViewImageStr
-/// @param leftViewClick leftView点击回调
-/// @param rightViewClick righView点击回调
 + (void)addViewWithTextfield:(__kindof UITextField *)textfield
                     viewSize:(CGSize)viewSize
             leftViewImageStr:(nullable NSString *)leftViewImageStr
@@ -239,20 +233,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)addUnderLineWithLabel:(__kindof UILabel *)fatherLabel;
 
 #pragma mark - 快速创建用户隐私协议按钮，可带勾选框☑️
-/// 使用方法:UIButton *btn = [XYHelperUtil createUserProButtonWithFullstring:xx];
-/// 快速创建用户隐私协议按钮，可带勾选框☑️
-/// @param fullstring 完整字符串
-/// @param normalSelectTitle 正常颜色的可点击文字，如：@"登录即代表同意"
-/// @param highlightSelectTitleArr 高亮颜色的可点击文字数组,如：@[@"用户协议",@"、",@"隐私声明"]
-/// @param normalColor 正常文字颜色
-/// @param highlightColor 高亮文字颜色
-/// @param normalFont 正常文字字体大小
-/// @param highlightFont 高亮文字字体大小
-/// @param isShowCheck 是否显示勾选框
-/// @param checkNormalImage 勾选框未选中颜色
-/// @param checkHighlightImage 勾选框选中颜色
-/// @param isDefaultCheck 是否默认勾选
-/// @param completion 回调点击下标
 + (UIButton *)createUserProButtonWithFullstring:(NSString *)fullstring
                         normalSelectTitle:(NSString *)normalSelectTitle
                   highlightSelectTitleArr:(NSArray *)highlightSelectTitleArr
@@ -274,6 +254,18 @@ NS_ASSUME_NONNULL_BEGIN
                                color:(nullable UIColor *)color;
 #pragma mark - 修改图片尺寸
 + (UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size;
+
+#pragma mark - 获取视频封面
++ (UIImage *)thumbnailImageForVideo:(NSURL *)videoURL;
+
+#pragma mark - 获取设备号
++ (NSString *)deviceID;
+
+#pragma mark - 获取 IDFA
++ (NSString *)IDFA;
+
+#pragma mark - 播放提示音
++ (void)playAlertSound:(NSString *)sourcesPath;
 
 @end
 

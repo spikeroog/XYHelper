@@ -23,5 +23,4 @@ static const void *xy_popStyleKey = &xy_popStyleKey;
     return [objc_getAssociatedObject(self, &xy_popStyleKey) integerValue];
 }
 
-
 @end

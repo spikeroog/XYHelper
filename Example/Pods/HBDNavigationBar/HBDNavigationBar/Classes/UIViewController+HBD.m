@@ -88,14 +88,6 @@
     objc_setAssociatedObject(self, @selector(hbd_titleTextAttributes), attributes, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (UIBarButtonItem *)hbd_backBarButtonItem {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setHbd_backBarButtonItem:(UIBarButtonItem *)backBarButtonItem {
-    objc_setAssociatedObject(self, @selector(hbd_backBarButtonItem), backBarButtonItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (BOOL)hbd_extendedLayoutDidSet {
     id obj = objc_getAssociatedObject(self, _cmd);
     return obj ? [obj boolValue] : NO;
@@ -205,7 +197,9 @@
 - (void)hbd_setNeedsUpdateNavigationBar {
     if (self.navigationController && [self.navigationController isKindOfClass:[HBDNavigationController class]]) {
         HBDNavigationController *nav = (HBDNavigationController *)self.navigationController;
-        [nav updateNavigationBarForViewController:self];
+        if (self == nav.topViewController) {
+            [nav updateNavigationBarForViewController:self];
+        }
     }
 }
 

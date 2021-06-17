@@ -27,7 +27,7 @@
     }
     
     CALayer *layer = [self jh_gradientLayer:self.bounds color:colors location:@[@(0.3)] direction:CAGradientLayerDirection_FromLeftToRight];
-    NSLog(@"%@:\n%@",self.titleLabel.text,self.layer.sublayers);
+    kLog(@"%@:\n%@",self.titleLabel.text,self.layer.sublayers);
     
     CALayer *labelLayer = nil;
     for (CALayer *l in self.layer.sublayers) {

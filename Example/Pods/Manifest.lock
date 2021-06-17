@@ -28,27 +28,29 @@ PODS:
   - BRPickerView/StringPickerView (2.7.3):
     - BRPickerView/Base
   - FLAnimatedImage (1.0.12)
-  - HBDNavigationBar (1.7.7)
+  - HBDNavigationBar (1.8.0)
   - IQKeyboardManager (6.5.6)
   - JXCategoryView (1.5.8)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - ReactiveObjC (3.1.1)
-  - SDWebImage (5.10.0):
-    - SDWebImage/Core (= 5.10.0)
-  - SDWebImage/Core (5.10.0)
-  - TZImagePickerController (3.5.7)
-  - XYHelper (1.1.0):
+  - SAMKeychain (1.5.3)
+  - SDWebImage (5.10.3):
+    - SDWebImage/Core (= 5.10.3)
+  - SDWebImage/Core (5.10.3)
+  - TZImagePickerController (3.5.8)
+  - XYHelper (1.2.0):
     - AFNetworking (~> 4.0)
     - Aspects
     - BRPickerView
     - FLAnimatedImage (~> 1.0.2)
-    - HBDNavigationBar (~> 1.7.7)
+    - HBDNavigationBar (~> 1.8.0)
     - IQKeyboardManager
     - JXCategoryView (~> 1.5.8)
     - Masonry
     - MBProgressHUD (~> 1.2.0)
     - ReactiveObjC
+    - SAMKeychain
     - SDWebImage
     - TZImagePickerController
     - YBImageBrowser (~> 3.0.9)
@@ -85,6 +87,7 @@ SPEC REPOS:
     - Masonry
     - MBProgressHUD
     - ReactiveObjC
+    - SAMKeychain
     - SDWebImage
     - TZImagePickerController
     - YBImageBrowser
@@ -101,15 +104,16 @@ SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   BRPickerView: 9cc11880ac79c4872d081ccb88f306224c1501d7
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
-  HBDNavigationBar: 6ba38b99637039c831ce460364d5398f29fa0685
+  HBDNavigationBar: 8a24d0348ad4371614569e3d015d46e41824b061
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   JXCategoryView: 778a620f76070d6598fd8d7239991b8da8326170
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
-  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
-  TZImagePickerController: aff4b62eacce0194d2494ee4f42934bcff577cec
-  XYHelper: 3f688a968c80dbfdf9f071406f4ba39978a9e5ff
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
+  SDWebImage: e378178472b735e84b007bfb55514c97948a0598
+  TZImagePickerController: 7fd9702897ef8c0b7c951e5463f4bcf398296f9e
+  XYHelper: 5dd2349795a8b3ed36216523ff3ecb2aaf588e12
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
@@ -117,4 +121,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b5c6586d5b520f78fafb6e7d10d68668b02c5ee4
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

@@ -469,4 +469,15 @@
     return newImage;
 }
 
+// 根据 aSize 返回一个新的image
+- (UIImage *)drawImageBySize:(CGSize)aSize {
+    
+    UIGraphicsBeginImageContextWithOptions(aSize, NO, [UIScreen mainScreen].scale); // 解决缩小图片后反而模糊的问题
+    [self drawInRect:CGRectMake(0, 0, aSize.width, aSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 @end

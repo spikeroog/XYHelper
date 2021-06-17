@@ -15,3 +15,10 @@
 @property (nonatomic, strong, readonly) UILabel *backButtonLabel;
 
 @end
+
+
+@interface UILabel (NavigationBarTransition)
+
+@property(nonatomic, strong) UIColor *hbd_specifiedTextColor;
+
+@end

@@ -167,6 +167,9 @@
 // ----  App名称
 #define kAppName [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]
 
+// ----  项目包名
+#define kAppBundleId ([[NSBundle mainBundle] bundleIdentifier] ?: @"")
+
 // ----  手机 iOS系统 版本号
 #ifndef kSystemVersion
 #define kSystemVersion [[[UIDevice currentDevice] systemVersion] floatValue]

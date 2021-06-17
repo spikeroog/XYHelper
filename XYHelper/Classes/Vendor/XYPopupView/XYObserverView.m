@@ -20,7 +20,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     }
     @catch (NSException *exception) {
-        NSLog(@"多次删除了");
+        kLog(@"多次删除了");
     }
 }
 
@@ -38,7 +38,7 @@
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAction:) name:UIKeyboardWillHideNotification object:nil];
         }
         @catch (NSException *exception) {
-            NSLog(@"多次添加了");
+            kLog(@"多次添加了");
         }
     }
 }
@@ -92,7 +92,7 @@
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
         }
         @catch (NSException *exception) {
-            NSLog(@"多次删除了");
+            kLog(@"多次删除了");
         }
     }
 }

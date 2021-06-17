@@ -36,9 +36,9 @@
 
 #pragma mark ---- 自定义路由
 
+#import "XYScreenAdapter.h" // 屏幕适配
 #import "XYHelperRouter.h"
 #import "XYHelperMarco.h"
-#import "XYScreenAdapter.h" // 屏幕适配
 #import "XYUserBasicModel.h"
 #import "XYHelperUtils.h"
 #import "XYNetworkUtils.h"
@@ -52,6 +52,12 @@
 #import "XYAppDelegateManager.h"
 #import "XYUserInfoManager.h"
 #import "XYMediaPreviewManager.h"
+#import "XYPaymentManger.h"
+#import "XYCacheManager.h"
+#import "XYOperation.h"
+#import "XYOperationQueue.h"
+#import "XYAsyncOperation.h"
+#import "XYTimerManager.h"
 
 #pragma mark ---- 自定义基类
 #import "XYBasicWebViewController.h"
