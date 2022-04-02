@@ -22,7 +22,7 @@
     // Do any additional setup after loading the view.
     self.myCategoryView.titles = self.titles;
     self.myCategoryView.frame = self.categoryViewFrame;
-
+    
     
     if (self.useTitleView) {
         [self.myCategoryView removeFromSuperview];
@@ -30,7 +30,7 @@
     } else {
         [self.view addSubview:self.myCategoryView];
     }
-
+    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -81,13 +81,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

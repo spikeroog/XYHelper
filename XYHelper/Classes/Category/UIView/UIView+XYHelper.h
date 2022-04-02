@@ -16,7 +16,6 @@
 @property (assign, nonatomic) CGFloat xy_centerX;
 @property (assign, nonatomic) CGFloat xy_centerY;
 
-
 @property (assign, nonatomic) CGSize xy_size;
 @property (assign, nonatomic) CGPoint xy_origin;
 @end

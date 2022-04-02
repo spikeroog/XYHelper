@@ -140,7 +140,7 @@ UINavigationControllerDelegate> {
     self.needCircleCrop = needCircleCrop;
     self.isOriginalPhoto = allowPickingOriginalPhoto;
     self.targetVC = targetVC;
-
+    
     _selectedPhotos = [NSMutableArray new];
     _selectedAssets = [NSMutableArray new];
     
@@ -159,7 +159,7 @@ UINavigationControllerDelegate> {
     self.tz_ImagePickerVc.preferredLanguage = @"zh-Hans";
     self.tz_ImagePickerVc.allowPickingGif = true;
     self.tz_ImagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
-
+    
     self.tz_ImagePickerVc.navigationBar.translucent = NO;
     self.tz_ImagePickerVc.navigationBar.barTintColor = [XYHelperRouter navBgColor];
     self.tz_ImagePickerVc.navigationBar.tintColor = [UIColor whiteColor];
@@ -224,7 +224,7 @@ UINavigationControllerDelegate> {
         [doneButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     }];
     
-   
+    
     imagePickerVc.showSelectBtn = NO;
     imagePickerVc.allowCrop = self.allowCrop;
     imagePickerVc.needCircleCrop = self.needCircleCrop;
@@ -264,10 +264,10 @@ UINavigationControllerDelegate> {
     }];
     
     // 设置首选语言 / Set preferred language
-//     imagePickerVc.preferredLanguage = @"zh-Hans";
-//
-//    // 设置languageBundle以使用其它语言 / Set languageBundle to use other language
-//     imagePickerVc.languageBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"tz-ru" ofType:@"lproj"]];
+    //     imagePickerVc.preferredLanguage = @"zh-Hans";
+    //
+    //    // 设置languageBundle以使用其它语言 / Set languageBundle to use other language
+    //     imagePickerVc.languageBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"tz-ru" ofType:@"lproj"]];
     
 #pragma mark - 到这里为止
     
@@ -276,7 +276,7 @@ UINavigationControllerDelegate> {
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         
     }];
-        
+    
     imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
     
     [[XYHelperRouter currentVC] presentViewController:imagePickerVc animated:YES completion:nil];

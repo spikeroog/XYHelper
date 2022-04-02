@@ -325,7 +325,7 @@
         if (CGRectContainsPoint(rect, point)) {
             
             CGPoint relativePoint = CGPointMake(point.x - CGRectGetMinX(rect), point.y - CGRectGetMinY(rect));
-
+            
             CFIndex index = CTLineGetStringIndexForPosition(line, relativePoint);
             
             CGFloat offset;
@@ -531,7 +531,7 @@
     if ([keyPath isEqualToString:@"attributedText"]) {
         if (self.isTapAction) {
             if (![change[NSKeyValueChangeNewKey] isEqual: change[NSKeyValueChangeOldKey]]) {
-               
+                
             }
         }
     }

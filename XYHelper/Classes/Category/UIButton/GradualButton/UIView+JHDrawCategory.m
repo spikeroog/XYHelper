@@ -35,7 +35,7 @@
 - (void)jh_drawLineFromPoint:(CGPoint)fPoint
                      toPoint:(CGPoint)tPoint
                    lineColor:(UIColor *)color
-                   lineHeight:(CGFloat)height
+                  lineHeight:(CGFloat)height
 {
     CAShapeLayer* shapeLayer = [CAShapeLayer layer];
     shapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;

@@ -65,7 +65,7 @@
  *  @param tapClick 点击事件回调
  */
 - (void)yb_addAttributeTapActionWithRanges:(NSArray <NSString *> *)ranges
-                                 tapClicked:(void (^) (UILabel * label, NSString *string, NSRange range, NSInteger index))tapClick;
+                                tapClicked:(void (^) (UILabel * label, NSString *string, NSRange range, NSInteger index))tapClick;
 
 /**
  *  根据range给文本添加点击事件delegate回调
@@ -74,7 +74,7 @@
  *  @param delegate delegate
  */
 - (void)yb_addAttributeTapActionWithRanges:(NSArray <NSString *> *)ranges
-                                   delegate:(id <YBAttributeTapActionDelegate> )delegate;
+                                  delegate:(id <YBAttributeTapActionDelegate> )delegate;
 
 /**
  *  删除label上的点击事件

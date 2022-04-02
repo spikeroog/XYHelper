@@ -27,20 +27,18 @@ BOOL shouldShowFake(UIViewController *vc, UIViewController *from, UIViewControll
         return NO;
     }
     
+    if (from.hbd_splitNavigationBarTransition || to.hbd_splitNavigationBarTransition) {
+        return YES;
+    }
+    
     if (from.hbd_computedBarImage && to.hbd_computedBarImage && isImageEqual(from.hbd_computedBarImage, to.hbd_computedBarImage)) {
         // have the same image
-        if (ABS(from.hbd_barAlpha - to.hbd_barAlpha) > 0.1) {
-            return YES;
-        }
-        return NO;
+        return from.hbd_barAlpha != to.hbd_barAlpha;
     }
     
     if (!from.hbd_computedBarImage && !to.hbd_computedBarImage && [from.hbd_computedBarTintColor.description isEqual:to.hbd_computedBarTintColor.description]) {
         // no images, and the colors are the same
-        if (ABS(from.hbd_barAlpha - to.hbd_barAlpha) > 0.1) {
-            return YES;
-        }
-        return NO;
+        return from.hbd_barAlpha != to.hbd_barAlpha;
     }
     
     return YES;
@@ -113,6 +111,16 @@ UIColor* blendColor(UIColor *from, UIColor *to, float percent) {
     return [UIColor colorWithRed:newRed green:newGreen blue:newBlue alpha:newAlpha];
 }
 
+void printViewHierarchy(UIView *view, NSString *prefix) {
+    NSString *viewName = [[[view classForCoder] description] stringByReplacingOccurrencesOfString:@"_" withString:@""];
+    NSLog(@"%@%@ %@", prefix, viewName, NSStringFromCGRect(view.frame));
+    if (view.subviews.count > 0) {
+        for (UIView *sub in view.subviews) {
+            printViewHierarchy(sub, [NSString stringWithFormat:@"--%@", prefix]);
+        }
+    }
+}
+
 @interface HBDNavigationControllerDelegate : UIScreenEdgePanGestureRecognizer <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) id<UINavigationControllerDelegate> proxiedDelegate;
@@ -173,6 +181,13 @@ UIColor* blendColor(UIColor *from, UIColor *to, float percent) {
     return NO;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer API_AVAILABLE(ios(7.0)){
+    if (gestureRecognizer == self.nav.interactivePopGestureRecognizer) {
+        return YES;
+    }
+    return NO;
+}
+
 - (void)handleNavigationTransition:(UIScreenEdgePanGestureRecognizer *)pan {
     HBDNavigationController *nav = self.nav;
     if (![self.proxiedDelegate respondsToSelector:@selector(navigationController:interactionControllerForAnimationController:)]) {
@@ -191,7 +206,6 @@ UIColor* blendColor(UIColor *from, UIColor *to, float percent) {
             nav.navigationBar.tintColor = blendColor(from.hbd_tintColor, to.hbd_tintColor, coordinator.percentComplete);
         }
     }
-    
 }
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -296,14 +310,28 @@ UIColor* blendColor(UIColor *from, UIColor *to, float percent) {
         if (shouldFake) {
             // title attributes, button tint color, barStyle
             [self.nav updateNavigationBarTinitColorForViewController:viewController];
-            
+        
             // background alpha, background color, shadow image alpha
             [self.nav showFakeBarFrom:from to:to];
         } else {
             [self.nav updateNavigationBarForViewController:viewController];
+            if (@available(iOS 13.0, *)) {
+                if (to == viewController) {
+                    self.nav.navigationBar.scrollEdgeAppearance.backgroundColor = viewController.hbd_computedBarTintColor;
+                    self.nav.navigationBar.scrollEdgeAppearance.backgroundImage = viewController.hbd_computedBarImage;
+                    self.nav.navigationBar.standardAppearance.backgroundColor = viewController.hbd_computedBarTintColor;
+                    self.nav.navigationBar.standardAppearance.backgroundImage = viewController.hbd_computedBarImage;
+                }
+            }
         }
     } completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         self.nav.poppingViewController = nil;
+        if (@available(iOS 13.0, *)) {
+            self.nav.navigationBar.scrollEdgeAppearance.backgroundColor = UIColor.clearColor;
+            self.nav.navigationBar.scrollEdgeAppearance.backgroundImage = nil;
+            self.nav.navigationBar.standardAppearance.backgroundColor = UIColor.clearColor;
+            self.nav.navigationBar.standardAppearance.backgroundImage = nil;
+        }
       
         if (context.isCancelled) {
             if (to == viewController) {
@@ -384,10 +412,29 @@ UIColor* blendColor(UIColor *from, UIColor *to, float percent) {
     return self.topViewController;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.topViewController.hbd_barStyle == UIBarStyleBlack ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
+}
+
+- (UIViewController *)childViewControllerForHomeIndicatorAutoHidden {
+    return self.topViewController;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationBar setTranslucent:YES];
     [self.navigationBar setShadowImage:[UINavigationBar appearance].shadowImage];
+    
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *scrollEdgeAppearance = [[UINavigationBarAppearance alloc] init];
+        [scrollEdgeAppearance configureWithTransparentBackground];
+        // scrollEdgeAppearance.backgroundEffect = nil;
+        scrollEdgeAppearance.backgroundColor = UIColor.clearColor;
+        scrollEdgeAppearance.shadowColor = UIColor.clearColor;
+        [scrollEdgeAppearance setBackIndicatorImage:[UINavigationBar appearance].backIndicatorImage transitionMaskImage:[UINavigationBar appearance].backIndicatorTransitionMaskImage];
+        self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance;
+        self.navigationBar.standardAppearance = [scrollEdgeAppearance copy];
+    }
     
     self.navigationDelegate = [[HBDNavigationControllerDelegate alloc] initWithNavigationController:self];
     self.navigationDelegate.proxiedDelegate = self.delegate;
@@ -463,16 +510,6 @@ UIColor* blendColor(UIColor *from, UIColor *to, float percent) {
     }
 }
 
-- (void)printSubViews:(UIView *)view prefix:(NSString *)prefix {
-    NSString *viewName = [[[view classForCoder] description] stringByReplacingOccurrencesOfString:@"_" withString:@""];
-    NSLog(@"%@%@", prefix, viewName);
-    if (view.subviews.count > 0) {
-        for (UIView *sub in view.subviews) {
-            [self printSubViews:sub prefix:[NSString stringWithFormat:@"--%@", prefix]];
-        }
-    }
-}
-
 - (void)updateNavigationBarForViewController:(UIViewController *)vc {
     [self updateNavigationBarStyleForViewController:vc];
     [self updateNavigationBarAlphaForViewController:vc];
@@ -487,6 +524,10 @@ UIColor* blendColor(UIColor *from, UIColor *to, float percent) {
 - (void)updateNavigationBarTinitColorForViewController:(UIViewController *)vc {
     self.navigationBar.tintColor = vc.hbd_tintColor;
     self.navigationBar.titleTextAttributes = vc.hbd_titleTextAttributes;
+    if (@available(iOS 13.0, *)) {
+        self.navigationBar.scrollEdgeAppearance.titleTextAttributes = vc.hbd_titleTextAttributes;
+        self.navigationBar.standardAppearance.titleTextAttributes = vc.hbd_titleTextAttributes;
+    }
 }
 
 - (void)updateNavigationBarAlphaForViewController:(UIViewController *)vc {
@@ -497,6 +538,13 @@ UIColor* blendColor(UIColor *from, UIColor *to, float percent) {
         self.navigationBar.fakeView.alpha = vc.hbd_barAlpha;
         self.navigationBar.backgroundImageView.alpha = 0;
     }
+    
+    if (vc.hbd_barAlpha == 0) {
+        self.navigationBar.hbd_backgroundView.layer.mask = [CALayer new];
+    } else {
+        self.navigationBar.hbd_backgroundView.layer.mask = nil;
+    }
+    
     self.navigationBar.shadowImageView.alpha = vc.hbd_computedBarShadowAlpha;
 }
 
@@ -522,10 +570,12 @@ UIColor* blendColor(UIColor *from, UIColor *to, float percent) {
     [from.view addSubview:self.fromFakeImageView];
     
     self.fromFakeBar.subviews.lastObject.backgroundColor = from.hbd_computedBarTintColor;
-    self.fromFakeBar.alpha = from.hbd_barAlpha == 0 || from.hbd_computedBarImage ? 0.01:from.hbd_barAlpha;
+    self.fromFakeBar.alpha = from.hbd_computedBarImage ? 0 : from.hbd_barAlpha;
+
     if (from.hbd_barAlpha == 0 || from.hbd_computedBarImage) {
-        self.fromFakeBar.subviews.lastObject.alpha = 0.01;
+        self.fromFakeBar.subviews.lastObject.layer.mask = [CALayer new];
     }
+    
     self.fromFakeBar.frame = [self fakeBarFrameForViewController:from];
     [from.view addSubview:self.fromFakeBar];
     

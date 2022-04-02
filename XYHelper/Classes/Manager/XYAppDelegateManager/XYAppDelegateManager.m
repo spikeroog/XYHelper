@@ -16,6 +16,11 @@
 /// 全局基础配置
 + (void)appGlobalSet {
     
+#pragma mark - UITableView分组高度默认增加22个像素的高度，导致所有的UI显示异常
+    if (@available(iOS 15.0, *)) {
+        [UITableView appearance].sectionHeaderTopPadding = 0;
+    }
+    
 #pragma mark - 强制关闭暗黑模式
 #if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
     if (@available(iOS 13.0, *)) {

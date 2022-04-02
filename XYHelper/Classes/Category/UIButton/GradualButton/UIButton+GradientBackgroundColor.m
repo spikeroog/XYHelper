@@ -37,7 +37,7 @@
             break;
         }
     }
-
+    
     // 避免渐变色 覆盖 标题
     [self.layer insertSublayer:layer below:labelLayer];
 }
@@ -49,17 +49,17 @@
  有标题时
  self.titleLabel.text.length >= 0
  (
-     "<_UILabelLayer: 0x2811e4c80>",
-     "<CAGradientLayer: 0x28303aea0>"
+ "<_UILabelLayer: 0x2811e4c80>",
+ "<CAGradientLayer: 0x28303aea0>"
  )
  (
-     "<_UILabelLayer: 0x280cd13b0>",
-     "<CAGradientLayer: 0x282d17800>"
+ "<_UILabelLayer: 0x280cd13b0>",
+ "<CAGradientLayer: 0x282d17800>"
  )
  
  没有标题时
  (
-     "<CAGradientLayer: 0x28364bfc0>",
-     "<_UILabelLayer: 0x281794c30>"
+ "<CAGradientLayer: 0x28364bfc0>",
+ "<_UILabelLayer: 0x281794c30>"
  )
  */

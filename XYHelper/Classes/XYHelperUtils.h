@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
                sureMessage:(nullable NSString *)sureMessage
              cancelMessage:(nullable NSString *)cancelMessage
               thirdMessage:(nullable NSString *)thirdMessage
-                 style:(UIAlertControllerStyle)style
+                     style:(UIAlertControllerStyle)style
                sureHandler:(void (^)())sureHandler
              cancelHandler:(void (^)())cancelHandler
               thirdHandler:(void(^)())thirdHandler;
@@ -68,10 +68,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 银行键盘，键盘输入限制小数后两位
 + (BOOL)judgeTextMoneyTypeWithTextField:(UITextField *)textField
-                  shouldChangeCharactersInRange:(NSRange)range
+          shouldChangeCharactersInRange:(NSRange)range
                       replacementString:(NSString *)string
-                            isFirst:(BOOL)dot
-                   complete:(void (^)(BOOL isFirstChar))complete;
+                                isFirst:(BOOL)dot
+                               complete:(void (^)(BOOL isFirstChar))complete;
 
 #pragma mark - 绘制部分圆角
 + (void)advancedEfficientDrawBead:(__kindof UIView *)targetView
@@ -234,17 +234,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 快速创建用户隐私协议按钮，可带勾选框☑️
 + (UIButton *)createUserProButtonWithFullstring:(NSString *)fullstring
-                        normalSelectTitle:(NSString *)normalSelectTitle
-                  highlightSelectTitleArr:(NSArray *)highlightSelectTitleArr
-                              normalColor:(UIColor *)normalColor
-                           highlightColor:(UIColor *)highlightColor
-                               normalFont:(CGFloat)normalFont
-                            highlightFont:(CGFloat)highlightFont
-                              isShowCheck:(BOOL)isShowCheck
-                         checkNormalImage:(nullable UIImage *)checkNormalImage
-                      checkHighlightImage:(nullable UIImage *)checkHighlightImage
-                           isDefaultCheck:(BOOL)isDefaultCheck
-                               completion:(void(^)(NSInteger idx))completion;
+                              normalSelectTitle:(NSString *)normalSelectTitle
+                        highlightSelectTitleArr:(NSArray *)highlightSelectTitleArr
+                                    normalColor:(UIColor *)normalColor
+                                 highlightColor:(UIColor *)highlightColor
+                                     normalFont:(CGFloat)normalFont
+                                  highlightFont:(CGFloat)highlightFont
+                                    isShowCheck:(BOOL)isShowCheck
+                               checkNormalImage:(nullable UIImage *)checkNormalImage
+                            checkHighlightImage:(nullable UIImage *)checkHighlightImage
+                                 isDefaultCheck:(BOOL)isDefaultCheck
+                                     completion:(void(^)(NSInteger idx))completion;
 
 #pragma mark - 获取gif中的图片数组
 /// 获取gif中的图片数组

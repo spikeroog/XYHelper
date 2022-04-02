@@ -37,9 +37,9 @@
  @return xx分钟前、xx小时前、xx天前
  */
 + (NSString *)xy_timeIntervalFromLastTime:(NSString *)lastTime
-                        lastTimeFormat:(NSString *)format1
-                         ToCurrentTime:(NSString *)currentTime
-                     currentTimeFormat:(NSString *)format2 {
+                           lastTimeFormat:(NSString *)format1
+                            ToCurrentTime:(NSString *)currentTime
+                        currentTimeFormat:(NSString *)format2 {
     // 上次时间
     NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc]init];
     dateFormatter1.dateFormat = format1;

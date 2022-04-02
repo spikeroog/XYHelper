@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 计算上次日期距离现在多久
 + (NSString *)xy_timeIntervalFromLastTime:(NSString *)lastTime
-                        lastTimeFormat:(NSString *)format1
-                         ToCurrentTime:(NSString *)currentTime
-                     currentTimeFormat:(NSString *)format2;
+                           lastTimeFormat:(NSString *)format1
+                            ToCurrentTime:(NSString *)currentTime
+                        currentTimeFormat:(NSString *)format2;
 
 #pragma mark - MD5加密 16位 大写
 + (NSString *)MD5ForUpper16Bate:(NSString *)str;

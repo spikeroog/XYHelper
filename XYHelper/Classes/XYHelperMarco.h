@@ -11,12 +11,12 @@
 
 // ----  异形屏
 #define kIsBangsScreen ({\
-    BOOL isBangsScreen = NO; \
-    if (@available(iOS 11.0, *)) { \
-    UIWindow *window = [[UIApplication sharedApplication].windows firstObject]; \
-    isBangsScreen = window.safeAreaInsets.bottom > 0; \
-    } \
-    isBangsScreen; \
+BOOL isBangsScreen = NO; \
+if (@available(iOS 11.0, *)) { \
+UIWindow *window = [[UIApplication sharedApplication].windows firstObject]; \
+isBangsScreen = window.safeAreaInsets.bottom > 0; \
+} \
+isBangsScreen; \
 })
 
 // ----  导航栏高度

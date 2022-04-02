@@ -14,7 +14,7 @@
 - (CGRect)thumbRectForBounds:(CGRect)bounds
                    trackRect:(CGRect)rect
                        value:(float)value {
-
+    
     // x 和 width 是滑块可触摸范围的大小，跟通过图片改变的滑块大小应当一致。
     rect.origin.x = rect.origin.x - 5 ;
     rect.size.width = rect.size.width + 10;

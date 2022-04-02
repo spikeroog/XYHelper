@@ -39,8 +39,8 @@
         // xocde11.1会闪退，暂时注释等作者更新版本
         [UIViewController aspect_hookSelector:NSSelectorFromString(@"dealloc")
                                   withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> info) {
-                                      [self dealloc:[info instance]];
-                                  }
+            [self dealloc:[info instance]];
+        }
                                         error:NULL];
         
     }

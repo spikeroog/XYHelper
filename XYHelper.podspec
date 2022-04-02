@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
-  s.version          = '1.2.0'
+  s.version          = '2.0.0'
   s.summary          = 'The Objective-C utilities you always wish you had.'
 
 # This description is used to generate tags and improve search results.
@@ -39,23 +39,24 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
 
-   s.dependency 'HBDNavigationBar', '~> 1.8.0'
-   s.dependency 'FLAnimatedImage', '~> 1.0.2'
-   s.dependency 'JXCategoryView', '~> 1.5.8'
-   s.dependency 'MBProgressHUD', '~> 1.2.0'
-   s.dependency 'YYCategories', '~> 1.0.4'
-   s.dependency 'AFNetworking', '~> 4.0'
-   s.dependency 'YYCache', '~> 1.0.4'
-
+   s.dependency 'HBDNavigationBar', '~> 1.9.5'
+   s.dependency 'FLAnimatedImage', '~> 1.0.16'
+   s.dependency 'JXCategoryView', '~> 1.5.9'
+   s.dependency 'AFNetworking', '~> 4.0.1'
+   
    s.dependency 'YBImageBrowser/Video', '~> 3.0.9'
    s.dependency 'YBImageBrowser', '~> 3.0.9'
    
+   s.dependency 'MBProgressHUD', '~> 1.2.0'
+   s.dependency 'YYCategories', '~> 1.0.4'
+   s.dependency 'YYCache', '~> 1.0.4'
+   s.dependency 'Masonry', '~> 1.1.0'
+
    s.dependency 'TZImagePickerController'
    s.dependency 'IQKeyboardManager'
    s.dependency 'ReactiveObjC'
    s.dependency 'BRPickerView'
    s.dependency 'SDWebImage'
-   s.dependency 'Masonry'
    s.dependency 'Aspects'
    s.dependency 'SAMKeychain'
    

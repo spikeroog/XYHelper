@@ -27,11 +27,11 @@
  
  @param couldTouch 是否可以点击背景
  @param isKeyWindow 父视图是否是keyWindow
-
+ 
  @return hud
  */
 + (MBProgressHUD *)reuseHudWithCouldTouch:(BOOL)couldTouch
-                          isKeyWindow:(BOOL)isKeyWindow {
+                              isKeyWindow:(BOOL)isKeyWindow {
     
     UIView *view;
     
@@ -56,7 +56,7 @@
     hud.bezelView.color = kColorWithRGB16RadixA(0x333333, 1);
     // 字体颜色
     hud.contentColor = kColorWithRGB16Radix(0xffffff);
-        
+    
     // hud在屏幕上的位置
     hud.offset = HUD_IN_CENTER;
     
@@ -70,7 +70,7 @@
     hud.bezelView.layer.masksToBounds = YES;
     
     // 设置菊花颜色  只能设置菊花的颜色
-//    hud.activityIndicatorColor = kColorWithRGB16Radix(0xffffff);
+    //    hud.activityIndicatorColor = kColorWithRGB16Radix(0xffffff);
     
     hud.label.font = kFontWithAutoSize(HUD_FONT);
     hud.label.textColor = kColorWithRGB16Radix(0xffffff);
@@ -183,22 +183,22 @@
  @param text 提示文本
  */
 + (void)showGifHUD:(MBProgressHudGifType)type
-           gifImageName:(NSString *)gifImageName
+      gifImageName:(NSString *)gifImageName
               text:(nullable NSString *)text {
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
+        
         MBProgressHUD *hud = [self reuseHudWithCouldTouch:YES isKeyWindow:NO];
         hud.mode = MBProgressHUDModeCustomView;
         hud.bezelView.backgroundColor = kColorWithNull;
         hud.contentColor = kColorWithNull;
         hud.offset = HUD_IN_CENTER;
-
+        
         if (text) {
             hud.label.text = text;
             hud.label.textColor = [UIColor blackColor];
         }
-
+        
         __block UIImageView *gifImageView = [[UIImageView alloc] init];
         
         if (type == MBProgressHUDGIfTypeUrl) { // 网络gif
@@ -236,7 +236,7 @@
             hud.customView = gifImageView;
         }
     });
-
+    
 }
 
 /// 显示环形下载hud
@@ -337,7 +337,7 @@
         
     }];
 }
-        
+
 
 #pragma mark + 进度hud公共方法
 

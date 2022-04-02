@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, WkWebViewShowType) {
      当用户停留在广告详情页时,APP从后台恢复时,你不想再次显示启动广告,
      请在广告详情控制器销毁时,发下面通知,告诉XHLaunchAd,广告详情页面已显示完
      */
-//    [[NSNotificationCenter defaultCenter] postNotificationName:XHLaunchAdDetailPageShowFinishNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:XHLaunchAdDetailPageShowFinishNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,7 +79,7 @@ typedef NS_ENUM(NSInteger, WkWebViewShowType) {
      当用户停留在广告详情页时,APP从后台恢复时,你不想再次显示启动广告,
      请在广告详情控制器将要显示时,发下面通知,告诉XHLaunchAd,广告详情页面将要显示
      */
-//    [[NSNotificationCenter defaultCenter] postNotificationName:XHLaunchAdDetailPageWillShowNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:XHLaunchAdDetailPageWillShowNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -165,8 +165,8 @@ typedef NS_ENUM(NSInteger, WkWebViewShowType) {
         _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kNavBarHeight-kAutoCs(2), self.view.bounds.size.width, kAutoCs(2))];
         _progressView.progressViewStyle = UIProgressViewStyleBar;
         _progressView.progressTintColor = kBlackStyleNavBgColor;
-//        _progressView.tintColor = [UIColor blueColor];
-//        _progressView.trackTintColor = [UIColor clearColor];
+        //        _progressView.tintColor = [UIColor blueColor];
+        //        _progressView.trackTintColor = [UIColor clearColor];
     }
     return _progressView;
 }

@@ -76,7 +76,7 @@ navBgImageStr = _navBgImageStr;
     NSInteger count = [XYHelperRouter currentNavC].childViewControllers.count;
     if (count > 1) {
         // 设置默认左侧按钮图片
-//        self.leftBarItemImage = kImageWithName(@"");
+        //        self.leftBarItemImage = kImageWithName(@"");
         self.leftBarItemTitle = @"返回";
         self.hbd_swipeBackEnabled = true;
     } else {
@@ -493,7 +493,7 @@ navBgImageStr = _navBgImageStr;
 - (void)rightBarItemHiddenWithArray:(NSArray<NSNumber *> *)itemsArray {
     [itemsArray enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSInteger index = [obj integerValue];
-//        self.navigationItem.rightBarButtonItems[index] = nil;
+        //        self.navigationItem.rightBarButtonItems[index] = nil;
         self.navigationItem.rightBarButtonItems[index].enabled = NO;
         self.navigationItem.rightBarButtonItems[index].customView.hidden = YES;
         
@@ -535,15 +535,15 @@ navBgImageStr = _navBgImageStr;
 - (void)setCornersLeftBarItem {
     self.navigationItem.leftBarButtonItem.customView.layer.cornerRadius = RotundityWH/2;
     self.navigationItem.leftBarButtonItem.customView.layer.masksToBounds = YES;
-//    self.navigationItem.leftBarButtonItem.customView.layer.borderWidth = 1;
-//    self.navigationItem.leftBarButtonItem.customView.layer.borderColor = kMainColor.CGColor;
+    //    self.navigationItem.leftBarButtonItem.customView.layer.borderWidth = 1;
+    //    self.navigationItem.leftBarButtonItem.customView.layer.borderColor = kMainColor.CGColor;
 }
 
 - (void)setCornersRightBarItem {
     self.navigationItem.rightBarButtonItem.customView.layer.cornerRadius = RotundityWH/2;
     self.navigationItem.rightBarButtonItem.customView.layer.masksToBounds = YES;
-//    self.navigationItem.leftBarButtonItem.customView.layer.borderWidth = 1;
-//    self.navigationItem.leftBarButtonItem.customView.layer.borderColor = kMainColor.CGColor;
+    //    self.navigationItem.leftBarButtonItem.customView.layer.borderWidth = 1;
+    //    self.navigationItem.leftBarButtonItem.customView.layer.borderColor = kMainColor.CGColor;
 }
 
 #pragma mark - 单个界面设置是否禁用右滑手势

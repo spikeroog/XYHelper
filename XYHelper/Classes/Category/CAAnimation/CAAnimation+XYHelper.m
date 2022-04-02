@@ -119,12 +119,12 @@
     CAKeyframeAnimation* anim=[CAKeyframeAnimation animation];
     anim.keyPath=@"position";
     anim.values=@[
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)],
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x-hOffset, originPos.y)],
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)],
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x+hOffset, originPos.y)],
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)]
-                  ];
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)],
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x-hOffset, originPos.y)],
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)],
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x+hOffset, originPos.y)],
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)]
+    ];
     anim.repeatCount=repeatTimes;
     anim.duration=time;
     anim.fillMode=kCAFillModeForwards;
@@ -151,12 +151,12 @@
     CAKeyframeAnimation* anim=[CAKeyframeAnimation animation];
     anim.keyPath=@"position";
     anim.values=@[
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)],
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y-hOffset)],
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)],
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y+hOffset)],
-                  [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)]
-                  ];
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)],
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y-hOffset)],
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)],
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y+hOffset)],
+        [NSValue valueWithCGPoint:CGPointMake(originPos.x, originPos.y)]
+    ];
     anim.repeatCount=repeatTimes;
     anim.duration=time;
     anim.fillMode=kCAFillModeForwards;

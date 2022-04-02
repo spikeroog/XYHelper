@@ -105,7 +105,7 @@
  @return 压缩后的图片
  */
 + (NSData *)xy_resetSizeOfImageData:(UIImage *)source_image
-                         maxSize:(NSInteger)maxSize {
+                            maxSize:(NSInteger)maxSize {
     // 先判断当前质量是否满足要求，不满足再进行压缩
     __block NSData *finallImageData = UIImageJPEGRepresentation(source_image,1.0);
     NSUInteger sizeOrigin   = finallImageData.length;
@@ -144,7 +144,7 @@
         }
         defaultSize = CGSizeMake(defaultSize.width-100, defaultSize.height-100);
         UIImage *image = [self xy_newSizeImage:defaultSize
-                                      image:[UIImage imageWithData:UIImageJPEGRepresentation(newImage,[[compressionQualityArr lastObject] floatValue])]];
+                                         image:[UIImage imageWithData:UIImageJPEGRepresentation(newImage,[[compressionQualityArr lastObject] floatValue])]];
         finallImageData = [self xy_halfFuntion:compressionQualityArr image:image sourceData:UIImageJPEGRepresentation(image,1.0) maxSize:maxSize];
     }
     return finallImageData;
@@ -152,7 +152,7 @@
 
 // 调整图片分辨率/尺寸（等比例缩放）
 + (UIImage *)xy_newSizeImage:(CGSize)size
-                    image:(UIImage *)source_image {
+                       image:(UIImage *)source_image {
     CGSize newSize = CGSizeMake(source_image.size.width, source_image.size.height);
     
     CGFloat tempHeight = newSize.height / size.height;
@@ -173,9 +173,9 @@
 
 // 二分法
 + (NSData *)xy_halfFuntion:(NSArray *)arr
-                  image:(UIImage *)image
-             sourceData:(NSData *)finallImageData
-                maxSize:(NSInteger)maxSize {
+                     image:(UIImage *)image
+                sourceData:(NSData *)finallImageData
+                   maxSize:(NSInteger)maxSize {
     
     NSData *tempData = [NSData data];
     NSUInteger start = 0;
@@ -220,7 +220,7 @@
  @return 操作完成的图片
  */
 + (UIImage *)xy_imageCompressForSize:(UIImage *)sourceImage
-                       targetSize:(CGSize)size {
+                          targetSize:(CGSize)size {
     UIImage *newImage = nil;
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
@@ -290,9 +290,9 @@
  @return 处理后的图片
  */
 + (UIImage *)xy_colorControlsWithOriginalImage:(UIImage *)image
-                                 saturation:(CGFloat)saturation
-                                 brightness:(CGFloat)brightness
-                                   contrast:(CGFloat)contrast {
+                                    saturation:(CGFloat)saturation
+                                    brightness:(CGFloat)brightness
+                                      contrast:(CGFloat)contrast {
     CIContext *context = [CIContext contextWithOptions:nil];
     CIImage *inputImage = [[CIImage alloc] initWithImage:image];
     CIFilter *filter = [CIFilter filterWithName:@"CIColorControls"];
@@ -398,7 +398,7 @@
 #pragma mark - 颜色转图片
 /**
  颜色转图片
-
+ 
  @param color 颜色
  @return 图片
  */

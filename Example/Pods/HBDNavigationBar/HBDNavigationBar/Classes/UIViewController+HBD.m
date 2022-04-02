@@ -49,7 +49,7 @@
 
 - (UIColor *)hbd_tintColor {
     id obj = objc_getAssociatedObject(self, _cmd);
-    return obj ?: [UINavigationBar appearance].tintColor;
+    return (obj ?: [UINavigationBar appearance].tintColor) ?: UIColor.blackColor;
 }
 
 - (void)setHbd_tintColor:(UIColor *)tintColor {
@@ -161,6 +161,15 @@
     objc_setAssociatedObject(self, @selector(hbd_clickBackEnabled), @(enabled), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
+- (BOOL)hbd_splitNavigationBarTransition {
+    id obj = objc_getAssociatedObject(self, _cmd);
+    return obj ? [obj boolValue] : NO;
+}
+
+- (void)setHbd_splitNavigationBarTransition:(BOOL)splitNavigationBarTransition {
+    objc_setAssociatedObject(self, @selector(hbd_splitNavigationBarTransition), @(splitNavigationBarTransition), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (float)hbd_computedBarShadowAlpha {
     return  self.hbd_barShadowHidden ? 0 : self.hbd_barAlpha;
 }
@@ -168,24 +177,29 @@
 - (UIImage *)hbd_computedBarImage {
     UIImage *image = self.hbd_barImage;
     if (!image) {
-        if (self.hbd_barTintColor) {
+        if (self.hbd_barTintColor != nil) {
             return nil;
         }
-        return [[UINavigationBar appearance] backgroundImageForBarMetrics:UIBarMetricsDefault];
+        image = [[UINavigationBar appearance] backgroundImageForBarMetrics:UIBarMetricsDefault];
     }
     return image;
 }
 
 - (UIColor *)hbd_computedBarTintColor {
+    if (self.hbd_barHidden) {
+        return UIColor.clearColor;
+    }
+    
     if (self.hbd_barImage) {
         return nil;
     }
+    
     UIColor *color = self.hbd_barTintColor;
     if (!color) {
-        if ([[UINavigationBar appearance] backgroundImageForBarMetrics:UIBarMetricsDefault]) {
+        if ([[UINavigationBar appearance] backgroundImageForBarMetrics:UIBarMetricsDefault] != nil) {
             return nil;
         }
-        if ([UINavigationBar appearance].barTintColor) {
+        if ([UINavigationBar appearance].barTintColor != nil) {
             color = [UINavigationBar appearance].barTintColor;
         } else {
             color = [UINavigationBar appearance].barStyle == UIBarStyleDefault ? [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:0.8]: [UIColor colorWithRed:28/255.0 green:28/255.0 blue:28/255.0 alpha:0.729];
@@ -199,6 +213,7 @@
         HBDNavigationController *nav = (HBDNavigationController *)self.navigationController;
         if (self == nav.topViewController) {
             [nav updateNavigationBarForViewController:self];
+            [nav setNeedsStatusBarAppearanceUpdate];
         }
     }
 }

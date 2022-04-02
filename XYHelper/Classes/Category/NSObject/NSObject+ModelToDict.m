@@ -13,7 +13,7 @@
 
 + (NSDictionary *)dictFromModel:(id)model {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    NSArray *allkeys = [model allKeys];
+    //    NSArray *allkeys = [model allKeys];
     NSMutableArray *keys = [NSMutableArray array];
     NSMutableArray *attributes = [NSMutableArray array];
     unsigned int outCount;

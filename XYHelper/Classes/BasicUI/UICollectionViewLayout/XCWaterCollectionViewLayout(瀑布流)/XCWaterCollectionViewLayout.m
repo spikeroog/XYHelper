@@ -98,9 +98,9 @@
     for (int i = 0; i < columns; i++) {
         [columnsHeight addObject:[NSNumber numberWithFloat:0.f]];
     }
-        
+    
     for (NSInteger section = 0; section < sections; section++) {
-
+        
         UIEdgeInsets sectionInsets = self.sectioinInsets;
         CGFloat itemSpace = self.itemSpace;
         CGFloat lineSpace = self.lineSpace;

@@ -1,6 +1,6 @@
 {
   "name": "XYHelper",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "summary": "The Objective-C utilities you always wish you had.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/spikeroog/XYHelper.git",
-    "tag": "1.2.0"
+    "tag": "2.0.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -21,13 +21,22 @@
   "source_files": "XYHelper/Classes/**/*.{h,m}",
   "dependencies": {
     "HBDNavigationBar": [
-      "~> 1.8.0"
+      "~> 1.9.5"
     ],
     "FLAnimatedImage": [
-      "~> 1.0.2"
+      "~> 1.0.16"
     ],
     "JXCategoryView": [
-      "~> 1.5.8"
+      "~> 1.5.9"
+    ],
+    "AFNetworking": [
+      "~> 4.0.1"
+    ],
+    "YBImageBrowser/Video": [
+      "~> 3.0.9"
+    ],
+    "YBImageBrowser": [
+      "~> 3.0.9"
     ],
     "MBProgressHUD": [
       "~> 1.2.0"
@@ -35,17 +44,11 @@
     "YYCategories": [
       "~> 1.0.4"
     ],
-    "AFNetworking": [
-      "~> 4.0"
-    ],
     "YYCache": [
       "~> 1.0.4"
     ],
-    "YBImageBrowser/Video": [
-      "~> 3.0.9"
-    ],
-    "YBImageBrowser": [
-      "~> 3.0.9"
+    "Masonry": [
+      "~> 1.1.0"
     ],
     "TZImagePickerController": [
 
@@ -60,9 +63,6 @@
 
     ],
     "SDWebImage": [
-
-    ],
-    "Masonry": [
 
     ],
     "Aspects": [

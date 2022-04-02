@@ -37,13 +37,13 @@ typedef NS_ENUM(NSInteger,XYScreenAdapterPhoneType) {
     /** iPhone6Plus_6SPlus_7Plus_8Plus */
     XYScreenAdapterPhoneType_iPhone6Plus_6SPlus_7Plus_8Plus = 3,
     /** iPhoneX_XS_11Pro_12mini */
-    XYScreenAdapterPhoneType_iPhoneX_XS_11Pro_12mini        = 4,
+    XYScreenAdapterPhoneType_iPhoneX_XS_11Pro_12mini_13mini        = 4,
     /** iPhoneXSMax_XR_11_11ProMax */
     XYScreenAdapterPhoneType_iPhoneXSMax_XR_11_11ProMax     = 5,
     /** iPhone12_12Pro */
-    XYScreenAdapterPhoneType_iPhone12_12Pro                 = 6,
+    XYScreenAdapterPhoneType_iPhone12_12Pro_13Pro                 = 6,
     /** iPhone12ProMax */
-    XYScreenAdapterPhoneType_iPhone12ProMax                 = 7,
+    XYScreenAdapterPhoneType_iPhone12ProMax_13ProMax                 = 7,
     /** 其他 */
     XYScreenAdapterPhoneTypeOther                           = 8,
 };
@@ -53,20 +53,20 @@ UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhone3GS_4_4S;
 UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhone5_5C_5S_5SE;
 UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhone6_6S_7_8_SE;
 UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhone6Plus_6SPlus_7Plus_8Plus;
-UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhoneX_XS_11Pro_12mini;
+UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhoneX_XS_11Pro_12mini_13mini;
 UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhoneXSMax_XR_11_11ProMax;
-UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhone12_12Pro;
-UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhone12ProMax;
+UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhone12_12Pro_13Pro;
+UIKIT_EXTERN CGFloat const SCREEN_WIDTH_iPhone12ProMax_13ProMax;
 
 /** 所需适配机型-屏幕高 */
 UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhone3GS_4_4S;
 UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhone5_5C_5S_5SE;
 UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhone6_6S_7_8_SE;
 UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhone6Plus_6SPlus_7Plus_8Plus;
-UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhoneX_XS_11Pro_12mini;
+UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhoneX_XS_11Pro_12mini_13mini;
 UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhoneXSMax_XR_11_11ProMax;
-UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhone12_12Pro;
-UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhone12ProMax;
+UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhone12_12Pro_13Pro;
+UIKIT_EXTERN CGFloat const SCREEN_HEIGHT_iPhone12ProMax_13ProMax;
 
 /** 屏幕宽度 */
 static inline CGFloat tScreenWidth() {
@@ -84,10 +84,10 @@ static inline XYScreenAdapterPhoneType tCurrentType() {
     if (tScreenHeight() == SCREEN_HEIGHT_iPhone5_5C_5S_5SE) return XYScreenAdapterPhoneType_iPhone5_5C_5S_5SE;
     if (tScreenHeight() == SCREEN_HEIGHT_iPhone6_6S_7_8_SE) return XYScreenAdapterPhoneType_iPhone6_6S_7_8_SE;
     if (tScreenHeight() == SCREEN_HEIGHT_iPhone6Plus_6SPlus_7Plus_8Plus) return XYScreenAdapterPhoneType_iPhone6Plus_6SPlus_7Plus_8Plus;
-    if (tScreenHeight() == SCREEN_HEIGHT_iPhoneX_XS_11Pro_12mini) return XYScreenAdapterPhoneType_iPhoneX_XS_11Pro_12mini;
+    if (tScreenHeight() == SCREEN_HEIGHT_iPhoneX_XS_11Pro_12mini_13mini) return XYScreenAdapterPhoneType_iPhoneX_XS_11Pro_12mini_13mini;
     if (tScreenHeight() == SCREEN_HEIGHT_iPhoneXSMax_XR_11_11ProMax) return XYScreenAdapterPhoneType_iPhoneXSMax_XR_11_11ProMax;
-    if (tScreenHeight() == SCREEN_HEIGHT_iPhone12_12Pro) return XYScreenAdapterPhoneType_iPhone12_12Pro;
-    if (tScreenHeight() == SCREEN_HEIGHT_iPhone12ProMax) return XYScreenAdapterPhoneType_iPhone12ProMax;
+    if (tScreenHeight() == SCREEN_HEIGHT_iPhone12_12Pro_13Pro) return XYScreenAdapterPhoneType_iPhone12_12Pro_13Pro;
+    if (tScreenHeight() == SCREEN_HEIGHT_iPhone12ProMax_13ProMax) return XYScreenAdapterPhoneType_iPhone12ProMax_13ProMax;
     return XYScreenAdapterPhoneTypeOther;
 }
 

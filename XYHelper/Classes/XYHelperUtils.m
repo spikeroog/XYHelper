@@ -41,7 +41,7 @@
 + (BOOL)iPhoneNotchScreen {
     
     if (kSystemVersion < 11.0f)  return false;
-        
+    
     CGFloat iPhoneNotchDirectionSafeAreaInsets = 0;
     
     if (@available(iOS 11.0, *)) {
@@ -103,7 +103,7 @@
 #pragma mark - 判断app是否第一次安装时启动
 /**
  判断app是否第一次安装时启动
-
+ 
  @return 是否
  */
 + (BOOL)isApplicationFirstInstallLoad {
@@ -480,7 +480,7 @@
         }
     }
     @catch (NSException * e) {
- 
+        
     }
     return [UIColor colorWithRed:(float)(red/255.0f) green:(float)(green/255.0f) blue:(float)(blue/255.0f) alpha:(float)(1.0f)];
 }
@@ -788,27 +788,29 @@
 #pragma mark - 获取当前网络时间
 /// 获取网络时间
 + (NSString *)getCurrentNetworkTime:(NSString *)dateFormat {
-    NSString *urlString = @"http://m.baidu.com";
+    NSString *urlString = @"https://www.baidu.com";
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:urlString]];
+    [request setURL:[NSURL URLWithString: urlString]];
     [request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
-    [request setTimeoutInterval:2];
+    [request setTimeoutInterval: 2];
     [request setHTTPShouldHandleCookies:FALSE];
     [request setHTTPMethod:@"GET"];
     NSHTTPURLResponse *response;
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    //NSLog(@">>>>> response :%@",response);
     NSString *date = [[response allHeaderFields] objectForKey:@"Date"];
+    
+    //NSLog(@">>>>> date :%@",date);
     date = [date substringFromIndex:5];
     date = [date substringToIndex:[date length]-4];
+    //NSLog(@">>>>> date :%@",date);
     NSDateFormatter *dMatter = [[NSDateFormatter alloc] init];
     dMatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    //    dMatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-CHS"];
     [dMatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
     NSDate *netDate = [[dMatter dateFromString:date] dateByAddingTimeInterval:60*60*8];
-    NSTimeZone *zone = [NSTimeZone systemTimeZone];
-    NSInteger interval = [zone secondsFromGMTForDate: netDate];
-    NSDate *localeDate = [netDate  dateByAddingTimeInterval: interval];
-    NSString *timeStr = [XYHelperUtils dateConversionTimeStamp:localeDate];
+    NSString *timeStr = [XYHelperUtils dateConversionTimeStamp:netDate];
     return [XYHelperUtils timeToStrFrom:timeStr dateformat:dateFormat];
 }
 
@@ -847,7 +849,7 @@
 }
 
 + (NSString *)timeToStrFrom:(NSString *)timeStamp
-                     dateformat:(NSString *)dateformat {
+                 dateformat:(NSString *)dateformat {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[timeStamp longLongValue]/1000];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     //    [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -873,7 +875,7 @@
 #pragma mark - 顺时针视图旋转N度
 /**
  视图旋转N度
-
+ 
  @param targetView 视图
  @param rotationAngle 顺时针旋转角度
  */
@@ -1198,7 +1200,7 @@
 
 /**
  ios13获取textfield label的方法
-
+ 
  @param tf 目标textfield
  @return label
  */
@@ -1213,7 +1215,7 @@
     NSDate *date = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-
+    
     //下面是单独获取每项的值
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *comps = [[NSDateComponents alloc] init];

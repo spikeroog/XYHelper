@@ -33,10 +33,10 @@
 
 + (UIColor *)defaultPlaceholderColor {
     if (@available(iOS 13, *)) {
-      SEL selector = NSSelectorFromString(@"placeholderTextColor");
-      if ([UIColor respondsToSelector:selector]) {
-        return [UIColor performSelector:selector];
-      }
+        SEL selector = NSSelectorFromString(@"placeholderTextColor");
+        if ([UIColor respondsToSelector:selector]) {
+            return [UIColor performSelector:selector];
+        }
     }
     static UIColor *color = nil;
     static dispatch_once_t onceToken;
@@ -46,7 +46,7 @@
         NSDictionary *attributes = [textField.attributedPlaceholder attributesAtIndex:0 effectiveRange:nil];
         color = attributes[NSForegroundColorAttributeName];
         if (!color) {
-          color = [UIColor colorWithRed:0 green:0 blue:0.0980392 alpha:0.22];
+            color = [UIColor colorWithRed:0 green:0 blue:0.0980392 alpha:0.22];
         }
     });
     return color;
@@ -77,23 +77,23 @@
         NSAttributedString *originalText = self.attributedText;
         self.text = @" "; // lazily set font of `UITextView`.
         self.attributedText = originalText;
-
+        
         textView = [[UITextView alloc] init];
         textView.backgroundColor = [UIColor clearColor];
         textView.textColor = [self.class defaultPlaceholderColor];
         textView.userInteractionEnabled = NO;
         textView.isAccessibilityElement = NO;
         objc_setAssociatedObject(self, @selector(placeholderTextView), textView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
+        
         self.needsUpdateFont = YES;
         [self updatePlaceholderTextView];
         self.needsUpdateFont = NO;
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(updatePlaceholderTextView)
                                                      name:UITextViewTextDidChangeNotification
                                                    object:self];
-
+        
         for (NSString *key in self.class.observingKeys) {
             [self addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:nil];
         }
@@ -165,13 +165,13 @@
     } else {
         [self insertSubview:self.placeholderTextView atIndex:0];
     }
-
+    
     if (self.needsUpdateFont) {
         self.placeholderTextView.font = self.font;
         self.needsUpdateFont = NO;
     }
     if (self.placeholderTextView.attributedText.length == 0) {
-      self.placeholderTextView.textAlignment = self.textAlignment;
+        self.placeholderTextView.textAlignment = self.textAlignment;
     }
     self.placeholderTextView.textContainer.exclusionPaths = self.textContainer.exclusionPaths;
     self.placeholderTextView.textContainerInset = self.textContainerInset;

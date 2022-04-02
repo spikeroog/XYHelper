@@ -22,7 +22,7 @@ typedef void(^AppleLoginObserverHandler)(void);
 + (UIView *)creatAppleIDAuthorizedButtonWithTarget:(id)target selector:(SEL)selector;
 
 + (void)checkAuthorizationStateWithUser:(NSString *)user
-                         completeHandler:(void(^)(BOOL authorized, NSString *msg))completeHandler;
+                        completeHandler:(void(^)(BOOL authorized, NSString *msg))completeHandler;
 
 - (void)loginWithExistingAccount:(AppleLoginCompleteHandler)completeHandler;
 

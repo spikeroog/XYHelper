@@ -9,6 +9,7 @@
 #import "XYViewController.h"
 
 @interface XYViewController ()
+
 @end
 
 @implementation XYViewController
@@ -20,16 +21,17 @@
     self.title = @"首页";
     
     /// 导航栏背景颜色
-    self.navBgColor = kBlackStyleNavBgColor;
+    self.navBgImageStr = @"launcher_image_2020_0709";
     /// 导航栏标题颜色
-    self.navTitleColor = kColorE8E8E8;
+    self.navTitleColor = UIColor.redColor;
     /// 导航栏按钮字体颜色
-    self.hbd_tintColor = kColorE8E8E8;
+    self.hbd_tintColor = UIColor.redColor;
+    self.hbd_barStyle = UIBarStyleBlack;
     
     self.leftBarItemTitle = @"嵌套使用";
     self.rightBarItemTitle = @"底部锚点";
    
-    self.view.backgroundColor = kBlackStyleViewControllerBgColor;
+    self.view.backgroundColor = UIColor.redColor;
     
     self.isWhiteStatusBar = true;
 }

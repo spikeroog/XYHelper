@@ -39,7 +39,7 @@
 }
 
 + (void)checkAuthorizationStateWithUser:(NSString *) user
-                         completeHandler:(void(^)(BOOL authorized, NSString *msg)) completeHandler {
+                        completeHandler:(void(^)(BOOL authorized, NSString *msg)) completeHandler {
     
     if (user == nil || user.length <= 0) {
         if (completeHandler) {
@@ -80,7 +80,7 @@
             completeHandler(authorized, msg);
         }
     }];
-        
+    
 }
 
 - (void)startAppleIDObserverWithCompleteHandler:(AppleLoginObserverHandler) handler {

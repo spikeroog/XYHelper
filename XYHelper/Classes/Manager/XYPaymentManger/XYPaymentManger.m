@@ -94,10 +94,10 @@
                 NSString *receiptDataStr = [receiptData base64EncodedStringWithOptions:0];
                 
                 //TODO:如果是之前未完成的单子需要延时校验，这里偷懒返回可能导致掉单情况
-//                if ([LWUserManager sharedInstance] == nil || self.productIdIng == nil) {
-//                    [[SKPaymentQueue defaultQueue] finishTransaction:tran];
-//                    return;
-//                }
+                //                if ([LWUserManager sharedInstance] == nil || self.productIdIng == nil) {
+                //                    [[SKPaymentQueue defaultQueue] finishTransaction:tran];
+                //                    return;
+                //                }
                 
                 //去服务器校验
                 NSDictionary *params = @{@"user_id":@"",
@@ -109,7 +109,7 @@
                                          @"appBuild":kBuildVersion,
                                          @"systemVersion":@(kSystemVersion).stringValue,
                                          @"device_ios_Type":@""
-                                         };
+                };
                 [PPNetworkHelper POST:@"" parameters:params success:^(id responseObject) {
                     if (responseObject[@"code"] == 0) {
                         [MBProgressHUD showTextHUD:@"购买成功"];

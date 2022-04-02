@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     if (self.barHidden) {
@@ -33,19 +33,19 @@
     [self.view addSubview:self.categoryView];
     [self.view addSubview:self.listContainerView];
     
-  
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    
     // 处于第一个item的时候，才允许屏幕边缘手势返回
     self.navigationController.interactivePopGestureRecognizer.enabled = (self.categoryView.selectedIndex == 0);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
+    
     // 离开页面的时候，需要恢复屏幕边缘手势，不能影响其他页面
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }

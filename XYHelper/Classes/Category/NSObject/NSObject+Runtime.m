@@ -132,21 +132,21 @@ void method_replace(Class toClass, Class fromClass, SEL selector)
 {
     BOOL __block (^ __weak block_self)(Class klass, SEL selector, Class stopClass);
     BOOL (^block)(Class klass, SEL selector, Class stopClass) = [^
-                                                                 (Class klass, SEL selector, Class stopClass)
-                                                                 {
-                                                                     if (!klass || klass == stopClass)
-                                                                         return NO;
-                                                                     
-                                                                     unsigned methodCount = 0;
-                                                                     Method *methodList = class_copyMethodList(klass, &methodCount);
-                                                                     
-                                                                     if (methodList)
-                                                                         for (unsigned i = 0; i < methodCount; ++i)
-                                                                             if (method_getName(methodList[i]) == selector)
-                                                                                 return YES;
-                                                                     
-                                                                     return block_self(klass.superclass, selector, stopClass);
-                                                                 } copy];
+        (Class klass, SEL selector, Class stopClass)
+        {
+        if (!klass || klass == stopClass)
+            return NO;
+        
+        unsigned methodCount = 0;
+        Method *methodList = class_copyMethodList(klass, &methodCount);
+        
+        if (methodList)
+            for (unsigned i = 0; i < methodCount; ++i)
+                if (method_getName(methodList[i]) == selector)
+                    return YES;
+        
+        return block_self(klass.superclass, selector, stopClass);
+    } copy];
     
     block_self = block;
     

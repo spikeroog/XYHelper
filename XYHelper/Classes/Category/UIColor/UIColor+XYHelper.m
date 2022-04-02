@@ -20,7 +20,7 @@
     static UIColor *color = nil;
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-       color = [UIColor colorWithRed:0 green:0 blue:0.098039215686274508 alpha:0.22];
+        color = [UIColor colorWithRed:0 green:0 blue:0.098039215686274508 alpha:0.22];
     });
     return color;
 }
@@ -60,7 +60,7 @@
  @return 渐变颜色
  */
 + (UIColor *)transitionVerColorWithColor:(UIColor *)beginColor
-                          andEndColor:(UIColor *)endColor {
+                             andEndColor:(UIColor *)endColor {
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
     //横向渐变的路径

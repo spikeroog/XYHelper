@@ -3,13 +3,17 @@
 //  Flipboard
 //
 //  Created by Raphael Schaad on 7/8/13.
-//  Copyright (c) 2013-2015 Flipboard. All rights reserved.
+//  Copyright (c) Flipboard. All rights reserved.
 //
 
 
 #import "FLAnimatedImage.h"
 #import <ImageIO/ImageIO.h>
+#if __has_include(<MobileCoreServices/MobileCoreServices.h>)
 #import <MobileCoreServices/MobileCoreServices.h>
+#else
+#import <CoreServices/CoreServices.h>
+#endif
 
 
 // From vm_param.h, define for iOS 8.0 or higher to build on device.
@@ -271,12 +275,12 @@ static NSHashTable *allAnimatedImagesWeak;
                         
                         // Try to use the unclamped delay time; fall back to the normal delay time.
                         NSNumber *delayTime = [framePropertiesGIF objectForKey:(id)kCGImagePropertyGIFUnclampedDelayTime];
-                        if (!delayTime) {
+                        if (delayTime == nil) {
                             delayTime = [framePropertiesGIF objectForKey:(id)kCGImagePropertyGIFDelayTime];
                         }
                         // If we don't get a delay time from the properties, fall back to `kDelayTimeIntervalDefault` or carry over the preceding frame's value.
                         const NSTimeInterval kDelayTimeIntervalDefault = 0.1;
-                        if (!delayTime) {
+                        if (delayTime == nil) {
                             if (i == 0) {
                                 FLLog(FLLogLevelInfo, @"Falling back to default delay time for first frame %@ because none found in GIF properties %@", frameImage, frameProperties);
                                 delayTime = @(kDelayTimeIntervalDefault);
@@ -299,7 +303,7 @@ static NSHashTable *allAnimatedImagesWeak;
                     CFRelease(frameImageRef);
                 } else {
                     skippedFrameCount++;
-                    FLLog(FLLogLevelInfo, @"Dropping frame %zu because failed to `CGImageSourceCreateImageAtIndex` with image source %@", i, _imageSource);
+                    FLLog(FLLogLevelInfo, @"Dropping frame %zu because failed to `CGImageSourceCreateImageAtIndex` with image source %@", i, self->_imageSource);
                 }
             }
         }

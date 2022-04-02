@@ -63,13 +63,13 @@ typedef NS_ENUM(NSInteger, MBProgressHudGifType) {
 
 /**
  显示gif hud
-
+ 
  @param type 显示类型
  @param gifImageName 目标字符串，url链接或者本地gif名称
  @param text 提示文本
  */
 + (void)showGifHUD:(MBProgressHudGifType)type
-           gifImageName:(NSString *)gifImageName
+      gifImageName:(NSString *)gifImageName
               text:(nullable NSString *)text;
 
 /// 显示环形下载hud
