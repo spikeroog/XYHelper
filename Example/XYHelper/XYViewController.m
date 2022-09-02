@@ -23,22 +23,22 @@
     /// 导航栏背景颜色
     self.navBgImageStr = @"launcher_image_2020_0709";
     /// 导航栏标题颜色
-    self.navTitleColor = UIColor.redColor;
+    self.navTitleColor = kColorWithRandom;
     /// 导航栏按钮字体颜色
-    self.hbd_tintColor = UIColor.redColor;
+    self.hbd_tintColor = kColorWithRandom;
     self.hbd_barStyle = UIBarStyleBlack;
     
     self.leftBarItemTitle = @"嵌套使用";
     self.rightBarItemTitle = @"底部锚点";
    
-    self.view.backgroundColor = UIColor.redColor;
+    self.view.backgroundColor = kColorWithRandom;
     
-    self.isWhiteStatusBar = true;
+    self.isWhiteStatusBarStyle = true;
 }
 
 - (void)leftActionInController {
     XYNestViewController *vc = [[XYNestViewController alloc] init];
-    vc.isWhiteStatusBar = false;
+    vc.isWhiteStatusBarStyle = false;
     vc.title = @"嵌套使用";
     vc.titles = @[@"主题一", @"主题二"];
     
@@ -51,7 +51,7 @@
     /// 是否显示在titleView上
     vc.useTitleView = true;
     
-//    vc.barHidden = true;
+//    vc.navBarHidden = true;
     
     JXCategoryTitleView *titleCategoryView = (JXCategoryTitleView *)vc.categoryView;
     titleCategoryView.layer.cornerRadius = 15;
@@ -70,7 +70,7 @@
     backgroundView.indicatorColor = kColorWithOpacity(UIColor.redColor, 0.3);
     titleCategoryView.indicators = @[backgroundView];
     
-//    vc.barHidden = random()%2 > 0 ? true : false;
+//    vc.navBarHidden = random()%2 > 0 ? true : false;
 
     XYNestSubViewController *listVC_1 = [XYNestSubViewController new];
     XYNestSubViewController *listVC_2 = [XYNestSubViewController new];
@@ -113,14 +113,18 @@
 }
 
 - (void)rightActionInController {
+    [self gotoImagePickVc];
+    return;
+    
     XYAnchorViewController *subViewC = [XYAnchorViewController new];
-    subViewC.isWhiteStatusBar = false;
+    subViewC.isWhiteStatusBarStyle = false;
+    subViewC.statusBarHiden = true;
     subViewC.title = @"底部锚点";
     subViewC.categoryViewHeight = 44;
     subViewC.lineView.indicatorColor = kColorWithNull;
     
 //    subViewC.categoryViewYOffset = 100;
-//    subViewC.barHidden = random()%2 > 0 ? true : false;
+//    subViewC.navBarHidden = random()%2 > 0 ? true : false;
     
     subViewC.titles = @[@"乐库", @"推荐", @"视频", @"看点"/*, @"葡萄", @"美味西瓜", @"香蕉", @"香甜菠萝", @"鸡肉", @"鱼", @"海星"*/];
     subViewC.controllers = @[[self getVc],[self getVc],[self getVc],[self getVc]];
@@ -149,14 +153,13 @@
     return vc;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)gotoImagePickVc {
+    
+    [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:true allowTakePhoto:true allowTakeVideo:true sortAscending:true allowPickingPhoto:true allowPickingVideo:true allowPickingOriginalPhoto:true showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:10 maxImageSize:10 maxVideoSize:20 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
+            
+        } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {
+            
+        } targetVC:self];
 }
-*/
 
 @end

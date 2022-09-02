@@ -135,4 +135,35 @@
     return output;
 }
 
++ (CGSize)calculateStringLength:(NSString *)str fontSize:(int)fontSize{
+    NSDictionary *dic = @{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]};
+     CGSize size = [str boundingRectWithSize:CGSizeMake(200, 50)  options: NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    return size;
+}
+
+- (NSString *)URLEncode {
+    return [self URLEncodeUsingEncoding:NSUTF8StringEncoding];
+}
+
+- (NSString *)URLEncodeUsingEncoding:(NSStringEncoding)encoding {
+    return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                                 (__bridge CFStringRef)self,
+                                                                                 NULL,
+                                                                                 (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
+                                                                                 CFStringConvertNSStringEncodingToEncoding(encoding));
+}
+
+- (NSString *)URLDecode {
+    return [self URLDecodeUsingEncoding:NSUTF8StringEncoding];
+}
+
+- (NSString *)URLDecodeUsingEncoding:(NSStringEncoding)encoding {
+    return (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
+                                                                                                 (__bridge CFStringRef)self,
+                                                                                                 CFSTR(""),
+                                                                                                 CFStringConvertNSStringEncodingToEncoding(encoding));
+}
+
+
+
 @end

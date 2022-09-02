@@ -15,10 +15,10 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 @interface XYBasicViewController : UIViewController
 
 /// 隐藏导航栏，默认NO
-@property (nonatomic, assign) BOOL barHidden;
+@property (nonatomic, assign) BOOL navBarHidden;
 
 /// 状态栏颜色，true为白色，false为黑色
-@property (nonatomic, assign) BOOL isWhiteStatusBar;
+@property (nonatomic, assign) BOOL isWhiteStatusBarStyle;
 
 /// 导航栏背景颜色
 @property (nonatomic, strong) UIColor *navBgColor;
@@ -44,6 +44,11 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 @property (nonatomic, copy) NSString *rightBarItemTitle;
 /// 右侧按钮图片
 @property (nonatomic, strong) UIImage *rightBarItemImage;
+
+/// 隐藏状态栏
+@property(nonatomic,assign) BOOL statusBarHiden;
+/// 状态栏样式
+@property(nonatomic,assign) UIStatusBarStyle barStyle;
 
 /// 导航栏多个右侧按钮的点击回调
 @property (nonatomic, copy) XYNavigationRightBarItemsHandle rightItemsHandle;

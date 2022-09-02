@@ -41,7 +41,7 @@
 
 - (CGRect)categoryViewFrame {
     CGRect frame = _categoryViewFrame;
-    frame.origin.y += self.barHidden ? kStatusBarHeight : 0;
+    frame.origin.y += self.navBarHidden ? kStatusBarHeight : 0;
     return frame;
 }
 

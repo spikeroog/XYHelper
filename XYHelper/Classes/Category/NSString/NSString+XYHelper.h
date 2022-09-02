@@ -31,6 +31,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)MD5;
 
+
++ (CGSize)calculateStringLength:(NSString *)str
+                       fontSize:(int)fontSize;
+- (NSString *)URLEncode;
+- (NSString *)URLEncodeUsingEncoding:(NSStringEncoding)encoding;
+- (NSString *)URLDecode;
+- (NSString *)URLDecodeUsingEncoding:(NSStringEncoding)encoding;
+
 @end
 
 NS_ASSUME_NONNULL_END

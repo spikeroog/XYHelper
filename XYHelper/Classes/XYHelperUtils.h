@@ -226,7 +226,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)addViewWithTextfield:(__kindof UITextField *)textfield
                     viewSize:(CGSize)viewSize
             leftViewImageStr:(nullable NSString *)leftViewImageStr
-           rightViewImageStr:(nullable NSString *)rightViewImageStr leftViewClick:(void(^)())leftViewClick rightViewClick:(void(^)())rightViewClick;
+           rightViewImageStr:(nullable NSString *)rightViewImageStr leftViewClick:(void(^)())leftViewClick
+              rightViewClick:(void(^)())rightViewClick;
 
 /// 添加和中文有间距的下划线
 /// @param fatherLabel 父label
@@ -266,6 +267,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 播放提示音
 + (void)playAlertSound:(NSString *)sourcesPath;
+
+#pragma mark - 获取设备型号
++ (NSString *)getAppTermModel;
+
+#pragma mark - 获取设备uuid
++ (NSString *)getAppTermId;
+
+#pragma mark - 表情符号 编码解码
++ (NSString *)expressionURLEncode:(NSString *)string;
++ (NSString *)expressionURLDecode:(NSString *)string;
+
+#pragma mark - 压缩图片
++ (UIImage *)compressionImage:(UIImage *)aImage toByte:(NSUInteger)length;
++ (void)compressionImage:(UIImage *)aImage toByte:(NSUInteger)length asynResultBlock:(void (^)(UIImage * _Nullable))asynResultBlock;
+
+#pragma mark - 为iPhone添加震动效果
++ (void)addFeedbackGenerator;
+
+#pragma mark - 跳转设置开启权限
++ (void)gotoSystemSetting;
+
+
 
 @end
 

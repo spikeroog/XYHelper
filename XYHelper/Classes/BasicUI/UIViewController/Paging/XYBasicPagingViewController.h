@@ -21,9 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) JXCategoryBaseView *categoryView;
 @property (nonatomic, strong) JXCategoryListContainerView *listContainerView;
 @property (nonatomic, assign) BOOL isNeedIndicatorPositionChangeItem;
-///categoryView的高度，默认44
+/// categoryView的高度，默认44
 @property (nonatomic, assign) CGFloat categoryViewHeight;
-//// Y轴偏移量，默认为0，使用嵌套样式可用到
+/// Y轴偏移量，默认为0，使用嵌套样式可用到
 @property (nonatomic, assign) CGFloat categoryViewYOffset;
 
 - (JXCategoryBaseView *)preferredCategoryView;

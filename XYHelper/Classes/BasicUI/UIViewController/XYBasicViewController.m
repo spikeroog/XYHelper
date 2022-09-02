@@ -11,17 +11,19 @@
 #import "XYHelperRouter.h"
 #import "XYHelperMarco.h"
 #import "XYScreenAdapter.h"
+
+#import "UIImage+XYHelper.h"
+#import "UIColor+XYHelper.h"
+
 #import <HBDNavigationBar/HBDNavigationBar.h>
 #import <HBDNavigationBar/HBDNavigationController.h>
 #import <HBDNavigationBar/UIViewController+HBD.h>
 #import <SDWebImage/SDWebImage.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIImage+GIF.h>
-#import "UIImage+XYHelper.h"
-#import "UIColor+XYHelper.h"
 #import <JXCategoryView/JXCategoryView.h>
 
-#define RotundityWH 35 // 导航栏左侧右侧，圆形或正方形显示barItem的默认宽高
+#define RotundityWH 35 /// 导航栏左侧右侧，圆形或正方形显示barItem的默认宽高
 
 @interface XYBasicViewController () <JXCategoryListContentViewDelegate>
 /**左侧按钮Item*/
@@ -53,30 +55,30 @@ navBgImageStr = _navBgImageStr;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (_isWhiteStatusBar) {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    if (_isWhiteStatusBarStyle) {
+        self.barStyle = UIStatusBarStyleLightContent;
     } else {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+        self.barStyle = UIStatusBarStyleDarkContent;
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 防止视图下移
+    /// 防止视图下移
     if (@available(iOS 11.0, *)) {
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     } else {
         self.automaticallyAdjustsScrollViewInsets = false;
     }
     
-    [self navigationHidden:self.barHidden];
+    [self hiddenNavigationBar:self.navBarHidden];
     
-    // 左侧默认显示图片
+    /// 左侧默认显示图片
     NSInteger count = [XYHelperRouter currentNavC].childViewControllers.count;
     if (count > 1) {
-        // 设置默认左侧按钮图片
-        //        self.leftBarItemImage = kImageWithName(@"");
+        /// 设置默认左侧按钮图片
+///        self.leftBarItemImage = kImageWithName(@"");
         self.leftBarItemTitle = @"返回";
         self.hbd_swipeBackEnabled = true;
     } else {
@@ -90,33 +92,34 @@ navBgImageStr = _navBgImageStr;
     self.view.backgroundColor = kWhiteStyleViewControllerBgColor;
     /// 隐藏导航栏下的黑线
     self.hbd_barShadowHidden = true;
-    // 取消导航栏半透明
+    /// 取消导航栏半透明
     self.navigationController.navigationBar.translucent = false;
-    // 修改导航栏背景颜色
+    /// 修改导航栏背景颜色
     self.hbd_barTintColor = self.navBgColor;
-    // 修改导航栏标题样式
+    /// 修改导航栏标题样式
     self.hbd_barStyle = UIBarStyleDefault;
-    // 修改导航栏按钮颜色
+    /// 修改导航栏按钮颜色
     self.hbd_tintColor = UIColor.blackColor;
-    // 设置导航栏字体颜色
+    /// 设置导航栏字体颜色
     self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [self.navTitleColor colorWithAlphaComponent:1],NSFontAttributeName:kFontWithAutoSize(17)};
 }
 
-- (void)setBarHidden:(BOOL)barHidden {
-    _barHidden = barHidden;
-    [self navigationHidden:barHidden];
+- (void)setNavBarHidden:(BOOL)navBarHidden {
+    _navBarHidden = navBarHidden;
+    [self hiddenNavigationBar:navBarHidden];
 }
 
-#pragma mark - 状态栏颜色
+#pragma mark - 状态栏相关
 
-- (void)setIsWhiteStatusBar:(BOOL)isWhiteStatusBar {
-    _isWhiteStatusBar = isWhiteStatusBar;
-    if (isWhiteStatusBar) {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    } else {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
-    }
+/// 状态栏的样式
+- (UIStatusBarStyle)preferredStatusBarStyle {
+     return self.barStyle;
 }
+
+/// 状态栏隐藏
+- (BOOL)prefersStatusBarHidden {
+     return self.statusBarHiden;
+ }
 
 #pragma mark - 导航栏左右侧按钮点击事件，子类重写的话就不会再调用了
 /**
@@ -148,7 +151,7 @@ navBgImageStr = _navBgImageStr;
 
 /**设置导航栏背景图片*/
 - (void)setNavBgImageStr:(NSString *)navBgImageStr {
-    // 设置导航栏背景图片，不需要考虑图片尺寸
+    /// 设置导航栏背景图片，不需要考虑图片尺寸
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kNavBarHeight)];
     imageV.contentMode = UIViewContentModeScaleAspectFill;
     imageV.image = kImageWithName(navBgImageStr);
@@ -227,7 +230,7 @@ navBgImageStr = _navBgImageStr;
  @param leftBarItemTitle 文字
  */
 - (void)setLeftBarItemTitle:(NSString *)leftBarItemTitle {
-    if (self.barHidden) {
+    if (self.navBarHidden) {
         return ;
     }
     
@@ -244,33 +247,33 @@ navBgImageStr = _navBgImageStr;
  @param leftBarItemDistanceImage 图片
  */
 - (void)setLeftBarItemDistanceImage:(UIImage *)leftBarItemDistanceImage {
-    if (self.barHidden) {
+    if (self.navBarHidden) {
         return ;
     }
     
     /** 如果导航栏左侧按钮不需要设置圆角，也可使用以下方法实现左侧按钮右侧多出8的间距**/
     
-    //    XYBarItemCustomView *leftBtn = [XYBarItemCustomView buttonWithType:UIButtonTypeCustom];
-    //    leftBtn.frame = CGRectMake(0, 0, RotundityWH, RotundityWH);
-    //
-    //    [leftBtn addTarget:self action:@selector(leftActionInController) forControlEvents:UIControlEventTouchUpInside];
-    //    [leftBtn setBackgroundImage:leftBarItemDistanceImage forState:UIControlStateNormal];
-    //
-    //    CGRect frame = leftBtn.frame;
-    //    frame.size.width += kAutoCs(10);
-    //
-    //    UIView *leftCV = [[UIView alloc] initWithFrame:frame];
-    //    [leftCV addSubview:leftBtn];
-    //
-    //    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftCV];
-    //    leftItem.tintColor = self.hbd_tintColor;
-    //    self.navigationItem.leftBarButtonItem = leftItem;
+    ///    XYBarItemCustomView *leftBtn = [XYBarItemCustomView buttonWithType:UIButtonTypeCustom];
+    ///    leftBtn.frame = CGRectMake(0, 0, RotundityWH, RotundityWH);
+    ///
+    ///    [leftBtn addTarget:self action:@selector(leftActionInController) forControlEvents:UIControlEventTouchUpInside];
+    ///    [leftBtn setBackgroundImage:leftBarItemDistanceImage forState:UIControlStateNormal];
+    ///
+    ///    CGRect frame = leftBtn.frame;
+    ///    frame.size.width += kAutoCs(10);
+    ///
+    ///    UIView *leftCV = [[UIView alloc] initWithFrame:frame];
+    ///    [leftCV addSubview:leftBtn];
+    ///
+    ///    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftCV];
+    ///    leftItem.tintColor = self.hbd_tintColor;
+    ///    self.navigationItem.leftBarButtonItem = leftItem;
     
     
     NSMutableArray <UIBarButtonItem *>*arrayMut = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < 2; i++) {
-        // 左侧设置或返回
+        /// 左侧设置或返回
         XYBarItemCustomView *leftBtn = [XYBarItemCustomView buttonWithType:UIButtonTypeCustom];
         
         if (i == 0) {
@@ -298,7 +301,7 @@ navBgImageStr = _navBgImageStr;
  @param leftBarItemImage 图片
  */
 - (void)setLeftBarItemImage:(UIImage *)leftBarItemImage {
-    if (self.barHidden) {
+    if (self.navBarHidden) {
         return ;
     }
     
@@ -331,7 +334,7 @@ navBgImageStr = _navBgImageStr;
  @param rightBarItemTitle 文字
  */
 - (void)setRightBarItemTitle:(NSString *)rightBarItemTitle {
-    if (self.barHidden) {
+    if (self.navBarHidden) {
         return ;
     }
     
@@ -348,7 +351,7 @@ navBgImageStr = _navBgImageStr;
  @param rightBarItemImage 图片url
  */
 - (void)setRightBarItemImage:(UIImage *)rightBarItemImage {
-    if (self.barHidden) {
+    if (self.navBarHidden) {
         return ;
     }
     
@@ -371,7 +374,7 @@ navBgImageStr = _navBgImageStr;
 - (void)rigBarItemsWithTitleArr:(nullable NSArray *)titleArr
                        imageArr:(nullable NSArray *)imageArr {
     
-    if (self.barHidden) {
+    if (self.navBarHidden) {
         return ;
     }
     
@@ -385,12 +388,12 @@ navBgImageStr = _navBgImageStr;
         UIBarButtonItem *rigItem = [[UIBarButtonItem alloc] init];
         rigItem.tintColor = self.hbd_tintColor;
         
-        if ([titleArr objectAtIndex:i] != nil && [imageArr objectAtIndex:i] != nil) { // 有文字和图片，使用自定义样式
+        if ([titleArr objectAtIndex:i] != nil && [imageArr objectAtIndex:i] != nil) { /// 有文字和图片，使用自定义样式
             
             XYBarItemCustomView *rigBtn = [XYBarItemCustomView buttonWithType:UIButtonTypeCustom];
             [rigBtn addTarget:self action:@selector(rigBtnsAct:) forControlEvents:UIControlEventTouchUpInside];
             
-            if (@available(iOS 11.0, *)) { // 适配ios11及以上
+            if (@available(iOS 11.0, *)) { /// 适配ios11及以上
                 rigBtn.isRight = YES;
                 rigBtn.offset = kAutoCs(8);
                 rigBtn.translatesAutoresizingMaskIntoConstraints = NO;
@@ -399,7 +402,7 @@ navBgImageStr = _navBgImageStr;
                 spacer.width = rigBtn.offset;
                 [muarr addObject:spacer];
                 
-            } else { // 适配ios10及以下
+            } else { /// 适配ios10及以下
                 UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
                 spacer.width = -kAutoCs(8);
                 [muarr addObject:spacer];
@@ -425,7 +428,7 @@ navBgImageStr = _navBgImageStr;
             
             rigItem = [[UIBarButtonItem alloc] initWithCustomView:rigBtn];
             
-        } else if ([titleArr objectAtIndex:i] != nil && [imageArr objectAtIndex:i] == nil) { // 只有文字，使用系统title样式
+        } else if ([titleArr objectAtIndex:i] != nil && [imageArr objectAtIndex:i] == nil) { /// 只有文字，使用系统title样式
             
             rigItem = [[UIBarButtonItem alloc] initWithTitle:titleArr[i] style:UIBarButtonItemStyleDone target:self action:@selector(rigBtnsAct:)];
             [rigItem setTintColor:self.hbd_tintColor];
@@ -433,7 +436,7 @@ navBgImageStr = _navBgImageStr;
             [rigItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
             rigItem.tag = i+100;
             
-        } else if ([imageArr objectAtIndex:i] != nil && [titleArr objectAtIndex:i] == nil) { // 只有图片，使用系统image样式
+        } else if ([imageArr objectAtIndex:i] != nil && [titleArr objectAtIndex:i] == nil) { /// 只有图片，使用系统image样式
             
             UIImage *rightBarButtonImage = [kImageWithName(imageArr[i]) imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             rigItem = [[UIBarButtonItem alloc] initWithImage:rightBarButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(rigBtnsAct:)];
@@ -459,8 +462,8 @@ navBgImageStr = _navBgImageStr;
 }
 
 - (void)leftBarItemShow {
-    //    self.navigationItem.leftBarButtonItem.enabled = YES;
-    //    self.navigationItem.leftBarButtonItem.customView.hidden = NO;
+    ///    self.navigationItem.leftBarButtonItem.enabled = YES;
+    ///    self.navigationItem.leftBarButtonItem.customView.hidden = NO;
 }
 
 - (void)leftBarItemHidden {
@@ -470,8 +473,8 @@ navBgImageStr = _navBgImageStr;
 }
 
 - (void)rightBarItemShow {
-    //    self.navigationItem.rightBarButtonItem.enabled = YES;
-    //    self.navigationItem.rightBarButtonItem.customView.hidden = NO;
+    ///    self.navigationItem.rightBarButtonItem.enabled = YES;
+    ///    self.navigationItem.rightBarButtonItem.customView.hidden = NO;
 }
 
 - (void)rightBarItemHidden {
@@ -480,7 +483,7 @@ navBgImageStr = _navBgImageStr;
     self.navigationItem.rightBarButtonItem.customView.hidden = YES;
 }
 
-// [self rightBarItemsShowWithArray:@[@1,@2]];
+/// [self rightBarItemsShowWithArray:@[@1,@2]];
 - (void)rightBarItemsShowWithArray:(NSArray<NSNumber *> *)itemsArray {
     [itemsArray enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSInteger index = [obj integerValue];
@@ -489,11 +492,11 @@ navBgImageStr = _navBgImageStr;
     }];
 }
 
-// [self rightBarItemHiddenWithArray:@[@1,@2]];
+/// [self rightBarItemHiddenWithArray:@[@1,@2]];
 - (void)rightBarItemHiddenWithArray:(NSArray<NSNumber *> *)itemsArray {
     [itemsArray enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSInteger index = [obj integerValue];
-        //        self.navigationItem.rightBarButtonItems[index] = nil;
+        ///        self.navigationItem.rightBarButtonItems[index] = nil;
         self.navigationItem.rightBarButtonItems[index].enabled = NO;
         self.navigationItem.rightBarButtonItems[index].customView.hidden = YES;
         
@@ -503,17 +506,17 @@ navBgImageStr = _navBgImageStr;
 #pragma mark - 隐藏/显示导航栏
 /// 隐藏导航栏
 /// @param hidden 是否隐藏
-- (void)navigationHidden:(BOOL)hidden {
-    // 是否隐藏导航栏
+- (void)hiddenNavigationBar:(BOOL)hidden {
+    /// 是否隐藏导航栏
     self.hbd_barHidden = hidden;
-    if (self.barHidden) {
+    if (self.navBarHidden) {
         [self leftBarItemHidden];
         [self rightBarItemHidden];
     } else {
         [self leftBarItemShow];
         [self rightBarItemShow];
     }
-    // 防止视图上移
+    /// 防止视图上移
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.hbd_extendedLayoutDidSet = !hidden;
 }
@@ -522,9 +525,9 @@ navBgImageStr = _navBgImageStr;
 #pragma mark - MemoryWarning
 
 - (void)didReceiveMemoryWarning {
-    // 关闭所有服务
+    /// 关闭所有服务
     [[SDWebImageManager sharedManager] cancelAll];
-    // 清除内存缓存
+    /// 清除内存缓存
     [[[SDWebImageManager sharedManager] imageCache] clearWithCacheType:SDImageCacheTypeMemory completion:^{
         
     }];
@@ -535,15 +538,15 @@ navBgImageStr = _navBgImageStr;
 - (void)setCornersLeftBarItem {
     self.navigationItem.leftBarButtonItem.customView.layer.cornerRadius = RotundityWH/2;
     self.navigationItem.leftBarButtonItem.customView.layer.masksToBounds = YES;
-    //    self.navigationItem.leftBarButtonItem.customView.layer.borderWidth = 1;
-    //    self.navigationItem.leftBarButtonItem.customView.layer.borderColor = kMainColor.CGColor;
+    ///    self.navigationItem.leftBarButtonItem.customView.layer.borderWidth = 1;
+    ///    self.navigationItem.leftBarButtonItem.customView.layer.borderColor = kMainColor.CGColor;
 }
 
 - (void)setCornersRightBarItem {
     self.navigationItem.rightBarButtonItem.customView.layer.cornerRadius = RotundityWH/2;
     self.navigationItem.rightBarButtonItem.customView.layer.masksToBounds = YES;
-    //    self.navigationItem.leftBarButtonItem.customView.layer.borderWidth = 1;
-    //    self.navigationItem.leftBarButtonItem.customView.layer.borderColor = kMainColor.CGColor;
+    ///    self.navigationItem.leftBarButtonItem.customView.layer.borderWidth = 1;
+    ///    self.navigationItem.leftBarButtonItem.customView.layer.borderColor = kMainColor.CGColor;
 }
 
 #pragma mark - 单个界面设置是否禁用右滑手势

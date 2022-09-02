@@ -21,7 +21,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    if (self.barHidden) {
+    if (self.navBarHidden) {
         self.categoryView.frame = CGRectMake(0, kStatusBarHeight+self.categoryViewYOffset, self.view.bounds.size.width, [self preferredCategoryViewHeight]);
         self.listContainerView.frame = CGRectMake(0, kStatusBarHeight+(self.categoryViewHeight > 0 ? self.categoryViewHeight : 44)+self.categoryViewYOffset, self.view.bounds.size.width, self.view.bounds.size.height);
     } else {

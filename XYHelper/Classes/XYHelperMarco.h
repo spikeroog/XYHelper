@@ -9,6 +9,10 @@
 #ifndef XYHelperMarco_h
 #define XYHelperMarco_h
 
+#import <os/lock.h>
+#import <libkern/OSAtomic.h>
+#import "XYmetamacros.h"
+
 // ----  异形屏
 #define kIsBangsScreen ({\
 BOOL isBangsScreen = NO; \
@@ -28,38 +32,6 @@ isBangsScreen; \
 // ----  刘海屏底部栏的高度
 #define kBottomBarHeight (kIsBangsScreen?34:0)
 
-// ---- 弱强引用
-#ifndef weakify
-#if DEBUG
-#if __has_feature(objc_arc)
-#define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
-#else
-#define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
-#endif
-#else
-#if __has_feature(objc_arc)
-#define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
-#else
-#define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
-#endif
-#endif
-#endif
-
-#ifndef strongify
-#if DEBUG
-#if __has_feature(objc_arc)
-#define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
-#else
-#define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
-#endif
-#else
-#if __has_feature(objc_arc)
-#define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
-#else
-#define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
-#endif
-#endif
-#endif
 
 // ----  hex颜色
 #define kColorWithRGB16Radix(rgbValue) ([UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0])
@@ -89,27 +61,6 @@ isBangsScreen; \
 
 // ----  判断ipad
 #define kiPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-// ----  判断iPhone5 5s
-#define kiPhone5s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) && !kiPad : NO)
-// ----  判断iPhone6 6s 7 8
-#define kiPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) && !kiPad : NO)
-// ----  判断iPhone6p 6sp 7p 8p
-#define kiPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) && !kiPad : NO)
-// ----  判断iPhoneX iPhoneXS
-#define kiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !kiPad : NO)
-// ----  判断iPhoneXS MAX
-#define kiPhoneXSMAX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !kiPad : NO)
-// ----  判断iPhoneXR
-#define kiPhoneXR ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) : NO)
-
-// ----  判断12.9 ipadPro
-#define kIpadPro129 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(2048, 2732), [[UIScreen mainScreen] currentMode].size) && kiPad : NO)
-// ----  判断11 ipadPro
-#define kIpadPro11 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1668, 2388), [[UIScreen mainScreen] currentMode].size) && kiPad : NO)
-// ----  判断10.5 ipadPro
-#define kIpadPro105 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1668, 2224), [[UIScreen mainScreen] currentMode].size) && kiPad : NO)
-// ----  判断9.7 ipad
-#define kIpad97 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1536, 2048), [[UIScreen mainScreen] currentMode].size) && kiPad : NO)
 
 // ----  GCD - 一次性执行  使用方法:kDISPATCH_ONCE_BLOCK(^{  });
 #define kDISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&onceToken, onceBlock);
@@ -179,6 +130,8 @@ isBangsScreen; \
 #define kAppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 // ----  获取 APP Build 版本号
 #define kBuildVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]
+// ----  获取 APP Bundle Id
+#define kAppBundleIdentifier [[NSBundle mainBundle] bundleIdentifier]
 
 
 // ----  字符串是否为空
@@ -218,6 +171,117 @@ _Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"") \
 Stuff; \
 _Pragma("clang diagnostic pop") \
 } while (0)
+
+
+#pragma mark - leaks
+
+/**
+ * \@onExit defines some code to be executed when the current scope exits. The
+ * code must be enclosed in braces and terminated with a semicolon, and will be
+ * executed regardless of how the scope is exited, including from exceptions,
+ * \c goto, \c return, \c break, and \c continue.
+ *
+ * Provided code will go into a block to be executed later. Keep this in mind as
+ * it pertains to memory management, restrictions on assignment, etc. Because
+ * the code is used within a block, \c return is a legal (though perhaps
+ * confusing) way to exit the cleanup block early.
+ *
+ * Multiple \@onExit statements in the same scope are executed in reverse
+ * lexical order. This helps when pairing resource acquisition with \@onExit
+ * statements, as it guarantees teardown in the opposite order of acquisition.
+ *
+ * @note This statement cannot be used within scopes defined without braces
+ * (like a one line \c if). In practice, this is not an issue, since \@onExit is
+ * a useless construct in such a case anyways.
+ */
+#define onExit \
+    xyh_keywordify \
+    __strong xyh_cleanupBlock_t metamacro_concat(xyh_exitBlock_, __LINE__) __attribute__((cleanup(xyh_executeCleanupBlock), unused)) = ^
+
+/**
+ * Creates \c __weak shadow variables for each of the variables provided as
+ * arguments, which can later be made strong again with #strongify.
+ *
+ * This is typically used to weakly reference variables in a block, but then
+ * ensure that the variables stay alive during the actual execution of the block
+ * (if they were live upon entry).
+ *
+ * See #strongify for an example of usage.
+ */
+#define weakify(...) \
+    xyh_keywordify \
+    metamacro_foreach_cxt(xyh_weakify_,, __weak, __VA_ARGS__)
+
+/**
+ * Like #weakify, but uses \c __unsafe_unretained instead, for targets or
+ * classes that do not support weak references.
+ */
+#define unsafeify(...) \
+    xyh_keywordify \
+    metamacro_foreach_cxt(xyh_weakify_,, __unsafe_unretained, __VA_ARGS__)
+
+/**
+ * Strongly references each of the variables provided as arguments, which must
+ * have previously been passed to #weakify.
+ *
+ * The strong references created will shadow the original variable names, such
+ * that the original names can be used without issue (and a significantly
+ * reduced risk of retain cycles) in the current scope.
+ *
+ * @code
+
+    id foo = [[NSObject alloc] init];
+    id bar = [[NSObject alloc] init];
+
+    @weakify(foo, bar);
+
+    // this block will not keep 'foo' or 'bar' alive
+    BOOL (^matchesFooOrBar)(id) = ^ BOOL (id obj){
+        // but now, upon entry, 'foo' and 'bar' will stay alive until the block has
+        // finished executing
+        @strongify(foo, bar);
+
+        return [foo isEqual:obj] || [bar isEqual:obj];
+    };
+
+ * @endcode
+ */
+#define strongify(...) \
+    xyh_keywordify \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wshadow\"") \
+    metamacro_foreach(xyh_strongify_,, __VA_ARGS__) \
+    _Pragma("clang diagnostic pop")
+
+/*** implementation details follow ***/
+typedef void (^xyh_cleanupBlock_t)(void);
+
+static inline void xyh_executeCleanupBlock (__strong xyh_cleanupBlock_t *block) {
+    (*block)();
+}
+
+#define xyh_weakify_(INDEX, CONTEXT, VAR) \
+    CONTEXT __typeof__(VAR) metamacro_concat(VAR, _weak_) = (VAR);
+
+#define xyh_strongify_(INDEX, VAR) \
+    __strong __typeof__(VAR) VAR = metamacro_concat(VAR, _weak_);
+
+// Details about the choice of backing keyword:
+//
+// The use of @try/@catch/@finally can cause the compiler to suppress
+// return-type warnings.
+// The use of @autoreleasepool {} is not optimized away by the compiler,
+// resulting in superfluous creation of autorelease pools.
+//
+// Since neither option is perfect, and with no other alternatives, the
+// compromise is to use @autorelease in DEBUG builds to maintain compiler
+// analysis, and to use @try/@catch otherwise to avoid insertion of unnecessary
+// autorelease pools.
+#if DEBUG
+#define xyh_keywordify autoreleasepool {}
+#else
+#define xyh_keywordify try {} @catch (...) {}
+#endif
 
 
 #endif /* XYHelperMarco_h */

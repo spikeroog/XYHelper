@@ -99,7 +99,7 @@
     
     if (_alertView && self.pickerStyle.topCornerRadius > 0) {
         // 设置顶部圆角
-        [self br_setView:_alertView roundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight withRadius:self.pickerStyle.topCornerRadius];
+        [BRPickerStyle br_setView:_alertView roundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight withRadius:self.pickerStyle.topCornerRadius];
     }
 }
 
@@ -251,6 +251,7 @@
 
 #pragma mark - 确定按钮的点击事件
 - (void)clickDoneBtn {
+    [self removePickerFromView:nil];
     if (self.doneBlock) {
         self.doneBlock();
     }
@@ -307,7 +308,7 @@
         if (!self.pickerStyle.hiddenMaskView) {
             self.maskView.alpha = 0;
         }
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.3f animations:^{
             if (!self.pickerStyle.hiddenMaskView) {
                 self.maskView.alpha = 1;
             }
@@ -325,7 +326,7 @@
         [self removeFromSuperview];
     } else {
         // 关闭动画
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.2f animations:^{
             CGFloat alertViewHeight = self.alertView.bounds.size.height;
             CGRect rect = self.alertView.frame;
             rect.origin.y += alertViewHeight;
@@ -368,15 +369,6 @@
         _keyView = BRGetKeyWindow();
     }
     return _keyView;
-}
-
-#pragma mark - 设置 view 的部分圆角
-// corners(枚举类型，可组合使用)：UIRectCornerTopLeft | UIRectCornerTopRight | UIRectCornerBottomLeft | UIRectCornerBottomRight | UIRectCornerAllCorners
-- (void)br_setView:(UIView *)view roundingCorners:(UIRectCorner)corners withRadius:(CGFloat)radius {
-    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(radius, radius)];
-    CAShapeLayer *shape = [[CAShapeLayer alloc]init];
-    [shape setPath:rounded.CGPath];
-    view.layer.mask = shape;
 }
 
 #pragma mark - setter 方法（支持动态设置标题）

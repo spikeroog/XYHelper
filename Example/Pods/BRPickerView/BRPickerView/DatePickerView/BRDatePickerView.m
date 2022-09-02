@@ -1181,8 +1181,14 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     if (self.nonSelectableDates && self.nonSelectableDates.count > 0 && ![self.mSelectValue isEqualToString:self.lastRowContent] && ![self.mSelectValue isEqualToString:self.firstRowContent]) {
         for (NSDate *date in self.nonSelectableDates) {
             if ([self br_compareDate:date targetDate:self.mSelectDate dateFormat:self.dateFormatter] == NSOrderedSame) {
-                // 如果当前的日期不可选择，就回滚到上次选择的日期
-                [self scrollToSelectDate:lastSelectDate animated:YES];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    // 如果当前的日期不可选择，就回滚到上次选择的日期
+                    [self scrollToSelectDate:lastSelectDate animated:YES];
+                });
+                // 不可选择日期的回调
+                if (self.nonSelectableBlock) {
+                    self.nonSelectableBlock(self.mSelectDate, self.mSelectValue);
+                }
                 self.mSelectDate = lastSelectDate;
                 self.mSelectValue = lastSelectValue;
                 break;
@@ -1325,8 +1331,6 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     __weak typeof(self) weakSelf = self;
     self.doneBlock = ^{
         // 点击确定按钮后，执行block回调
-        [weakSelf removePickerFromView:view];
-        
         if (weakSelf.resultBlock) {
             weakSelf.resultBlock(weakSelf.mSelectDate, weakSelf.mSelectValue);
         }

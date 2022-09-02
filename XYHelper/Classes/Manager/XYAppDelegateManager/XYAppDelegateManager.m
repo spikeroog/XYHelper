@@ -40,11 +40,7 @@
     
 #pragma mark - 设置网络请求超时时间
     [PPNetworkHelper setRequestTimeoutInterval:10.0f];
-    
-#pragma mark - 设置状态栏颜色为白色
-    /// info.plist设置UIViewControllerBasedStatusBarAppearance为NO，才能生效
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
+
 #pragma mark - 配置IQKeyboardManager
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     // enable控制整个功能是否启用

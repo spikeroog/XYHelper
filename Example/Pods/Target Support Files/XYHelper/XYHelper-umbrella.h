@@ -41,6 +41,12 @@
 #import "UIButton+EnlargeEdge.h"
 #import "UIControl+FixMultiClick.h"
 #import "UIColor+XYHelper.h"
+#import "UIBarButtonItem+Extension.h"
+#import "UIButton+Extension.h"
+#import "UIExtensionHeader.h"
+#import "UIImage+Extension.h"
+#import "UIImageView+Extension.h"
+#import "UILabel+Extension.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImage+XYHelper.h"
 #import "UILabel+XYHelper.h"
@@ -56,6 +62,7 @@
 #import "XYAppDelegateManager.h"
 #import "XYAppleLoginManager.h"
 #import "XYCacheManager.h"
+#import "TZImageUploadOperation.h"
 #import "XYImagePickerManager.h"
 #import "XYMediaPreviewManager.h"
 #import "XYNetworkUtils.h"
@@ -79,6 +86,7 @@
 #import "XYHelperMarco.h"
 #import "XYHelperRouter.h"
 #import "XYHelperUtils.h"
+#import "XYmetamacros.h"
 
 FOUNDATION_EXPORT double XYHelperVersionNumber;
 FOUNDATION_EXPORT const unsigned char XYHelperVersionString[];

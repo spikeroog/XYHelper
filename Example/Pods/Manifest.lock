@@ -15,31 +15,35 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - Aspects (1.4.1)
-  - BRPickerView (2.7.6):
-    - BRPickerView/AddressPickerView (= 2.7.6)
-    - BRPickerView/Base (= 2.7.6)
-    - BRPickerView/DatePickerView (= 2.7.6)
-    - BRPickerView/StringPickerView (= 2.7.6)
-  - BRPickerView/AddressPickerView (2.7.6):
+  - BRPickerView (2.8.0):
+    - BRPickerView/AddressPickerView (= 2.8.0)
+    - BRPickerView/Base (= 2.8.0)
+    - BRPickerView/DatePickerView (= 2.8.0)
+    - BRPickerView/StringPickerView (= 2.8.0)
+  - BRPickerView/AddressPickerView (2.8.0):
     - BRPickerView/Base
-  - BRPickerView/Base (2.7.6)
-  - BRPickerView/DatePickerView (2.7.6):
+  - BRPickerView/Base (2.8.0)
+  - BRPickerView/DatePickerView (2.8.0):
     - BRPickerView/Base
-  - BRPickerView/StringPickerView (2.7.6):
+  - BRPickerView/StringPickerView (2.8.0):
     - BRPickerView/Base
-  - FLAnimatedImage (1.0.16)
-  - HBDNavigationBar (1.9.5)
-  - IQKeyboardManager (6.5.9)
+  - FLAnimatedImage (1.0.17)
+  - HBDNavigationBar (1.9.6)
+  - IQKeyboardManager (6.5.10)
   - JXCategoryView (1.5.9)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - ReactiveObjC (3.1.1)
   - SAMKeychain (1.5.3)
-  - SDWebImage (5.12.3):
-    - SDWebImage/Core (= 5.12.3)
-  - SDWebImage/Core (5.12.3)
-  - TZImagePickerController (3.7.3)
-  - XYHelper (2.0.0):
+  - SDWebImage (5.13.2):
+    - SDWebImage/Core (= 5.13.2)
+  - SDWebImage/Core (5.13.2)
+  - TZImagePickerController (3.8.3):
+    - TZImagePickerController/Basic (= 3.8.3)
+    - TZImagePickerController/Location (= 3.8.3)
+  - TZImagePickerController/Basic (3.8.3)
+  - TZImagePickerController/Location (3.8.3)
+  - XYHelper (2.0.1):
     - AFNetworking (~> 4.0.1)
     - Aspects
     - BRPickerView
@@ -102,23 +106,23 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
-  BRPickerView: 2a1620caf218e37a3aca9626732719a419928b15
-  FLAnimatedImage: 8f3e854ebf9680b71f0b6e700939687fc4d82b4b
-  HBDNavigationBar: 5e8e93c1dfaf4195c54b6fcf55090cb3ea597e06
-  IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
+  BRPickerView: a0ff460bf092bc069db5a54153395b1f7e8f5300
+  FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
+  HBDNavigationBar: a997b65ab7194271e5584b87a952fc851832f692
+  IQKeyboardManager: 45a1fa55c1a5b02c61ac0fd7fd5b62bb4ad20d97
   JXCategoryView: 2ef9ecfd3735158d009ce02d1f29811aa822da65
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
-  TZImagePickerController: d8c57e56fe6990a961d03134121a091c31015aa5
-  XYHelper: 8e5a7c96ad53f3054df9b439de4163124139fa0c
+  SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
+  TZImagePickerController: e9909edbadf7381140efc5b5c9f5bdbfd630f7d4
+  XYHelper: e42ec7ed9e83c0df467aed794651556b5b4557ac
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: b5c6586d5b520f78fafb6e7d10d68668b02c5ee4
+PODFILE CHECKSUM: 3b301411c2b8e2a8b1e439141d93c5075bbcedc8
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

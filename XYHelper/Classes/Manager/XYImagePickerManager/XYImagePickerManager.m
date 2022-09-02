@@ -7,16 +7,21 @@
 //
 
 #import "XYImagePickerManager.h"
+
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <Photos/Photos.h>
 #import <PhotosUI/PhotosUI.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <ReactiveObjC/ReactiveObjC.h>
+
 #import "XYHelperRouter.h"
 #import "XYHelperMarco.h"
 #import "XYScreenAdapter.h"
 #import "UIView+XYHelper.h"
 #import "MBProgressHUD+XYHelper.h"
 #import "XYHelperUtils.h"
+
+#import "TZImageUploadOperation.h"
 
 // 视频最大拍摄时间(s)
 #define kVideoMaxTime 10
@@ -43,6 +48,8 @@ UINavigationControllerDelegate> {
 @property (nonatomic, assign) BOOL isSelectOriginalPhoto;
 @property (nonatomic, assign) BOOL isOriginalPhoto;
 @property (nonatomic, strong) UIViewController *targetVC;
+
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
 
 @end
 
@@ -83,12 +90,8 @@ UINavigationControllerDelegate> {
             tzBarItem = [UIBarButtonItem appearanceWhenContainedIn:[TZImagePickerController class], nil];
             BarItem = [UIBarButtonItem appearanceWhenContainedIn:[UIImagePickerController class], nil];
         }
-        
-        [tzBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateNormal];
-        [tzBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
-        
-        [BarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateNormal];
-        [BarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+        NSDictionary *titleTextAttributes = [tzBarItem titleTextAttributesForState:UIControlStateNormal];
+        [BarItem setTitleTextAttributes:titleTextAttributes forState:UIControlStateNormal];
     }
     return _imagePickerVc;
 }
@@ -186,10 +189,7 @@ UINavigationControllerDelegate> {
         [alertVc addAction:imagePickerAction];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         [alertVc addAction:cancelAction];
-        
-        
         [[XYHelperRouter currentVC] presentViewController:alertVc animated:YES completion:nil];
-        
     } else {
         [self pushTZImagePickerController:self.tz_ImagePickerVc];
     }
@@ -199,6 +199,9 @@ UINavigationControllerDelegate> {
 
 - (void)pushTZImagePickerController:(TZImagePickerController *)imagePickerVc {
     
+#pragma mark - 设置导航栏默认字体大小
+    imagePickerVc.naviTitleFont = kFontWithAutoSize(17);
+    imagePickerVc.barItemTextFont = kFontWithAutoSize(15);
 #pragma mark - 五类个性化设置，这些参数都可以不传，此时会走默认设置
     imagePickerVc.isSelectOriginalPhoto = self.isSelectOriginalPhoto;
     
@@ -288,6 +291,11 @@ UINavigationControllerDelegate> {
 }
 
 
+// The picker should dismiss itself; when it dismissed these handle will be called.
+// You can also set autoDismiss to NO, then the picker don't dismiss itself.
+// If isOriginalPhoto is YES, user picked the original photo.
+// You can get original photo with asset, by the method [[TZImageManager manager] getOriginalPhotoWithAsset:completion:].
+// The UIImage Object in photos default width is 828px, you can set it by photoWidth property.
 // 这个照片选择器会自己dismiss，当选择器dismiss的时候，会执行下面的代理方法
 // 你也可以设置autoDismiss属性为NO，选择器就不会自己dismis了
 // 如果isSelectOriginalPhoto为YES，表明用户选择了原图
@@ -298,12 +306,14 @@ UINavigationControllerDelegate> {
     _selectedPhotos = [NSMutableArray arrayWithArray:photos];
     _selectedAssets = [NSMutableArray arrayWithArray:assets];
     _isSelectOriginalPhoto = isSelectOriginalPhoto;
-    
+
+    // _collectionView.contentSize = CGSizeMake(0, ((_selectedPhotos.count + 2) / 3 ) * (_margin + _itemWH));
+
     // 1.打印图片名字
-    //    [self printAssetsName:assets];
+    [self printAssetsName:assets];
     // 2.图片位置信息
     for (PHAsset *phAsset in assets) {
-        kLog(@"location:%@",phAsset.location);
+        NSLog(@"location:%@",phAsset.location);
     }
     
     NSMutableArray *muPhotos = [photos mutableCopy];
@@ -328,6 +338,34 @@ UINavigationControllerDelegate> {
     }];
     if (muPhotos.count > 0) {
         !self.pictureCallBackBlock ? : self.pictureCallBackBlock(muPhotos, muPhotosAsset);
+    }
+    
+    
+
+    // 3. 获取原图的示例，用队列限制最大并发为1，避免内存暴增
+//    self.operationQueue = [[NSOperationQueue alloc] init];
+//    self.operationQueue.maxConcurrentOperationCount = 1;
+//    for (NSInteger i = 0; i < assets.count; i++) {
+//        PHAsset *asset = assets[i];
+//        // 图片上传operation，上传代码请写到operation内的start方法里，内有注释
+//        TZImageUploadOperation *operation = [[TZImageUploadOperation alloc] initWithAsset:asset completion:^(UIImage * photo, NSDictionary *info, BOOL isDegraded) {
+//            if (isDegraded) return;
+//            NSLog(@"图片获取&上传完成");
+//        } progressHandler:^(double progress, NSError * _Nonnull error, BOOL * _Nonnull stop, NSDictionary * _Nonnull info) {
+//            NSLog(@"获取原图进度 %f", progress);
+//        }];
+//        [self.operationQueue addOperation:operation];
+//    }
+}
+
+#pragma mark - Private
+
+/// 打印图片名字
+- (void)printAssetsName:(NSArray *)assets {
+    NSString *fileName;
+    for (PHAsset *asset in assets) {
+        fileName = [asset valueForKey:@"filename"];
+        // NSLog(@"图片名字:%@",fileName);
     }
 }
 
