@@ -6,7 +6,7 @@
 //  Copyright © 2022 spikeroog. All rights reserved.
 //
 
-#import "XYHelper.h"
+#import "XYBasicViewController.h"
 #import "XYBasicScrollView.h"
 
 

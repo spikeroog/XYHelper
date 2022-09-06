@@ -7,7 +7,7 @@
 //  自适应cell高度的tableViewController基类，包含数据为空的默认缺省图和上拉加载下拉刷新
 //  子类如若需要调整tableView的位置，可使用remakeConstraint
 
-#import "XYHelper.h"
+#import "XYBasicViewController.h"
 #import "XYPlaceholderTableView.h"
 #import "MJRefreshManager.h"
 

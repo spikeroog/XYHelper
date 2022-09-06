@@ -7,6 +7,7 @@
 //
 
 #import "XYBasicScrollViewController.h"
+#import <Masonry/Masonry.h>
 
 @interface XYBasicScrollViewController ()
 

@@ -8,6 +8,10 @@
 
 #import "XYBasicTableViewController.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+#import <Masonry/Masonry.h>
+
+#import "XYHelperMarco.h"
+#import "UIColor+XYHelper.h"
 
 @interface XYBasicTableViewController ()
 <UITableViewDelegate,
