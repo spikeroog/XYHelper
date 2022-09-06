@@ -16,9 +16,9 @@
 // 屏幕适配的字体
 #define kFontWithAutoSize(size) ([UIFont systemFontOfSize:tRealFontSize(size)])
 // 加粗字体
-#define kBoldFontWithSize(size) ([UIFont boldSystemFontOfSize:size])
+#define kFontBoldWithSize(size) ([UIFont boldSystemFontOfSize:size])
 // 加粗屏幕适配的字体
-#define kBoldFontWithAutoSize(size) ([UIFont boldSystemFontOfSize:tRealFontSize(size)])
+#define kFontBoldWithAutoSize(size) ([UIFont boldSystemFontOfSize:tRealFontSize(size)])
 // 斜体
 #define kItalicFontWithSize(size) ([UIFont italicSystemFontOfSize:size])
 

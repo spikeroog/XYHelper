@@ -10,9 +10,16 @@
 
 @implementation UIImageView (Extension)
 
-+ (instancetype)ui_imageViewWithImageName:(NSString *)imageName {
++ (instancetype)ui_imageViewWithImageName:(NSString *)imageName
+                             cornerRadius:(NSInteger)cornerRadius contentMode:(UIViewContentMode)contentMode {
+    UIImageView * imagev = [[self alloc] initWithImage:[UIImage imageNamed:imageName]];
+    imagev.layer.cornerRadius = cornerRadius;
+    if (cornerRadius > 0) {
+        imagev.layer.masksToBounds = true;
+    }
+    imagev.contentMode = contentMode;
     
-    return [[self alloc] initWithImage:[UIImage imageNamed:imageName]];
+    return imagev;
 }
 
 - (UIImage *)ui_imageClipImage:(UIImage *)image size:(CGSize)size{

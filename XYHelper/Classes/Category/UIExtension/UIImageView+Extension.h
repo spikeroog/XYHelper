@@ -15,8 +15,8 @@
 /// @param imageName 图像名称
 ///
 /// @return UIImageView
-+ (instancetype)ui_imageViewWithImageName:(NSString *)imageName;
-
++ (instancetype)ui_imageViewWithImageName:(NSString *)imageName
+                             cornerRadius:(NSInteger)cornerRadius contentMode:(UIViewContentMode)contentMode;
 
 ///  根据imageView大小裁切图片
 - (UIImage *)ui_imageClipImage:(UIImage *)image size:(CGSize)size;

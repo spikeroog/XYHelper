@@ -1,6 +1,6 @@
 //
 //  XYCollectionViewFlowLayout.h
-//  XYKit
+//  XYHelper
 //
 //  Created by spikeroog on 2019/11/5.
 //  Copyright © 2019 spikeroog. All rights reserved.

@@ -30,7 +30,7 @@
 #define MAS_SHORTHAND // equalTo不需要使用"mas_"前缀
 #define MAS_SHORTHAND_GLOBALS // @1直接写1即可 自动将数据类型转为NSNumber类型
 #import <IQKeyboardManager/IQKeyboardManager.h> // 键盘
-#import <BRPickerView.h> // 选择器
+#import <BRPickerView/BRPickerView.h> // 选择器
 
 #pragma mark ---- 非Pods引用三方库
 
@@ -67,6 +67,8 @@
 
 #import "XYBasicWebViewController.h"
 #import "XYBasicPagingViewController.h"
+#import "XYBasicTableViewController.h"
+#import "XYBasicScrollViewController.h"
 #import "XYAnchorViewController.h"
 #import "XYNestSubViewController.h"
 #import "XYNestViewController.h"
@@ -74,6 +76,7 @@
 #import "XYBasicViewController.h"
 #import "XYObserverView.h"
 #import "XYCommentView.h"
+#import "XYMotionView.h"
 #import "XYPopupView.h"
 #import "XYTextfield.h"
 #import "XYSlider.h"
@@ -100,7 +103,9 @@
 #import "UIColor+XYHelper.h"
 #import "UILabel+XYHelper.h"
 #import "NSString+XYHelper.h"
+#import "UIButton+XYHelper.h"
 #import "UITextView+XYHelper.h"
+#import "UIImageView+XYHelper.h"
 #import "CAAnimation+XYHelper.h"
 #import "MBProgressHUD+XYHelper.h"
 #import "NSLayoutConstraint+XYHelper.h"

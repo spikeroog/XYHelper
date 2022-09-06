@@ -88,6 +88,10 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 #pragma mark - 单个界面设置是否禁用右滑手势
 - (void)interactivePopDisabled:(BOOL)disabled;
 
+#pragma mark - 开发相关
+- (void)setUpUi;
+- (void)setUpNetwork;
+
 @end
 
 NS_ASSUME_NONNULL_END

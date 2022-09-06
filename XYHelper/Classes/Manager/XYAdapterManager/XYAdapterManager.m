@@ -8,6 +8,7 @@
 
 #import "XYAdapterManager.h"
 #import <Aspects/Aspects.h>
+#import <ReactiveObjC/ReactiveObjC.h>
 
 #import "XYHelperMarco.h"
 #import "XYScreenAdapter.h"

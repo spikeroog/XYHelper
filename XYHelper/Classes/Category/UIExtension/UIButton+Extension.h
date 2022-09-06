@@ -24,12 +24,12 @@
 ///
 /// @param title         标题
 /// @param color         字体颜色
-/// @param fontSize      字号
+/// @param font          字体
 /// @param imageName     图像
 /// @param backImageName 背景图像
 ///
 /// @return UIButton
-+ (instancetype)ui_buttonWithTitle:(NSString *)title color:(UIColor *)color fontSize:(CGFloat)fontSize imageName:(NSString *)imageName backImageName:(NSString *)backImageName;
++ (instancetype)ui_buttonWithTitle:(NSString *)title color:(UIColor *)color font:(UIFont *)font imageName:(NSString *)imageName backImageName:(NSString *)backImageName;
 
 /// 创建按钮
 ///
@@ -56,6 +56,6 @@
 /**
  图片在上文字在下
  */
--(void)ui_verticalArrangement;
+- (void)ui_verticalArrangement;
 
 @end

@@ -217,8 +217,8 @@ navBgImageStr = _navBgImageStr;
     if (!_leftBarItem) {
         _leftBarItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:@selector(leftActionInController)];
         [_leftBarItem setTintColor:self.hbd_tintColor];
-        [_leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateNormal];
-        [_leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+        [_leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
+        [_leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
         self.navigationItem.leftBarButtonItem = _leftBarItem;
     }
     return _leftBarItem;
@@ -236,8 +236,8 @@ navBgImageStr = _navBgImageStr;
     
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithTitle:leftBarItemTitle style:UIBarButtonItemStyleDone target:self action:@selector(leftActionInController)];
     [leftBarItem setTintColor:self.hbd_tintColor];
-    [leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateNormal];
-    [leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+    [leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
     self.navigationItem.leftBarButtonItem = leftBarItem;
 }
 
@@ -321,8 +321,8 @@ navBgImageStr = _navBgImageStr;
     if (!_rightBarItem) {
         _rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:@selector(rightActionInController)];
         [_rightBarItem setTintColor:self.hbd_tintColor];
-        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
-        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateHighlighted];
+        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateHighlighted];
         self.navigationItem.rightBarButtonItem = _rightBarItem;
     }
     return _rightBarItem;
@@ -340,8 +340,8 @@ navBgImageStr = _navBgImageStr;
     
     UIBarButtonItem *rightBarBtnItem = [[UIBarButtonItem alloc] initWithTitle:rightBarItemTitle style:UIBarButtonItemStyleDone target:self action:@selector(rightActionInController)];
     [rightBarBtnItem setTintColor:self.hbd_tintColor];
-    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
-    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateHighlighted];
+    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateHighlighted];
     self.navigationItem.rightBarButtonItem = rightBarBtnItem;
 }
 
@@ -432,8 +432,8 @@ navBgImageStr = _navBgImageStr;
             
             rigItem = [[UIBarButtonItem alloc] initWithTitle:titleArr[i] style:UIBarButtonItemStyleDone target:self action:@selector(rigBtnsAct:)];
             [rigItem setTintColor:self.hbd_tintColor];
-            [rigItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateNormal];
-            [rigItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(15),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+            [rigItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
+            [rigItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
             rigItem.tag = i+100;
             
         } else if ([imageArr objectAtIndex:i] != nil && [titleArr objectAtIndex:i] == nil) { /// 只有图片，使用系统image样式

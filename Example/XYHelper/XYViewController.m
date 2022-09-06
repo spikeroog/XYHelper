@@ -90,7 +90,7 @@
     listVC_2.lineView.indicatorColor = UIColor.redColor;
     listVC_2.myCategoryView.titleColor = kColor333333;
     listVC_2.myCategoryView.titleSelectedColor = UIColor.redColor;
-    listVC_2.myCategoryView.titleFont = kBoldFontWithSize(14);
+    listVC_2.myCategoryView.titleFont = kFontBoldWithSize(14);
     listVC_2.myCategoryView.titleColorGradientEnabled = YES;
     listVC_2.myCategoryView.titleLabelZoomEnabled = YES;
     listVC_2.myCategoryView.titleLabelZoomScale = 1.5;
@@ -140,7 +140,7 @@
     titleCategoryView.titleLabelZoomSelectedVerticalOffset = 3;
     titleCategoryView.titleColor = kColor333333;
     titleCategoryView.titleSelectedColor = UIColor.blackColor;
-    titleCategoryView.titleFont = kBoldFontWithSize(18);
+    titleCategoryView.titleFont = kFontBoldWithSize(18);
        
     [XYHelperRouter pushViewController:subViewC completion:^{
         

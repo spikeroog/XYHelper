@@ -7,13 +7,15 @@
 //
 
 #import "UIButton+Extension.h"
+#import "XYScreenAdapter.h"
 
 /// 标题默认颜色
 #define kItemTitleColor ([UIColor colorWithWhite:80.0 / 255.0 alpha:1.0])
 /// 标题高亮颜色
 #define kItemTitleHighlightedColor ([UIColor orangeColor])
 /// 标题字体大小
-#define kItemFontSize   16
+#define kItemFontSize   kAutoCs(16)
+
 
 @implementation UIButton (Extension)
 
@@ -45,14 +47,14 @@
     return button;
 }
 
-+ (instancetype)ui_buttonWithTitle:(NSString *)title color:(UIColor *)color fontSize:(CGFloat)fontSize imageName:(NSString *)imageName backImageName:(NSString *)backImageName {
++ (instancetype)ui_buttonWithTitle:(NSString *)title color:(UIColor *)color font:(UIFont *)font imageName:(NSString *)imageName backImageName:(NSString *)backImageName {
     
     UIButton *button = [[UIButton alloc] init];
     
     // 设置标题
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:color forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:fontSize];
+    button.titleLabel.font = font;
     
     // 图片
     if (imageName != nil) {
@@ -115,7 +117,7 @@
 /**
  图片在上文字在下
  */
--(void)ui_verticalArrangement{
+- (void)ui_verticalArrangement {
     /// 使图片和文字水平居中显示
     self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     /// 文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
