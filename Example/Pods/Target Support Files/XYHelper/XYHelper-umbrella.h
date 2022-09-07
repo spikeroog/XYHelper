@@ -11,8 +11,6 @@
 #endif
 
 #import "XYBarItemCustomView.h"
-#import "XYEmptyCollectionView.h"
-#import "XYPlaceholderCollectionView.h"
 #import "JHCollectionViewFlowLayout.h"
 #import "XCollectionViewLineLayout.h"
 #import "XCWaterCollectionViewLayout.h"
@@ -21,8 +19,6 @@
 #import "XYBasicScrollView.h"
 #import "XYSlider.h"
 #import "XYBasicScrollViewController.h"
-#import "XYBasicTableViewController.h"
-#import "XYPlaceholderTableView.h"
 #import "XYTextfield.h"
 #import "XYCommentView.h"
 #import "XYMotionView.h"
@@ -80,9 +76,6 @@
 #import "XYOperation.h"
 #import "XYOperationQueue.h"
 #import "XYPaymentManger.h"
-#import "MJRefreshManager.h"
-#import "XYRefreshGifFooter.h"
-#import "XYRefreshGifHeader.h"
 #import "XYTimerManager.h"
 #import "XYUserBasicModel.h"
 #import "XYUserInfoManager.h"

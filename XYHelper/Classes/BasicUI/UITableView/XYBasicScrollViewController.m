@@ -9,7 +9,7 @@
 #import "XYBasicScrollViewController.h"
 #import <Masonry/Masonry.h>
 
-@interface XYBasicScrollViewController ()
+@interface XYBasicScrollViewController ()<UIScrollViewDelegate>
 
 @end
 
@@ -19,6 +19,7 @@
     [super viewDidLoad];
     
     self.basicScrollView = [[XYBasicScrollView alloc] init];
+    self.basicScrollView.delegate = self;
     [self.view addSubview:self.basicScrollView];
     [self.basicScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);

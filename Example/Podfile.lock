@@ -27,14 +27,12 @@ PODS:
     - BRPickerView/Base
   - BRPickerView/StringPickerView (2.8.0):
     - BRPickerView/Base
-  - DZNEmptyDataSet (1.8.1)
   - FLAnimatedImage (1.0.17)
   - HBDNavigationBar (1.9.6)
   - IQKeyboardManager (6.5.10)
   - JXCategoryView (1.5.9)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
-  - MJRefresh (3.7.5)
   - ReactiveObjC (3.1.1)
   - SAMKeychain (1.5.3)
   - SDWebImage (5.13.2):
@@ -49,14 +47,12 @@ PODS:
     - AFNetworking (~> 4.0.1)
     - Aspects
     - BRPickerView
-    - DZNEmptyDataSet
     - FLAnimatedImage (~> 1.0.16)
     - HBDNavigationBar (~> 1.9.5)
     - IQKeyboardManager
     - JXCategoryView (~> 1.5.9)
     - Masonry (~> 1.1.0)
     - MBProgressHUD (~> 1.2.0)
-    - MJRefresh
     - ReactiveObjC
     - SAMKeychain
     - SDWebImage
@@ -88,14 +84,12 @@ SPEC REPOS:
     - AFNetworking
     - Aspects
     - BRPickerView
-    - DZNEmptyDataSet
     - FLAnimatedImage
     - HBDNavigationBar
     - IQKeyboardManager
     - JXCategoryView
     - Masonry
     - MBProgressHUD
-    - MJRefresh
     - ReactiveObjC
     - SAMKeychain
     - SDWebImage
@@ -113,19 +107,17 @@ SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   BRPickerView: a0ff460bf092bc069db5a54153395b1f7e8f5300
-  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   HBDNavigationBar: a997b65ab7194271e5584b87a952fc851832f692
   IQKeyboardManager: 45a1fa55c1a5b02c61ac0fd7fd5b62bb4ad20d97
   JXCategoryView: 2ef9ecfd3735158d009ce02d1f29811aa822da65
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
   TZImagePickerController: e9909edbadf7381140efc5b5c9f5bdbfd630f7d4
-  XYHelper: afcee91c903180a1445175bc628e0f8d31e12eea
+  XYHelper: 2c3acaf1c472da4800c4f98d8e677901a8de6e17
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd

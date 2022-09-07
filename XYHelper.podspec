@@ -55,11 +55,9 @@ TODO: Add long description of the pod here.
 
    s.dependency 'TZImagePickerController'
    s.dependency 'IQKeyboardManager'
-   s.dependency 'DZNEmptyDataSet'
    s.dependency 'ReactiveObjC'
    s.dependency 'BRPickerView'
    s.dependency 'SDWebImage'
-   s.dependency 'MJRefresh'
    s.dependency 'Aspects'
    s.dependency 'SAMKeychain'
    
