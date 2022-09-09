@@ -68,11 +68,7 @@
 #pragma mark ---- 自定义基类
 
 #import "XYBasicWebViewController.h"
-#import "XYBasicPagingViewController.h"
 #import "XYBasicScrollViewController.h"
-#import "XYAnchorViewController.h"
-#import "XYNestSubViewController.h"
-#import "XYNestViewController.h"
 #import "XYNavigationController.h"
 #import "XYBasicViewController.h"
 #import "XYObserverView.h"

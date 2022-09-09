@@ -4,7 +4,7 @@ inhibit_all_warnings!
 platform :ios, '9.0'
 
 target 'XYHelper_Example' do
-  pod 'XYHelper', :path => '../'
+ pod 'XYHelper', :path => '../'
 
   target 'XYHelper_Tests' do
     inherit! :search_paths

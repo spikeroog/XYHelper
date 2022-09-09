@@ -21,11 +21,10 @@
 #import <SDWebImage/SDWebImage.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIImage+GIF.h>
-#import <JXCategoryView/JXCategoryView.h>
 
 #define RotundityWH 35 /// 导航栏左侧右侧，圆形或正方形显示barItem的默认宽高
 
-@interface XYBasicViewController () <JXCategoryListContentViewDelegate>
+@interface XYBasicViewController ()
 /**左侧按钮Item*/
 @property (nonatomic, strong) UIBarButtonItem *leftBarItem;
 /**右侧按钮Item*/
@@ -41,25 +40,35 @@ navTitleColor = _navTitleColor,
 navTitle = _navTitle,
 navBgImageStr = _navBgImageStr;
 
-
-#pragma mark - JXCategoryListContentViewDelegate
-
-/**
- 实现 <JXCategoryListContentViewDelegate> 协议方法，返回该视图控制器所拥有的「视图」
- */
-- (UIView *)listView {
-    return self.view;
-}
-
 #pragma mark - Controller lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (_isWhiteStatusBarStyle) {
-        self.barStyle = UIStatusBarStyleLightContent;
-    } else {
-        self.barStyle = UIStatusBarStyleDarkContent;
+    /// 刷新状态栏
+    [self setNeedsStatusBarAppearanceUpdate];
+    if (self.xy_NavHiddenForReal) {
+        [self.navigationController setNavigationBarHidden:YES animated:animated];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (self.xy_NavHiddenForReal) {
+        if ([self xy_pushOrPopIsHidden] == NO) {
+            [self.navigationController setNavigationBarHidden:NO animated:animated];
+        }
+    }
+}
+
+/// 监听push下一个或 pop 上一个，是否隐藏导航栏
+- (BOOL)xy_pushOrPopIsHidden {
+    NSArray * viewcontrollers = self.navigationController.viewControllers;
+    if (viewcontrollers.count > 0) {
+        XYBasicViewController * vc = viewcontrollers[viewcontrollers.count - 1];
+        return vc.xy_NavHiddenForReal;
+    }
+    return NO;
 }
 
 - (void)viewDidLoad {

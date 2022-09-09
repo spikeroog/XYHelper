@@ -14,11 +14,11 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 
 @interface XYBasicViewController : UIViewController
 
-/// 隐藏导航栏，默认NO
+/// 隐藏导航栏，默认NO，此为假隐藏，但是导航栏的高度还在
 @property (nonatomic, assign) BOOL navBarHidden;
 
-/// 状态栏颜色，true为白色，false为黑色
-@property (nonatomic, assign) BOOL isWhiteStatusBarStyle;
+/// 隐藏导航栏 默认NO，此为真隐藏，导航栏高度将消失，适用于pageView模块的"真"隐藏导航栏
+@property (nonatomic, assign) BOOL xy_NavHiddenForReal;
 
 /// 导航栏背景颜色
 @property (nonatomic, strong) UIColor *navBgColor;
@@ -47,7 +47,7 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 
 /// 隐藏状态栏
 @property(nonatomic,assign) BOOL statusBarHiden;
-/// 状态栏样式
+/// 状态栏样式 状态栏颜色，0为黑色，1为白色
 @property(nonatomic,assign) UIStatusBarStyle barStyle;
 
 /// 导航栏多个右侧按钮的点击回调

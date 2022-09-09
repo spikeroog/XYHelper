@@ -64,4 +64,14 @@ UIGestureRecognizerDelegate>
     return [super popViewControllerAnimated:animated];
 }
 
+// 当设置了 childViewControllerForStatusBarStyle 后，不会进入这里
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
+// 以 topViewController 的 preferredStatusBarStyle 来设置 statusBarStyle
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.topViewController;
+}
+
 @end
