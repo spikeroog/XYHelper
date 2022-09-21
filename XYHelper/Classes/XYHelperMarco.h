@@ -15,18 +15,25 @@
 
 // ----  异形屏
 #define kIsBangsScreen ({\
-BOOL isBangsScreen = NO; \
-if (@available(iOS 11.0, *)) { \
-UIWindow *window = [[UIApplication sharedApplication].windows firstObject]; \
-isBangsScreen = window.safeAreaInsets.bottom > 0; \
-} \
-isBangsScreen; \
+BOOL isBangsScreen = NO;\
+if (@available(iOS 11.0, *)) {\
+UIWindow *window = [[UIApplication sharedApplication].windows firstObject];\
+isBangsScreen = window.safeAreaInsets.bottom > 0;\
+}\
+isBangsScreen;\
+})
+
+// ----  电池栏高度
+#define kStatusBarHeight ({\
+CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;\
+if (@available(iOS 13.0, *)) {\
+statusBarHeight = [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height;\
+}\
+statusBarHeight;\
 })
 
 // ----  导航栏高度
 #define kNavBarHeight (kIsBangsScreen?88:64)
-// ----  电池栏高度
-#define kStatusBarHeight (kIsBangsScreen?44:20)
 // ----  标签栏高度
 #define kTabBarHeight (kIsBangsScreen?83:49)
 // ----  刘海屏底部栏的高度

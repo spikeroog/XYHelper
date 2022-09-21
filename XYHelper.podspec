@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
-  s.version          = '2.0.4'
+  s.version          = '2.0.5'
   s.summary          = 'The Objective-C utilities you always wish you had.'
 
 # This description is used to generate tags and improve search results.

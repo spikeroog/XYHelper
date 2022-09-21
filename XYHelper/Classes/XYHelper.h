@@ -87,6 +87,7 @@
 #import "UIButton+GradientBackgroundColor.h"
 
 #import "UIImage+ImageEffects.h"
+#import "UIImage+Nonprint.h"
 #import "UIControl+FixMultiClick.h"
 #import "NSObject+ModelToDict.h"
 #import "UIButton+EnlargeEdge.h"

@@ -18,5 +18,8 @@
 
 @property (assign, nonatomic) CGSize xy_size;
 @property (assign, nonatomic) CGPoint xy_origin;
+
+- (void)addGestureForView:(void(^)(void))callBack;
+
 @end
 

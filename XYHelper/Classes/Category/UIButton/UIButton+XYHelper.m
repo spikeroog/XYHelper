@@ -10,9 +10,9 @@
 
 @implementation UIButton (XYHelper)
 
-+ (void)addGestureForButton:(UIButton *)target
-                   callBack:(void(^)(void))callBack {
-    [[target rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+- (void)addGestureForButton:(void(^)(void))callBack {
+    self.userInteractionEnabled = true;
+    [[self rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         callBack();
     }];
 }

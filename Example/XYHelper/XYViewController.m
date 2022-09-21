@@ -17,9 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.title = @"首页";
     
+    self.barStyle = 1;
     
     self.view.backgroundColor = UIColor.blackColor;
     /// 导航栏背景颜色
@@ -36,6 +37,19 @@
     self.view.backgroundColor = kColorWithRandom;
     
     
+    NSLog(@"%f", kStatusBarHeight);
+    
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = UIColor.systemBlueColor;
+    [self.view addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+    @weakify(self);
+    [view addGestureForView:^{
+        
+    }];
 }
 
 - (void)leftActionInController {
@@ -56,10 +70,10 @@
 - (void)gotoImagePickVc {
     
     [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:true allowTakePhoto:true allowTakeVideo:true sortAscending:true allowPickingPhoto:true allowPickingVideo:true allowPickingOriginalPhoto:true showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:10 maxImageSize:10 maxVideoSize:20 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
-            
-        } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {
-            
-        } targetVC:self];
+        
+    } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {
+        
+    } targetVC:self];
 }
 
 @end

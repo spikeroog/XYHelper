@@ -19,7 +19,7 @@
         
     }];
     
-    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [[XYNavigationController alloc] initWithRootViewController:[XYViewController new]];
     [self.window makeKeyAndVisible];
     

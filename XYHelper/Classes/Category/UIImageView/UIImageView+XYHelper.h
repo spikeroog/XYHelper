@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImageView (XYHelper)
-+ (void)addGestureForImageView:(UIImageView *)target callBack:(void(^)(void))callBack;
+- (void)addGestureForImageView:(void(^)(void))callBack;
 
 @end
 

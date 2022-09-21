@@ -48,6 +48,7 @@
 #import "UIImageView+Extension.h"
 #import "UILabel+Extension.h"
 #import "UIImage+ImageEffects.h"
+#import "UIImage+Nonprint.h"
 #import "UIImage+XYHelper.h"
 #import "UIImageView+XYHelper.h"
 #import "UILabel+XYHelper.h"

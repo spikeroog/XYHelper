@@ -11,8 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIButton (XYHelper)
 
-+ (void)addGestureForButton:(UIButton *)target
-                   callBack:(void(^)(void))callBack;
+- (void)addGestureForButton:(void(^)(void))callBack;
 
 @end
 

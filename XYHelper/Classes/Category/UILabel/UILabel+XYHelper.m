@@ -8,8 +8,18 @@
 
 #import "UILabel+XYHelper.h"
 #import <CoreText/CoreText.h>
+#import <ReactiveObjC/ReactiveObjC.h>
 
 @implementation UILabel (XYHelper)
+
+- (void)addGestureForLabel:(void(^)(void))callBack {
+    self.userInteractionEnabled = true;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+    [[tap rac_gestureSignal] subscribeNext:^(id x) {
+        callBack();
+    }];
+    [self addGestureRecognizer:tap];
+}
 
 /**
  设置间距

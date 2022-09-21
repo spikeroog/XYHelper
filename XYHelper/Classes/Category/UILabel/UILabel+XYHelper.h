@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UILabel (XYHelper)
 
+- (void)addGestureForLabel:(void(^)(void))callBack;
+
+
 /**
  *  设置字间距
  */

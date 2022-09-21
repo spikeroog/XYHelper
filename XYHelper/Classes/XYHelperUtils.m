@@ -1630,7 +1630,12 @@
     if ([deviceString isEqualToString:@"iPhone14,2"]) return @"iPhone 13 Pro";
     if ([deviceString isEqualToString:@"iPhone14,3"]) return @"iPhone 13 Pro Max";
     if ([deviceString isEqualToString:@"iPhone14,6"]) return @"iPhone SE 3nd";
-
+    if ([deviceString isEqualToString:@"iPhone14,7"]) return @"iPhone 14";
+    if ([deviceString isEqualToString:@"iPhone14,8"]) return @"iPhone 14 Plus";
+    if ([deviceString isEqualToString:@"iPhone15,2"]) return @"iPhone 14 Pro";
+    if ([deviceString isEqualToString:@"iPhone15,3"]) return @"iPhone 14 Pro Max";
+    
+    
     //iPod Touch
     if ([deviceString isEqualToString:@"iPod1,1"])   return @"iPodTouch";
     if ([deviceString isEqualToString:@"iPod2,1"])   return @"iPodTouch2";

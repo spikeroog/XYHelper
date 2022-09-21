@@ -6,8 +6,10 @@
 //
 
 #import "UIView+XYHelper.h"
+#import <ReactiveObjC/ReactiveObjC.h>
 
 @implementation UIView (XYHelper)
+
 - (void)setXy_x:(CGFloat)xy_x {
     CGRect frame = self.frame;
     frame.origin.x = xy_x;
@@ -82,6 +84,15 @@
 
 - (void)setXy_centerY:(CGFloat)xy_centerY {
     self.center = CGPointMake(self.center.x, xy_centerY);
+}
+
+- (void)addGestureForView:(void(^)(void))callBack {
+    self.userInteractionEnabled = true;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+    [[tap rac_gestureSignal] subscribeNext:^(id x) {
+        callBack();
+    }];
+    [self addGestureRecognizer:tap];
 }
 
 @end

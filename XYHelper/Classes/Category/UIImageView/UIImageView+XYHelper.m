@@ -10,14 +10,13 @@
 
 @implementation UIImageView (XYHelper)
 
-+ (void)addGestureForImageView:(UIImageView *)target
-                      callBack:(void(^)(void))callBack {
-    target.userInteractionEnabled = true;
+- (void)addGestureForImageView:(void(^)(void))callBack {
+    self.userInteractionEnabled = true;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
     [[tap rac_gestureSignal] subscribeNext:^(id x) {
         callBack();
     }];
-    [target addGestureRecognizer:tap];
+    [self addGestureRecognizer:tap];
 }
 
 @end
