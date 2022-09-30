@@ -76,6 +76,7 @@
 #import "XYTimerManager.h"
 #import "XYUserBasicModel.h"
 #import "XYUserInfoManager.h"
+#import "DQAlertView.h"
 #import "PPNetworkCache.h"
 #import "PPNetworkHelper.h"
 #import "UIView+XYPop.h"

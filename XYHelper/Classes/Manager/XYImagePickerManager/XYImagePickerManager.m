@@ -594,6 +594,7 @@ UINavigationControllerDelegate> {
                 if (!error) {
                     TZAssetModel *assetModel = [[TZImageManager manager] createModelWithAsset:asset];
                     [[TZImageManager manager] getPhotoWithAsset:assetModel.asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+                        @strongify(self);
                         if (!isDegraded && photo) {
                             !self.videoCallBackBlock ? :                             self.videoCallBackBlock([videoUrl absoluteString], photo);
                             [self refreshCollectionViewWithAddedAsset:assetModel.asset image:photo];

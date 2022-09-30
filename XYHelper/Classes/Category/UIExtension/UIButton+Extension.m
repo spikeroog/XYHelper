@@ -34,7 +34,7 @@
     // 设置标题
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:kItemTitleColor forState:UIControlStateNormal];
-    [button setTitleColor:kItemTitleHighlightedColor forState:UIControlStateHighlighted];
+//    [button setTitleColor:kItemTitleHighlightedColor forState:UIControlStateHighlighted];
     button.titleLabel.font = [UIFont systemFontOfSize:kItemFontSize];
     
     [button sizeToFit];

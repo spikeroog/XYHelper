@@ -53,6 +53,14 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 /// 导航栏多个右侧按钮的点击回调
 @property (nonatomic, copy) XYNavigationRightBarItemsHandle rightItemsHandle;
 
+/// 设置导航栏背景透明
+- (void)navBarAlphaZero;
+/// 设置导航栏背景透明度,0-1
+- (void)navBarAlphaWithValue:(CGFloat)value;
+
+/// 设置导航栏背景毛玻璃效果，建议传入0.75-0.8左右的值
+- (void)navVisualEffectWithValue:(CGFloat)value
+                   originalColor:(UIColor *)originalColor;
 
 /// 左侧按钮隐藏
 - (void)leftBarItemHidden;

@@ -101,8 +101,6 @@ navBgImageStr = _navBgImageStr;
     self.view.backgroundColor = kWhiteStyleViewControllerBgColor;
     /// 隐藏导航栏下的黑线
     self.hbd_barShadowHidden = true;
-    /// 取消导航栏半透明
-    self.navigationController.navigationBar.translucent = false;
     /// 修改导航栏背景颜色
     self.hbd_barTintColor = self.navBgColor;
     /// 修改导航栏标题样式
@@ -117,6 +115,31 @@ navBgImageStr = _navBgImageStr;
     _navBarHidden = navBarHidden;
     [self hiddenNavigationBar:navBarHidden];
 }
+
+#pragma mark - 设置导航栏背景透明
+/// 设置导航栏背景透明
+- (void)navBarAlphaZero {
+    self.hbd_barAlpha = 0;
+    self.hbd_extendedLayoutDidSet = false;
+    [self hbd_setNeedsUpdateNavigationBar];
+}
+
+/// 设置导航栏背景透明度,0-1
+- (void)navBarAlphaWithValue:(CGFloat)value {
+    self.hbd_barAlpha = value;
+    self.hbd_extendedLayoutDidSet = false;
+    [self hbd_setNeedsUpdateNavigationBar];
+}
+
+#pragma mark - 设置导航栏毛玻璃效果
+/// 设置导航栏背景毛玻璃效果
+- (void)navVisualEffectWithValue:(CGFloat)value
+                   originalColor:(UIColor *)originalColor {
+    self.hbd_barTintColor = kColorWithOpacity(originalColor, value);
+    self.hbd_extendedLayoutDidSet = false;
+    [self hbd_setNeedsUpdateNavigationBar];
+}
+
 
 #pragma mark - 状态栏相关
 
@@ -176,7 +199,11 @@ navBgImageStr = _navBgImageStr;
 - (void)setNavTitleColor:(UIColor *)navTitleColor {
     UIColor *col = !navTitleColor ? UIColor.whiteColor:navTitleColor;
     _navTitleColor = col;
-    self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [_navTitleColor colorWithAlphaComponent:1],NSFontAttributeName:kFontWithAutoSize(17)};;
+    self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [_navTitleColor colorWithAlphaComponent:1],NSFontAttributeName:kFontWithAutoSize(17)};
+    
+    self.hbd_tintColor = navTitleColor;
+    self.navigationItem.leftBarButtonItem.tintColor = navTitleColor;
+    self.navigationItem.rightBarButtonItem.tintColor = navTitleColor;
 }
 
 - (UIColor *)navTitleColor {
@@ -330,8 +357,8 @@ navBgImageStr = _navBgImageStr;
     if (!_rightBarItem) {
         _rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:@selector(rightActionInController)];
         [_rightBarItem setTintColor:self.hbd_tintColor];
-        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
-        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateHighlighted];
+        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
+        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
         self.navigationItem.rightBarButtonItem = _rightBarItem;
     }
     return _rightBarItem;
@@ -349,8 +376,8 @@ navBgImageStr = _navBgImageStr;
     
     UIBarButtonItem *rightBarBtnItem = [[UIBarButtonItem alloc] initWithTitle:rightBarItemTitle style:UIBarButtonItemStyleDone target:self action:@selector(rightActionInController)];
     [rightBarBtnItem setTintColor:self.hbd_tintColor];
-    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
-    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,self.hbd_tintColor,NSForegroundColorAttributeName,nil] forState:UIControlStateHighlighted];
+    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
     self.navigationItem.rightBarButtonItem = rightBarBtnItem;
 }
 

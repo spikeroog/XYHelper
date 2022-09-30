@@ -443,6 +443,8 @@
                    drawBottomLeft:(BOOL)drawBottomLeft
                   drawBottomRight:(BOOL)drawBottomRight
                      cornerRadius:(CGFloat)cornerRadius {
+    [targetView layoutIfNeeded];
+    
     CGSize cornerRadii = CGSizeMake(cornerRadius, cornerRadius);
     UIRectCorner topLeftcorner = MAX_INPUT;
     UIRectCorner topRightcorner = MAX_INPUT;
@@ -1791,8 +1793,14 @@
 
 #pragma mark - 为iPhone添加震动效果
 + (void)addFeedbackGenerator {
-    UIImpactFeedbackGenerator *impactLight = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
-    [impactLight impactOccurred];
+    if (@available(iOS 13.0, *)) {
+        UIImpactFeedbackGenerator *impactLight = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleSoft];
+        [impactLight impactOccurred];
+    } else {
+        // Fallback on earlier versions
+        UIImpactFeedbackGenerator *impactLight = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
+        [impactLight impactOccurred];
+    }
 }
 
 #pragma mark - 跳转设置开启权限
