@@ -38,7 +38,10 @@
 navBgColor = _navBgColor,
 navTitleColor = _navTitleColor,
 navTitle = _navTitle,
-navBgImageStr = _navBgImageStr;
+navBgImageStr = _navBgImageStr,
+navItemTitleFont = _navItemTitleFont,
+barItemTextFont = _barItemTextFont;
+
 
 #pragma mark - Controller lifecycle
 
@@ -87,12 +90,16 @@ navBgImageStr = _navBgImageStr;
     NSInteger count = [XYHelperRouter currentNavC].childViewControllers.count;
     if (count > 1) {
         /// 设置默认左侧按钮图片
-///        self.leftBarItemImage = kImageWithName(@"");
+//        self.leftBarItemImage = kImageWithName(@"");
         self.leftBarItemTitle = @"返回";
         self.hbd_swipeBackEnabled = true;
     } else {
         self.hbd_swipeBackEnabled = false;
     }
+    
+    /// 导航栏字体
+    self.navItemTitleFont = kFontWithRealsize(16);
+    self.barItemTextFont = kFontWithRealsize(14);
     
     self.navBgColor = UIColor.whiteColor;
     self.navTitleColor = UIColor.blackColor;
@@ -107,8 +114,10 @@ navBgImageStr = _navBgImageStr;
     self.hbd_barStyle = UIBarStyleDefault;
     /// 修改导航栏按钮颜色
     self.hbd_tintColor = UIColor.blackColor;
+
+
     /// 设置导航栏字体颜色
-    self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [self.navTitleColor colorWithAlphaComponent:1],NSFontAttributeName:kFontWithAutoSize(17)};
+    self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [self.navTitleColor colorWithAlphaComponent:1],NSFontAttributeName:self.navItemTitleFont};
 }
 
 - (void)setNavBarHidden:(BOOL)navBarHidden {
@@ -145,13 +154,13 @@ navBgImageStr = _navBgImageStr;
 
 /// 状态栏的样式
 - (UIStatusBarStyle)preferredStatusBarStyle {
-     return self.barStyle;
+    return self.barStyle;
 }
 
 /// 状态栏隐藏
 - (BOOL)prefersStatusBarHidden {
-     return self.statusBarHiden;
- }
+    return self.statusBarHiden;
+}
 
 #pragma mark - 导航栏左右侧按钮点击事件，子类重写的话就不会再调用了
 /**
@@ -199,7 +208,7 @@ navBgImageStr = _navBgImageStr;
 - (void)setNavTitleColor:(UIColor *)navTitleColor {
     UIColor *col = !navTitleColor ? UIColor.whiteColor:navTitleColor;
     _navTitleColor = col;
-    self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [_navTitleColor colorWithAlphaComponent:1],NSFontAttributeName:kFontWithAutoSize(17)};
+    self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [_navTitleColor colorWithAlphaComponent:1],NSFontAttributeName:_navItemTitleFont};
     
     self.hbd_tintColor = navTitleColor;
     self.navigationItem.leftBarButtonItem.tintColor = navTitleColor;
@@ -231,6 +240,44 @@ navBgImageStr = _navBgImageStr;
     return _navTitle;
 }
 
+#pragma mark - 导航栏字体
+- (void)setNavItemTitleFont:(UIFont *)navItemTitleFont {
+    _navItemTitleFont = navItemTitleFont;
+    
+    self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [self.hbd_tintColor colorWithAlphaComponent:1],NSFontAttributeName:_navItemTitleFont};
+}
+
+- (UIFont *)navItemTitleFont {
+    return _navItemTitleFont;
+}
+
+- (void)setBarItemTextFont:(UIFont *)barItemTextFont {
+    _barItemTextFont = barItemTextFont;
+    
+    /// 左侧按钮
+    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+    
+    /// 右侧按钮
+    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+    
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+    
+    /// 右侧多个按钮
+    NSMutableArray <UIBarButtonItem *>*rightAryMuts = self.navigationItem.rightBarButtonItems;
+    [rightAryMuts enumerateObjectsUsingBlock:^(UIBarButtonItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateNormal];
+        [obj setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+    }];
+    
+}
+
+- (UIFont *)barItemTextFont {
+    return _barItemTextFont;
+}
+
 #pragma mark - 导航栏标题处图片
 /**
  设置标题处图片
@@ -253,8 +300,8 @@ navBgImageStr = _navBgImageStr;
     if (!_leftBarItem) {
         _leftBarItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:@selector(leftActionInController)];
         [_leftBarItem setTintColor:self.hbd_tintColor];
-        [_leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
-        [_leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+        [_leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateNormal];
+        [_leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateHighlighted];
         self.navigationItem.leftBarButtonItem = _leftBarItem;
     }
     return _leftBarItem;
@@ -272,8 +319,8 @@ navBgImageStr = _navBgImageStr;
     
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithTitle:leftBarItemTitle style:UIBarButtonItemStyleDone target:self action:@selector(leftActionInController)];
     [leftBarItem setTintColor:self.hbd_tintColor];
-    [leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
-    [leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+    [leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [leftBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateHighlighted];
     self.navigationItem.leftBarButtonItem = leftBarItem;
 }
 
@@ -296,7 +343,7 @@ navBgImageStr = _navBgImageStr;
     ///    [leftBtn setBackgroundImage:leftBarItemDistanceImage forState:UIControlStateNormal];
     ///
     ///    CGRect frame = leftBtn.frame;
-    ///    frame.size.width += kAutoCs(10);
+    ///    frame.size.width += kRl(10);
     ///
     ///    UIView *leftCV = [[UIView alloc] initWithFrame:frame];
     ///    [leftCV addSubview:leftBtn];
@@ -357,8 +404,8 @@ navBgImageStr = _navBgImageStr;
     if (!_rightBarItem) {
         _rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:@selector(rightActionInController)];
         [_rightBarItem setTintColor:self.hbd_tintColor];
-        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
-        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateNormal];
+        [_rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateHighlighted];
         self.navigationItem.rightBarButtonItem = _rightBarItem;
     }
     return _rightBarItem;
@@ -376,8 +423,8 @@ navBgImageStr = _navBgImageStr;
     
     UIBarButtonItem *rightBarBtnItem = [[UIBarButtonItem alloc] initWithTitle:rightBarItemTitle style:UIBarButtonItemStyleDone target:self action:@selector(rightActionInController)];
     [rightBarBtnItem setTintColor:self.hbd_tintColor];
-    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
-    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [rightBarBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateHighlighted];
     self.navigationItem.rightBarButtonItem = rightBarBtnItem;
 }
 
@@ -431,7 +478,7 @@ navBgImageStr = _navBgImageStr;
             
             if (@available(iOS 11.0, *)) { /// 适配ios11及以上
                 rigBtn.isRight = YES;
-                rigBtn.offset = kAutoCs(8);
+                rigBtn.offset = kRl(8);
                 rigBtn.translatesAutoresizingMaskIntoConstraints = NO;
                 
                 UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
@@ -440,7 +487,7 @@ navBgImageStr = _navBgImageStr;
                 
             } else { /// 适配ios10及以下
                 UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-                spacer.width = -kAutoCs(8);
+                spacer.width = -kRl(8);
                 [muarr addObject:spacer];
             }
             
@@ -468,8 +515,8 @@ navBgImageStr = _navBgImageStr;
             
             rigItem = [[UIBarButtonItem alloc] initWithTitle:titleArr[i] style:UIBarButtonItemStyleDone target:self action:@selector(rigBtnsAct:)];
             [rigItem setTintColor:self.hbd_tintColor];
-            [rigItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateNormal];
-            [rigItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFontWithAutoSize(14),NSFontAttributeName,nil] forState:UIControlStateHighlighted];
+            [rigItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateNormal];
+            [rigItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_barItemTextFont,NSFontAttributeName,nil] forState:UIControlStateHighlighted];
             rigItem.tag = i+100;
             
         } else if ([imageArr objectAtIndex:i] != nil && [titleArr objectAtIndex:i] == nil) { /// 只有图片，使用系统image样式

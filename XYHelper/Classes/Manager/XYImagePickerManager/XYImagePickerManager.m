@@ -78,20 +78,12 @@ UINavigationControllerDelegate> {
         // set appearance / 改变相册选择页的导航栏外观
         _imagePickerVc.navigationBar.translucent = NO;
         _imagePickerVc.navigationBar.barTintColor = [XYHelperRouter navBgColor];
-        _imagePickerVc.navigationBar.tintColor = [UIColor whiteColor];
+        _imagePickerVc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [[XYHelperRouter navTitleColor] colorWithAlphaComponent:1],NSFontAttributeName:[XYHelperRouter navTitleFont]};
+        _imagePickerVc.navigationBar.tintColor = [XYHelperRouter navTitleColor];
+
         _imagePickerVc.allowsEditing = NO; // 不允许裁剪
         _imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
-        
-        UIBarButtonItem *tzBarItem, *BarItem;
-        if (@available(iOS 9, *)) {
-            tzBarItem = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[TZImagePickerController class]]];
-            BarItem = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UIImagePickerController class]]];
-        } else {
-            tzBarItem = [UIBarButtonItem appearanceWhenContainedIn:[TZImagePickerController class], nil];
-            BarItem = [UIBarButtonItem appearanceWhenContainedIn:[UIImagePickerController class], nil];
-        }
-        NSDictionary *titleTextAttributes = [tzBarItem titleTextAttributesForState:UIControlStateNormal];
-        [BarItem setTitleTextAttributes:titleTextAttributes forState:UIControlStateNormal];
+    
     }
     return _imagePickerVc;
 }
@@ -164,9 +156,19 @@ UINavigationControllerDelegate> {
     self.tz_ImagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
     
     self.tz_ImagePickerVc.navigationBar.translucent = NO;
-    self.tz_ImagePickerVc.navigationBar.barTintColor = [XYHelperRouter navBgColor];
-    self.tz_ImagePickerVc.navigationBar.tintColor = [UIColor whiteColor];
-    
+    self.tz_ImagePickerVc.naviBgColor = [XYHelperRouter navBgColor];
+    self.tz_ImagePickerVc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [[XYHelperRouter navTitleColor] colorWithAlphaComponent:1],NSFontAttributeName:[XYHelperRouter navTitleFont]};
+    self.tz_ImagePickerVc.barItemTextColor = [XYHelperRouter navTitleColor];
+    self.tz_ImagePickerVc.barItemTextFont = [XYHelperRouter navBarItemFont];
+    self.tz_ImagePickerVc.navigationBar.tintColor = [XYHelperRouter navTitleColor];
+
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *barAppearance = [[UINavigationBarAppearance alloc] init];
+        barAppearance.backgroundColor = self.tz_ImagePickerVc.navigationBar.barTintColor;
+        barAppearance.titleTextAttributes = self.tz_ImagePickerVc.navigationBar.titleTextAttributes;
+        self.tz_ImagePickerVc.navigationBar.standardAppearance = barAppearance;
+        self.tz_ImagePickerVc.navigationBar.scrollEdgeAppearance = barAppearance;
+    }
     
     if (showSheet) {
         NSString *takePhotoTitle = @"拍照";
@@ -200,8 +202,8 @@ UINavigationControllerDelegate> {
 - (void)pushTZImagePickerController:(TZImagePickerController *)imagePickerVc {
     
 #pragma mark - 设置导航栏默认字体大小
-    imagePickerVc.naviTitleFont = kFontWithAutoSize(17);
-    imagePickerVc.barItemTextFont = kFontWithAutoSize(15);
+    imagePickerVc.naviTitleFont = [XYHelperRouter navTitleFont];
+    imagePickerVc.barItemTextFont = [XYHelperRouter navBarItemFont];
 #pragma mark - 五类个性化设置，这些参数都可以不传，此时会走默认设置
     imagePickerVc.isSelectOriginalPhoto = self.isSelectOriginalPhoto;
     
@@ -217,8 +219,19 @@ UINavigationControllerDelegate> {
     
     // 自定义imagePickerVc导航栏背景颜色 标题颜色等
     imagePickerVc.navigationBar.translucent = NO;
-    imagePickerVc.navigationBar.barTintColor = [XYHelperRouter navBgColor];
-    imagePickerVc.navigationBar.tintColor = [UIColor whiteColor];
+    imagePickerVc.naviBgColor = [XYHelperRouter navBgColor];
+    imagePickerVc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [[XYHelperRouter navTitleColor] colorWithAlphaComponent:1],NSFontAttributeName:[XYHelperRouter navTitleFont]};
+    imagePickerVc.barItemTextColor = [XYHelperRouter navTitleColor];
+    imagePickerVc.navigationBar.tintColor = [XYHelperRouter navTitleColor];
+
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *barAppearance = [[UINavigationBarAppearance alloc] init];
+        barAppearance.backgroundColor = imagePickerVc.navigationBar.barTintColor;
+        barAppearance.titleTextAttributes = imagePickerVc.navigationBar.titleTextAttributes;
+        imagePickerVc.navigationBar.standardAppearance = barAppearance;
+        imagePickerVc.navigationBar.scrollEdgeAppearance = barAppearance;
+    }
+    
     
     imagePickerVc.iconThemeColor = [UIColor colorWithRed:31 / 255.0 green:185 / 255.0 blue:34 / 255.0 alpha:1.0];
     imagePickerVc.showPhotoCannotSelectLayer = YES;
@@ -245,7 +258,7 @@ UINavigationControllerDelegate> {
      cropView.layer.borderWidth = 2.0;
      }];*/
     
-    imagePickerVc.statusBarStyle = UIStatusBarStyleLightContent;
+    imagePickerVc.statusBarStyle = [XYHelperRouter statusBarStyle];
     
     // 自定义gif播放方案
     [[TZImagePickerConfig sharedInstance] setGifImagePlayBlock:^(TZPhotoPreviewView *view, UIImageView *imageView, NSData *gifData, NSDictionary *info) {
@@ -632,3 +645,4 @@ UINavigationControllerDelegate> {
 #pragma clang diagnostic pop
 
 @end
+

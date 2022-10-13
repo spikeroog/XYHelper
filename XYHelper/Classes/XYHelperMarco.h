@@ -105,11 +105,6 @@ navBarHeight;\
 #define kScreenRect [UIScreen mainScreen].bounds
 #endif
 
-// ----  屏幕分辨率
-#ifndef kScreenResolutio
-#define kScreenResolutio (SCREEN_WIDTH * SCREEN_HEIGHT * [UIScreen mainScreen].scale)
-#endif
-
 // ----  宽
 #ifndef kScreenWidth
 #define kScreenWidth [[UIScreen mainScreen] bounds].size.width
@@ -118,6 +113,11 @@ navBarHeight;\
 // ----  高
 #ifndef kScreenHeight
 #define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+#endif
+
+// ----  屏幕分辨率
+#ifndef kScreenResolutio
+#define kScreenResolutio (kScreenWidth * kScreenHeight * [UIScreen mainScreen].scale)
 #endif
 
 // ----  Application
@@ -139,7 +139,7 @@ navBarHeight;\
 #define kAppName [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]
 
 // ----  项目包名
-#define kAppBundleId ([[NSBundle mainBundle] bundleIdentifier] ?: @"")
+#define kAppBundleId ([[NSBundle mainBundle] bundleIdentifier] ? : @"")
 
 // ----  手机 iOS系统 版本号
 #ifndef kSystemVersion

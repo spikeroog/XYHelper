@@ -14,7 +14,7 @@
 
 - (void)setWidthScreen:(BOOL)widthScreen {
     if (widthScreen) {
-        self.constant = kAutoCs(self.constant);
+        self.constant = kRl(self.constant);
     } else {
         self.constant = self.constant;
     }

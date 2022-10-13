@@ -14,17 +14,17 @@
 // 正常的字体
 #define kFontWithSize(size) ([UIFont systemFontOfSize:size])
 // 屏幕适配的字体
-#define kFontWithAutoSize(size) ([UIFont systemFontOfSize:tRealFontSize(size)])
+#define kFontWithRealsize(size) ([UIFont systemFontOfSize:tRealFontSize(size)])
 // 加粗字体
-#define kFontBoldWithSize(size) ([UIFont boldSystemFontOfSize:size])
+#define kFontWithSizeBold(size) ([UIFont boldSystemFontOfSize:size])
 // 加粗屏幕适配的字体
-#define kFontBoldWithAutoSize(size) ([UIFont boldSystemFontOfSize:tRealFontSize(size)])
+#define kFontWithRealsizeBold(size) ([UIFont boldSystemFontOfSize:tRealFontSize(size)])
 // 斜体
-#define kItalicFontWithSize(size) ([UIFont italicSystemFontOfSize:size])
+#define kFontWithSizeItalic(size) ([UIFont italicSystemFontOfSize:size])
 
 /** ---- 屏幕适配 ----
  */
-#define kAutoCs(number) tRealLength(number)
+#define kRl(number) tRealLength(number)
 
 /** 适配手机类型 */
 typedef NS_ENUM(NSInteger,XYScreenAdapterPhoneType) {

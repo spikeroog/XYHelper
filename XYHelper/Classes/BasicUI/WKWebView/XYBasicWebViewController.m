@@ -162,7 +162,7 @@ typedef NS_ENUM(NSInteger, WkWebViewShowType) {
 
 - (UIProgressView *)progressView {
     if (!_progressView){
-        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kNavBarHeight-kAutoCs(2), self.view.bounds.size.width, kAutoCs(2))];
+        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kNavBarHeight-kRl(2), self.view.bounds.size.width, kRl(2))];
         _progressView.progressViewStyle = UIProgressViewStyleBar;
         _progressView.progressTintColor = kBlackStyleNavBgColor;
         //        _progressView.tintColor = [UIColor blueColor];

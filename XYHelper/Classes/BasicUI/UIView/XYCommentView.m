@@ -30,7 +30,7 @@
         _textView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     } else {
         _textNumLabel.hidden = NO;
-        _textView.contentInset = UIEdgeInsetsMake(0, 0, kAutoCs(30), 0);
+        _textView.contentInset = UIEdgeInsetsMake(0, 0, kRl(30), 0);
     }
 }
 
@@ -44,29 +44,37 @@
 
 /// warning:此方法名不能和子类一样，不然父类子类重名，会先走子类setupui方法再走父类
 - (void)setCommentViewUpUI {
+    
+    self.layer.cornerRadius = kRl(2);
+    self.layer.masksToBounds = true;
+    
     _textView = [[UITextView alloc] init];
     _textView.placeholder = @"请输入内容";
     _textView.placeholderColor = [UIColor textfieldPlaceholderColor];
-    _textView.backgroundColor = [UIColor whiteColor];
+    _textView.backgroundColor = kColorWithNull;
     _textView.textColor = kColor333333;
-    _textView.font = kFontWithAutoSize(16);
-    _textView.contentInset = UIEdgeInsetsMake(0, 0, kAutoCs(30), 0);
+    _textView.font = kFontWithRealsize(15);
+    _textView.contentInset = UIEdgeInsetsMake(0, 0, kRl(30), 0);
     _textView.delegate = self;
     [self addSubview:_textView];
     [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self).offset(-kAutoCs(10));
+        make.top.equalTo(self).offset(kRl(7));
+        make.left.equalTo(self).offset(kRl(7));
+        make.right.equalTo(self).offset(-kRl(7));
+        make.bottom.equalTo(self).offset(-kRl(7));
+
     }];
     
     _textNumLabel = [[UILabel alloc] init];
     _textNumLabel.text = [NSString stringWithFormat:@"0/%ld", _inputNumber];
-    _textNumLabel.font = kFontWithAutoSize(16);
+    _textNumLabel.font = kFontWithRealsize(15);
     _textNumLabel.textColor = kColor666666;
     _textNumLabel.textAlignment = NSTextAlignmentRight;
     [self addSubview:_textNumLabel];
     
     [_textNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(_textView.mas_bottom).offset(-kAutoCs(10));
-        make.right.equalTo(_textView.mas_right).offset(-kAutoCs(10));
+        make.bottom.equalTo(_textView.mas_bottom).offset(-kRl(10));
+        make.right.equalTo(_textView.mas_right).offset(-kRl(10));
     }];
 }
 

@@ -20,33 +20,22 @@
 
     self.title = @"首页";
     
+
     self.barStyle = 1;
     
     self.view.backgroundColor = UIColor.blackColor;
     /// 导航栏背景颜色
     self.navBgImageStr = @"launcher_image_2020_0709";
-    
+//    self.navBgColor = UIColor.systemYellowColor;
     /// 导航栏标题颜色
     self.navTitleColor = UIColor.redColor;
     
     self.leftBarItemTitle = @"嵌套使用";
     self.rightBarItemTitle = @"底部锚点";
-   
+    self.barItemTextFont = kFontWithRealsize(20);
+    self.navItemTitleFont = kFontWithRealsize(20);
+    
     self.view.backgroundColor = kColorWithRandom;
-    
-    CGFloat a;
-    if (kIsBangsScreen) {
-        if (@available(iOS 14.0, *)) {
-            a= kStatusBarHeight+44;
-        } else {
-            a= 88;
-        }
-    } else {
-        a= 64;
-    }
-    
-    NSLog(@"%f", kStatusBarHeight);
-    NSLog(@"%f", a);
 
     
     UIView *view = [[UIView alloc] init];
@@ -68,14 +57,7 @@
 }
 
 - (void)rightActionInController {
-
-}
-
-- (id)getVc {
-    XYViewController * vc = [XYViewController new];
-    vc.view.backgroundColor = kColorWithRandom;
-    return vc;
-    
+    [self gotoImagePickVc];
 }
 
 - (void)gotoImagePickVc {

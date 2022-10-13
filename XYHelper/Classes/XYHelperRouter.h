@@ -14,6 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 导航栏颜色获取
 + (UIColor *)navBgColor;
+#pragma mark - 导航栏字体颜色获取
++ (UIColor *)navTitleColor;
+#pragma mark - 导航栏标题字体
++ (UIFont *)navTitleFont;
+#pragma mark - 导航栏按钮字体
++ (UIFont *)navBarItemFont;
+#pragma mark - 状态栏颜色获取, 0为黑色，1为白色
++ (NSInteger)statusBarStyle;
 
 /** 获取当前显示的导航栏 */
 + (UINavigationController *)currentNavC;

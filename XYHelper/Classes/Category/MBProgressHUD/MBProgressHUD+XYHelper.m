@@ -12,8 +12,8 @@
 #import "XYScreenAdapter.h"
 #import "PPNetworkHelper.h"
 
-#define HUD_DELAY 1.25f
-#define HUD_FONT 14.0f
+#define HUD_DELAY 1.4
+#define HUD_FONT 14
 
 #define HUD_IN_TOP CGPointMake(0.f, +MBProgressMaxOffset)
 #define HUD_IN_CENTER CGPointMake(0.f, 0.f)
@@ -66,16 +66,16 @@
         hud.userInteractionEnabled = YES;
     }
     
-    hud.bezelView.layer.cornerRadius = kAutoCs(15);
+    hud.bezelView.layer.cornerRadius = kRl(15);
     hud.bezelView.layer.masksToBounds = YES;
     
     // 设置菊花颜色  只能设置菊花的颜色
     //    hud.activityIndicatorColor = kColorWithRGB16Radix(0xffffff);
     
-    hud.label.font = kFontWithAutoSize(HUD_FONT);
+    hud.label.font = kFontWithRealsize(HUD_FONT);
     hud.label.textColor = kColorWithRGB16Radix(0xffffff);
     hud.label.numberOfLines = 0;
-    hud.detailsLabel.font = kFontWithAutoSize(HUD_FONT);
+    hud.detailsLabel.font = kFontWithRealsize(HUD_FONT);
     hud.detailsLabel.textColor = kColorWithRGB16Radix(0xffffff);
     hud.detailsLabel.numberOfLines = 0;
     
@@ -150,7 +150,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         MBProgressHUD *hud = [self reuseHudWithCouldTouch:canTouch isKeyWindow:YES];
         hud.offset = HUD_IN_CENTER;
-        hud.bezelView.layer.cornerRadius = kAutoCs(3);
+        hud.bezelView.layer.cornerRadius = kRl(3);
         hud.mode = MBProgressHUDModeIndeterminate;
         if (loadText.length > 0) {
             hud.label.text = loadText;
@@ -168,7 +168,7 @@
         MBProgressHUD *hud = [self reuseHudWithCouldTouch:canTouch isKeyWindow:YES];
         hud.label.text = text;
         hud.mode = MBProgressHUDModeCustomView;
-        hud.bezelView.layer.cornerRadius = kAutoCs(3);
+        hud.bezelView.layer.cornerRadius = kRl(3);
         hud.customView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:hintImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         [hud hideAnimated:YES afterDelay:HUD_DELAY];
     });

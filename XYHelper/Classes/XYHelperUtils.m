@@ -1285,6 +1285,7 @@
     if (leftViewImageStr.length > 0) {
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, textfield.height)];
         UIImageView *leftImgV = [[UIImageView alloc] initWithImage:kImageWithName(leftViewImageStr)];
+        leftImgV.contentMode = UIViewContentModeScaleAspectFit;
         leftImgV.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
         leftImgV.centerY = textfield.height/2;
         [leftView addSubview:leftImgV];
@@ -1303,6 +1304,7 @@
         UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, textfield.height)];
         
         UIImageView *rightImgV = [[UIImageView alloc] initWithImage:kImageWithName(rightViewImageStr)];
+        rightImgV.contentMode = UIViewContentModeScaleAspectFit;
         rightImgV.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
         rightImgV.centerY = textfield.height/2;
         [rightView addSubview:rightImgV];
@@ -1341,7 +1343,7 @@
         make.edges.equalTo(fatherLabel);
     }];
     [underLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(fatherLabel.mas_top).offset(kAutoCs(4));
+        make.top.equalTo(fatherLabel.mas_top).offset(kRl(4));
     }];
 }
 
@@ -1378,7 +1380,7 @@
     
     if (isShowCheck) {
         [button setImage:checkNormalImage forState:UIControlStateNormal];
-        [button setImageEdgeInsets:UIEdgeInsetsMake(0, kAutoCs(22), 0, 0)];
+        [button setImageEdgeInsets:UIEdgeInsetsMake(0, kRl(22), 0, 0)];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         showText = [NSString stringWithFormat:@"      %@",fullstring];
         normalSelectTitle = [NSString stringWithFormat:@"      %@", normalSelectTitle];

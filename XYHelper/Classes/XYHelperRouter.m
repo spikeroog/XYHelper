@@ -14,12 +14,33 @@
 #import "XYHelperMarco.h"
 #import "XYScreenAdapter.h"
 #import "UINavigationController+XYHelper.h"
+#import "XYBasicViewController.h"
 
 @implementation XYHelperRouter
 
 #pragma mark - 导航栏颜色获取
 + (UIColor *)navBgColor {
     return [XYHelperRouter currentVC].hbd_barTintColor;
+}
+
+#pragma mark - 导航栏字体颜色获取
++ (UIColor *)navTitleColor {
+    return ((XYBasicViewController *)[XYHelperRouter currentVC]).navTitleColor;
+}
+
+#pragma mark - 导航栏标题字体
++ (UIFont *)navTitleFont {
+    return ((XYBasicViewController *)[XYHelperRouter currentVC]).navItemTitleFont;
+}
+
+#pragma mark - 导航栏按钮字体
++ (UIFont *)navBarItemFont {
+    return ((XYBasicViewController *)[XYHelperRouter currentVC]).barItemTextFont;
+}
+
+#pragma mark - 状态栏颜色获取, 0为黑色，1为白色
++ (NSInteger)statusBarStyle {
+    return ((XYBasicViewController *)[XYHelperRouter currentVC]).barStyle;
 }
 
 #pragma mark - 获取当前Window试图

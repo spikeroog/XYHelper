@@ -14,7 +14,7 @@
 /// 标题高亮颜色
 #define kItemTitleHighlightedColor ([UIColor orangeColor])
 /// 标题字体大小
-#define kItemFontSize   kAutoCs(16)
+#define kItemFontSize   kRl(16)
 
 
 @implementation UIButton (Extension)
@@ -34,7 +34,7 @@
     // 设置标题
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:kItemTitleColor forState:UIControlStateNormal];
-//    [button setTitleColor:kItemTitleHighlightedColor forState:UIControlStateHighlighted];
+    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     button.titleLabel.font = [UIFont systemFontOfSize:kItemFontSize];
     
     [button sizeToFit];

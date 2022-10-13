@@ -14,12 +14,14 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 
 @interface XYBasicViewController : UIViewController
 
+#pragma mark - 隐藏导航栏
 /// 隐藏导航栏，默认NO，此为假隐藏，但是导航栏的高度还在
 @property (nonatomic, assign) BOOL navBarHidden;
 
 /// 隐藏导航栏 默认NO，此为真隐藏，导航栏高度将消失，适用于pageView模块的"真"隐藏导航栏
 @property (nonatomic, assign) BOOL xy_NavHiddenForReal;
 
+#pragma mark - 导航栏字体颜色，字体大小
 /// 导航栏背景颜色
 @property (nonatomic, strong) UIColor *navBgColor;
 /// 导航栏背景图片
@@ -45,14 +47,23 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 /// 右侧按钮图片
 @property (nonatomic, strong) UIImage *rightBarItemImage;
 
+/// 导航栏标题字体
+@property (nonatomic, strong) UIFont *navItemTitleFont;
+/// 导航栏按钮字体
+@property (nonatomic, strong) UIFont *barItemTextFont;
+
+
+#pragma mark - 状态栏相关
 /// 隐藏状态栏
 @property(nonatomic,assign) BOOL statusBarHiden;
 /// 状态栏样式 状态栏颜色，0为黑色，1为白色
 @property(nonatomic,assign) UIStatusBarStyle barStyle;
 
+#pragma mark - 导航栏右侧多个按钮样式
 /// 导航栏多个右侧按钮的点击回调
 @property (nonatomic, copy) XYNavigationRightBarItemsHandle rightItemsHandle;
 
+#pragma mark - 导航栏背景透明、背景毛玻璃
 /// 设置导航栏背景透明
 - (void)navBarAlphaZero;
 /// 设置导航栏背景透明度,0-1
@@ -62,6 +73,7 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 - (void)navVisualEffectWithValue:(CGFloat)value
                    originalColor:(UIColor *)originalColor;
 
+#pragma mark - 导航栏左侧按钮、右侧按钮的显示与隐藏、圆角、点击回调
 /// 左侧按钮隐藏
 - (void)leftBarItemHidden;
 /// 单个右侧按钮隐藏
@@ -81,7 +93,6 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 /// 点击导航栏多个右侧按钮的回调
 /// @param complete 回调
 - (void)clickRigBarItemsHandle:(void(^)(NSInteger index))complete;
-
 
 /// 导航栏左侧按钮点击
 - (void)leftActionInController;
