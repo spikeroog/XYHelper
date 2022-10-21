@@ -191,6 +191,8 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
         _bgBtn.adjustsImageWhenHighlighted = NO;
         // 使图片充满整个ImageView
         _bgBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _bgBtn.imageView.clipsToBounds = true;
+
         // 保持原图长宽比
         _bgBtn.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [_bgBtn addTarget:self action:@selector(bgBtnAct) forControlEvents:UIControlEventTouchUpInside];

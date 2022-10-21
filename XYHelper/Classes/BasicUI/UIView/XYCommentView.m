@@ -62,7 +62,6 @@
         make.left.equalTo(self).offset(kRl(7));
         make.right.equalTo(self).offset(-kRl(7));
         make.bottom.equalTo(self).offset(-kRl(7));
-
     }];
     
     _textNumLabel = [[UILabel alloc] init];

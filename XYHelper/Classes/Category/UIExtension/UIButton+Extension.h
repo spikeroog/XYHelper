@@ -56,6 +56,12 @@
 /**
  图片在上文字在下
  */
-- (void)ui_verticalArrangement;
+- (void)ui_topImageWithBottomText;
+
+/**
+ 按钮文字在左，图片在右
+ */
+- (void)ui_leftTextWithRightImage;
 
 @end
+

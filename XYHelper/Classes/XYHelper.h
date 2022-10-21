@@ -33,12 +33,12 @@
 #import <BRPickerView/BRPickerView.h> // 选择器
 
 
-
 #pragma mark ---- 非Pods引用三方库
 
 #import "PPNetworkHelper.h"
 #import "XYUnicodeUtil.h"
 #import "YCShadowView.h"
+#import "FYFImagePicker.h" /// 基于系统封装的相机相册库，iOS14下支持多选
 
 #pragma mark ---- 自定义路由
 

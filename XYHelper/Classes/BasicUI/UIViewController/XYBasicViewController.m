@@ -195,6 +195,7 @@ barItemTextFont = _barItemTextFont;
     /// 设置导航栏背景图片，不需要考虑图片尺寸
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kNavBarHeight)];
     imageV.contentMode = UIViewContentModeScaleAspectFill;
+    imageV.clipsToBounds = true;
     imageV.image = kImageWithName(navBgImageStr);
     UIImage *img = [UIImage xy_convertViewToImage:imageV];
     self.navBgColor = kColorWithImage(img);

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define kColor666666 kColorWithRGB16Radix(0x666666)
 #define kColor999999 kColorWithRGB16Radix(0x999999)
 #define kColorE8E8E8 kColorWithRGB16Radix(0xe8e8e8)
+#define kColorBBBBBB kColorWithRGB16Radix(0xbbbbbb)
 
 
 // 导航栏颜色

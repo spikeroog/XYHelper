@@ -12,12 +12,23 @@
 
 + (instancetype)ui_imageViewWithImageName:(NSString *)imageName
                              cornerRadius:(NSInteger)cornerRadius contentMode:(UIViewContentMode)contentMode {
-    UIImageView * imagev = [[self alloc] initWithImage:[UIImage imageNamed:imageName]];
+    
+    UIImage *image;
+    if (imageName == nil || imageName.length == 0) {
+        image = nil;
+    } else {
+        image = [UIImage imageNamed:imageName];
+    }
+    
+    UIImageView * imagev = [[self alloc] initWithImage:image];
     imagev.layer.cornerRadius = cornerRadius;
     if (cornerRadius > 0) {
         imagev.layer.masksToBounds = true;
     }
     imagev.contentMode = contentMode;
+    if (contentMode == UIViewContentModeScaleAspectFill) {
+        imagev.clipsToBounds = YES;
+    }
     
     return imagev;
 }

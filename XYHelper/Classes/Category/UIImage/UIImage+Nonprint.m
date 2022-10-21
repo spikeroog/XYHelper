@@ -2,8 +2,8 @@
 //  UIImage+Nonprint.m
 //  KYMCOCloud
 //
-//  Created by 杭州英捷鑫科技 on 2022/9/14.
-//  Copyright © 2022 KYMCO. All rights reserved.
+//  Created by spikeroog on 2022/9/14.
+//  Copyright © 2022 spikeroog. All rights reserved.
 //
 
 #import "UIImage+Nonprint.h"

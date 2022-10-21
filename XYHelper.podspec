@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
-  s.version          = '2.0.7'
+  s.version          = '2.0.8'
   s.summary          = 'The Objective-C utilities you always wish you had.'
 
 # This description is used to generate tags and improve search results.
@@ -32,9 +32,9 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'XYHelper/Classes/**/*.{h,m}'
   
-  # s.resource_bundles = {
-  #   'XYHelper' => ['XYHelper/Assets/*.png']
-  # }
+#  s.resource_bundles = {
+#    'XYHelper' => ['XYHelper/XYHelper.bundle']
+#  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

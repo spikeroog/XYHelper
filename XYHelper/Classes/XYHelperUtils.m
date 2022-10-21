@@ -1381,7 +1381,11 @@
     if (isShowCheck) {
         [button setImage:checkNormalImage forState:UIControlStateNormal];
         [button setImageEdgeInsets:UIEdgeInsetsMake(0, kRl(22), 0, 0)];
-        [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        if (kIsBangsScreen) {
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        } else {
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(kRl(5), 0, 0, 0)];
+        }
         showText = [NSString stringWithFormat:@"      %@",fullstring];
         normalSelectTitle = [NSString stringWithFormat:@"      %@", normalSelectTitle];
     } else {
@@ -1810,7 +1814,81 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
+#pragma mark - 获取视频第一帧
++ (UIImage*)requestVideoPreViewImage:(NSURL *)path {
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:path options:nil];
+    AVAssetImageGenerator *assetGen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    
+    assetGen.appliesPreferredTrackTransform = YES;
+    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    NSError *error = nil;
+    CMTime actualTime;
+    CGImageRef image = [assetGen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    UIImage *videoImage = [[UIImage alloc] initWithCGImage:image];
+    CGImageRelease(image);
+    return videoImage;
+}
 
+#pragma mark - 设置tabbar，适配ios15，兼容ios13以前
++ (void)setTabbarWithTitleColor:(UIColor *)titleColor
+                    selectColor:(UIColor *)selectColor
+                           font:(UIFont *)font
+                     selectFont:(UIFont *)selectFont
+                         target:(__kindof UITabBarController *)target {
+    /// 设置tabBarItem字体颜色
+    NSMutableDictionary<NSAttributedStringKey, id> *normalAttributes = [NSMutableDictionary dictionary];
+    [normalAttributes setValue:titleColor forKey:NSForegroundColorAttributeName];
+    [normalAttributes setValue:font forKey:NSFontAttributeName];
+
+    NSMutableDictionary<NSAttributedStringKey, id> *selectAttributes = [NSMutableDictionary dictionary];
+    [selectAttributes setValue:selectColor forKey:NSForegroundColorAttributeName];
+    [selectAttributes setValue:selectFont forKey:NSFontAttributeName];
+
+    if (@available(iOS 13.4, *)) {
+        UITabBarItemAppearance *itemAppearance = [[UITabBarItemAppearance alloc] init];
+        itemAppearance.normal.titleTextAttributes = normalAttributes.copy;
+        itemAppearance.selected.titleTextAttributes = selectAttributes.copy;
+        UITabBarAppearance *appearance = [[UITabBarAppearance alloc] init];
+        appearance.stackedLayoutAppearance = itemAppearance;
+        /// tabBar背景颜色
+        appearance.backgroundColor = [UIColor whiteColor];
+        target.tabBar.standardAppearance = appearance;
+        if (@available(iOS 15.0, *)) {
+            target.tabBar.scrollEdgeAppearance = appearance;
+        } else {
+            // Fallback on earlier versions
+        }
+    } else {
+        /// tabBar背景颜色
+        target.tabBarController.tabBar.backgroundColor = [UIColor whiteColor];
+        
+        [target.tabBarItem setTitleTextAttributes:normalAttributes.copy forState:UIControlStateNormal];
+        [target.tabBarItem setTitleTextAttributes:selectAttributes.copy forState:UIControlStateSelected];
+        target.tabBar.tintColor = selectColor;
+        target.tabBar.unselectedItemTintColor = titleColor;
+    }
+    
+    /// 移除tabbar上的黑线
+    if (@available(iOS 13, *)) {
+        UIColor *color = [UIColor whiteColor];
+        UITabBarAppearance *appearance = [target.tabBar.standardAppearance copy];
+        appearance.backgroundImage = [UIImage imageWithColor:color];
+        appearance.shadowImage = [UIImage imageWithColor:color];
+        /// 重置背景和阴影为透明  如果设置了阴影效果则此代码需要去掉
+//        [appearance configureWithTransparentBackground];
+        target.tabBar.standardAppearance = appearance;
+        if (@available(iOS 15.0, *)) {
+            target.tabBar.scrollEdgeAppearance = appearance;
+        }
+    } else {
+        target.tabBar.backgroundImage = [UIImage new];
+        target.tabBar.shadowImage = [UIImage new];
+    }
+    
+    // Masonry布局的控件，红点默认会显示在左边，在设置红点之前调用该方法，可使红点居右
+    [target.tabBar layoutIfNeeded];
+    
+}
 
 @end
 

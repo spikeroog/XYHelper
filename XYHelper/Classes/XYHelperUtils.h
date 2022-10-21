@@ -288,6 +288,15 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 跳转设置开启权限
 + (void)gotoSystemSetting;
 
+#pragma mark - 获取视频第一帧
++ (UIImage*)requestVideoPreViewImage:(NSURL *)path;
+
+#pragma mark - 设置tabbar，适配ios15
++ (void)setTabbarWithTitleColor:(UIColor *)titleColor
+                    selectColor:(UIColor *)selectColor
+                           font:(UIFont *)font
+                     selectFont:(UIFont *)selectFont
+                         target:(__kindof UITabBarController *)target;
 
 @end
 

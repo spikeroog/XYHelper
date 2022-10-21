@@ -8,6 +8,7 @@
 
 #import "XYBasicScrollViewController.h"
 #import <Masonry/Masonry.h>
+#import "XYHelperMarco.h"
 
 @interface XYBasicScrollViewController ()<UIScrollViewDelegate>
 
@@ -22,7 +23,9 @@
     self.basicScrollView.delegate = self;
     [self.view addSubview:self.basicScrollView];
     [self.basicScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.top.bottom.equalTo(self.view);
+        make.centerX.equalTo(self.view);
+        make.width.offset(kScreenWidth);
     }];
 }
 
