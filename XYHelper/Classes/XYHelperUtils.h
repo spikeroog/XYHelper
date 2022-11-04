@@ -298,6 +298,9 @@ NS_ASSUME_NONNULL_BEGIN
                      selectFont:(UIFont *)selectFont
                          target:(__kindof UITabBarController *)target;
 
+#pragma mark - 判断是否为模拟器
++ (BOOL)isSimuLator;
+
 @end
 
 NS_ASSUME_NONNULL_END

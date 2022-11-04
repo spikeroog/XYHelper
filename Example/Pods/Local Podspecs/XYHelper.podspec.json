@@ -1,6 +1,6 @@
 {
   "name": "XYHelper",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "summary": "The Objective-C utilities you always wish you had.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/spikeroog/XYHelper.git",
-    "tag": "2.0.8"
+    "tag": "2.0.9"
   },
   "platforms": {
     "ios": "9.0"
@@ -21,7 +21,7 @@
   "source_files": "XYHelper/Classes/**/*.{h,m}",
   "dependencies": {
     "HBDNavigationBar": [
-      "~> 1.9.5"
+      "~> 1.9.6"
     ],
     "FLAnimatedImage": [
       "~> 1.0.16"

@@ -20,10 +20,11 @@
 - (void)setAcceptEventInterval:(NSTimeInterval)acceptEventInterval {
     objc_setAssociatedObject(self, @selector(acceptEventInterval), @(acceptEventInterval), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
 - (NSTimeInterval)acceptEventInterval {
     NSTimeInterval interval = 0;
     if ([self isMemberOfClass:UIButton.class]) {
-        interval = 0.2f;
+        interval = 0.5;
     }
     if(objc_getAssociatedObject(self, @selector(acceptEventInterval))) {
         return [objc_getAssociatedObject(self, @selector(acceptEventInterval)) doubleValue];
@@ -34,12 +35,17 @@
 - (void)setAcceptEventTime:(NSTimeInterval)acceptEventTime {
     objc_setAssociatedObject(self, @selector(acceptEventTime), @(acceptEventTime), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-- (NSTimeInterval)acceptEventTime{
+
+- (NSTimeInterval)acceptEventTime {
     return [objc_getAssociatedObject(self, @selector(acceptEventTime)) doubleValue];
 }
 
 - (void)ms_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event {
-    if (![self isKindOfClass:[UIButton class]]) {
+    /*
+     排除这两种按钮“CUShutterButton”和"CAMShutterButton"，这两个分别是8系统，10系统上相机拍照按钮的类名.这是两个特殊封装过的按钮，如果把它们的事件也用时间戳给过滤掉了，你就会发现app里弹出相机后，要长按才能拍照。
+     */
+    if ([NSStringFromClass([self class]) isEqualToString:@"CUShutterButton"] ||
+        [NSStringFromClass([self class]) isEqualToString:@"CAMShutterButton"]) {
         [self ms_sendAction:action to:target forEvent:event];
         return;
     }
@@ -52,4 +58,6 @@
     }
     [self ms_sendAction:action to:target forEvent:event];
 }
+
 @end
+

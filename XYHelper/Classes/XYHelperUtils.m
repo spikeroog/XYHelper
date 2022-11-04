@@ -1890,5 +1890,17 @@
     
 }
 
+#pragma mark - 判断是否为模拟器
++ (BOOL)isSimuLator {
+    if (TARGET_IPHONE_SIMULATOR == 1 && TARGET_OS_IPHONE == 1) {
+        ///模拟器
+        return YES;
+    } else {
+        ///真机
+        return NO;
+    }
+}
+
+
 @end
 

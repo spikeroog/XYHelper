@@ -4,7 +4,7 @@
 //
 //  Created by spikeroog on 2018/8/9.
 //  Copyright © 2018年 spikeroog. All rights reserved.
-//  防止多次点击，针对UIButton设置默认0.2s
+//  防止多次点击，针对UIButton设置默认0.5s
 
 #import <UIKit/UIKit.h>
 
@@ -15,3 +15,4 @@
 @property (nonatomic, assign) NSTimeInterval acceptEventTime;
 
 @end
+
