@@ -5,10 +5,10 @@ platform :ios, '11.0'
 
 target 'XYHelper_Example' do
   pod 'XYHelper', :path => '../'
-
+  
   target 'XYHelper_Tests' do
     inherit! :search_paths
-
+    
     
   end
 end

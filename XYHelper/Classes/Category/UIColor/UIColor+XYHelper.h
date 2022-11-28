@@ -14,12 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**项目使用频率高的颜色*/
 // 字体颜色
+#define kColor222222 kColorWithRGB16Radix(0x222222)
 #define kColor333333 kColorWithRGB16Radix(0x333333)
+#define kColor444444 kColorWithRGB16Radix(0x444444)
 #define kColor666666 kColorWithRGB16Radix(0x666666)
 #define kColor999999 kColorWithRGB16Radix(0x999999)
 #define kColorE8E8E8 kColorWithRGB16Radix(0xe8e8e8)
 #define kColorBBBBBB kColorWithRGB16Radix(0xbbbbbb)
-
+#define kColorEEEEEE kColorWithRGB16Radix(0xeeeeee)
 
 // 导航栏颜色
 #define kWhiteStyleNavBgColor kColorWithRGB16Radix(0xffffff)
@@ -32,6 +34,14 @@ NS_ASSUME_NONNULL_BEGIN
 // cell分割线的颜色
 #define kWhiteStyleCellSeparatorColor kColorWithRGB16Radix(0xe6e6e6)
 #define kBlackStyleCellSeparatorColor kColorWithRGB16Radix(0x171719)
+
+// apple官网配色
+#define kColor313132 kColorWithRGB16Radix(0x313132) // 苹果黑
+#define kColor0069C8 kColorWithRGB16Radix(0x0069C8) /// 苹果蓝
+#define kColor444444 kColorWithRGB16Radix(0x444444) /// 苹果深灰
+#define kColorF5F5F7 kColorWithRGB16Radix(0xF5F5F7) /// 苹果浅灰
+
+
 
 
 @interface UIColor (XYHelper)

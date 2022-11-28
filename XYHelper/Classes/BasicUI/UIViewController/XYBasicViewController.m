@@ -21,10 +21,12 @@
 #import <SDWebImage/SDWebImage.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIImage+GIF.h>
+#import <JXCategoryView/JXCategoryView.h>
 
 #define RotundityWH 35 /// 导航栏左侧右侧，圆形或正方形显示barItem的默认宽高
 
 @interface XYBasicViewController ()
+<JXCategoryListContentViewDelegate>
 /**左侧按钮Item*/
 @property (nonatomic, strong) UIBarButtonItem *leftBarItem;
 /**右侧按钮Item*/
@@ -42,6 +44,14 @@ navBgImageStr = _navBgImageStr,
 navItemTitleFont = _navItemTitleFont,
 barItemTextFont = _barItemTextFont;
 
+#pragma mark - JXCategoryListContentViewDelegate
+
+/**
+ 实现 <JXCategoryListContentViewDelegate> 协议方法，返回该视图控制器所拥有的「视图」
+ */
+- (UIView *)listView {
+    return self.view;
+}
 
 #pragma mark - Controller lifecycle
 
@@ -115,9 +125,15 @@ barItemTextFont = _barItemTextFont;
     /// 修改导航栏按钮颜色
     self.hbd_tintColor = UIColor.blackColor;
 
-
     /// 设置导航栏字体颜色
     self.hbd_titleTextAttributes = @{NSForegroundColorAttributeName: [self.navTitleColor colorWithAlphaComponent:1],NSFontAttributeName:self.navItemTitleFont};
+    
+#pragma mark - 当前导航栏是否需要透明处理
+    if (self.isNeedsClear) {
+        [self navBarAlphaZero];
+    } else {
+//        [self navBarAlphaWithValue:1];
+    }
 }
 
 - (void)setNavBarHidden:(BOOL)navBarHidden {
@@ -129,14 +145,22 @@ barItemTextFont = _barItemTextFont;
 /// 设置导航栏背景透明
 - (void)navBarAlphaZero {
     self.hbd_barAlpha = 0;
-    self.hbd_extendedLayoutDidSet = false;
+    self.hbd_extendedLayoutDidSet = NO;
     [self hbd_setNeedsUpdateNavigationBar];
+
 }
 
 /// 设置导航栏背景透明度,0-1
 - (void)navBarAlphaWithValue:(CGFloat)value {
     self.hbd_barAlpha = value;
-    self.hbd_extendedLayoutDidSet = false;
+    self.hbd_extendedLayoutDidSet = NO;
+    [self hbd_setNeedsUpdateNavigationBar];
+}
+
+/// 设置导航栏背景透明度,0-1,hbd_extendedLayoutDidSet为true,修复某些场景下的导航栏异常问题
+- (void)navBarAlphaWithValueFix:(CGFloat)value  {
+    self.hbd_barAlpha = value;
+    self.hbd_extendedLayoutDidSet = YES;
     [self hbd_setNeedsUpdateNavigationBar];
 }
 
@@ -145,7 +169,7 @@ barItemTextFont = _barItemTextFont;
 - (void)navVisualEffectWithValue:(CGFloat)value
                    originalColor:(UIColor *)originalColor {
     self.hbd_barTintColor = kColorWithOpacity(originalColor, value);
-    self.hbd_extendedLayoutDidSet = false;
+    self.hbd_extendedLayoutDidSet = NO;
     [self hbd_setNeedsUpdateNavigationBar];
 }
 
@@ -612,9 +636,7 @@ barItemTextFont = _barItemTextFont;
     /// 关闭所有服务
     [[SDWebImageManager sharedManager] cancelAll];
     /// 清除内存缓存
-    [[[SDWebImageManager sharedManager] imageCache] clearWithCacheType:SDImageCacheTypeMemory completion:^{
-        
-    }];
+    [[[SDWebImageManager sharedManager] imageCache] clearWithCacheType:SDImageCacheTypeMemory completion:nil];
 }
 
 #pragma mark - 设置BarItem圆角

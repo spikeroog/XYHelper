@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4983B0F5292E167200B5DE4A /* KCExploreInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983B0F1292E167200B5DE4A /* KCExploreInformationViewController.m */; };
+		4983B0F6292E167200B5DE4A /* KCExploreInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983B0F2292E167200B5DE4A /* KCExploreInformationCell.m */; };
+		4983B0F9292E200E00B5DE4A /* XYTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983B0F8292E200E00B5DE4A /* XYTestViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -40,6 +43,12 @@
 		01F85AD74E94E1513B11761A /* Pods-XYHelper_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XYHelper_Tests.debug.xcconfig"; path = "Target Support Files/Pods-XYHelper_Tests/Pods-XYHelper_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		0750B0C053A9AC15A2850F74 /* Pods-XYHelper_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XYHelper_Example.release.xcconfig"; path = "Target Support Files/Pods-XYHelper_Example/Pods-XYHelper_Example.release.xcconfig"; sourceTree = "<group>"; };
 		2C1BC4F1243926C443B119C1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		4983B0F1292E167200B5DE4A /* KCExploreInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCExploreInformationViewController.m; sourceTree = "<group>"; };
+		4983B0F2292E167200B5DE4A /* KCExploreInformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCExploreInformationCell.m; sourceTree = "<group>"; };
+		4983B0F3292E167200B5DE4A /* KCExploreInformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCExploreInformationCell.h; sourceTree = "<group>"; };
+		4983B0F4292E167200B5DE4A /* KCExploreInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCExploreInformationViewController.h; sourceTree = "<group>"; };
+		4983B0F7292E200E00B5DE4A /* XYTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYTestViewController.h; sourceTree = "<group>"; };
+		4983B0F8292E200E00B5DE4A /* XYTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYTestViewController.m; sourceTree = "<group>"; };
 		499F105428F92B4000747265 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		499F105528F92B4300747265 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* XYHelper_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XYHelper_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +156,10 @@
 		6003F593195388D20070C39A /* Example for XYHelper */ = {
 			isa = PBXGroup;
 			children = (
+				4983B0F3292E167200B5DE4A /* KCExploreInformationCell.h */,
+				4983B0F2292E167200B5DE4A /* KCExploreInformationCell.m */,
+				4983B0F4292E167200B5DE4A /* KCExploreInformationViewController.h */,
+				4983B0F1292E167200B5DE4A /* KCExploreInformationViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -154,6 +167,8 @@
 				6003F59D195388D20070C39A /* XYAppDelegate.m */,
 				ECF980A72588A05200CC106F /* XYViewController.h */,
 				ECF980A82588A05200CC106F /* XYViewController.m */,
+				4983B0F7292E200E00B5DE4A /* XYTestViewController.h */,
+				4983B0F8292E200E00B5DE4A /* XYTestViewController.m */,
 			);
 			name = "Example for XYHelper";
 			path = XYHelper;
@@ -210,7 +225,7 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				3A30E7EE27B45D1640E70E42 /* [CP] Embed Pods Frameworks */,
+				5C238CCE2F67EC2831DF04DB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,56 +318,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A30E7EE27B45D1640E70E42 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-XYHelper_Example/Pods-XYHelper_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/Aspects/Aspects.framework",
-				"${BUILT_PRODUCTS_DIR}/BRPickerView/BRPickerView.framework",
-				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
-				"${BUILT_PRODUCTS_DIR}/HBDNavigationBar/HBDNavigationBar.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
-				"${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
-				"${BUILT_PRODUCTS_DIR}/XYHelper/XYHelper.framework",
-				"${BUILT_PRODUCTS_DIR}/YBImageBrowser/YBImageBrowser.framework",
-				"${BUILT_PRODUCTS_DIR}/YYCache/YYCache.framework",
-				"${BUILT_PRODUCTS_DIR}/YYCategories/YYCategories.framework",
-				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Aspects.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRPickerView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBDNavigationBar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYHelper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YBImageBrowser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCache.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCategories.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-XYHelper_Example/Pods-XYHelper_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3E8161D5316925ABDE5AC9A6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -373,6 +338,66 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C238CCE2F67EC2831DF04DB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-XYHelper_Example/Pods-XYHelper_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Aspects/Aspects.framework",
+				"${BUILT_PRODUCTS_DIR}/BRPickerView/BRPickerView.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/HBDNavigationBar/HBDNavigationBar.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/JXCategoryView/JXCategoryView.framework",
+				"${BUILT_PRODUCTS_DIR}/JXPagingView/JXPagingView.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
+				"${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
+				"${BUILT_PRODUCTS_DIR}/XYHelper/XYHelper.framework",
+				"${BUILT_PRODUCTS_DIR}/YBImageBrowser/YBImageBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/YYCache/YYCache.framework",
+				"${BUILT_PRODUCTS_DIR}/YYCategories/YYCategories.framework",
+				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Aspects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRPickerView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBDNavigationBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXCategoryView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPagingView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYHelper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YBImageBrowser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCategories.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-XYHelper_Example/Pods-XYHelper_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6A4AC692CC73D2A11DE69978 /* [CP] Check Pods Manifest.lock */ = {
@@ -404,8 +429,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4983B0F6292E167200B5DE4A /* KCExploreInformationCell.m in Sources */,
+				4983B0F9292E200E00B5DE4A /* XYTestViewController.m in Sources */,
 				6003F59E195388D20070C39A /* XYAppDelegate.m in Sources */,
 				ECF980A92588A05200CC106F /* XYViewController.m in Sources */,
+				4983B0F5292E167200B5DE4A /* KCExploreInformationViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,7 +575,7 @@
 				GCC_PREFIX_HEADER = "XYHelper/XYHelper-Prefix.pch";
 				INFOPLIST_FILE = "XYHelper/XYHelper-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2.0.9;
+				MARKETING_VERSION = 2.1.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = io.dcloud.guangyang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -575,7 +603,7 @@
 				GCC_PREFIX_HEADER = "XYHelper/XYHelper-Prefix.pch";
 				INFOPLIST_FILE = "XYHelper/XYHelper-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2.0.9;
+				MARKETING_VERSION = 2.1.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = io.dcloud.guangyang;
 				PRODUCT_NAME = "$(TARGET_NAME)";

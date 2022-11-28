@@ -32,6 +32,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h> // 键盘
 #import <BRPickerView/BRPickerView.h> // 选择器
 
+#import <MJExtension/MJExtension.h> // 接口解析
 
 #pragma mark ---- 非Pods引用三方库
 
@@ -64,13 +65,20 @@
 #import "XYOperationQueue.h"
 #import "XYAsyncOperation.h"
 #import "XYTimerManager.h"
+#import "XYMJRefreshManager.h"
 
 #pragma mark ---- 自定义基类
 
 #import "XYBasicWebViewController.h"
 #import "XYBasicScrollViewController.h"
-#import "XYNavigationController.h"
+#import "XYBasicTableViewController.h"
 #import "XYBasicViewController.h"
+#import "XYBasicCollectionView.h"
+#import "XYBasicScrollView.h"
+#import "XYBasicTableView.h"
+
+
+#import "XYNavigationController.h"
 #import "XYObserverView.h"
 #import "XYCommentView.h"
 #import "XYMotionView.h"

@@ -150,7 +150,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         MBProgressHUD *hud = [self reuseHudWithCouldTouch:canTouch isKeyWindow:YES];
         hud.offset = HUD_IN_CENTER;
-        hud.bezelView.layer.cornerRadius = kRl(3);
+        hud.bezelView.layer.cornerRadius = kRl(4);
         hud.mode = MBProgressHUDModeIndeterminate;
         if (loadText.length > 0) {
             hud.label.text = loadText;
@@ -168,7 +168,7 @@
         MBProgressHUD *hud = [self reuseHudWithCouldTouch:canTouch isKeyWindow:YES];
         hud.label.text = text;
         hud.mode = MBProgressHUDModeCustomView;
-        hud.bezelView.layer.cornerRadius = kRl(3);
+        hud.bezelView.layer.cornerRadius = kRl(4);
         hud.customView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:hintImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         [hud hideAnimated:YES afterDelay:HUD_DELAY];
     });

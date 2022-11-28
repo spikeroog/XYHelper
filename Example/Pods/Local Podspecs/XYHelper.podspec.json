@@ -1,6 +1,6 @@
 {
   "name": "XYHelper",
-  "version": "2.0.9",
+  "version": "2.1.0",
   "summary": "The Objective-C utilities you always wish you had.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/spikeroog/XYHelper.git",
-    "tag": "2.0.9"
+    "tag": "2.1.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -50,6 +50,21 @@
     "TZImagePickerController": [
 
     ],
+    "JXPagingView/Pager": [
+
+    ],
+    "JXCategoryView": [
+
+    ],
+    "MJRefresh": [
+
+    ],
+    "MJExtension": [
+
+    ],
+    "DZNEmptyDataSet": [
+
+    ],
     "IQKeyboardManager": [
 
     ],
@@ -59,13 +74,13 @@
     "BRPickerView": [
 
     ],
+    "SAMKeychain": [
+
+    ],
     "SDWebImage": [
 
     ],
     "Aspects": [
-
-    ],
-    "SAMKeychain": [
 
     ]
   }

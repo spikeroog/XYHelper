@@ -2,7 +2,7 @@
 //  XYBaseViewController.h
 //  XYHelper
 //
-//  Created by Xiao Yuan on 2019/12/11.
+//  Created by spikeroog on 2019/12/11.
 //  Copyright © 2020 spikeroog. All rights reserved.
 //
 
@@ -55,21 +55,24 @@ typedef void(^XYNavigationRightBarItemsHandle) (NSInteger idx);
 
 #pragma mark - 状态栏相关
 /// 隐藏状态栏
-@property(nonatomic,assign) BOOL statusBarHiden;
+@property(nonatomic, assign) BOOL statusBarHiden;
 /// 状态栏样式 状态栏颜色，0为黑色，1为白色
-@property(nonatomic,assign) UIStatusBarStyle barStyle;
+@property(nonatomic, assign) UIStatusBarStyle barStyle;
 
 #pragma mark - 导航栏右侧多个按钮样式
 /// 导航栏多个右侧按钮的点击回调
 @property (nonatomic, copy) XYNavigationRightBarItemsHandle rightItemsHandle;
 
 #pragma mark - 导航栏背景透明、背景毛玻璃
+/// 是否默认设置当前控制器导航栏为透明
+@property (nonatomic,assign) BOOL isNeedsClear;
 /// 设置导航栏背景透明
 - (void)navBarAlphaZero;
 /// 设置导航栏背景透明度,0-1
 - (void)navBarAlphaWithValue:(CGFloat)value;
+- (void)navBarAlphaWithValueFix:(CGFloat)value;
 
-/// 设置导航栏背景毛玻璃效果，建议传入0.75-0.8左右的值
+/// 设置导航栏背景毛玻璃效果，建议传入0.2-0.4左右的值
 - (void)navVisualEffectWithValue:(CGFloat)value
                    originalColor:(UIColor *)originalColor;
 

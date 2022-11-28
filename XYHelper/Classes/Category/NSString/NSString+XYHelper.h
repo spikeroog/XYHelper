@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)URLDecode;
 - (NSString *)URLDecodeUsingEncoding:(NSStringEncoding)encoding;
 
+//去除emoji表情的方法
+- (NSString *)disable_EmojiString;
+
 @end
 
 NS_ASSUME_NONNULL_END
