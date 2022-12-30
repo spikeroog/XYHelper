@@ -193,7 +193,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)modelArrayConvertToJson:(NSArray *)modelArray;
 
-
 #pragma mark - 计算视频大小和图片大小
 /**
  计算图片的大小 单位：M
@@ -203,6 +202,8 @@ NS_ASSUME_NONNULL_BEGIN
  @return 大小
  */
 + (CGFloat)fetchImageSize:(UIImage *)image;
+/// 返回图片大小，如:1.3M
++ (NSString *)getStringBytesFromDataLength:(UIImage *)image;
 
 /**
  计算视频的大小 单位：M
@@ -300,6 +301,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 判断是否为模拟器
 + (BOOL)isSimuLator;
+
+#pragma mark - 压缩图片
++ (NSData *)compressImageSize:(UIImage *)image toByte:(NSUInteger)maxLength;
+
 
 @end
 

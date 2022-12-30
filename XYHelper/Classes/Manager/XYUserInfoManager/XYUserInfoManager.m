@@ -27,6 +27,11 @@
     if (!userData) {
         return nil;
     }
+    
+//    NSError *err;
+    ///取
+//    id user = [NSKeyedUnarchiver unarchivedObjectOfClass:[XYUserBasicModel class] fromData:userData error:&err];
+    
     id user = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
     if (!user) {
         return nil;
@@ -40,7 +45,8 @@
         return;
     }
     
-    NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:loginUser];
+    ///存
+    NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:loginUser requiringSecureCoding:YES error:nil];
     
     if (userData) {
         [kUserDefaults setObject:userData forKey:loginUserCurrent];

@@ -30,8 +30,6 @@
 #define MAS_SHORTHAND // equalTo不需要使用"mas_"前缀
 #define MAS_SHORTHAND_GLOBALS // @1直接写1即可 自动将数据类型转为NSNumber类型
 #import <IQKeyboardManager/IQKeyboardManager.h> // 键盘
-#import <BRPickerView/BRPickerView.h> // 选择器
-
 #import <MJExtension/MJExtension.h> // 接口解析
 
 #pragma mark ---- 非Pods引用三方库

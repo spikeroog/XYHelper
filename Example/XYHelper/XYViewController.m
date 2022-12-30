@@ -19,13 +19,14 @@
 #import "KCExploreInformationViewController.h"
 #import "XYTestViewController.h"
 
+#import <YBImageBrowser/YBImageBrowser.h> // 浏览图片
+#import <YBImageBrowser/YBIBVideoData.h> // 浏览视频
+
 @interface XYViewController ()
 @property (nonatomic, strong) FYFImagePickerController *imagePicker;
-
 @end
 
 @implementation XYViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,16 +45,63 @@
     self.rightBarItemTitle = @"底部锚点";
     self.barItemTextFont = kFontWithRealsize(20);
     self.navItemTitleFont = kFontWithRealsize(20);
-
+    
 //    self.view.backgroundColor = kColorWithRandom;
 
 }
 
 - (void)gotoImagePickVc {
     
-    [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:true allowTakePhoto:true allowTakeVideo:true sortAscending:true allowPickingPhoto:true allowPickingVideo:true allowPickingOriginalPhoto:true showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:10 maxImageSize:10 maxVideoSize:20 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
+    [self pickImage];
+}
+
+- (void)pickImage {
+    @weakify(self);
+    [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:true allowTakePhoto:true allowTakeVideo:false sortAscending:true allowPickingPhoto:true allowPickingVideo:false allowPickingOriginalPhoto:false showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:9 maxImageSize:2 maxVideoSize:1000 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
         
+        NSMutableArray *imageArrayMut = [NSMutableArray new];
+        [assetArray enumerateObjectsUsingBlock:^(id  _Nonnull singleObj, NSUInteger singleIdx, BOOL * _Nonnull singleStop) {
+            PHAsset * asset = (PHAsset *)singleObj;
+            YBIBImageData *data = [YBIBImageData new];
+            NSLog(@"%@", [asset valueForKey:@"filename"]);
+            data.imageName = [asset valueForKey:@"filename"];
+            data.projectiveView = self.view;
+            [imageArrayMut addObject:data];
+        }];
+        
+        YBImageBrowser *browser = [YBImageBrowser new];
+        browser.dataSourceArray = imageArrayMut;
+        browser.currentPage = 0;
+        [browser show];
+
     } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {
+        @strongify(self);
+        
+        
+    } targetVC:self];
+}
+
+- (void)pickVideo {
+    @weakify(self);
+    [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:false allowTakePhoto:false allowTakeVideo:true sortAscending:true allowPickingPhoto:false allowPickingVideo:true allowPickingOriginalPhoto:false showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:9 maxImageSize:1 maxVideoSize:1000 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
+
+    } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {
+        @strongify(self);
+        
+        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:outputPath] options:nil];
+
+        NSMutableArray *videoArrayMut = [NSMutableArray new];
+        YBIBVideoData *data = [YBIBVideoData new];
+        
+        data.videoAVAsset = asset;
+        data.projectiveView = self.view;
+        [videoArrayMut addObject:data];
+
+        YBImageBrowser *browser = [YBImageBrowser new];
+        browser.dataSourceArray = videoArrayMut;
+        browser.currentPage = 0;
+        [browser show];
+        
         
     } targetVC:self];
 }
@@ -100,10 +148,10 @@
 
 - (void)rightActionInController {
     
-    [self showPagingVIewModel_4];
-    return;
+//    [self showPagingVIewModel_4];
+//    return;
     
-//    [self gotoImagePickVc];
+    [self gotoImagePickVc];
 
 }
 

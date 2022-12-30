@@ -123,7 +123,7 @@
     
     // 保存压缩系数
     NSMutableArray *compressionQualityArr = [NSMutableArray array];
-    CGFloat avg   = 1.0/250;
+    CGFloat avg   = 1.0/250.0;
     CGFloat value = avg;
     for (int i = 250; i >= 1; i--) {
         value = i * avg;
@@ -470,14 +470,33 @@
 }
 
 // 根据 aSize 返回一个新的image
-- (UIImage *)drawImageBySize:(CGSize)aSize {
-    
-    UIGraphicsBeginImageContextWithOptions(aSize, NO, [UIScreen mainScreen].scale); // 解决缩小图片后反而模糊的问题
+- (UIImage *)drawImageBySize:(CGSize)aSize; {
+    UIGraphicsBeginImageContext(aSize);
     [self drawInRect:CGRectMake(0, 0, aSize.width, aSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+- (NSData *)compressQualityWithMaxLength:(NSInteger)maxLength {
+   CGFloat compression = 1;
+    NSData *data = UIImageJPEGRepresentation(self, compression);
+    if (data.length < maxLength) return data;
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        data = UIImageJPEGRepresentation(self, compression);
+        if (data.length < maxLength * 0.9) {
+            min = compression;
+        } else if (data.length > maxLength) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    return data;
 }
 
 @end

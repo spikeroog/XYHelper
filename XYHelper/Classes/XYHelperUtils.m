@@ -27,6 +27,7 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "UIButton+EnlargeEdge.h"
 
 @implementation XYHelperUtils
 
@@ -529,6 +530,8 @@
  @return YES 通过 NO 不通过
  */
 + (BOOL)isAvailableEmailNumber:(NSString *)emailNum {
+    emailNum = [emailNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:emailNum];
@@ -542,7 +545,8 @@
  @return YES 通过 NO 不通过
  */
 + (BOOL)isAvailableIDCardNumber:(NSString *)idCardNum {
-    
+    idCardNum = [idCardNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+
     NSString *regex = @"^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     BOOL isRe = [predicate evaluateWithObject:idCardNum];
@@ -584,6 +588,8 @@
  @return YES 通过 NO 不通过
  */
 + (BOOL)isAvailableBankCardNumber:(NSString *)cardNum {
+    cardNum = [cardNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+
     int oddSum = 0;     // 奇数和
     int evenSum = 0;    // 偶数和
     int allSum = 0;     // 总和
@@ -629,6 +635,8 @@
  @return YES 通过 NO 不通过
  */
 + (BOOL)isAvailableContactNumber:(NSString *)mobileNum {
+    mobileNum = [mobileNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+
     /// 所有手机号段，包括虚拟手机号：如170，190等，192为中国广电号段
     NSString *MOBILE = @"^1(3[0-9]|4[5-9]|5[0-35-9]|6[67]|7[0-35-78]|8[0-9]|9[0-35-9]|440)\\d{8}$";
     /// 中国移动号段
@@ -1185,9 +1193,24 @@
  @return 大小
  */
 + (CGFloat)fetchImageSize:(UIImage *)image {
-    NSData *imageData = UIImageJPEGRepresentation(image,1);
-    CGFloat length = [imageData length]/1000/1000;
+    NSData *imageData = UIImagePNGRepresentation(image);
+//    CGFloat length = [imageData length]/1000/1000.0;
+    CGFloat length = [imageData length]/1024/1024.0;
     return length;
+}
+
+/// 返回图片大小，如:1.3M
++ (NSString *)getStringBytesFromDataLength:(UIImage *)image {
+    NSInteger dataLength = UIImagePNGRepresentation(image).length;
+    NSString *bytes;
+    if (dataLength >= 0.1 * (1024 * 1024)) {
+        bytes = [NSString stringWithFormat:@"%0.1fM",dataLength/1024/1024.0];
+    } else if (dataLength >= 1024) {
+        bytes = [NSString stringWithFormat:@"%0.0fK",dataLength/1024.0];
+    } else {
+        bytes = [NSString stringWithFormat:@"%zdB",dataLength];
+    }
+    return bytes;
 }
 
 /**
@@ -1376,13 +1399,14 @@
                                  isDefaultCheck:(BOOL)isDefaultCheck completion:(void(^)(NSInteger idx))completion {
     
     __block UIButton * button = [[UIButton alloc] init];
-    
+    [button setEnlargeEdge:kRl(25)];
+
     NSString * showText;
     
     if (isShowCheck) {
         [button setImage:checkNormalImage forState:UIControlStateNormal];
         [button setImageEdgeInsets:UIEdgeInsetsMake(0, kRl(22), 0, 0)];
-        if (kIsBangsScreen) {
+        if (kIsBangsScreen || [[XYHelperUtils getAppTermModel] containsString:@"SE"]) {
             [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         } else {
             [button setTitleEdgeInsets:UIEdgeInsetsMake(kRl(5), 0, 0, 0)];
@@ -1902,6 +1926,64 @@
     }
 }
 
+#pragma mark - 压缩图片
+/*
+ 根据图片大小，获取图片压缩因子
+ */
++ (CGFloat)getCompressRateByImageSize:(CGFloat)imageSize targetSize:(CGFloat)targetSize {
+    NSUInteger rate = (NSUInteger)(imageSize / targetSize);
+    rate = (rate == 0) ? 1 : rate;
+
+    // 默认0.8压缩因子
+    CGFloat maxCompressRate = 0.8;
+    CGFloat minCompressRate = 0.2;
+
+    // 反比例压缩函数
+    CGFloat compressRate = 0.8 / rate;
+
+    compressRate = MIN(MAX(compressRate, minCompressRate), maxCompressRate);
+    return compressRate;
+}
+
+/*!
+ *  @brief 使图片压缩后刚好小于指定大小
+ *
+ *  @param image 当前要压缩的图 maxLength 压缩后的大小
+ *
+ *  @return 图片对象
+ */
++ (NSData *)compressImageSize:(UIImage *)image toByte:(NSUInteger)maxLength {
+    // 压
+    NSData *data = UIImageJPEGRepresentation(image, 1);
+    if (data.length < maxLength) {
+        return data;
+    }
+
+    CGFloat compressRate = [self.class getCompressRateByImageSize:data.length targetSize:maxLength];
+    data = UIImageJPEGRepresentation(image, compressRate);
+    if (data.length < maxLength) {
+        return data;
+    }
+
+    // 缩
+    UIImage *resultImage = [UIImage imageWithData:data];
+    NSUInteger lastDataLength = 0;
+    while (data.length > maxLength && data.length != lastDataLength) {
+        lastDataLength = data.length;
+        CGFloat ratio = (CGFloat)maxLength / data.length;
+        CGSize size = CGSizeMake((NSUInteger)(resultImage.size.width * sqrtf(ratio)), (NSUInteger)(resultImage.size.height * sqrtf(ratio)));
+        if (CGSizeEqualToSize(size, CGSizeZero) || size.width < 10 || size.height < 10) {
+            break;
+        }
+        UIGraphicsBeginImageContext(size);
+        [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        resultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        data = UIImageJPEGRepresentation(resultImage, compressRate);
+    }
+
+    return data;
+}
 
 @end
 

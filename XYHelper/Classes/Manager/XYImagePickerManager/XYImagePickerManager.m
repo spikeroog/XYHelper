@@ -18,19 +18,22 @@
 #import "XYHelperMarco.h"
 #import "XYScreenAdapter.h"
 #import "UIView+XYHelper.h"
+
 #import "MBProgressHUD+XYHelper.h"
 #import "XYHelperUtils.h"
 
+#import "UIImage+XYHelper.h"
 #import "TZImageUploadOperation.h"
 
 // 视频最大拍摄时间(s)
-#define kVideoMaxTime 10
+#define kVideoMaxTime 60
 
 @interface XYImagePickerManager ()
 <TZImagePickerControllerDelegate,
 UIImagePickerControllerDelegate,
 UIAlertViewDelegate,
-UINavigationControllerDelegate> {
+UINavigationControllerDelegate>
+{
     NSMutableArray *_selectedPhotos;
     NSMutableArray *_selectedAssets;
 }
@@ -40,8 +43,8 @@ UINavigationControllerDelegate> {
 @property (nonatomic, copy) XYPictureCallBack pictureCallBackBlock;
 @property (nonatomic, copy) XYVideoCallBack videoCallBackBlock;
 
-@property (nonatomic, assign) NSInteger maxImageSize;
-@property (nonatomic, assign) NSInteger maxVideoSize;
+@property (nonatomic, assign) CGFloat maxImageSize;
+@property (nonatomic, assign) CGFloat maxVideoSize;
 @property (nonatomic, assign) NSInteger maxCount;
 @property (nonatomic, assign) BOOL allowCrop;
 @property (nonatomic, assign) BOOL needCircleCrop;
@@ -80,6 +83,8 @@ UINavigationControllerDelegate> {
         _imagePickerVc.navigationBar.barTintColor = [XYHelperRouter navBgColor];
         _imagePickerVc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [[XYHelperRouter navTitleColor] colorWithAlphaComponent:1],NSFontAttributeName:[XYHelperRouter navTitleFont]};
         _imagePickerVc.navigationBar.tintColor = [XYHelperRouter navTitleColor];
+        
+        _imagePickerVc.videoQuality = UIImagePickerControllerQualityTypeIFrame1280x720;
 
         _imagePickerVc.allowsEditing = NO; // 不允许裁剪
         _imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -326,7 +331,7 @@ UINavigationControllerDelegate> {
     [self printAssetsName:assets];
     // 2.图片位置信息
     for (PHAsset *phAsset in assets) {
-        NSLog(@"location:%@",phAsset.location);
+        kLog(@"location:%@",phAsset.location);
     }
     
     NSMutableArray *muPhotos = [photos mutableCopy];
@@ -343,16 +348,20 @@ UINavigationControllerDelegate> {
         [muPhotosAsset addObject:asset];
         
         if (self.maxImageSize > 0) {
-            if ([XYHelperUtils fetchImageSize:obj] > self.maxImageSize) {
-                [muPhotos removeObjectAtIndex:idx];
-                [MBProgressHUD showTextHUD:[NSString stringWithFormat:@"请选择小于等于%ldM的图片文件", (long)self.maxImageSize]];
+            CGFloat objImageSize = [XYHelperUtils fetchImageSize:obj];
+            if (objImageSize > self.maxImageSize) {
+                
+                obj = [UIImage imageWithData:[obj compressQualityWithMaxLength:1024*self.maxImageSize]];
+                
+//                [muPhotos removeObjectAtIndex:idx];
+//                [MBProgressHUD showTextHUD:[NSString stringWithFormat:@"请选择小于%dM的图片", (NSInteger)self.maxImageSize]];
             }
         }
     }];
+    
     if (muPhotos.count > 0) {
         !self.pictureCallBackBlock ? : self.pictureCallBackBlock(muPhotos, muPhotosAsset);
     }
-    
     
 
     // 3. 获取原图的示例，用队列限制最大并发为1，避免内存暴增
@@ -363,9 +372,9 @@ UINavigationControllerDelegate> {
 //        // 图片上传operation，上传代码请写到operation内的start方法里，内有注释
 //        TZImageUploadOperation *operation = [[TZImageUploadOperation alloc] initWithAsset:asset completion:^(UIImage * photo, NSDictionary *info, BOOL isDegraded) {
 //            if (isDegraded) return;
-//            NSLog(@"图片获取&上传完成");
+//            kLog(@"图片获取&上传完成");
 //        } progressHandler:^(double progress, NSError * _Nonnull error, BOOL * _Nonnull stop, NSDictionary * _Nonnull info) {
-//            NSLog(@"获取原图进度 %f", progress);
+//            kLog(@"获取原图进度 %f", progress);
 //        }];
 //        [self.operationQueue addOperation:operation];
 //    }
@@ -378,7 +387,7 @@ UINavigationControllerDelegate> {
     NSString *fileName;
     for (PHAsset *asset in assets) {
         fileName = [asset valueForKey:@"filename"];
-        // NSLog(@"图片名字:%@",fileName);
+        // kLog(@"图片名字:%@",fileName);
     }
 }
 
@@ -387,16 +396,39 @@ UINavigationControllerDelegate> {
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(PHAsset *)asset {
     _selectedPhotos = [NSMutableArray arrayWithArray:@[coverImage]];
     _selectedAssets = [NSMutableArray arrayWithArray:@[asset]];
-    
+
     PHAssetResource *resource = [[PHAssetResource assetResourcesForAsset:asset] firstObject];
     long long size = [[resource valueForKey:@"fileSize"] longLongValue];
+    
+    CGFloat videoSize = (CGFloat)size/(1024*1024.0);
+    NSTimeInterval duration = asset.duration;
+    
+    kLog(@"\n\n视频大小:%f，视频时长:%f\n", videoSize, duration);
+    
+    if (duration >= kVideoMaxTime+1) {
+        NSInteger min = kVideoMaxTime/60;
+        [MBProgressHUD showTextHUD:[NSString stringWithFormat:@"请选择%d分钟内的视频", min]];
+        
+        return;
+    }
+    
     if (self.maxVideoSize > 0) {
-        if ((CGFloat)size/(1024*1024) > self.maxVideoSize) {
-            [MBProgressHUD showTextHUD:[NSString stringWithFormat:@"请选择小于等于%ldM的视频文件", (long)self.maxVideoSize]];
+        if (videoSize > self.maxVideoSize) {
+            
+            [MBProgressHUD showTextHUD:[NSString stringWithFormat:@"请选择小于%dM的视频", (NSInteger)self.maxVideoSize]];
             return;
+            
         }
     }
     
+    // 选择视频后，有个导出的过程，视频越大越费时
+    [self compressedVideoWithAsset:asset coverImage:coverImage];
+    
+}
+
+#pragma mark - 压缩视频
+/// 压缩视频
+- (void)compressedVideoWithAsset:(PHAsset *)asset coverImage:(UIImage *)coverImage {
     // 选择视频后，有个导出的过程，视频越大越费时
     [MBProgressHUD showLoadingHUD:@"导出视频中.." canTouch:false];
     
@@ -405,19 +437,21 @@ UINavigationControllerDelegate> {
     [[TZImageManager manager] getVideoOutputPathWithAsset:asset presetName:AVAssetExportPreset640x480 success:^(NSString *outputPath) {
         
         @strongify(self);
-        
+
         [MBProgressHUD removeLoadingHud];
+        
+        kLog(@"\n\n压缩后的视频大小：%f\n",[XYHelperUtils fetchVideoSize:outputPath]);
+
+        kLog(@"视频导出到本地完成,沙盒路径为:%@",outputPath);
         
         !self.videoCallBackBlock ? : self.videoCallBackBlock(outputPath, coverImage);
         
-        kLog(@"视频导出到本地完成,沙盒路径为:%@",outputPath);
         // Export completed, send video here, send by outputPath or NSData
         // 导出完成，在这里写上传代码，通过路径或者通过NSData上传
         
     } failure:^(NSString *errorMessage, NSError *error) {
         kLog(@"视频导出失败:%@,error:%@",errorMessage, error);
     }];
-    
 }
 
 
@@ -472,6 +506,7 @@ UINavigationControllerDelegate> {
 
 #pragma mark - UIImagePickerController Delegate
 - (void)takePhoto:(TZImagePickerController *)tzImagePickerController {
+    
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
         // 无相机权限 做一个友好的提示
@@ -501,6 +536,7 @@ UINavigationControllerDelegate> {
     }
 }
 
+#pragma mark - 调用相机
 // 调用相机
 - (void)pushImagePickerController:(TZImagePickerController *)tzImagePickerController {
     // 提前定位
@@ -528,7 +564,10 @@ UINavigationControllerDelegate> {
             self.imagePickerVc.mediaTypes = mediaTypes;
         }
         kLog(@"%d", self.imagePickerVc.allowsEditing);
+        
+
         [[XYHelperRouter currentVC] presentViewController:self.imagePickerVc animated:YES completion:nil];
+        
     } else {
         kLog(@"模拟器中无法打开照相机,请在真机中使用");
     }
@@ -585,7 +624,13 @@ UINavigationControllerDelegate> {
                     
                 } else {
                     if ([XYHelperUtils fetchImageSize:image] > self.maxImageSize) {
-                        [MBProgressHUD showTextHUD:[NSString stringWithFormat:@"请选择小于等于%ldM的图片文件", (long)self.maxImageSize]];
+                        
+                        image = [UIImage imageWithData:[image compressQualityWithMaxLength:1024*self.maxImageSize]];
+                        // 返回图片回调
+                        !self.pictureCallBackBlock ? : self.pictureCallBackBlock(@[image], @[asset]);
+                        [self refreshCollectionViewWithAddedAsset:assetModel.asset image:image];
+                        
+//                        [MBProgressHUD showTextHUD:[NSString stringWithFormat:@"请选择小于%dM的图片", (NSInteger)self.maxImageSize]];
                     } else {
                         // 返回图片回调
                         !self.pictureCallBackBlock ? : self.pictureCallBackBlock(@[image], @[asset]);
@@ -606,10 +651,21 @@ UINavigationControllerDelegate> {
                 [tzImagePickerVc hideProgressHUD];
                 if (!error) {
                     TZAssetModel *assetModel = [[TZImageManager manager] createModelWithAsset:asset];
+                    
+                    PHAssetResource *resource = [[PHAssetResource assetResourcesForAsset:asset] firstObject];
+                    long long size = [[resource valueForKey:@"fileSize"] longLongValue];
+                    
+                    CGFloat videoSize = (CGFloat)size/(1024*1024.0);
+                    
+                    kLog(@"\n\n视频大小:%f，视频时长:%@\n", videoSize, assetModel.timeLength);
+                    
                     [[TZImageManager manager] getPhotoWithAsset:assetModel.asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
                         @strongify(self);
                         if (!isDegraded && photo) {
-                            !self.videoCallBackBlock ? :                             self.videoCallBackBlock([videoUrl absoluteString], photo);
+                            
+                            // 选择视频后，有个导出的过程，视频越大越费时
+                            [self compressedVideoWithAsset:assetModel.asset coverImage:photo];
+//                            !self.videoCallBackBlock ? :                             self.videoCallBackBlock([videoUrl absoluteString], photo);
                             [self refreshCollectionViewWithAddedAsset:assetModel.asset image:photo];
                         }
                     }];

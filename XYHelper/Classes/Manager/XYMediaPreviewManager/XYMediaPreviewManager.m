@@ -11,6 +11,7 @@
 #import <YBImageBrowser/YBIBVideoData.h> // 浏览视频
 #import <YYCategories/YYCategories.h>
 
+
 @implementation XYMediaPreviewManager
 
 /// 预览图片
@@ -20,6 +21,7 @@
 - (void)previewImageWithUrl:(NSArray<NSString *> *)urls
              projectiveView:(NSArray<__kindof UIView *> *)projectiveViews
                         idx:(NSInteger)idx {
+    
     NSMutableArray *imageArrayMut = [NSMutableArray new];
     [urls enumerateObjectsUsingBlock:^(id  _Nonnull singleObj, NSUInteger singleIdx, BOOL * _Nonnull singleStop) {
         id view = [projectiveViews objectOrNilAtIndex:singleIdx];

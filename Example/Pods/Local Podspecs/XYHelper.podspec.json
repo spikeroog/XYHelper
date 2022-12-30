@@ -1,6 +1,6 @@
 {
   "name": "XYHelper",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "summary": "The Objective-C utilities you always wish you had.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/spikeroog/XYHelper.git",
-    "tag": "2.1.0"
+    "tag": "2.1.1"
   },
   "platforms": {
     "ios": "9.0"
@@ -69,9 +69,6 @@
 
     ],
     "ReactiveObjC": [
-
-    ],
-    "BRPickerView": [
 
     ],
     "SAMKeychain": [

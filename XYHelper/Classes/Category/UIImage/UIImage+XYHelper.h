@@ -90,8 +90,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 改变图片颜色,使用方法：[kImageWithName(@"xx") imageWithColor:UIColor.blackColor];
 - (UIImage *)imageWithColor:(UIColor *)color;
 
-// 根据 aSize 返回一个新的image
+/// 根据 aSize 返回一个新的image
 - (UIImage *)drawImageBySize:(CGSize)aSize;
+
+- (NSData *)compressQualityWithMaxLength:(NSInteger)maxLength;
 
 @end
 

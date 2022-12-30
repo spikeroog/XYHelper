@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XYMediaPreviewManager : NSObject
 
-
 /// 预览图片
 /// @param urls 图片url数组
 /// @param projectiveViews 图片view视图数组，如：cell.imageView

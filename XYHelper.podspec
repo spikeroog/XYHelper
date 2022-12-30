@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
-  s.version          = '2.1.0'
+  s.version          = '2.1.1'
   s.summary          = 'The Objective-C utilities you always wish you had.'
 
 # This description is used to generate tags and improve search results.
@@ -61,7 +61,6 @@ TODO: Add long description of the pod here.
    s.dependency 'DZNEmptyDataSet'
    s.dependency 'IQKeyboardManager'
    s.dependency 'ReactiveObjC'
-   s.dependency 'BRPickerView'
    s.dependency 'SAMKeychain'
    s.dependency 'SDWebImage'
    s.dependency 'Aspects'

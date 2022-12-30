@@ -64,11 +64,14 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
 - (void)popupView:(__kindof UIView *)targetView
     animationType:(PopUpViewAnimationType)animationType
      clickDismiss:(BOOL)clickDismiss {
-    
+    [self removeView];
+
     self.targetView = targetView;
     self.popUpViewAnimationType = animationType;
     self.clickDismiss = clickDismiss;
     
+    [self.targetView layoutIfNeeded];
+
     self.targetView.frame = CGRectMake(0, 0, targetView.xy_size.width, targetView.xy_size.height);
     self.targetView.xy_centerX = [XYHelperRouter fetchKeyWindow].xy_centerX;
 
@@ -152,7 +155,6 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
     [self removeFromSuperview];
 }
 
-
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *hitView = [super hitTest:point withEvent:event];
     return hitView;
@@ -160,15 +162,8 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
 
 - (void)packupView {
     if (self.popUpViewAnimationType == PopUpViewAnimationTypeCenter) {
-        [UIView animateWithDuration:kDefaultAnimateDismissDuration delay:0 options:kAnimationOptionCurve animations:^{
-            self.bgBtn.alpha = 0;
-            // 如果是变大变小的动画CGAffineTransformMakeScale要写在CGAffineTransformMakeTranslation的前面
-            self.targetView.transform = CGAffineTransformMakeScale(1, 1);
-            self.targetView.transform = self.fromTransform;
-        } completion:^(BOOL finished) {
+        [self removeView];
 
-            [self removeView];
-        }];
     } else if (self.popUpViewAnimationType == PopUpViewAnimationTypeBottom) {
         
         [UIView animateWithDuration:kDefaultAnimateDuration delay:0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:UIViewAnimationOptionCurveEaseInOut animations:^{

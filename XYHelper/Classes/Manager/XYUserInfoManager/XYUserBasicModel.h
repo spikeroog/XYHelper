@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XYUserBasicModel : NSObject <NSCoding>
+@interface XYUserBasicModel : NSObject <NSCoding, NSSecureCoding>
 
 @end
 

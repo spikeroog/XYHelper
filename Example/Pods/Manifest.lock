@@ -15,18 +15,6 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - Aspects (1.4.1)
-  - BRPickerView (2.8.0):
-    - BRPickerView/AddressPickerView (= 2.8.0)
-    - BRPickerView/Base (= 2.8.0)
-    - BRPickerView/DatePickerView (= 2.8.0)
-    - BRPickerView/StringPickerView (= 2.8.0)
-  - BRPickerView/AddressPickerView (2.8.0):
-    - BRPickerView/Base
-  - BRPickerView/Base (2.8.0)
-  - BRPickerView/DatePickerView (2.8.0):
-    - BRPickerView/Base
-  - BRPickerView/StringPickerView (2.8.0):
-    - BRPickerView/Base
   - DZNEmptyDataSet (1.8.1)
   - FLAnimatedImage (1.0.17)
   - HBDNavigationBar (1.9.6)
@@ -47,10 +35,9 @@ PODS:
     - TZImagePickerController/Location (= 3.8.3)
   - TZImagePickerController/Basic (3.8.3)
   - TZImagePickerController/Location (3.8.3)
-  - XYHelper (2.1.0):
+  - XYHelper (2.1.1):
     - AFNetworking (~> 4.0.1)
     - Aspects
-    - BRPickerView
     - DZNEmptyDataSet
     - FLAnimatedImage (~> 1.0.16)
     - HBDNavigationBar (~> 1.9.6)
@@ -91,7 +78,6 @@ SPEC REPOS:
   trunk:
     - AFNetworking
     - Aspects
-    - BRPickerView
     - DZNEmptyDataSet
     - FLAnimatedImage
     - HBDNavigationBar
@@ -118,7 +104,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
-  BRPickerView: a0ff460bf092bc069db5a54153395b1f7e8f5300
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   HBDNavigationBar: a997b65ab7194271e5584b87a952fc851832f692
@@ -133,7 +118,7 @@ SPEC CHECKSUMS:
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: b9a731e1d6307f44ca703b3976d18c24ca561e84
   TZImagePickerController: e9909edbadf7381140efc5b5c9f5bdbfd630f7d4
-  XYHelper: 20bb86c42f5bb20b05901b75c00a3024e25a0af0
+  XYHelper: e434e400add75558b85690960ad30066492523a0
   YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
