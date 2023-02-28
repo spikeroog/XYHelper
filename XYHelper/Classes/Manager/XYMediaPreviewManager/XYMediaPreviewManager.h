@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param urls 图片url数组
 /// @param projectiveViews 图片view视图数组，如：cell.imageView
 /// @param idx 图片下标
-- (void)previewImageWithUrl:(NSArray<NSString *> *)urls
++ (void)previewImageWithUrl:(NSArray<NSString *> *)urls
              projectiveView:(NSArray<__kindof UIView *> *)projectiveViews
                         idx:(NSInteger)idx;
 
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param urls 视频url数组
 /// @param projectiveViews 视频view视图数组，如：cell.imageView
 /// @param idx 视频下标
-- (void)previewVideoWithUrl:(NSArray<NSString *> *)urls
++ (void)previewVideoWithUrl:(NSArray<NSString *> *)urls
              projectiveView:(NSArray<__kindof UIView *> *)projectiveViews
                         idx:(NSInteger)idx;
 

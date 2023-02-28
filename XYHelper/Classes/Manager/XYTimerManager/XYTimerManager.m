@@ -77,4 +77,11 @@
     _timerTarget = nil;
 }
 
+- (void)destroyTimer {
+    _delegate = nil;
+    [_timer invalidate];
+    _timer = nil;
+    _timerTarget = nil;
+}
+
 @end

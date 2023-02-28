@@ -248,6 +248,19 @@ NS_ASSUME_NONNULL_BEGIN
                                  isDefaultCheck:(BOOL)isDefaultCheck
                                      completion:(void(^)(NSInteger idx))completion;
 
+/// 按钮图片文字居左样式，仿得物样式
++ (UIButton *)createLeftModelUserProButtonWithFullstring:(NSString *)fullstring
+                              normalSelectTitle:(NSString *)normalSelectTitle
+                        highlightSelectTitleArr:(NSArray *)highlightSelectTitleArr
+                                    normalColor:(UIColor *)normalColor
+                                 highlightColor:(UIColor *)highlightColor
+                                     normalFont:(CGFloat)normalFont
+                                  highlightFont:(CGFloat)highlightFont
+                                    isShowCheck:(BOOL)isShowCheck
+                               checkNormalImage:(nullable UIImage *)checkNormalImage
+                            checkHighlightImage:(nullable UIImage *)checkHighlightImage
+                                          isDefaultCheck:(BOOL)isDefaultCheck completion:(void(^)(NSInteger idx))completion;
+
 #pragma mark - 获取gif中的图片数组
 /// 获取gif中的图片数组
 /// @param resource gif
@@ -305,6 +318,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 压缩图片
 + (NSData *)compressImageSize:(UIImage *)image toByte:(NSUInteger)maxLength;
 
+#pragma mark - UIView动效
+/// CGAffineTransform toTrans = CGAffineTransformMakeTranslation(0, kScreenHeight-kRl(194));
++ (void)showInAnimationWithTarget:(__kindof UIView *)target
+                          toTrans:(CGAffineTransform)toTrans;
+/// CGAffineTransform toTrans = CGAffineTransformMakeTranslation(0, kScreenHeight+kRl(194));
++ (void)showOutAnimationWithTarget:(__kindof UIView *)target
+                           toTrans:(CGAffineTransform)toTrans;
 
 @end
 

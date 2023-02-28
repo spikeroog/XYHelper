@@ -16,7 +16,6 @@
 // 刘海屏底部栏的高度
 #define XYPopupBottomHeight ([XYPopupView iPhoneNotchScreen]?34:0)
 
-static const CGFloat kDefaultSpringDamping = 0.7f;
 static const CGFloat kDefaultSpringVelocity = 0.8f;
 
 static const CGFloat kDefaultAnimateDuration = 0.55f;
@@ -59,12 +58,20 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
     return manager;
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        self.springDuration = 0.7f;
+    }
+    return self;
+}
+
 #pragma mark - 弹出弹窗
 
 - (void)popupView:(__kindof UIView *)targetView
     animationType:(PopUpViewAnimationType)animationType
      clickDismiss:(BOOL)clickDismiss {
     [self removeView];
+    
 
     self.targetView = targetView;
     self.popUpViewAnimationType = animationType;
@@ -72,6 +79,12 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
     
     [self.targetView layoutIfNeeded];
 
+    if (targetView.xy_size.height > kScreenHeight/2.0f && (animationType == PopUpViewAnimationTypeBottom || animationType == PopUpViewAnimationTypeTop)) {
+        self.springDuration = 5;
+    } else {
+        self.springDuration = 0.7f;
+    }
+    
     self.targetView.frame = CGRectMake(0, 0, targetView.xy_size.width, targetView.xy_size.height);
     self.targetView.xy_centerX = [XYHelperRouter fetchKeyWindow].xy_centerX;
 
@@ -89,6 +102,12 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
         self.fromTransform = CGAffineTransformMakeTranslation(0, kScreenHeight+self.targetView.xy_size.height);
         self.toTransfrom = CGAffineTransformMakeTranslation(0, kScreenHeight-self.targetView.xy_size.height);
         self.targetView.transform = CGAffineTransformMakeTranslation(0, kScreenHeight+self.targetView.xy_size.height);
+        
+    } else if (animationType == PopUpViewAnimationTypeTop) {
+        
+        self.fromTransform = CGAffineTransformMakeTranslation(0, -self.targetView.xy_size.height);
+        self.toTransfrom = CGAffineTransformMakeTranslation(0, 0);
+        self.targetView.transform = CGAffineTransformMakeTranslation(0, -self.targetView.xy_size.height);
     }
     
     self.bgBtn.backgroundColor = kColorWithRGB16RadixA(0x000000, ALPHA_NUM);
@@ -105,13 +124,14 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
 
     [self addSubview:self.bgBtn];
     [self addSubview:self.targetView];
+    
     if (self.popUpViewAnimationType == PopUpViewAnimationTypeCenter) {
         // 中间出现，从小变大，收起反之
         dispatch_async(dispatch_get_main_queue(), ^{
 
             self.targetView.transform = CGAffineTransformMakeScale(1, 1);
 
-            [UIView animateWithDuration:kDefaultAnimateDuration delay:0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:kDefaultAnimateDuration delay:0 usingSpringWithDamping:self.springDuration initialSpringVelocity:kDefaultSpringVelocity options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.bgBtn.alpha = 1;
                 // 在动画过程中禁止遮罩视图响应用户手势
                 self.targetView.maskView.userInteractionEnabled = NO;
@@ -123,10 +143,10 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
                 self.targetView.maskView.userInteractionEnabled = YES;
             }];
         });
-    } else if (self.popUpViewAnimationType == PopUpViewAnimationTypeBottom) {
+    } else if (self.popUpViewAnimationType == PopUpViewAnimationTypeBottom || self.popUpViewAnimationType == PopUpViewAnimationTypeTop) {
         // 从底部出现，收起反之
         dispatch_async(dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:kDefaultAnimateDuration delay:0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:kDefaultAnimateDuration delay:0 usingSpringWithDamping:self.springDuration initialSpringVelocity:kDefaultSpringVelocity options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.bgBtn.alpha = 1;
                 self.targetView.transform = self.toTransfrom;
                 // 在动画过程中禁止遮罩视图响应用户手势
@@ -164,9 +184,9 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
     if (self.popUpViewAnimationType == PopUpViewAnimationTypeCenter) {
         [self removeView];
 
-    } else if (self.popUpViewAnimationType == PopUpViewAnimationTypeBottom) {
+    } else if (self.popUpViewAnimationType == PopUpViewAnimationTypeBottom || self.popUpViewAnimationType == PopUpViewAnimationTypeTop) {
         
-        [UIView animateWithDuration:kDefaultAnimateDuration delay:0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:kDefaultAnimateDuration delay:0 usingSpringWithDamping:self.springDuration initialSpringVelocity:kDefaultSpringVelocity options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.bgBtn.alpha = 0;
             self.targetView.transform = self.fromTransform;
         } completion:^(BOOL finished) {
@@ -253,4 +273,5 @@ static const NSInteger kAnimationOptionCurve = (7 << 16);
 }
 
 @end
+
 

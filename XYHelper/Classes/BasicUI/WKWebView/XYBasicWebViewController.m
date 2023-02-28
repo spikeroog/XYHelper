@@ -91,10 +91,10 @@ typedef NS_ENUM(NSInteger, WkWebViewShowType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"详情";
+    self.navigationItem.title = @"";
     
     // 禁止右滑返回
-    [self interactivePopDisabled:YES];
+//    [self interactivePopDisabled:YES];
     
     [self.view addSubview:self.webView];
     [self.navigationController.view addSubview:self.progressView];
@@ -162,7 +162,7 @@ typedef NS_ENUM(NSInteger, WkWebViewShowType) {
 
 - (UIProgressView *)progressView {
     if (!_progressView){
-        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kNavBarHeight-kRl(2), self.view.bounds.size.width, kRl(2))];
+        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kNavBarHeight-2, self.view.bounds.size.width, 2)];
         _progressView.progressViewStyle = UIProgressViewStyleBar;
         _progressView.progressTintColor = kBlackStyleNavBgColor;
         //        _progressView.tintColor = [UIColor blueColor];
@@ -476,3 +476,4 @@ typedef NS_ENUM(NSInteger, WkWebViewShowType) {
 }
 
 @end
+

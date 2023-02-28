@@ -148,10 +148,10 @@
 
 - (void)rightActionInController {
     
-//    [self showPagingVIewModel_4];
+    [self showPagingVIewModel_3];
 //    return;
     
-    [self gotoImagePickVc];
+//    [self gotoImagePickVc];
 
 }
 
@@ -299,7 +299,7 @@
 //    listVC_1.lineView.indicatorWidth = 16;
 
     vc.titles = @[@"全部", @"租赁中", @"待归还", @"已退租"];
-    vc.controllers = @[[self getHomepageVc],[self getHomepageVc],[self getHomepageVc],[self getHomepageVc]];
+    vc.controllers = @[[XYBasicViewController new],[XYBasicViewController new],[XYBasicViewController new],[XYBasicViewController new]];
 
     [XYHelperRouter pushViewController:vc];
 }

@@ -38,8 +38,8 @@
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
     
-#pragma mark - 设置网络请求超时时间
-    [PPNetworkHelper setRequestTimeoutInterval:10.0f];
+#pragma mark - 设置网络请求超时时间为5秒
+    [PPNetworkHelper setRequestTimeoutInterval:5];
 
 #pragma mark - 配置IQKeyboardManager
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];

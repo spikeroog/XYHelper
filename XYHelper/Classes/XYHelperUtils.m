@@ -1452,6 +1452,73 @@
     return button;
 }
 
+/// 按钮图片文字居左样式，仿得物样式
++ (UIButton *)createLeftModelUserProButtonWithFullstring:(NSString *)fullstring
+                              normalSelectTitle:(NSString *)normalSelectTitle
+                        highlightSelectTitleArr:(NSArray *)highlightSelectTitleArr
+                                    normalColor:(UIColor *)normalColor
+                                 highlightColor:(UIColor *)highlightColor
+                                     normalFont:(CGFloat)normalFont
+                                  highlightFont:(CGFloat)highlightFont
+                                    isShowCheck:(BOOL)isShowCheck
+                               checkNormalImage:(nullable UIImage *)checkNormalImage
+                            checkHighlightImage:(nullable UIImage *)checkHighlightImage
+                                 isDefaultCheck:(BOOL)isDefaultCheck completion:(void(^)(NSInteger idx))completion {
+    
+    __block UIButton * button = [[UIButton alloc] init];
+    [button setEnlargeEdge:kRl(25)];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    button.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    
+    NSString * showText;
+    
+    if (isShowCheck) {
+        [button setImage:checkNormalImage forState:UIControlStateNormal];
+        [button setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        if (kIsBangsScreen || [[XYHelperUtils getAppTermModel] containsString:@"SE"]) {
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        } else {
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(kRl(5), 0, 0, 0)];
+        }
+        showText = [NSString stringWithFormat:@"   %@",fullstring];
+        normalSelectTitle = [NSString stringWithFormat:@"   %@", normalSelectTitle];
+    } else {
+        showText = fullstring;
+    }
+    
+    NSAttributedString * showAttString = [self getAttributeWith:highlightSelectTitleArr string:showText orginFont:normalFont orginColor:normalColor attributeFont:highlightFont attributeColor:highlightColor];
+    [button setAttributedTitle:showAttString forState:UIControlStateNormal];
+    button.titleLabel.numberOfLines = 0;
+    button.titleLabel.enabledTapEffect = false;
+    button.adjustsImageWhenHighlighted = false;
+    
+    if (isDefaultCheck) {
+        button.selected = true;
+    } else {
+        button.selected = false;
+    }
+    
+    NSMutableArray *arrayMut = [NSMutableArray new];
+    [arrayMut addObject:normalSelectTitle];
+    [arrayMut addObjectsFromArray:highlightSelectTitleArr];
+    [button.titleLabel yb_addAttributeTapActionWithStrings:arrayMut tapClicked:^(UILabel *label, NSString *string, NSRange range, NSInteger index) {
+        if ([string isEqualToString:normalSelectTitle]) {
+            button.selected = !button.selected;
+            if (isShowCheck) {
+                if (button.selected) {
+                    [button setImage:checkHighlightImage forState:UIControlStateNormal];
+                } else {
+                    [button setImage:checkNormalImage forState:UIControlStateNormal];
+                }
+            }
+        } else {
+            completion(index);
+        }
+    }];
+    
+    return button;
+}
+
 + (NSAttributedString *)getAttributeWith:(id)sender
                                   string:(NSString *)string
                                orginFont:(CGFloat)orginFont
@@ -1983,6 +2050,38 @@
     }
 
     return data;
+}
+
+#pragma mark - UIView动效
+/// CGAffineTransform toTrans = CGAffineTransformMakeTranslation(0, kScreenHeight-kRl(194));
++ (void)showInAnimationWithTarget:(__kindof UIView *)target
+                          toTrans:(CGAffineTransform)toTrans {
+    [target layoutIfNeeded];
+    
+    CGFloat damping = 0.7;
+    if (target.size.height > kScreenHeight/2.0f) {
+        damping = 5;
+    } else {
+        damping = 0.7;
+    }
+    [UIView animateWithDuration:0.6 delay:0 usingSpringWithDamping:damping initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        target.transform = toTrans;
+
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+/// CGAffineTransform toTrans = CGAffineTransformMakeTranslation(0, kScreenHeight+kRl(194));
++ (void)showOutAnimationWithTarget:(__kindof UIView *)target
+                          toTrans:(CGAffineTransform)toTrans {
+    
+    [UIView animateWithDuration:0.6 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        target.transform = toTrans;
+
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 @end

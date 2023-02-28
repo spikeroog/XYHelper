@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define kColorE8E8E8 kColorWithRGB16Radix(0xe8e8e8)
 #define kColorBBBBBB kColorWithRGB16Radix(0xbbbbbb)
 #define kColorEEEEEE kColorWithRGB16Radix(0xeeeeee)
+#define kColorDDDDDD kColorWithRGB16Radix(0xdddddd)
 
 // 导航栏颜色
 #define kWhiteStyleNavBgColor kColorWithRGB16Radix(0xffffff)

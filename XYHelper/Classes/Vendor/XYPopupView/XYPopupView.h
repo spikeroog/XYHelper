@@ -15,7 +15,9 @@ typedef NS_ENUM(NSInteger, PopUpStyleType) {
 
 typedef NS_ENUM(NSInteger, PopUpViewAnimationType) {
     PopUpViewAnimationTypeCenter = 0, // 中间出现
-    PopUpViewAnimationTypeBottom // 底部出现
+    PopUpViewAnimationTypeBottom, /// 底部出现
+    PopUpViewAnimationTypeTop /// 顶部出现
+
 };
 
 typedef void(^PopViewDismiss) (void);
@@ -23,6 +25,8 @@ typedef void(^PopViewDismiss) (void);
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XYPopupView : UIView
+
+@property (nonatomic, assign) CGFloat springDuration;
 
 @property (nonatomic, assign) PopUpStyleType styleType;
 
@@ -43,3 +47,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
