@@ -190,7 +190,7 @@ static AFHTTPSessionManager *_sessionManager;
     
     NSURLSessionTask *sessionTask = [_sessionManager POST:URL parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         NSError *error = nil;
-        [formData appendPartWithFileURL:[NSURL URLWithString:filePath] name:name error:&error];
+        [formData appendPartWithFileURL:[NSURL fileURLWithPath:filePath] name:name error:&error];
         (failure && error) ? failure(error) : nil;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         //上传进度

@@ -16,7 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 
     self.navTitle = @"画蛇添足";
     self.view.backgroundColor = UIColor.redColor;

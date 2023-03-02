@@ -1,6 +1,6 @@
 {
   "name": "XYHelper",
-  "version": "2.1.1",
+  "version": "2.1.3",
   "summary": "The Objective-C utilities you always wish you had.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/spikeroog/XYHelper",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/spikeroog/XYHelper.git",
-    "tag": "2.1.1"
+    "tag": "2.1.3"
   },
   "platforms": {
     "ios": "9.0"
@@ -66,7 +66,7 @@
 
     ],
     "IQKeyboardManager": [
-
+      " 6.5.10"
     ],
     "ReactiveObjC": [
 

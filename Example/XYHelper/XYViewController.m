@@ -47,6 +47,51 @@
     self.navItemTitleFont = kFontWithRealsize(20);
     
 //    self.view.backgroundColor = kColorWithRandom;
+    
+    UIButton *protocolBtn = [XYHelperUtils createUserProButtonWithFullstring:@"已阅读并同意《用户协议》《隐私政策》" normalSelectTitle:@"已阅读并同意" highlightSelectTitleArr:@[@"《用户协议》",@"《隐私政策》"] normalColor:kColor666666 highlightColor:kColorWithRGB16Radix(0x2EA8FF) normalFont:kRl(10.5f) highlightFont:kRl(10.5f) isShowCheck:YES checkNormalImage:kImageWithName(@"icon_login_cycle_uns") checkHighlightImage:kImageWithName(@"icon_login_cycle_s") isDefaultCheck:NO completion:^(NSInteger idx) {
+        
+        if (idx == 1) {
+            [MBProgressHUD showTextHUD:@"1"];
+            
+        } else if (idx == 2) {
+            [MBProgressHUD showTextHUD:@"2"];
+
+        }
+
+        
+    }];
+    protocolBtn.backgroundColor = UIColor.redColor;
+
+    [self.view addSubview:protocolBtn];
+    [protocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(-kNavBarHeight);
+//        make.left.equalTo(self.view).offset(kRl(20));
+        make.centerX.equalTo(self.view);
+        make.width.offset(kRl(288));
+        make.height.offset(kRl(41));
+    }];
+    
+    
+    UIButton *protocolBtn2 = [XYHelperUtils createLeftModelUserProButtonWithFullstring:@"已阅读并同意《用户协议》《隐私政策》" normalSelectTitle:@"已阅读并同意" highlightSelectTitleArr:@[@"《用户协议》",@"《隐私政策》"] normalColor:kColor666666 highlightColor:kColorWithRGB16Radix(0x2EA8FF) normalFont:kRl(10.5f) highlightFont:kRl(10.5f) isShowCheck:YES checkNormalImage:kImageWithName(@"icon_login_cycle_uns") checkHighlightImage:kImageWithName(@"icon_login_cycle_s") isDefaultCheck:NO completion:^(NSInteger idx) {
+        
+        if (idx == 1) {
+            [MBProgressHUD showTextHUD:@"1"];
+            
+        } else if (idx == 2) {
+            [MBProgressHUD showTextHUD:@"2"];
+
+        }
+
+    }];
+
+    [self.view addSubview:protocolBtn2];
+    [protocolBtn2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(-200);
+//        make.left.equalTo(self.view).offset(kRl(20));
+        make.centerX.equalTo(self.view);
+        make.width.offset(kRl(288));
+        make.height.offset(kRl(41));
+    }];
 
 }
 
@@ -82,7 +127,9 @@
 }
 
 - (void)pickVideo {
+    
     @weakify(self);
+    
     [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:false allowTakePhoto:false allowTakeVideo:true sortAscending:true allowPickingPhoto:false allowPickingVideo:true allowPickingOriginalPhoto:false showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:9 maxImageSize:1 maxVideoSize:1000 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
 
     } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {

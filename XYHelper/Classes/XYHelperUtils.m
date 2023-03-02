@@ -28,6 +28,7 @@
 #import <CoreTelephony/CTCarrier.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIButton+EnlargeEdge.h"
+#import "UIButton+XYHelper.h"
 
 @implementation XYHelperUtils
 
@@ -1399,20 +1400,19 @@
                                  isDefaultCheck:(BOOL)isDefaultCheck completion:(void(^)(NSInteger idx))completion {
     
     __block UIButton * button = [[UIButton alloc] init];
-    [button setEnlargeEdge:kRl(25)];
+    [button setEnlargeEdge:kRl(20)];
 
     NSString * showText;
     
     if (isShowCheck) {
         [button setImage:checkNormalImage forState:UIControlStateNormal];
-        [button setImageEdgeInsets:UIEdgeInsetsMake(0, kRl(22), 0, 0)];
         if (kIsBangsScreen || [[XYHelperUtils getAppTermModel] containsString:@"SE"]) {
             [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         } else {
             [button setTitleEdgeInsets:UIEdgeInsetsMake(kRl(5), 0, 0, 0)];
         }
-        showText = [NSString stringWithFormat:@"      %@",fullstring];
-        normalSelectTitle = [NSString stringWithFormat:@"      %@", normalSelectTitle];
+        showText = [NSString stringWithFormat:@"   %@",fullstring];
+        normalSelectTitle = [NSString stringWithFormat:@"   %@", normalSelectTitle];
     } else {
         showText = fullstring;
     }
@@ -1423,11 +1423,51 @@
     button.titleLabel.enabledTapEffect = false;
     button.adjustsImageWhenHighlighted = false;
     
-    if (isDefaultCheck) {
-        button.selected = true;
-    } else {
-        button.selected = false;
+    
+    __block UIButton *checkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    checkBtn.backgroundColor = UIColor.clearColor;
+    
+    if (isShowCheck == NO) {
+        checkBtn.hidden = YES;
     }
+    
+    RAC(button, selected) = RACObserve(checkBtn, selected);
+    
+    if (isDefaultCheck) {
+        button.selected = YES;
+        checkBtn.selected = YES;
+        [button setImage:checkHighlightImage forState:UIControlStateNormal];
+
+    } else {
+        button.selected = NO;
+        checkBtn.selected = NO;
+        [button setImage:checkNormalImage forState:UIControlStateNormal];
+
+    }
+
+    [button addSubview:checkBtn];
+    
+    [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.offset(kRl(30));
+        make.height.equalTo(button);
+        make.centerY.equalTo(button);
+        make.left.equalTo(button).offset(kRl(25));
+    }];
+    [checkBtn setEnlargeEdge:kRl(20)];
+    
+    [checkBtn addGestureForButton:^{
+        
+        checkBtn.selected = !checkBtn.selected;
+                
+        if (isShowCheck) {
+            if (checkBtn.selected) {
+                [button setImage:checkHighlightImage forState:UIControlStateNormal];
+            } else {
+                [button setImage:checkNormalImage forState:UIControlStateNormal];
+            }
+        }
+        
+    }];
     
     NSMutableArray *arrayMut = [NSMutableArray new];
     [arrayMut addObject:normalSelectTitle];
@@ -1435,7 +1475,8 @@
     [button.titleLabel yb_addAttributeTapActionWithStrings:arrayMut tapClicked:^(UILabel *label, NSString *string, NSRange range, NSInteger index) {
         if ([string isEqualToString:normalSelectTitle]) {
             button.selected = !button.selected;
-            
+            checkBtn.selected = button.selected;
+
             if (isShowCheck) {
                 if (button.selected) {
                     [button setImage:checkHighlightImage forState:UIControlStateNormal];
@@ -1466,7 +1507,7 @@
                                  isDefaultCheck:(BOOL)isDefaultCheck completion:(void(^)(NSInteger idx))completion {
     
     __block UIButton * button = [[UIButton alloc] init];
-    [button setEnlargeEdge:kRl(25)];
+    [button setEnlargeEdge:kRl(20)];
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     button.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
@@ -1474,7 +1515,6 @@
     
     if (isShowCheck) {
         [button setImage:checkNormalImage forState:UIControlStateNormal];
-        [button setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         if (kIsBangsScreen || [[XYHelperUtils getAppTermModel] containsString:@"SE"]) {
             [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         } else {
@@ -1492,18 +1532,61 @@
     button.titleLabel.enabledTapEffect = false;
     button.adjustsImageWhenHighlighted = false;
     
-    if (isDefaultCheck) {
-        button.selected = true;
-    } else {
-        button.selected = false;
+    __block UIButton *checkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    checkBtn.backgroundColor = UIColor.clearColor;
+    
+    RAC(button, selected) = RACObserve(checkBtn, selected);
+    
+    if (isShowCheck == NO) {
+        checkBtn.hidden = YES;
     }
+    
+    if (isDefaultCheck) {
+        button.selected = YES;
+        checkBtn.selected = YES;
+        [button setImage:checkHighlightImage forState:UIControlStateNormal];
+
+    } else {
+        button.selected = NO;
+        checkBtn.selected = NO;
+        [button setImage:checkNormalImage forState:UIControlStateNormal];
+
+    }
+    
+    [button addSubview:checkBtn];
+    
+    [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.offset(kRl(30));
+        make.height.equalTo(button);
+        make.centerY.equalTo(button);
+        make.left.equalTo(button);
+    }];
+    
+    [checkBtn setEnlargeEdge:kRl(20)];
+    
+    [checkBtn addGestureForButton:^{
+        
+        checkBtn.selected = !checkBtn.selected;
+                
+        if (isShowCheck) {
+            if (checkBtn.selected) {
+                [button setImage:checkHighlightImage forState:UIControlStateNormal];
+            } else {
+                [button setImage:checkNormalImage forState:UIControlStateNormal];
+            }
+        }
+        
+    }];
     
     NSMutableArray *arrayMut = [NSMutableArray new];
     [arrayMut addObject:normalSelectTitle];
     [arrayMut addObjectsFromArray:highlightSelectTitleArr];
     [button.titleLabel yb_addAttributeTapActionWithStrings:arrayMut tapClicked:^(UILabel *label, NSString *string, NSRange range, NSInteger index) {
         if ([string isEqualToString:normalSelectTitle]) {
+            
             button.selected = !button.selected;
+            checkBtn.selected = button.selected;
+            
             if (isShowCheck) {
                 if (button.selected) {
                     [button setImage:checkHighlightImage forState:UIControlStateNormal];
