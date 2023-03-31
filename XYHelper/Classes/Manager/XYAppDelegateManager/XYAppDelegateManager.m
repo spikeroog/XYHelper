@@ -32,12 +32,6 @@
     // 避免在一个界面上同时点击多个UIButton导致同时响应多个方法
     [[UIButton appearance] setExclusiveTouch:YES];
     
-#pragma mark - scrollView适配iOS11
-    if (@available(iOS 11.0, *)) {
-        // 防止iOS11后所有的ScrollView，TableView，CollectionView下移64
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-    }
-    
 #pragma mark - 设置网络请求超时时间为5秒
     [PPNetworkHelper setRequestTimeoutInterval:5];
 

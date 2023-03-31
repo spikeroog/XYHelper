@@ -8,13 +8,14 @@
 
 #import "XYAppDelegate.h"
 #import "XYViewController.h"
+#import "NormalViewController.h"
 
 @implementation XYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [XYAppDelegateManager appGlobalSet];
-    
+
     [XYAppDelegateManager netWorkStatusObserver:^(NSString * _Nonnull netWorkStatusStr, PPNetworkStatusType statusType) {
         
     }];

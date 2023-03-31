@@ -52,24 +52,12 @@ PODS:
     - SAMKeychain
     - SDWebImage
     - TZImagePickerController
-    - YBImageBrowser (~> 3.0.9)
-    - YBImageBrowser/Video (~> 3.0.9)
     - YYCache (~> 1.0.4)
     - YYCategories (~> 1.0.4)
-  - YBImageBrowser (3.0.9):
-    - YBImageBrowser/Core (= 3.0.9)
-  - YBImageBrowser/Core (3.0.9):
-    - SDWebImage (>= 5.0.0)
-    - YYImage
-  - YBImageBrowser/Video (3.0.9):
-    - YBImageBrowser/Core
   - YYCache (1.0.4)
   - YYCategories (1.0.4):
     - YYCategories/no-arc (= 1.0.4)
   - YYCategories/no-arc (1.0.4)
-  - YYImage (1.0.4):
-    - YYImage/Core (= 1.0.4)
-  - YYImage/Core (1.0.4)
 
 DEPENDENCIES:
   - XYHelper (from `../`)
@@ -92,10 +80,8 @@ SPEC REPOS:
     - SAMKeychain
     - SDWebImage
     - TZImagePickerController
-    - YBImageBrowser
     - YYCache
     - YYCategories
-    - YYImage
 
 EXTERNAL SOURCES:
   XYHelper:
@@ -118,11 +104,9 @@ SPEC CHECKSUMS:
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: 1c39de67663e5eebb2f41324d5d580eeea12dd4c
   TZImagePickerController: e9909edbadf7381140efc5b5c9f5bdbfd630f7d4
-  XYHelper: c82fdcd82b2b1e7f4557fe3275dacfa0adafb509
-  YBImageBrowser: 7ecc8bf33ffa5f3b94c397c29b4f3638dd37f527
+  XYHelper: bb55331d31c615ca0cbdfb1b96f698d148f3c6ae
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
-  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
 PODFILE CHECKSUM: 68aa658757bc85080453c2f2226934e9741d2f21
 

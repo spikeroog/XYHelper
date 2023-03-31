@@ -87,12 +87,12 @@ barItemTextFont = _barItemTextFont;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    /// 防止视图下移
-    if (@available(iOS 11.0, *)) {
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = false;
-    }
+//    /// 防止视图下移
+//    if (@available(iOS 11.0, *)) {
+//        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+//    } else {
+//        self.automaticallyAdjustsScrollViewInsets = false;
+//    }
     
     [self hiddenNavigationBar:self.navBarHidden];
     

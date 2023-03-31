@@ -53,6 +53,16 @@ typedef NS_ENUM(NSInteger, WkWebViewShowType) {
     [_webView reload];
 }
 
+- (void)configNewFrame:(CGRect)frame {
+    self.webView.frame = frame;
+}
+
+- (void)configBackgroundColor:(UIColor *)color {
+    self.view.backgroundColor = color;
+    self.webView.backgroundColor = color;
+    self.webView.scrollView.backgroundColor = color;
+}
+
 - (void)dealloc {
     
     //移除注册的js方法
@@ -211,7 +221,7 @@ typedef NS_ENUM(NSInteger, WkWebViewShowType) {
         [config.userContentController addUserScript:wkUScript];
         
         _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-kNavBarHeight-kBottomBarHeight)];
-        _webView.scrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        _webView.scrollView.backgroundColor = [UIColor whiteColor];
         _webView.scrollView.showsVerticalScrollIndicator = NO;
         _webView.scrollView.showsHorizontalScrollIndicator = NO;
         _webView.opaque = NO; //不设置这个值 页面背景始终是白色

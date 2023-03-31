@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XYHelper'
-  s.version          = '2.1.3'
+  s.version          = '2.1.4'
   s.summary          = 'The Objective-C utilities you always wish you had.'
 
 # This description is used to generate tags and improve search results.
@@ -43,8 +43,8 @@ TODO: Add long description of the pod here.
    s.dependency 'FLAnimatedImage', '~> 1.0.16'
    s.dependency 'AFNetworking', '~> 4.0.1'
    
-   s.dependency 'YBImageBrowser/Video', '~> 3.0.9'
-   s.dependency 'YBImageBrowser', '~> 3.0.9'
+#   s.dependency 'YBImageBrowser/Video', '~> 3.0.9'
+#   s.dependency 'YBImageBrowser', '~> 3.0.9'
 
    s.dependency 'MBProgressHUD', '~> 1.2.0'
    s.dependency 'YYCategories', '~> 1.0.4'

@@ -7,9 +7,9 @@
 //
 
 #import "XYMediaPreviewManager.h"
-#import <YBImageBrowser/YBImageBrowser.h> // 浏览图片
-#import <YBImageBrowser/YBIBVideoData.h> // 浏览视频
-#import <YYCategories/YYCategories.h>
+//#import <YBImageBrowser/YBImageBrowser.h> // 浏览图片
+//#import <YBImageBrowser/YBIBVideoData.h> // 浏览视频
+//#import <YYCategories/YYCategories.h>
 
 
 @implementation XYMediaPreviewManager
@@ -22,19 +22,19 @@
              projectiveView:(NSArray<__kindof UIView *> *)projectiveViews
                         idx:(NSInteger)idx {
     
-    NSMutableArray *imageArrayMut = [NSMutableArray new];
-    [urls enumerateObjectsUsingBlock:^(id  _Nonnull singleObj, NSUInteger singleIdx, BOOL * _Nonnull singleStop) {
-        id view = [projectiveViews objectOrNilAtIndex:singleIdx];
-        YBIBImageData *data = [YBIBImageData new];
-        data.imageURL = singleObj;
-        data.projectiveView = view;
-        [imageArrayMut addObject:data];
-    }];
-    
-    YBImageBrowser *browser = [YBImageBrowser new];
-    browser.dataSourceArray = imageArrayMut;
-    browser.currentPage = idx;
-    [browser show];
+//    NSMutableArray *imageArrayMut = [NSMutableArray new];
+//    [urls enumerateObjectsUsingBlock:^(id  _Nonnull singleObj, NSUInteger singleIdx, BOOL * _Nonnull singleStop) {
+//        id view = [projectiveViews objectOrNilAtIndex:singleIdx];
+//        YBIBImageData *data = [YBIBImageData new];
+//        data.imageURL = singleObj;
+//        data.projectiveView = view;
+//        [imageArrayMut addObject:data];
+//    }];
+//
+//    YBImageBrowser *browser = [YBImageBrowser new];
+//    browser.dataSourceArray = imageArrayMut;
+//    browser.currentPage = idx;
+//    [browser show];
 }
 
 
@@ -45,19 +45,19 @@
 + (void)previewVideoWithUrl:(NSArray<NSString *> *)urls
              projectiveView:(NSArray<__kindof UIView *> *)projectiveViews
                         idx:(NSInteger)idx {
-    NSMutableArray *videoArrayMut = [NSMutableArray new];
-    [urls enumerateObjectsUsingBlock:^(id  _Nonnull singleObj, NSUInteger singleIdx, BOOL * _Nonnull singleStop) {
-        id view = [projectiveViews objectOrNilAtIndex:singleIdx];
-        YBIBVideoData *data = [YBIBVideoData new];
-        data.videoURL = singleObj;
-        data.projectiveView = view;
-        [videoArrayMut addObject:data];
-    }];
-    
-    YBImageBrowser *browser = [YBImageBrowser new];
-    browser.dataSourceArray = videoArrayMut;
-    browser.currentPage = idx;
-    [browser show];
+//    NSMutableArray *videoArrayMut = [NSMutableArray new];
+//    [urls enumerateObjectsUsingBlock:^(id  _Nonnull singleObj, NSUInteger singleIdx, BOOL * _Nonnull singleStop) {
+//        id view = [projectiveViews objectOrNilAtIndex:singleIdx];
+//        YBIBVideoData *data = [YBIBVideoData new];
+//        data.videoURL = singleObj;
+//        data.projectiveView = view;
+//        [videoArrayMut addObject:data];
+//    }];
+//
+//    YBImageBrowser *browser = [YBImageBrowser new];
+//    browser.dataSourceArray = videoArrayMut;
+//    browser.currentPage = idx;
+//    [browser show];
 }
 
 @end

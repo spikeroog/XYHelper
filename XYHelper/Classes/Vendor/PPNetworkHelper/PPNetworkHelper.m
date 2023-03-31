@@ -124,7 +124,7 @@ static AFHTTPSessionManager *_sessionManager;
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        PPLog(@"\n\n请求头信息:%@\n", task.originalRequest.allHTTPHeaderFields);
+//        PPLog(@"\n\n请求头信息:%@\n", task.originalRequest.allHTTPHeaderFields);
         
         if (_isOpenLog) {PPLog(@"responseObject = %@",responseObject);}
         [[self allSessionTask] removeObject:task];
@@ -158,7 +158,7 @@ static AFHTTPSessionManager *_sessionManager;
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        PPLog(@"\n\n请求头信息:%@\n", task.originalRequest.allHTTPHeaderFields);
+//        PPLog(@"\n\n请求头信息:%@\n", task.originalRequest.allHTTPHeaderFields);
         
         if (_isOpenLog) {PPLog(@"responseObject = %@",responseObject);}
         [[self allSessionTask] removeObject:task];
@@ -199,7 +199,7 @@ static AFHTTPSessionManager *_sessionManager;
         });
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        PPLog(@"\n\n请求头信息:%@\n", task.originalRequest.allHTTPHeaderFields);
+//        PPLog(@"\n\n请求头信息:%@\n", task.originalRequest.allHTTPHeaderFields);
         
         if (_isOpenLog) {PPLog(@"responseObject = %@",responseObject);}
         [[self allSessionTask] removeObject:task];
@@ -254,7 +254,7 @@ static AFHTTPSessionManager *_sessionManager;
         });
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        PPLog(@"\n\n请求头信息:%@\n", task.originalRequest.allHTTPHeaderFields);
+//        PPLog(@"\n\n请求头信息:%@\n", task.originalRequest.allHTTPHeaderFields);
         
         if (_isOpenLog) {PPLog(@"responseObject = %@",responseObject);}
         [[self allSessionTask] removeObject:task];

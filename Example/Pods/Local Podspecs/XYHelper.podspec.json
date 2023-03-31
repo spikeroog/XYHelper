@@ -29,12 +29,6 @@
     "AFNetworking": [
       "~> 4.0.1"
     ],
-    "YBImageBrowser/Video": [
-      "~> 3.0.9"
-    ],
-    "YBImageBrowser": [
-      "~> 3.0.9"
-    ],
     "MBProgressHUD": [
       "~> 1.2.0"
     ],

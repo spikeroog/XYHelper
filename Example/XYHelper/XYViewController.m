@@ -19,11 +19,12 @@
 #import "KCExploreInformationViewController.h"
 #import "XYTestViewController.h"
 
-#import <YBImageBrowser/YBImageBrowser.h> // 浏览图片
-#import <YBImageBrowser/YBIBVideoData.h> // 浏览视频
+//#import <YBImageBrowser/YBImageBrowser.h> // 浏览图片
+//#import <YBImageBrowser/YBIBVideoData.h> // 浏览视频
 
-@interface XYViewController ()
+@interface XYViewController () <UIDocumentPickerDelegate>
 @property (nonatomic, strong) FYFImagePickerController *imagePicker;
+
 @end
 
 @implementation XYViewController
@@ -102,55 +103,55 @@
 
 - (void)pickImage {
     @weakify(self);
-    [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:true allowTakePhoto:true allowTakeVideo:false sortAscending:true allowPickingPhoto:true allowPickingVideo:false allowPickingOriginalPhoto:false showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:9 maxImageSize:2 maxVideoSize:1000 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
-        
-        NSMutableArray *imageArrayMut = [NSMutableArray new];
-        [assetArray enumerateObjectsUsingBlock:^(id  _Nonnull singleObj, NSUInteger singleIdx, BOOL * _Nonnull singleStop) {
-            PHAsset * asset = (PHAsset *)singleObj;
-            YBIBImageData *data = [YBIBImageData new];
-            NSLog(@"%@", [asset valueForKey:@"filename"]);
-            data.imageName = [asset valueForKey:@"filename"];
-            data.projectiveView = self.view;
-            [imageArrayMut addObject:data];
-        }];
-        
-        YBImageBrowser *browser = [YBImageBrowser new];
-        browser.dataSourceArray = imageArrayMut;
-        browser.currentPage = 0;
-        [browser show];
-
-    } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {
-        @strongify(self);
-        
-        
-    } targetVC:self];
+//    [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:true allowTakePhoto:true allowTakeVideo:false sortAscending:true allowPickingPhoto:true allowPickingVideo:false allowPickingOriginalPhoto:false showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:9 maxImageSize:2 maxVideoSize:1000 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
+//
+//        NSMutableArray *imageArrayMut = [NSMutableArray new];
+//        [assetArray enumerateObjectsUsingBlock:^(id  _Nonnull singleObj, NSUInteger singleIdx, BOOL * _Nonnull singleStop) {
+//            PHAsset * asset = (PHAsset *)singleObj;
+//            YBIBImageData *data = [YBIBImageData new];
+//            NSLog(@"%@", [asset valueForKey:@"filename"]);
+//            data.imageName = [asset valueForKey:@"filename"];
+//            data.projectiveView = self.view;
+//            [imageArrayMut addObject:data];
+//        }];
+//
+//        YBImageBrowser *browser = [YBImageBrowser new];
+//        browser.dataSourceArray = imageArrayMut;
+//        browser.currentPage = 0;
+//        [browser show];
+//
+//    } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {
+//        @strongify(self);
+//
+//
+//    } targetVC:self];
 }
 
 - (void)pickVideo {
     
     @weakify(self);
     
-    [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:false allowTakePhoto:false allowTakeVideo:true sortAscending:true allowPickingPhoto:false allowPickingVideo:true allowPickingOriginalPhoto:false showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:9 maxImageSize:1 maxVideoSize:1000 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
-
-    } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {
-        @strongify(self);
-        
-        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:outputPath] options:nil];
-
-        NSMutableArray *videoArrayMut = [NSMutableArray new];
-        YBIBVideoData *data = [YBIBVideoData new];
-        
-        data.videoAVAsset = asset;
-        data.projectiveView = self.view;
-        [videoArrayMut addObject:data];
-
-        YBImageBrowser *browser = [YBImageBrowser new];
-        browser.dataSourceArray = videoArrayMut;
-        browser.currentPage = 0;
-        [browser show];
-        
-        
-    } targetVC:self];
+//    [[XYImagePickerManager shareInstance] imagePickerallowPickingMuitlple:false allowTakePhoto:false allowTakeVideo:true sortAscending:true allowPickingPhoto:false allowPickingVideo:true allowPickingOriginalPhoto:false showSheet:true showCornermark:true allowCrop:true needCircleCrop:true maxCount:9 maxImageSize:1 maxVideoSize:1000 pictureCallBack:^(NSArray<UIImage *> * _Nonnull backupsImgArray, NSArray<PHAsset *> * _Nonnull assetArray) {
+//
+//    } videoCallBack:^(NSString * _Nonnull outputPath, UIImage * _Nonnull coverImage) {
+//        @strongify(self);
+//
+//        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:outputPath] options:nil];
+//
+//        NSMutableArray *videoArrayMut = [NSMutableArray new];
+//        YBIBVideoData *data = [YBIBVideoData new];
+//
+//        data.videoAVAsset = asset;
+//        data.projectiveView = self.view;
+//        [videoArrayMut addObject:data];
+//
+//        YBImageBrowser *browser = [YBImageBrowser new];
+//        browser.dataSourceArray = videoArrayMut;
+//        browser.currentPage = 0;
+//        [browser show];
+//
+//
+//    } targetVC:self];
 }
 
 
@@ -195,11 +196,26 @@
 
 - (void)rightActionInController {
     
-    [self showPagingVIewModel_3];
+    
+    [self pushToDocumentPickerVC];
+    
+//    [self showPagingVIewModel_3];
 //    return;
     
 //    [self gotoImagePickVc];
 
+}
+
+- (void)pushToDocumentPickerVC {
+    NSArray *documentTypes = @[@"public.content", @"public.text", @"public.source-code ", @"public.image", @"public.audiovisual-content", @"com.adobe.pdf", @"com.apple.keynote.key", @"com.microsoft.word.doc", @"com.microsoft.excel.xls", @"com.microsoft.powerpoint.ppt", @"public.avi"];
+    
+    UIDocumentPickerViewController *documentPickerViewController = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeOpen];
+    documentPickerViewController.delegate = self;
+
+    documentPickerViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+//    documentPickerViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+
+    [self presentViewController:documentPickerViewController animated:YES completion:nil];
 }
 
 
@@ -391,6 +407,7 @@
     XYBasicViewController * vc = [XYBasicViewController new];
     vc.view.backgroundColor = kColorWithRandom;
     return vc;
+    
 }
 
 - (XYHomePagingSubViewController *)getHomepageVc {
@@ -485,6 +502,61 @@
     return videoImage;
 }
 
+#pragma mark - UIDocumentPickerDelegate
 
+- (void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller {
+    [MBProgressHUD removeLoadingHud];
+
+}
+
+- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(nonnull NSArray<NSURL *> *)urls {
+    
+    BOOL fileUrlAuthozied = [urls.firstObject startAccessingSecurityScopedResource];
+    
+    __block NSString *fileName;
+    __block NSData *musicData;
+    __block NSString *pathUrl;
+    
+    if (fileUrlAuthozied) {
+        //通过文件协调工具来得到新的文件地址，以此得到文件保护功能
+        NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] init];
+        NSError *error;
+        [fileCoordinator coordinateReadingItemAtURL:urls.firstObject options:0 error:&error byAccessor:^(NSURL *newURL) {
+            
+            //读取文件
+            fileName = [newURL lastPathComponent];
+            NSError *error = nil;
+            NSData *fileData = [NSData dataWithContentsOfURL:newURL options:NSDataReadingMappedIfSafe error:&error];
+            
+            if (error) {
+                //读取出错
+                [MBProgressHUD removeLoadingHud];
+
+            } else {
+                
+                //保存
+                musicData = fileData;
+                NSArray *paths  = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString*path = [paths objectAtIndex:0];
+                path = [path stringByAppendingString:@"/YWBG"];
+                if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
+                }
+                pathUrl = [path stringByAppendingPathComponent:fileName];
+                [musicData writeToFile:pathUrl atomically:YES];
+                
+#pragma mark - 上传音乐文件
+//                [self uploadMusic:pathUrl];
+            }
+            
+            [self dismissViewControllerAnimated:YES completion:NULL];
+        }];
+        
+        [urls.firstObject stopAccessingSecurityScopedResource];
+        
+    }else{
+        //授权失败
+    }
+}
 
 @end

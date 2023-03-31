@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)localHtmlWithLocalFile:(NSString *)localFile;
 
+/// 设置webView新的frame
+- (void)configNewFrame:(CGRect)frame;
+- (void)configBackgroundColor:(UIColor *)color;
+
 @end
 
 NS_ASSUME_NONNULL_END
